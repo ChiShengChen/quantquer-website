@@ -304,6 +304,26 @@
   .partner:hover .psite{color:var(--accent-dim);}
   @media(max-width:860px){ .partners{grid-template-columns:1fr;} }
 
+  /* ---------- services ---------- */
+  .sec-lead strong{color:var(--accent);font-weight:500;font-family:var(--mono);font-size:.95em;}
+  .svc-list{border-top:1px solid var(--line);}
+  .svc{
+    display:grid;grid-template-columns:auto minmax(170px,.85fr) 1.7fr;
+    gap:clamp(1rem,3vw,2.6rem);align-items:baseline;
+    padding:clamp(1.5rem,3vw,2.1rem) 0;border-bottom:1px solid var(--line);
+    transition:background .35s;
+  }
+  .svc:hover{background:var(--bg-2);}
+  .svc-n{font-family:var(--mono);font-size:.8rem;color:var(--accent);letter-spacing:.1em;}
+  .svc-name h3{font-family:var(--serif);font-weight:500;font-size:1.35rem;line-height:1.2;}
+  .svc-lat{font-family:var(--mono);font-size:.72rem;color:var(--fg-faint);letter-spacing:.06em;margin-top:.3rem;}
+  .svc-desc{color:var(--fg-dim);font-size:.96rem;}
+  @media(max-width:720px){
+    .svc{grid-template-columns:1fr;gap:.55rem;padding:1.6rem 0;}
+    .svc-name{display:flex;align-items:baseline;gap:.7rem;}
+    .svc-lat{margin-top:0;}
+  }
+
   /* ---------- contact ---------- */
   .contact-inner{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(2rem,5vw,4rem);align-items:end;}
   .contact h2{font-family:var(--serif);font-weight:500;font-size:clamp(2rem,4.6vw,3.4rem);line-height:1.2;}
@@ -316,14 +336,18 @@
   @media(max-width:760px){ .contact-inner{grid-template-columns:1fr;align-items:start;} }
 
   /* ---------- footer ---------- */
-  footer{border-top:1px solid var(--line);padding:2.4rem 0;}
-  .foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+  footer{border-top:1px solid var(--line);padding:2.8rem 0 2.2rem;}
+  .foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem 2rem;}
   .foot .fbrand{display:flex;align-items:center;}
   .foot .foot-logo{height:80px;width:auto;display:block;opacity:.92;}
   @media(max-width:480px){ .foot .foot-logo{height:64px;} }
-  .foot .fmeta{font-family:var(--mono);font-size:.72rem;color:var(--fg-faint);letter-spacing:.05em;}
+  .fcompany{font-family:var(--mono);font-size:.74rem;color:var(--fg-faint);letter-spacing:.02em;line-height:1.95;text-align:right;}
+  .fcompany .fco-name{color:var(--fg-dim);font-size:.82rem;margin-bottom:.15rem;}
+  .foot-btm{display:flex;justify-content:flex-end;margin-top:1.8rem;padding-top:1.3rem;border-top:1px solid var(--line);}
+  .foot-btm .fmeta{font-family:var(--mono);font-size:.72rem;color:var(--fg-faint);letter-spacing:.05em;}
+  @media(max-width:560px){ .fcompany{text-align:left;} .foot-btm{justify-content:flex-start;} }
   /* light theme keeps a dark footer band so the light-on-dark logo stays legible */
-  html[data-theme="light"] footer{background:#070A11;--line:rgba(255,255,255,.08);--fg-faint:#7A8696;}
+  html[data-theme="light"] footer{background:#070A11;--line:rgba(255,255,255,.08);--fg-faint:#7A8696;--fg-dim:#9AA6B4;}
   /* light theme: white text on the (mid-tone) accent buttons for contrast */
   html[data-theme="light"] .btn-primary{color:#fff;}
   html[data-theme="light"] .btn-primary:hover{background:#003D80;color:#fff;}
@@ -360,6 +384,7 @@
     </a>
     <nav class="navlinks">
       <a href="#capabilities" class="lk">能力</a>
+      <a href="#services" class="lk">服務</a>
       <a href="#work" class="lk">案例</a>
       <a href="#method" class="lk">方法</a>
       <a href="#about" class="lk">關於</a>
@@ -435,11 +460,50 @@
   </div>
 </section>
 
+<!-- ===================== SERVICES ===================== -->
+<section class="block axis-divider" id="services">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="idx">§ 02</span>
+      <h2>服務與合作模式</h2>
+      <span class="en">/ Services</span>
+    </div>
+    <p class="sec-lead reveal">依問題的階段與規模，選擇最合適的合作方式——全部採 <strong>專案制</strong> 計費，範圍與交付物在開始前一起定義清楚。</p>
+    <div class="svc-list reveal">
+      <div class="svc">
+        <div class="svc-n">01</div>
+        <div class="svc-name"><h3>顧問諮詢</h3><div class="svc-lat">Advisory</div></div>
+        <p class="svc-desc">針對特定技術難題提供方向評估、方法選型與決策建議，以少量投入快速釐清可行性與風險。</p>
+      </div>
+      <div class="svc">
+        <div class="svc-n">02</div>
+        <div class="svc-name"><h3>PoC 驗證</h3><div class="svc-lat">Proof of Concept</div></div>
+        <p class="svc-desc">在投入完整開發前，先以可重現的實驗驗證關鍵技術與假設，用最小成本確認「這條路走得通」。</p>
+      </div>
+      <div class="svc">
+        <div class="svc-n">03</div>
+        <div class="svc-name"><h3>MVP 製作</h3><div class="svc-lat">MVP Build</div></div>
+        <p class="svc-desc">打造最小可行產品，用最短路徑把核心價值做成能實際使用、可拿去驗證市場的雛形。</p>
+      </div>
+      <div class="svc">
+        <div class="svc-n">04</div>
+        <div class="svc-name"><h3>專案外包</h3><div class="svc-lat">Project Delivery</div></div>
+        <p class="svc-desc">完整承接專案，從問題定義、方法設計到系統交付一手包辦，產出穩健、可維護、可上線的成果。</p>
+      </div>
+      <div class="svc">
+        <div class="svc-n">05</div>
+        <div class="svc-name"><h3>長期技術夥伴</h3><div class="svc-lat">Long-term Partner</div></div>
+        <p class="svc-desc">以持續合作的方式深入你的團隊與場域，提供穩定的技術支援、迭代與共同研發。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ===================== SELECTED WORK ===================== -->
 <section class="block axis-divider" id="work">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="idx">§ 02</span>
+      <span class="idx">§ 03</span>
       <h2>精選案例</h2>
       <span class="en">/ Selected Work</span>
     </div>
@@ -498,7 +562,7 @@
 <section class="block axis-divider" id="method">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="idx">§ 03</span>
+      <span class="idx">§ 04</span>
       <h2>工作方式</h2>
       <span class="en">/ How We Work</span>
     </div>
@@ -536,7 +600,7 @@
 <section class="block axis-divider" id="about">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="idx">§ 04</span>
+      <span class="idx">§ 05</span>
       <h2>關於</h2>
       <span class="en">/ About</span>
     </div>
@@ -578,7 +642,7 @@
 <section class="block axis-divider" id="partners">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="idx">§ 05</span>
+      <span class="idx">§ 06</span>
       <h2>夥伴服務</h2>
       <span class="en">/ Partner Services</span>
     </div>
@@ -635,7 +699,7 @@
   <div class="wrap">
     <div class="contact-inner reveal">
       <div>
-        <div class="eyebrow" style="margin-bottom:1.4rem;">§ 06 / Contact</div>
+        <div class="eyebrow" style="margin-bottom:1.4rem;">§ 07 / Contact</div>
         <h2>有一個<span class="hl">別人解不動</span>的問題？<br>來談談。</h2>
         <p class="csub">告訴我們你卡在哪裡。第一次對話，我們會一起把問題定義清楚——這通常是最有價值的一步。</p>
       </div>
@@ -651,6 +715,13 @@
 <footer>
   <div class="wrap foot">
     <div class="fbrand"><img src="assets/logo-full-light.png" class="foot-logo" alt="量維資科 Quantquer Inc."></div>
+    <div class="fcompany">
+      <div class="fco-name">量維資科有限公司 · Quantquer Inc.</div>
+      <div>統一編號 93573761</div>
+      <div>桃園市桃園區國際路二段 188 之 2 號三樓</div>
+    </div>
+  </div>
+  <div class="wrap foot-btm">
     <div class="fmeta">© 2026 Quantquer Inc. — 用量化方法解決硬問題</div>
   </div>
 </footer>
