@@ -63,6 +63,12 @@ GitHub Pages（來源：`main` 分支根目錄）。推送到 `main` 即自動�
 - 自訂網域由 `CNAME` 指定，DNS 將 apex 指向 GitHub Pages 的 A 紀錄、`www` 以 CNAME 指向 `chishengchen.github.io`。
 - 已啟用 **Enforce HTTPS**（Let's Encrypt 憑證，http 自動轉址 https）。
 
+## 授權 License
+
+**版權所有，禁止轉用。** 本儲存庫所有內容（程式碼、設計、文字、圖像、品牌標誌）均為量維資科有限公司之財產，未經書面同意不得重製、修改或散布。詳見 [LICENSE](LICENSE)。
+
+公開此儲存庫僅為網站部署之用，不構成任何授權。
+
 ---
 
 © 2026 量維資科有限公司 Quantquer Inc.（統一編號 93573761）— 用量化方法解決硬問題。
