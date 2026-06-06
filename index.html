@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>/* set theme before paint to avoid flash */(function(){try{if(localStorage.getItem('theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}})();</script>
+<script>/* default to light; honor a saved 'dark' choice. set before paint to avoid flash */(function(){try{if(localStorage.getItem('theme')!=='dark')document.documentElement.setAttribute('data-theme','light');}catch(e){document.documentElement.setAttribute('data-theme','light');}})();</script>
 <title>量維資科 Quantquer Inc. — 量化深科技顧問</title>
 <link rel="icon" type="image/png" href="assets/logo-mark.png">
 
@@ -11,7 +11,7 @@
 <meta name="description" content="量維資科 Quantquer Inc.｜量化深科技顧問。以研究級的嚴謹方法，解決 AI/ML、訊號處理、時頻分析、臨床醫療資訊與量化策略上別人解不動的硬問題，並交付可上線的系統。">
 <meta name="keywords" content="量化顧問,AI顧問,機器學習,訊號處理,時頻分析,臨床AI,醫療AI,量化策略,EEG,BCI,Quantquer,量維資科">
 <meta name="author" content="量維資科 Quantquer Inc.">
-<meta name="theme-color" content="#070A11">
+<meta name="theme-color" content="#F6F8FB">
 <link rel="canonical" href="https://quantquer.com/">
 
 <!-- ===== Open Graph ===== -->
