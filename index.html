@@ -254,6 +254,23 @@
   .badge .ble{font-family:var(--mono);font-size:.64rem;color:var(--fg-faint);letter-spacing:.06em;margin-top:.2rem;}
   @media(max-width:760px){ .about{grid-template-columns:1fr;} }
 
+  /* ---------- partners ---------- */
+  .partners{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+  .partner{background:var(--bg);padding:clamp(1.8rem,3vw,2.4rem);display:flex;flex-direction:column;transition:background .35s;}
+  .partner:hover{background:var(--bg-2);}
+  .partner .ptop{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;}
+  .partner h3{font-family:var(--serif);font-weight:500;font-size:1.4rem;line-height:1.2;}
+  .partner .ext{font-family:var(--mono);font-size:.95rem;color:var(--fg-faint);flex-shrink:0;transition:color .25s,transform .25s;}
+  .partner:hover .ext{color:var(--accent);transform:translate(2px,-2px);}
+  .partner .plat{font-family:var(--mono);font-size:.7rem;color:var(--fg-faint);letter-spacing:.05em;margin-top:.35rem;}
+  .partner .ptag{font-family:var(--mono);font-size:.8rem;color:var(--accent);letter-spacing:.01em;margin-top:1.1rem;line-height:1.4;}
+  .partner ul{list-style:none;margin-top:1.25rem;display:grid;gap:.7rem;flex:1;}
+  .partner li{position:relative;padding-left:1.5rem;color:var(--fg-dim);font-size:.92rem;line-height:1.55;}
+  .partner li::before{content:"";position:absolute;left:2px;top:.42em;width:8px;height:5px;border-left:1.6px solid var(--accent);border-bottom:1.6px solid var(--accent);transform:rotate(-45deg);}
+  .partner .psite{font-family:var(--mono);font-size:.74rem;color:var(--fg-faint);letter-spacing:.03em;margin-top:1.7rem;transition:color .25s;}
+  .partner:hover .psite{color:var(--accent-dim);}
+  @media(max-width:860px){ .partners{grid-template-columns:1fr;} }
+
   /* ---------- contact ---------- */
   .contact-inner{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(2rem,5vw,4rem);align-items:end;}
   .contact h2{font-family:var(--serif);font-weight:500;font-size:clamp(2rem,4.6vw,3.4rem);line-height:1.2;}
@@ -307,6 +324,7 @@
       <a href="#work" class="lk">案例</a>
       <a href="#method" class="lk">方法</a>
       <a href="#about" class="lk">關於</a>
+      <a href="#partners" class="lk">夥伴</a>
       <a href="#contact" class="nav-cta">談談你的問題</a>
     </nav>
   </div>
@@ -516,12 +534,68 @@
   </div>
 </section>
 
+<!-- ===================== PARTNERS ===================== -->
+<section class="block axis-divider" id="partners">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="idx">§ 05</span>
+      <h2>夥伴服務</h2>
+      <span class="en">/ Partner Services</span>
+    </div>
+    <p class="sec-lead reveal">串接專業夥伴，補齊數位與硬體整合需求——從量測驗證、AIoT 到工業電子，把研究級方法延伸為完整的軟硬體交付。</p>
+    <div class="partners reveal">
+      <a class="partner" href="https://scitotech.com" target="_blank" rel="noopener">
+        <div class="ptop">
+          <h3>識新科技</h3>
+          <span class="ext">↗</span>
+        </div>
+        <div class="plat">Scito Technology Co., Ltd.</div>
+        <div class="ptag">量測驗證與自動化系統整合</div>
+        <ul>
+          <li>IC 檢測、量測驗證與儀器整合</li>
+          <li>光學、運動控制與自動化檢測機台</li>
+          <li>AI 影像辨識、訊號處理與遠端控制</li>
+        </ul>
+        <span class="psite">scitotech.com</span>
+      </a>
+      <a class="partner" href="https://rengiantek.info" target="_blank" rel="noopener">
+        <div class="ptop">
+          <h3>睿基科技</h3>
+          <span class="ext">↗</span>
+        </div>
+        <div class="plat">RGTK</div>
+        <div class="ptag">智慧 AIoT 畜牧管理解決方案</div>
+        <ul>
+          <li>智慧無線耳標與生理數據監控</li>
+          <li>動物影像辨識、數量統計與活動力分析</li>
+          <li>畜牧環境數據整合與健康履歷</li>
+        </ul>
+        <span class="psite">rengiantek.info</span>
+      </a>
+      <a class="partner" href="https://hzt.com.tw" target="_blank" rel="noopener">
+        <div class="ptop">
+          <h3>晶芯科技</h3>
+          <span class="ext">↗</span>
+        </div>
+        <div class="plat">晶芯科技有限公司</div>
+        <div class="ptag">工業電子維修與測試平台支援</div>
+        <ul>
+          <li>工業電路板設計、維修與中古品支援</li>
+          <li>客製測試平台設計與翻修品質控管</li>
+          <li>反向工程、通訊資料分析與停產產品支援</li>
+        </ul>
+        <span class="psite">hzt.com.tw</span>
+      </a>
+    </div>
+  </div>
+</section>
+
 <!-- ===================== CONTACT ===================== -->
 <section class="block axis-divider contact" id="contact">
   <div class="wrap">
     <div class="contact-inner reveal">
       <div>
-        <div class="eyebrow" style="margin-bottom:1.4rem;">§ 05 / Contact</div>
+        <div class="eyebrow" style="margin-bottom:1.4rem;">§ 06 / Contact</div>
         <h2>有一個<span class="hl">別人解不動</span>的問題？<br>來談談。</h2>
         <p class="csub">告訴我們你卡在哪裡。第一次對話，我們會一起把問題定義清楚——這通常是最有價值的一步。</p>
       </div>
