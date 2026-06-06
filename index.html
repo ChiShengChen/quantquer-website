@@ -41,7 +41,7 @@
   "description":"量化深科技顧問。以研究級的嚴謹方法，解決 AI/ML、訊號處理、時頻分析、臨床醫療資訊與量化策略上別人解不動的硬問題，並交付可上線的系統。",
   "email":"chisheng.m.chen@gmail.com",
   "sameAs":["https://www.linkedin.com/company/104143648/"],
-  "founder":{"@type":"Person","name":"陳麒升"}
+  "founder":{"@type":"Person","name":"陳麒升","sameAs":["https://scholar.google.com/citations?user=5XHD7nkAAAAJ"]}
 }
 </script>
 
@@ -286,6 +286,10 @@
   .badge .bn{font-family:var(--mono);font-weight:500;font-size:1.6rem;color:var(--accent);line-height:1.1;word-break:break-word;}
   .badge .bl{font-size:.86rem;color:var(--fg-dim);margin-top:.6rem;}
   .badge .ble{font-family:var(--mono);font-size:.64rem;color:var(--fg-faint);letter-spacing:.06em;margin-top:.2rem;}
+  a.badge{display:block;transition:background .3s;}
+  a.badge:hover{background:var(--bg-2);}
+  .badge .blink{font-family:var(--mono);font-size:.64rem;color:var(--accent);letter-spacing:.05em;margin-top:.55rem;}
+  a.badge:hover .blink{text-decoration:underline;}
   @media(max-width:760px){ .about{grid-template-columns:1fr;} }
 
   /* ---------- partners ---------- */
@@ -622,11 +626,12 @@
         </div>
       </div>
       <div class="badges">
-        <div class="badge">
+        <a class="badge" href="https://scholar.google.com/citations?user=5XHD7nkAAAAJ&amp;hl=zh-TW" target="_blank" rel="noopener">
           <div class="bn">15+</div>
           <div class="bl">第一作者論文</div>
           <div class="ble">First-author papers</div>
-        </div>
+          <div class="blink">Google Scholar ↗</div>
+        </a>
         <div class="badge">
           <div class="bn">ICASSP·ICML·NeurIPS</div>
           <div class="bl">會議審稿人</div>
