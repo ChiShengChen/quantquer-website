@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>量維資科 Quantquer Inc. — 量化深科技顧問</title>
+<link rel="icon" type="image/png" href="assets/logo-mark.png">
+
+<!-- ===== SEO ===== -->
+<meta name="description" content="量維資科 Quantquer Inc.｜量化深科技顧問。以研究級的嚴謹方法，解決 AI/ML、訊號處理、時頻分析、臨床醫療資訊與量化策略上別人解不動的硬問題，並交付可上線的系統。">
+<meta name="keywords" content="量化顧問,AI顧問,機器學習,訊號處理,時頻分析,臨床AI,醫療AI,量化策略,EEG,BCI,Quantquer,量維資科">
+<meta name="author" content="量維資科 Quantquer Inc.">
+<meta name="theme-color" content="#070A11">
+<link rel="canonical" href="https://quantquer.com/">
+
+<!-- ===== Open Graph ===== -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="量維資科 Quantquer Inc.">
+<meta property="og:title" content="量維資科 Quantquer Inc. — 量化深科技顧問">
+<meta property="og:description" content="以研究級的嚴謹方法，解決別人解不動的量化硬問題，交付可上線的系統。">
+<meta property="og:url" content="https://quantquer.com/">
+<meta property="og:image" content="https://quantquer.com/assets/logo-full-light.png">
+<meta property="og:locale" content="zh_TW">
+
+<!-- ===== Twitter ===== -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="量維資科 Quantquer Inc. — 量化深科技顧問">
+<meta name="twitter:description" content="以研究級的嚴謹方法，解決別人解不動的量化硬問題，交付可上線的系統。">
+<meta name="twitter:image" content="https://quantquer.com/assets/logo-full-light.png">
+
+<!-- ===== Organization schema ===== -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Organization",
+  "name":"量維資科 Quantquer Inc.",
+  "alternateName":"Quantquer",
+  "url":"https://quantquer.com/",
+  "logo":"https://quantquer.com/assets/logo-full-light.png",
+  "description":"量化深科技顧問。以研究級的嚴謹方法，解決 AI/ML、訊號處理、時頻分析、臨床醫療資訊與量化策略上別人解不動的硬問題，並交付可上線的系統。",
+  "email":"chisheng.m.chen@gmail.com",
+  "founder":{"@type":"Person","name":"陳麒升"}
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700&family=Noto+Sans+TC:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#070A11;
+    --bg-2:#0A0F18;
+    --panel:#0C121C;
+    --fg:#EAEEF2;
+    --fg-dim:#9AA6B4;
+    --fg-faint:#5A6675;
+    --accent:#2DD4BF;
+    --accent-dim:rgba(45,212,191,.55);
+    --line:rgba(255,255,255,.08);
+    --line-soft:rgba(255,255,255,.045);
+    --serif:'Noto Serif TC',serif;
+    --sans:'Noto Sans TC',system-ui,sans-serif;
+    --mono:'IBM Plex Mono',ui-monospace,monospace;
+    --maxw:1180px;
+    --pad:clamp(20px,5vw,64px);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--fg);
+    font-family:var(--sans);
+    font-weight:300;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  ::selection{background:rgba(45,212,191,.25);color:#fff;}
+  a{color:inherit;text-decoration:none;}
+
+  .mono{font-family:var(--mono);}
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:.72rem;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--accent);
+    font-weight:400;
+  }
+  .en{
+    font-family:var(--mono);
+    color:var(--fg-faint);
+    font-size:.8rem;
+    letter-spacing:.04em;
+    font-weight:400;
+  }
+
+  /* ---------- shell ---------- */
+  .wrap{max-width:var(--maxw);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad);}
+
+  /* ---------- nav ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    transition:background .4s ease, border-color .4s ease, backdrop-filter .4s ease;
+    border-bottom:1px solid transparent;
+  }
+  header.scrolled{
+    background:rgba(7,10,17,.78);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line-soft);
+  }
+  .nav{
+    display:flex;align-items:center;justify-content:space-between;
+    height:74px;
+  }
+  .brand{display:flex;align-items:center;gap:.7rem;}
+  .brand .logo-mark{height:34px;width:auto;display:block;}
+  .brand .brand-txt{display:flex;align-items:baseline;gap:.55rem;}
+  .brand .mark{font-family:var(--serif);font-weight:600;font-size:1.2rem;letter-spacing:.02em;}
+  @media(max-width:480px){ .brand .brand-txt{display:none;} .brand .logo-mark{height:30px;} }
+  .brand .lat{font-family:var(--mono);font-size:.72rem;letter-spacing:.18em;color:var(--fg-faint);text-transform:uppercase;}
+  .navlinks{display:flex;align-items:center;gap:2.1rem;}
+  .navlinks a{
+    font-family:var(--mono);font-size:.78rem;letter-spacing:.05em;color:var(--fg-dim);
+    transition:color .25s;
+  }
+  .navlinks a:hover{color:var(--fg);}
+  .nav-cta{
+    font-family:var(--mono);font-size:.78rem;letter-spacing:.04em;
+    color:var(--accent);border:1px solid var(--accent-dim);white-space:nowrap;
+    padding:.5rem 1rem;border-radius:2px;transition:background .25s,color .25s;
+  }
+  .nav-cta:hover{background:var(--accent);color:#04201d;}
+  @media(max-width:820px){ .navlinks .lk{display:none;} }
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden;}
+  #spectrum{position:absolute;inset:0;width:100%;height:100%;z-index:0;}
+  .hero::after{ /* vignette to settle text */
+    content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+    background:radial-gradient(120% 90% at 18% 42%, rgba(7,10,17,.55) 0%, rgba(7,10,17,.2) 45%, rgba(7,10,17,.75) 100%);
+  }
+  .hero .wrap{position:relative;z-index:2;width:100%;padding-top:96px;padding-bottom:64px;}
+  .hero-eyebrow{display:flex;align-items:center;gap:.85rem;margin-bottom:2rem;}
+  .hero-eyebrow .tick{width:34px;height:1px;background:var(--accent-dim);}
+  h1.hero-title{
+    font-family:var(--serif);font-weight:600;
+    font-size:clamp(2.5rem,6.4vw,5.1rem);
+    line-height:1.16;letter-spacing:.01em;
+    max-width:16ch;
+    text-wrap:balance;
+  }
+  h1.hero-title .hl{color:var(--accent);}
+  .hero-sub{
+    margin-top:1.8rem;max-width:46ch;
+    font-size:clamp(1rem,1.4vw,1.18rem);color:var(--fg-dim);font-weight:300;
+  }
+  .hero-sub .en{display:block;margin-top:.7rem;}
+  .domains{
+    display:flex;flex-wrap:wrap;gap:.5rem .65rem;margin-top:2.1rem;
+  }
+  .domains span{
+    font-family:var(--mono);font-size:.72rem;letter-spacing:.04em;color:var(--fg-dim);
+    border:1px solid var(--line);padding:.34rem .66rem;border-radius:2px;
+  }
+  .cta-row{display:flex;flex-wrap:wrap;gap:1rem;margin-top:2.6rem;}
+  .btn{
+    font-family:var(--mono);font-size:.84rem;letter-spacing:.03em;
+    display:inline-flex;align-items:center;gap:.6rem;
+    padding:.85rem 1.5rem;border-radius:2px;transition:.25s;cursor:pointer;border:1px solid transparent;white-space:nowrap;
+  }
+  .btn .arr{transition:transform .25s;}
+  .btn:hover .arr{transform:translateX(4px);}
+  .btn-primary{background:var(--accent);color:#04201d;font-weight:500;}
+  .btn-primary:hover{background:#5fe6d6;}
+  .btn-ghost{border-color:var(--line);color:var(--fg);}
+  .btn-ghost:hover{border-color:var(--accent-dim);color:var(--accent);}
+  .fig-cap{
+    position:absolute;left:var(--pad);bottom:24px;z-index:2;
+    font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;color:var(--fg-faint);
+    display:flex;align-items:center;gap:.6rem;
+  }
+  .fig-cap .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 0 rgba(45,212,191,.5);animation:pulse 2.6s infinite;}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(45,212,191,.45);}70%{box-shadow:0 0 0 7px rgba(45,212,191,0);}100%{box-shadow:0 0 0 0 rgba(45,212,191,0);}}
+
+  /* ---------- section frame ---------- */
+  section.block{padding:clamp(72px,11vh,150px) 0;position:relative;}
+  .axis-divider{
+    border-top:1px solid var(--line);
+    position:relative;
+  }
+  .axis-divider::before{
+    content:"";position:absolute;top:-1px;left:0;width:60px;height:1px;background:var(--accent);
+  }
+  .sec-head{display:flex;align-items:baseline;gap:1rem;margin-bottom:clamp(2.5rem,5vw,4rem);flex-wrap:wrap;}
+  .sec-head .idx{font-family:var(--mono);font-size:.78rem;color:var(--accent);letter-spacing:.12em;}
+  .sec-head h2{font-family:var(--serif);font-weight:500;font-size:clamp(1.7rem,3.4vw,2.6rem);letter-spacing:.01em;}
+  .sec-head .en{margin-left:.2rem;}
+  .sec-lead{max-width:54ch;color:var(--fg-dim);font-size:1.05rem;margin-top:-1.8rem;margin-bottom:3.4rem;}
+
+  /* ---------- capabilities ---------- */
+  .cap-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+  .cap{background:var(--bg);padding:clamp(1.8rem,3.4vw,2.8rem);position:relative;transition:background .35s;}
+  .cap:hover{background:var(--bg-2);}
+  .cap .num{font-family:var(--mono);font-size:.78rem;color:var(--accent);letter-spacing:.1em;}
+  .cap h3{font-family:var(--serif);font-weight:500;font-size:1.45rem;margin:1.1rem 0 .35rem;}
+  .cap .lat{font-family:var(--mono);font-size:.74rem;color:var(--fg-faint);letter-spacing:.06em;}
+  .cap p{color:var(--fg-dim);font-size:.98rem;margin-top:1rem;max-width:34ch;}
+  @media(max-width:720px){ .cap-grid{grid-template-columns:1fr;} }
+
+  /* ---------- cases ---------- */
+  .case{
+    display:grid;grid-template-columns:1.45fr .9fr;gap:clamp(1.5rem,4vw,3.5rem);
+    padding:clamp(2.2rem,4vw,3.2rem) 0;border-top:1px solid var(--line);align-items:center;
+  }
+  .case:last-child{border-bottom:1px solid var(--line);}
+  .case .ctag{font-family:var(--mono);font-size:.74rem;color:var(--accent);letter-spacing:.1em;}
+  .case h3{font-family:var(--serif);font-weight:500;font-size:1.5rem;margin:.7rem 0 1.6rem;}
+  .pm{display:grid;gap:1.3rem;}
+  .pm .lbl{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--fg-faint);margin-bottom:.3rem;}
+  .pm p{color:var(--fg-dim);font-size:.98rem;}
+  .result{
+    border-left:1px solid var(--line);padding-left:clamp(1.4rem,3vw,2.6rem);
+  }
+  .result .big{font-family:var(--mono);font-weight:500;font-size:clamp(2.6rem,5vw,3.8rem);color:var(--accent);line-height:1;letter-spacing:-.01em;}
+  .result .rlbl{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-faint);margin-bottom:.9rem;}
+  .result .rdesc{color:var(--fg-dim);font-size:.92rem;margin-top:1rem;max-width:24ch;}
+  @media(max-width:720px){
+    .case{grid-template-columns:1fr;gap:2rem;}
+    .result{border-left:none;border-top:1px solid var(--line);padding-left:0;padding-top:1.8rem;}
+  }
+
+  /* ---------- method ---------- */
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .step{background:var(--bg);padding:clamp(1.6rem,3vw,2.4rem) clamp(1.3rem,2.4vw,1.9rem);}
+  .step .sn{font-family:var(--mono);font-size:.78rem;color:var(--accent);letter-spacing:.1em;}
+  .step h4{font-family:var(--serif);font-weight:500;font-size:1.25rem;margin:1.4rem 0 .25rem;}
+  .step .lat{font-family:var(--mono);font-size:.7rem;color:var(--fg-faint);letter-spacing:.08em;}
+  .step p{color:var(--fg-dim);font-size:.92rem;margin-top:.9rem;}
+  @media(max-width:860px){ .steps{grid-template-columns:repeat(2,1fr);} }
+  @media(max-width:480px){ .steps{grid-template-columns:1fr;} }
+
+  /* ---------- about ---------- */
+  .about{display:grid;grid-template-columns:1.25fr .75fr;gap:clamp(2rem,5vw,4.5rem);align-items:start;}
+  .about h3{font-family:var(--serif);font-weight:600;font-size:1.7rem;}
+  .about .role{font-family:var(--mono);font-size:.76rem;color:var(--accent);letter-spacing:.1em;margin-top:.4rem;}
+  .about .bio{color:var(--fg-dim);font-size:1.02rem;margin-top:1.6rem;max-width:52ch;}
+  .affil{display:flex;flex-wrap:wrap;gap:.45rem .55rem;margin-top:1.7rem;}
+  .affil span{font-family:var(--mono);font-size:.7rem;color:var(--fg-dim);border:1px solid var(--line);padding:.3rem .6rem;border-radius:2px;}
+  .badges{display:grid;grid-template-columns:1fr;gap:1px;background:var(--line);border:1px solid var(--line);}
+  .badge{background:var(--bg);padding:1.4rem 1.4rem;}
+  .badge .bn{font-family:var(--mono);font-weight:500;font-size:1.6rem;color:var(--accent);line-height:1.1;word-break:break-word;}
+  .badge .bl{font-size:.86rem;color:var(--fg-dim);margin-top:.6rem;}
+  .badge .ble{font-family:var(--mono);font-size:.64rem;color:var(--fg-faint);letter-spacing:.06em;margin-top:.2rem;}
+  @media(max-width:760px){ .about{grid-template-columns:1fr;} }
+
+  /* ---------- contact ---------- */
+  .contact-inner{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(2rem,5vw,4rem);align-items:end;}
+  .contact h2{font-family:var(--serif);font-weight:500;font-size:clamp(2rem,4.6vw,3.4rem);line-height:1.2;}
+  .contact h2 .hl{color:var(--accent);}
+  .contact .csub{color:var(--fg-dim);margin-top:1.4rem;max-width:40ch;}
+  .mailcard{border:1px solid var(--line);padding:clamp(1.6rem,3vw,2.2rem);background:var(--bg-2);}
+  .mailcard .ml{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--fg-faint);}
+  .mailcard a.email{font-family:var(--mono);font-size:clamp(.95rem,2vw,1.25rem);color:var(--fg);display:block;margin:.7rem 0 1.6rem;letter-spacing:.01em;word-break:break-all;transition:color .25s;}
+  .mailcard a.email:hover{color:var(--accent);}
+  @media(max-width:760px){ .contact-inner{grid-template-columns:1fr;align-items:start;} }
+
+  /* ---------- footer ---------- */
+  footer{border-top:1px solid var(--line);padding:2.4rem 0;}
+  .foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+  .foot .fbrand{display:flex;align-items:center;}
+  .foot .foot-logo{height:80px;width:auto;display:block;opacity:.92;}
+  @media(max-width:480px){ .foot .foot-logo{height:64px;} }
+  .foot .fmeta{font-family:var(--mono);font-size:.72rem;color:var(--fg-faint);letter-spacing:.05em;}
+
+  /* ---------- reveal ---------- */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1);}
+  .reveal.in{opacity:1;transform:none;}
+  @media(prefers-reduced-motion:reduce){
+    .reveal{opacity:1;transform:none;transition:none;}
+    html{scroll-behavior:auto;}
+    .fig-cap .dot{animation:none;}
+  }
+</style>
+</head>
+<body>
+
+<template id="__bundler_thumbnail">
+  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <rect width="100" height="100" fill="#070A11"/>
+    <path d="M15 60 Q30 30 42 55 T62 50 T85 40" fill="none" stroke="#2DD4BF" stroke-width="2.5"/>
+    <text x="50" y="82" fill="#2DD4BF" font-family="monospace" font-size="9" text-anchor="middle">Q</text>
+  </svg>
+</template>
+
+<header id="hdr">
+  <div class="wrap nav">
+    <a href="#top" class="brand">
+      <img src="assets/logo-mark.png" class="logo-mark" alt="量維資科 Quantquer logo">
+      <span class="brand-txt">
+        <span class="mark">量維資科</span>
+        <span class="lat">Quantquer</span>
+      </span>
+    </a>
+    <nav class="navlinks">
+      <a href="#capabilities" class="lk">能力</a>
+      <a href="#work" class="lk">案例</a>
+      <a href="#method" class="lk">方法</a>
+      <a href="#about" class="lk">關於</a>
+      <a href="#contact" class="nav-cta">談談你的問題</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero" id="top">
+  <canvas id="spectrum"></canvas>
+  <div class="wrap">
+    <div class="hero-eyebrow">
+      <span class="tick"></span>
+      <span class="eyebrow">Quantitative Deep-Tech Consulting</span>
+    </div>
+    <h1 class="hero-title">把困難的量化問題，<br>做成<span class="hl">可交付的系統</span>。</h1>
+    <p class="hero-sub">
+      用研究級的嚴謹方法，解決 AI/ML、訊號處理、時序與頻域分析、臨床醫療資訊與量化策略上「別人解不動」的硬問題。
+      <span class="en">Rigorous quantitative methods for the hard problems others can't crack.</span>
+    </p>
+    <div class="domains">
+      <span>AI / ML</span>
+      <span>訊號處理 Signal Processing</span>
+      <span>時頻分析 Time–Frequency</span>
+      <span>臨床醫療資訊 Clinical AI</span>
+      <span>量化策略 Quant</span>
+    </div>
+    <div class="cta-row">
+      <a href="#contact" class="btn btn-primary">談談你的問題 <span class="arr">→</span></a>
+      <a href="#work" class="btn btn-ghost">看精選案例 <span class="arr">→</span></a>
+    </div>
+  </div>
+  <div class="fig-cap"><span class="dot"></span> fig.01 — power spectral density · live signal trace</div>
+</section>
+
+<!-- ===================== CAPABILITIES ===================== -->
+<section class="block axis-divider" id="capabilities">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="idx">§ 01</span>
+      <h2>能力</h2>
+      <span class="en">/ Capabilities</span>
+    </div>
+    <div class="cap-grid reveal">
+      <div class="cap">
+        <div class="num">01</div>
+        <h3>臨床與醫療 AI</h3>
+        <div class="lat">Clinical &amp; Medical AI</div>
+        <p>從原始生理訊號到臨床可用的決策系統，以符合研究標準的方式驗證每一步。</p>
+      </div>
+      <div class="cap">
+        <div class="num">02</div>
+        <h3>訊號處理與系統</h3>
+        <div class="lat">Signal Processing &amp; EEG–BCI</div>
+        <p>在高雜訊環境中萃取微弱目標訊號，建構即時、可部署的處理鏈，如腦波(EEG)、金融資料等。</p>
+      </div>
+      <div class="cap">
+        <div class="num">03</div>
+        <h3>時序與頻域方法</h3>
+        <div class="lat">Time-Series &amp; Spectral Methods</div>
+        <p>以頻域、時頻與統計方法，看見時間序列裡別人忽略的結構。</p>
+      </div>
+      <div class="cap">
+        <div class="num">04</div>
+        <h3>量化策略與 ML 工程</h3>
+        <div class="lat">Quant Strategy &amp; ML Engineering</div>
+        <p>把研究想法工程化為穩健、可重現、可上線的系統。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SELECTED WORK ===================== -->
+<section class="block axis-divider" id="work">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="idx">§ 02</span>
+      <h2>精選案例</h2>
+      <span class="en">/ Selected Work</span>
+    </div>
+
+    <div class="case reveal">
+      <div>
+        <div class="ctag">案例 01 · 生醫影像</div>
+        <h3>次世代定序影像降噪</h3>
+        <div class="pm">
+          <div><div class="lbl">問題 Problem</div><p>次世代定序（NGS）影像背景雜訊高、目標訊號微弱，傳統方法難以穩定分離。</p></div>
+          <div><div class="lbl">方法 Method</div><p>設計客製化降噪演算法，結合針對該訊號特性最佳化的 AI 模型。</p></div>
+        </div>
+      </div>
+      <div class="result">
+        <div class="rlbl">成果 Result</div>
+        <div class="big">+12<span style="font-size:.5em">%</span></div>
+        <p class="rdesc">客製化 AI 降噪相較既有傳統方法基準的訊號品質提升。</p>
+      </div>
+    </div>
+
+    <div class="case reveal">
+      <div>
+        <div class="ctag">案例 02 · 長照 / 即時系統</div>
+        <h3>養老院即時跌倒監測</h3>
+        <div class="pm">
+          <div><div class="lbl">問題 Problem</div><p>長照場域需要即時、低誤報的跌倒偵測，並能在邊緣裝置上穩定運行。</p></div>
+          <div><div class="lbl">方法 Method</div><p>建構即時 AI 跌倒監測系統，從感測到告警的完整處理鏈。</p></div>
+        </div>
+      </div>
+      <div class="result">
+        <div class="rlbl">成果 Result</div>
+        <div class="big">98<span style="font-size:.5em">%</span></div>
+        <p class="rdesc">邊緣裝置即時運行下的跌倒事件偵測準確率。</p>
+      </div>
+    </div>
+
+    <div class="case reveal">
+      <div>
+        <div class="ctag">案例 03 · 教育 AI</div>
+        <h3>大學普物個人化 AI 家教</h3>
+        <div class="pm">
+          <div><div class="lbl">問題 Problem</div><p>大班普通物理教學難以因材施教，學生之間的學習落差持續擴大。</p></div>
+          <div><div class="lbl">方法 Method</div><p>打造個人化 AI 家教系統，依學生狀態動態調整教學路徑。</p></div>
+        </div>
+      </div>
+      <div class="result">
+        <div class="rlbl">成果 Result</div>
+        <div class="big">+30<span style="font-size:.5em">%</span></div>
+        <p class="rdesc">導入個人化 AI 家教後，目標學生的期末成績提升。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== METHOD ===================== -->
+<section class="block axis-divider" id="method">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="idx">§ 03</span>
+      <h2>工作方式</h2>
+      <span class="en">/ How We Work</span>
+    </div>
+    <p class="sec-lead reveal">我們把每個案子當成一個研究問題：先把它定義清楚、設好基準，再用可重現的流程，把方法工程化為能真正上線的系統。</p>
+    <div class="steps reveal">
+      <div class="step">
+        <div class="sn">01</div>
+        <h4>問題定義</h4>
+        <div class="lat">Define</div>
+        <p>把模糊的需求收斂成可量測、可驗證的問題。</p>
+      </div>
+      <div class="step">
+        <div class="sn">02</div>
+        <h4>方法設計</h4>
+        <div class="lat">Design</div>
+        <p>從文獻與基準出發，設計合適的量化方法與評估指標。</p>
+      </div>
+      <div class="step">
+        <div class="sn">03</div>
+        <h4>原型驗證</h4>
+        <div class="lat">Validate</div>
+        <p>以研究級嚴謹度驗證，確保結果可重現、可解釋。</p>
+      </div>
+      <div class="step">
+        <div class="sn">04</div>
+        <h4>系統交付</h4>
+        <div class="lat">Deliver</div>
+        <p>將方法工程化為穩健、可維護、可部署的系統。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ABOUT ===================== -->
+<section class="block axis-divider" id="about">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="idx">§ 04</span>
+      <h2>關於</h2>
+      <span class="en">/ About</span>
+    </div>
+    <div class="about reveal">
+      <div class="about-info">
+        <h3>陳麒升</h3>
+        <div class="role">創辦人 · Founder</div>
+        <p class="bio">交大電子物理與理學院學士班雙學士，台大生醫電子與資訊學研究所碩士。 曾任聯發科（MediaTek）IC 設計工程師與OpenAI AI Trainer，後於哈佛醫學院與 BIDMC 擔任研究員。 專注於 AI 訊號處理、醫學應用與企業 AI 轉型——擅長把研究級的方法，落地成可交付的系統。</p>
+        <div class="affil">
+          <span>交大 NYCU</span>
+          <span>台大 NTU</span>
+          <span>聯發科 MediaTek</span>
+          <span>哈佛醫學院 Harvard Medical</span>
+          <span>BIDMC</span>
+        </div>
+      </div>
+      <div class="badges">
+        <div class="badge">
+          <div class="bn">15+</div>
+          <div class="bl">第一作者論文</div>
+          <div class="ble">First-author papers</div>
+        </div>
+        <div class="badge">
+          <div class="bn">ICASSP·ICML·NeurIPS</div>
+          <div class="bl">會議審稿人</div>
+          <div class="ble">Conference reviewer</div>
+        </div>
+        <div class="badge">
+          <div class="bn">20+</div>
+          <div class="bl">期刊審稿</div>
+          <div class="ble">Journal reviews</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CONTACT ===================== -->
+<section class="block axis-divider contact" id="contact">
+  <div class="wrap">
+    <div class="contact-inner reveal">
+      <div>
+        <div class="eyebrow" style="margin-bottom:1.4rem;">§ 05 / Contact</div>
+        <h2>有一個<span class="hl">別人解不動</span>的問題？<br>來談談。</h2>
+        <p class="csub">告訴我們你卡在哪裡。第一次對話，我們會一起把問題定義清楚——這通常是最有價值的一步。</p>
+      </div>
+      <div class="mailcard">
+        <div class="ml">Email</div>
+        <a class="email" href="mailto:chisheng.m.chen@gmail.com?subject=%5BQuantquer%5D%20%E5%95%8F%E9%A1%8C%E8%A8%8E%E8%AB%96">chisheng.m.chen@gmail.com</a>
+        <a href="mailto:chisheng.m.chen@gmail.com?subject=%5BQuantquer%5D%20%E5%95%8F%E9%A1%8C%E8%A8%8E%E8%AB%96" class="btn btn-primary" style="width:100%;justify-content:center;">寄信給我們 · Email us <span class="arr">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <div class="fbrand"><img src="assets/logo-full-light.png" class="foot-logo" alt="量維資科 Quantquer Inc."></div>
+    <div class="fmeta">© 2026 Quantquer Inc. — 用量化方法解決硬問題</div>
+  </div>
+</footer>
+
+<script>
+  // ---- header scroll state ----
+  const hdr = document.getElementById('hdr');
+  const onScroll = () => { hdr.classList.toggle('scrolled', window.scrollY > 30); };
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  // ---- reveal on scroll ----
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:.12, rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // ---- spectrum / signal motif ----
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const canvas = document.getElementById('spectrum');
+  const ctx = canvas.getContext('2d');
+  let W=0,H=0,dpr=1, scrollY=0;
+  const accent = '#2DD4BF';
+
+  function resize(){
+    dpr = Math.min(2, window.devicePixelRatio||1);
+    const r = canvas.getBoundingClientRect();
+    W = r.width; H = r.height;
+    canvas.width = Math.round(W*dpr); canvas.height = Math.round(H*dpr);
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
+  const gauss = (u,mu,s)=>Math.exp(-Math.pow((u-mu)/s,2)/2);
+
+  function draw(t){
+    ctx.clearRect(0,0,W,H);
+    const sn = Math.min(1, scrollY / Math.max(1,H));   // 0..1 scroll within hero
+    const base = H*0.60;
+    const par = scrollY*0.06;                            // parallax drift
+
+    // --- frequency grid (vertical) ---
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = 'rgba(255,255,255,0.035)';
+    const step = Math.max(70, W/14);
+    for(let x=step; x<W; x+=step){
+      ctx.beginPath(); ctx.moveTo(x, H*0.16); ctx.lineTo(x, H*0.92); ctx.stroke();
+    }
+    // --- baseline axis ---
+    ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+    ctx.beginPath(); ctx.moveTo(0, base - par); ctx.lineTo(W, base - par); ctx.stroke();
+
+    // --- PSD envelope (filled, with peaks) ---
+    ctx.beginPath();
+    ctx.moveTo(0, base - par);
+    for(let x=0; x<=W; x+=3){
+      const u = x/W;
+      const breathe = 0.92 + 0.08*Math.sin(t*0.0006);
+      const psd = (gauss(u,0.20,0.045)*0.55 + gauss(u,0.50,0.085)*1.0 + gauss(u,0.79,0.05)*0.42) * breathe;
+      const yy = (base - par) - psd*H*0.155*(1 - sn*0.5);
+      ctx.lineTo(x, yy);
+    }
+    ctx.lineTo(W, base - par); ctx.closePath();
+    const g = ctx.createLinearGradient(0, base-H*0.22, 0, base);
+    g.addColorStop(0,'rgba(45,212,191,0.085)');
+    g.addColorStop(1,'rgba(45,212,191,0)');
+    ctx.fillStyle = g; ctx.fill();
+    ctx.strokeStyle = 'rgba(45,212,191,0.16)'; ctx.lineWidth = 1; ctx.stroke();
+
+    // --- live signal trace ---
+    const amp = H*0.115 * (1 - sn*0.45);
+    ctx.beginPath();
+    for(let x=0; x<=W; x+=2){
+      const u = x/W;
+      let y = Math.sin(u*4.2  + t*0.00045)*0.62
+            + Math.sin(u*9.3  + t*0.00075)*0.46
+            + Math.sin(u*21.0 - t*0.00095)*0.24
+            + Math.sin(u*46.0 + t*0.00130)*0.11;
+      const env = gauss(u,0.5,0.46);           // taper at edges
+      const yy = (base - par) - y*amp*env;
+      x===0 ? ctx.moveTo(x,yy) : ctx.lineTo(x,yy);
+    }
+    ctx.strokeStyle = accent; ctx.lineWidth = 1.6; ctx.stroke();
+
+    // soft second harmonic ghost
+    ctx.beginPath();
+    for(let x=0; x<=W; x+=3){
+      const u = x/W;
+      let y = Math.sin(u*6.5 - t*0.0005)*0.5 + Math.sin(u*15 + t*0.0009)*0.3;
+      const env = gauss(u,0.5,0.46);
+      const yy = (base - par) - y*amp*0.55*env + 14;
+      x===0 ? ctx.moveTo(x,yy) : ctx.lineTo(x,yy);
+    }
+    ctx.strokeStyle = 'rgba(45,212,191,0.22)'; ctx.lineWidth = 1; ctx.stroke();
+  }
+
+  function frame(t){ draw(t); requestAnimationFrame(frame); }
+
+  window.addEventListener('resize', resize, {passive:true});
+  window.addEventListener('scroll', ()=>{ scrollY = window.scrollY; }, {passive:true});
+  resize();
+  if(reduce){ draw(0); }
+  else { requestAnimationFrame(frame); }
+</script>
+</body>
+</html>
