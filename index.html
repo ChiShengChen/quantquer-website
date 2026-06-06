@@ -346,8 +346,11 @@
   .foot-btm{display:flex;justify-content:flex-end;margin-top:1.8rem;padding-top:1.3rem;border-top:1px solid var(--line);}
   .foot-btm .fmeta{font-family:var(--mono);font-size:.72rem;color:var(--fg-faint);letter-spacing:.05em;}
   @media(max-width:560px){ .fcompany{text-align:left;} .foot-btm{justify-content:flex-start;} }
-  /* light theme keeps a dark footer band so the light-on-dark logo stays legible */
-  html[data-theme="light"] footer{background:#070A11;--line:rgba(255,255,255,.08);--fg-faint:#7A8696;--fg-dim:#9AA6B4;}
+  /* logo swaps with theme; light footer is a soft tint, no abrupt dark band */
+  .foot-logo.on-light{display:none;}
+  html[data-theme="light"] .foot-logo.on-dark{display:none;}
+  html[data-theme="light"] .foot-logo.on-light{display:block;}
+  html[data-theme="light"] footer{background:#EDF1F5;}
   /* light theme: white text on the (mid-tone) accent buttons for contrast */
   html[data-theme="light"] .btn-primary{color:#fff;}
   html[data-theme="light"] .btn-primary:hover{background:#003D80;color:#fff;}
@@ -714,7 +717,10 @@
 
 <footer>
   <div class="wrap foot">
-    <div class="fbrand"><img src="assets/logo-full-light.png" class="foot-logo" alt="量維資科 Quantquer Inc."></div>
+    <div class="fbrand">
+      <img src="assets/logo-full-light.png" class="foot-logo on-dark" alt="量維資科 Quantquer Inc." loading="lazy">
+      <img src="assets/logo-full-onlight.png" class="foot-logo on-light" alt="量維資科 Quantquer Inc." loading="lazy">
+    </div>
     <div class="fcompany">
       <div class="fco-name">量維資科有限公司 · Quantquer Inc.</div>
       <div>統一編號 93573761</div>
