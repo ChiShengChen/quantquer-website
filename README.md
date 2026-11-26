@@ -23,12 +23,14 @@
 │   ├── logo-mark.png           # 標誌（藍色 Q，深淺底皆適用）— favicon / nav
 │   ├── logo-full-light.png     # 完整 logo（淺色字，深色底用）— 深色版頁尾
 │   ├── logo-full-onlight.png   # 完整 logo（深色字，淺色底用）— 亮色版頁尾、JSON-LD
-│   ├── partners/*.svg          # §08 夥伴 logo（取自築邦科技夥伴頁 buildpolis.com/partners）
+│   ├── partners/*              # §08 夥伴 logo（取自築邦科技夥伴頁 buildpolis.com/partners）
 │   ├── og-image.png            # 社群分享圖 1200×630（實心淺底，LINE／FB／X 預覽用）
-│   ├── caps/*.webp             # §01 能力示意圖（AI 生成，900×600）
-│   ├── svcs/*.webp             # §02 服務方案示意圖（AI 生成，900×600）
-│   ├── method-flow.webp        # §04 工作方式流程圖（AI 生成，1536×512）
-│   └── cases/*.webp            # §03 案例配圖（AI 生成，1200×800）
+│   ├── caps/*.webp             # §01 能力示意圖
+│   ├── svcs/*.webp             # §02 服務方案示意圖
+│   ├── labs/*.webp             # §06 Labs 示意圖
+│   ├── method-flow.webp        # §04 工作方式流程圖（1536×512）
+│   └── cases/*.webp            # §03 案例配圖
+│                               #   插圖皆為 AI 生成：<name>.webp 1536×1024 + <name>-768.webp，以 srcset 供瀏覽器挑選
 ├── CNAME                       # 自訂網域：quantquer.com
 ├── .nojekyll                   # 關閉 GitHub Pages 的 Jekyll 處理
 └── .gitignore

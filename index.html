@@ -285,7 +285,7 @@
   .case:hover{background:var(--bg-2);}
   .cfig{position:relative;aspect-ratio:3/2;overflow:hidden;border-bottom:1px solid var(--line);background:#F3F6FA;}
   .cfig img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.2,.7,.2,1);}
-  .case:hover .cfig img,.cap:hover .cfig img,.offer:hover .cfig img{transform:scale(1.025);}
+  .case:hover .cfig img,.cap:hover .cfig img,.offer:hover .cfig img,.lab:hover .cfig img{transform:scale(1.025);}
   html:not([data-theme="light"]) .cfig img{filter:brightness(.86) contrast(1.04);}
   .case .cbody{padding:clamp(1.6rem,2.8vw,2.3rem);display:flex;flex-direction:column;flex:1;}
   .case .ctag{font-family:var(--mono);font-size:.72rem;color:var(--accent);letter-spacing:.1em;}
@@ -318,7 +318,8 @@
 
   /* ---------- labs ---------- */
   .labs{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
-  .lab{background:var(--bg);padding:clamp(1.6rem,2.6vw,2.1rem);display:flex;flex-direction:column;transition:background .35s;}
+  .lab{background:var(--bg);display:flex;flex-direction:column;transition:background .35s;}
+  .lab .cbd{padding:clamp(1.6rem,2.6vw,2.1rem);display:flex;flex-direction:column;flex:1;}
   a.lab:hover{background:var(--bg-2);}
   .lab .ltop{display:flex;justify-content:space-between;align-items:center;gap:.8rem;}
   .lab .lname{font-family:var(--mono);font-size:.98rem;font-weight:500;color:var(--fg);}
@@ -367,12 +368,13 @@
   @media(max-width:400px){ .badges{grid-template-columns:1fr;} }
 
   /* ---------- partners ---------- */
-  .partners{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+  .partners{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
   .partner{background:var(--bg);display:flex;flex-direction:column;transition:background .35s;}
-  .partner .pbd{padding:clamp(1.8rem,3vw,2.4rem);display:flex;flex-direction:column;flex:1;}
+  .partner .pbd{padding:clamp(1.5rem,2.2vw,1.9rem);display:flex;flex-direction:column;flex:1;}
   /* logo tile keeps its own background in both themes so brand colours stay legible */
   .plogo{height:clamp(104px,10vw,128px);display:flex;align-items:center;justify-content:center;background:#F3F6FA;border-bottom:1px solid var(--line);}
-  .plogo.dark{background:#141925;}
+  .plogo.scito{background:#36558E;}
+  .plogo.scito img{height:100%;max-height:100%;width:auto;max-width:none;}
   .plogo img{max-width:72%;max-height:54%;width:auto;height:auto;display:block;transition:transform .5s cubic-bezier(.2,.7,.2,1);}
   .partner:hover .plogo img{transform:scale(1.04);}
   .partner:hover{background:var(--bg-2);}
@@ -387,7 +389,8 @@
   .partner li::before{content:"";position:absolute;left:2px;top:.42em;width:8px;height:5px;border-left:1.6px solid var(--accent);border-bottom:1.6px solid var(--accent);transform:rotate(-45deg);}
   .partner .psite{font-family:var(--mono);font-size:.74rem;color:var(--fg-faint);letter-spacing:.03em;margin-top:1.7rem;transition:color .25s;}
   .partner:hover .psite{color:var(--accent-dim);}
-  @media(max-width:860px){ .partners{grid-template-columns:1fr;} }
+  @media(max-width:1080px){ .partners{grid-template-columns:repeat(2,1fr);} }
+  @media(max-width:640px){ .partners{grid-template-columns:1fr;} }
 
   /* ---------- services ---------- */
   .sec-lead strong{color:var(--accent);font-weight:500;font-family:var(--mono);font-size:.95em;}
@@ -558,7 +561,7 @@
     </div>
     <div class="cap-grid reveal">
       <div class="cap">
-        <div class="cfig"><img src="assets/caps/agent.webp" alt="AI Agent 與多代理系統示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="cfig"><img src="assets/caps/agent.webp" srcset="assets/caps/agent-768.webp 768w, assets/caps/agent.webp 1536w" sizes="(max-width: 620px) 100vw, (max-width: 1080px) 50vw, 270px" alt="AI Agent 與多代理系統示意圖" loading="lazy" width="1536" height="1024"></div>
         <div class="cbd">
           <div class="num">01</div>
           <h3>AI Agent 與多代理系統</h3>
@@ -568,7 +571,7 @@
         </div>
       </div>
       <div class="cap">
-        <div class="cfig"><img src="assets/caps/science.webp" alt="科學 AI 與研究自動化示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="cfig"><img src="assets/caps/science.webp" srcset="assets/caps/science-768.webp 768w, assets/caps/science.webp 1536w" sizes="(max-width: 620px) 100vw, (max-width: 1080px) 50vw, 270px" alt="科學 AI 與研究自動化示意圖" loading="lazy" width="1536" height="1024"></div>
         <div class="cbd">
           <div class="num">02</div>
           <h3>科學 AI 與研究自動化</h3>
@@ -578,7 +581,7 @@
         </div>
       </div>
       <div class="cap">
-        <div class="cfig"><img src="assets/caps/clinical.webp" alt="臨床 AI 與腦機介面示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="cfig"><img src="assets/caps/clinical.webp" srcset="assets/caps/clinical-768.webp 768w, assets/caps/clinical.webp 1536w" sizes="(max-width: 620px) 100vw, (max-width: 1080px) 50vw, 270px" alt="臨床 AI 與腦機介面示意圖" loading="lazy" width="1536" height="1024"></div>
         <div class="cbd">
           <div class="num">03</div>
           <h3>臨床 AI 與腦機介面</h3>
@@ -588,7 +591,7 @@
         </div>
       </div>
       <div class="cap">
-        <div class="cfig"><img src="assets/caps/signal.webp" alt="訊號處理與時序建模示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="cfig"><img src="assets/caps/signal.webp" srcset="assets/caps/signal-768.webp 768w, assets/caps/signal.webp 1536w" sizes="(max-width: 620px) 100vw, (max-width: 1080px) 50vw, 270px" alt="訊號處理與時序建模示意圖" loading="lazy" width="1536" height="1024"></div>
         <div class="cbd">
           <div class="num">04</div>
           <h3>訊號處理與時序建模</h3>
@@ -598,7 +601,7 @@
         </div>
       </div>
       <div class="cap">
-        <div class="cfig"><img src="assets/caps/finance.webp" alt="金融 AI 與決策智慧示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="cfig"><img src="assets/caps/finance.webp" srcset="assets/caps/finance-768.webp 768w, assets/caps/finance.webp 1536w" sizes="(max-width: 620px) 100vw, (max-width: 1080px) 50vw, 270px" alt="金融 AI 與決策智慧示意圖" loading="lazy" width="1536" height="1024"></div>
         <div class="cbd">
           <div class="num">05</div>
           <h3>金融 AI 與決策智慧</h3>
@@ -608,7 +611,7 @@
         </div>
       </div>
       <div class="cap">
-        <div class="cfig"><img src="assets/caps/quantum.webp" alt="量子與混合機器學習示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="cfig"><img src="assets/caps/quantum.webp" srcset="assets/caps/quantum-768.webp 768w, assets/caps/quantum.webp 1536w" sizes="(max-width: 620px) 100vw, (max-width: 1080px) 50vw, 270px" alt="量子與混合機器學習示意圖" loading="lazy" width="1536" height="1024"></div>
         <div class="cbd">
           <div class="num">06</div>
           <h3>量子與混合機器學習</h3>
@@ -618,7 +621,7 @@
         </div>
       </div>
       <div class="cap">
-        <div class="cfig"><img src="assets/caps/industrial.webp" alt="工業 AI 與電腦視覺示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="cfig"><img src="assets/caps/industrial.webp" srcset="assets/caps/industrial-768.webp 768w, assets/caps/industrial.webp 1536w" sizes="(max-width: 620px) 100vw, (max-width: 1080px) 50vw, 270px" alt="工業 AI 與電腦視覺示意圖" loading="lazy" width="1536" height="1024"></div>
         <div class="cbd">
           <div class="num">07</div>
           <h3>工業 AI 與電腦視覺</h3>
@@ -628,7 +631,7 @@
         </div>
       </div>
       <div class="cap">
-        <div class="cfig"><img src="assets/caps/product.webp" alt="AI 產品工程與評估示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="cfig"><img src="assets/caps/product.webp" srcset="assets/caps/product-768.webp 768w, assets/caps/product.webp 1536w" sizes="(max-width: 620px) 100vw, (max-width: 1080px) 50vw, 270px" alt="AI 產品工程與評估示意圖" loading="lazy" width="1536" height="1024"></div>
         <div class="cbd">
           <div class="num">08</div>
           <h3>AI 產品工程與評估</h3>
@@ -652,7 +655,7 @@
     <p class="sec-lead reveal">從你要解決的問題出發。每個方案在開始前，都會先一起把範圍與交付物定義清楚。</p>
     <div class="offers reveal">
       <div class="offer">
-        <div class="cfig"><img src="assets/svcs/agent.webp" alt="客製化 AI Agent 系統示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="cfig"><img src="assets/svcs/agent.webp" srcset="assets/svcs/agent-768.webp 768w, assets/svcs/agent.webp 1536w" sizes="(max-width: 640px) 100vw, (max-width: 1000px) 50vw, 360px" alt="客製化 AI Agent 系統示意圖" loading="lazy" width="1536" height="1024"></div>
         <div class="cbd">
           <div class="on"><span>01</span><span class="pick">重點服務</span></div>
           <h3>客製化 AI Agent 系統</h3>
@@ -667,7 +670,7 @@
         </div>
       </div>
       <div class="offer">
-        <div class="cfig"><img src="assets/svcs/eval.webp" alt="AI 評估與成本最佳化示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="cfig"><img src="assets/svcs/eval.webp" srcset="assets/svcs/eval-768.webp 768w, assets/svcs/eval.webp 1536w" sizes="(max-width: 640px) 100vw, (max-width: 1000px) 50vw, 360px" alt="AI 評估與成本最佳化示意圖" loading="lazy" width="1536" height="1024"></div>
         <div class="cbd">
           <div class="on"><span>02</span><span class="pick">重點服務</span></div>
           <h3>AI 評估與成本最佳化</h3>
@@ -682,7 +685,7 @@
         </div>
       </div>
       <div class="offer">
-        <div class="cfig"><img src="assets/svcs/research.webp" alt="研究即服務示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="cfig"><img src="assets/svcs/research.webp" srcset="assets/svcs/research-768.webp 768w, assets/svcs/research.webp 1536w" sizes="(max-width: 640px) 100vw, (max-width: 1000px) 50vw, 360px" alt="研究即服務示意圖" loading="lazy" width="1536" height="1024"></div>
         <div class="cbd">
           <div class="on"><span>03</span><span class="pick">重點服務</span></div>
           <h3>研究即服務</h3>
@@ -697,7 +700,7 @@
         </div>
       </div>
       <div class="offer">
-        <div class="cfig"><img src="assets/svcs/kb.webp" alt="企業知識庫與智慧問答示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="cfig"><img src="assets/svcs/kb.webp" srcset="assets/svcs/kb-768.webp 768w, assets/svcs/kb.webp 1536w" sizes="(max-width: 640px) 100vw, (max-width: 1000px) 50vw, 360px" alt="企業知識庫與智慧問答示意圖" loading="lazy" width="1536" height="1024"></div>
         <div class="cbd">
           <div class="on"><span>04</span></div>
           <h3>企業知識庫與智慧問答</h3>
@@ -712,7 +715,7 @@
         </div>
       </div>
       <div class="offer">
-        <div class="cfig"><img src="assets/svcs/domain.webp" alt="領域 AI 演算法研發示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="cfig"><img src="assets/svcs/domain.webp" srcset="assets/svcs/domain-768.webp 768w, assets/svcs/domain.webp 1536w" sizes="(max-width: 640px) 100vw, (max-width: 1000px) 50vw, 360px" alt="領域 AI 演算法研發示意圖" loading="lazy" width="1536" height="1024"></div>
         <div class="cbd">
           <div class="on"><span>05</span></div>
           <h3>領域 AI 演算法研發</h3>
@@ -727,7 +730,7 @@
         </div>
       </div>
       <div class="offer">
-        <div class="cfig"><img src="assets/svcs/assess.webp" alt="AI 技術診斷與架構規劃示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="cfig"><img src="assets/svcs/assess.webp" srcset="assets/svcs/assess-768.webp 768w, assets/svcs/assess.webp 1536w" sizes="(max-width: 640px) 100vw, (max-width: 1000px) 50vw, 360px" alt="AI 技術診斷與架構規劃示意圖" loading="lazy" width="1536" height="1024"></div>
         <div class="cbd">
           <div class="on"><span>06</span></div>
           <h3>AI 技術診斷與架構規劃</h3>
@@ -791,7 +794,7 @@
 
     <div class="cases reveal">
       <article class="case">
-        <div class="cfig"><img src="assets/cases/robot.webp" alt="機器人碼垛工作站佈局最佳化示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="cfig"><img src="assets/cases/robot.webp" srcset="assets/cases/robot-768.webp 768w, assets/cases/robot.webp 1536w" sizes="(max-width: 760px) 100vw, 530px" alt="機器人碼垛工作站佈局最佳化示意圖" loading="lazy" width="1536" height="1024"></div>
         <div class="cbody">
           <div class="ctag">案例 01 · 工業 AI · AI Agent</div>
           <h3>工業機器人工作站智慧設計平台</h3>
@@ -806,7 +809,7 @@
       </article>
 
       <article class="case">
-        <div class="cfig"><img src="assets/cases/kb.webp" alt="企業知識庫衝突仲裁問答系統示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="cfig"><img src="assets/cases/kb.webp" srcset="assets/cases/kb-768.webp 768w, assets/cases/kb.webp 1536w" sizes="(max-width: 760px) 100vw, 530px" alt="企業知識庫衝突仲裁問答系統示意圖" loading="lazy" width="1536" height="1024"></div>
         <div class="cbody">
           <div class="ctag">案例 02 · 企業 AI · 知識管理</div>
           <h3>設備廠商技術知識庫問答系統</h3>
@@ -821,7 +824,7 @@
       </article>
 
       <article class="case">
-        <div class="cfig"><img src="assets/cases/finance.webp" alt="AI 投資研究平台示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="cfig"><img src="assets/cases/finance.webp" srcset="assets/cases/finance-768.webp 768w, assets/cases/finance.webp 1536w" sizes="(max-width: 760px) 100vw, 530px" alt="AI 投資研究平台示意圖" loading="lazy" width="1536" height="1024"></div>
         <div class="cbody">
           <div class="ctag">案例 03 · 金融科技 · AI Agent</div>
           <h3>AI 投資研究平台</h3>
@@ -836,7 +839,7 @@
       </article>
 
       <article class="case">
-        <div class="cfig"><img src="assets/cases/floorplan.webp" alt="建築平面圖自動上色示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="cfig"><img src="assets/cases/floorplan.webp" srcset="assets/cases/floorplan-768.webp 768w, assets/cases/floorplan.webp 1536w" sizes="(max-width: 760px) 100vw, 530px" alt="建築平面圖自動上色示意圖" loading="lazy" width="1536" height="1024"></div>
         <div class="cbody">
           <div class="ctag">案例 04 · 電腦視覺 · 建築設計</div>
           <h3>建築平面圖自動上色系統</h3>
@@ -851,7 +854,7 @@
       </article>
 
       <article class="case">
-        <div class="cfig"><img src="assets/cases/eeg.webp" alt="腦波療效預測示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="cfig"><img src="assets/cases/eeg.webp" srcset="assets/cases/eeg-768.webp 768w, assets/cases/eeg.webp 1536w" sizes="(max-width: 760px) 100vw, 530px" alt="腦波療效預測示意圖" loading="lazy" width="1536" height="1024"></div>
         <div class="cbody">
           <div class="ctag">案例 05 · 臨床 AI · 腦波</div>
           <h3>腦波憂鬱症療效預測</h3>
@@ -866,7 +869,7 @@
       </article>
 
       <article class="case">
-        <div class="cfig"><img src="assets/cases/fall.webp" alt="長照場域即時跌倒監測示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="cfig"><img src="assets/cases/fall.webp" srcset="assets/cases/fall-768.webp 768w, assets/cases/fall.webp 1536w" sizes="(max-width: 760px) 100vw, 530px" alt="長照場域即時跌倒監測示意圖" loading="lazy" width="1536" height="1024"></div>
         <div class="cbody">
           <div class="ctag">案例 06 · 長照 · 邊緣 AI</div>
           <h3>養老院即時跌倒監測</h3>
@@ -880,7 +883,7 @@
       </article>
 
       <article class="case">
-        <div class="cfig"><img src="assets/cases/ngs.webp" alt="次世代定序影像降噪示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="cfig"><img src="assets/cases/ngs.webp" srcset="assets/cases/ngs-768.webp 768w, assets/cases/ngs.webp 1536w" sizes="(max-width: 760px) 100vw, 530px" alt="次世代定序影像降噪示意圖" loading="lazy" width="1536" height="1024"></div>
         <div class="cbody">
           <div class="ctag">案例 07 · 生醫影像</div>
           <h3>次世代定序影像降噪</h3>
@@ -894,7 +897,7 @@
       </article>
 
       <article class="case">
-        <div class="cfig"><img src="assets/cases/tutor.webp" alt="大學普物個人化 AI 家教示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="cfig"><img src="assets/cases/tutor.webp" srcset="assets/cases/tutor-768.webp 768w, assets/cases/tutor.webp 1536w" sizes="(max-width: 760px) 100vw, 530px" alt="大學普物個人化 AI 家教示意圖" loading="lazy" width="1536" height="1024"></div>
         <div class="cbody">
           <div class="ctag">案例 08 · 教育 AI</div>
           <h3>大學普物個人化 AI 家教</h3>
@@ -919,7 +922,7 @@
       <span class="en">/ How We Work</span>
     </div>
     <p class="sec-lead reveal">我們最擅長的，是從零研究一個還沒有標準答案的問題：先定義清楚、設好基準與對照組，設計方法並以實驗驗證，再把它工程化成真正能用的產品。</p>
-    <div class="method-fig reveal"><img src="assets/method-flow.webp" alt="問題定義、方法設計、原型驗證、系統交付四階段流程示意圖" loading="lazy" width="1536" height="512"></div>
+    <div class="method-fig reveal"><img src="assets/method-flow.webp" srcset="assets/method-flow-768.webp 768w, assets/method-flow.webp 1536w" sizes="(max-width: 1180px) 100vw, 1060px" alt="問題定義、方法設計、原型驗證、系統交付四階段流程示意圖" loading="lazy" width="1536" height="512"></div>
     <div class="steps reveal">
       <div class="step">
         <div class="sn">01</div>
@@ -1030,40 +1033,58 @@
     <p class="sec-lead reveal">我們自己開發、自己使用的工具。每一項都標明目前狀態：已開源的可以直接看程式碼，其餘仍在內部使用或開發中。</p>
     <div class="labs reveal">
       <a class="lab" href="https://github.com/ChiShengChen/paper-evidence" target="_blank" rel="noopener">
-        <div class="ltop"><span class="lname">paper-evidence</span><span class="status open">開源</span></div>
-        <h3>證據導向的文獻分析</h3>
-        <p>從文獻抽出可驗證的證據；LLM 對來源的每個宣稱，都必須有原文與數字上下文支持才放行。</p>
-        <div class="lfor">應用 <b>可追溯的研究報告</b></div>
+        <div class="cfig"><img src="assets/labs/evidence.webp" srcset="assets/labs/evidence-768.webp 768w, assets/labs/evidence.webp 1536w" sizes="(max-width: 640px) 100vw, (max-width: 1000px) 50vw, 360px" alt="證據導向文獻分析示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="cbd">
+          <div class="ltop"><span class="lname">paper-evidence</span><span class="status open">開源</span></div>
+          <h3>證據導向的文獻分析</h3>
+          <p>從文獻抽出可驗證的證據；LLM 對來源的每個宣稱，都必須有原文與數字上下文支持才放行。</p>
+          <div class="lfor">應用 <b>可追溯的研究報告</b></div>
+        </div>
       </a>
       <a class="lab" href="https://github.com/ChiShengChen/tokenbench" target="_blank" rel="noopener">
-        <div class="ltop"><span class="lname">tokenbench</span><span class="status open">開源</span></div>
-        <h3>LLM 應用的 Token 效率基準</h3>
-        <p>在本機可重現地量測 LLM 應用的模型呼叫、token 用量與答對率，比較不同策略的成本與品質。</p>
-        <div class="lfor">應用 <b>企業 LLM 降本</b></div>
+        <div class="cfig"><img src="assets/labs/tokenbench.webp" srcset="assets/labs/tokenbench-768.webp 768w, assets/labs/tokenbench.webp 1536w" sizes="(max-width: 640px) 100vw, (max-width: 1000px) 50vw, 360px" alt="Token 效率基準示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="cbd">
+          <div class="ltop"><span class="lname">tokenbench</span><span class="status open">開源</span></div>
+          <h3>LLM 應用的 Token 效率基準</h3>
+          <p>在本機可重現地量測 LLM 應用的模型呼叫、token 用量與答對率，比較不同策略的成本與品質。</p>
+          <div class="lfor">應用 <b>企業 LLM 降本</b></div>
+        </div>
       </a>
       <a class="lab" href="https://github.com/ChiShengChen/sevencheck" target="_blank" rel="noopener">
-        <div class="ltop"><span class="lname">sevencheck</span><span class="status open">開源</span></div>
-        <h3>LLM 輸出的確定性檢查</h3>
-        <p>七類不需第二個模型的驗證，專抓「看起來合理但其實錯了」的輸出：改寫過的引文、捏造的引用、被截斷的統計。</p>
-        <div class="lfor">應用 <b>高可靠性 AI 工作流</b></div>
+        <div class="cfig"><img src="assets/labs/sevencheck.webp" srcset="assets/labs/sevencheck-768.webp 768w, assets/labs/sevencheck.webp 1536w" sizes="(max-width: 640px) 100vw, (max-width: 1000px) 50vw, 360px" alt="LLM 輸出確定性檢查示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="cbd">
+          <div class="ltop"><span class="lname">sevencheck</span><span class="status open">開源</span></div>
+          <h3>LLM 輸出的確定性檢查</h3>
+          <p>七類不需第二個模型的驗證，專抓「看起來合理但其實錯了」的輸出：改寫過的引文、捏造的引用、被截斷的統計。</p>
+          <div class="lfor">應用 <b>高可靠性 AI 工作流</b></div>
+        </div>
       </a>
       <div class="lab">
-        <div class="ltop"><span class="lname">AutoResearch</span><span class="status">內部使用</span></div>
-        <h3>自動化研究多代理系統</h3>
-        <p>文獻監控、構想辯論、預註冊閘門、實驗、撰稿、審稿模擬到數字稽核，關鍵節點保留人工把關。</p>
-        <div class="lfor">應用 <b>企業研發自動化</b></div>
+        <div class="cfig"><img src="assets/labs/autoresearch.webp" srcset="assets/labs/autoresearch-768.webp 768w, assets/labs/autoresearch.webp 1536w" sizes="(max-width: 640px) 100vw, (max-width: 1000px) 50vw, 360px" alt="自動化研究多代理系統示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="cbd">
+          <div class="ltop"><span class="lname">AutoResearch</span><span class="status">內部使用</span></div>
+          <h3>自動化研究多代理系統</h3>
+          <p>文獻監控、構想辯論、預註冊閘門、實驗、撰稿、審稿模擬到數字稽核，關鍵節點保留人工把關。</p>
+          <div class="lfor">應用 <b>企業研發自動化</b></div>
+        </div>
       </div>
       <div class="lab">
-        <div class="ltop"><span class="lname">Hypogen</span><span class="status">開發中</span></div>
-        <h3>投資假說產生器</h3>
-        <p>從一個問題展開多層供應鏈關係、排序瓶頸，產生附觸發與失效條件的假說，並逐句回查引用。</p>
-        <div class="lfor">應用 <b>投資研究、產業分析</b></div>
+        <div class="cfig"><img src="assets/labs/hypogen.webp" srcset="assets/labs/hypogen-768.webp 768w, assets/labs/hypogen.webp 1536w" sizes="(max-width: 640px) 100vw, (max-width: 1000px) 50vw, 360px" alt="投資假說產生器示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="cbd">
+          <div class="ltop"><span class="lname">Hypogen</span><span class="status">開發中</span></div>
+          <h3>投資假說產生器</h3>
+          <p>從一個問題展開多層供應鏈關係、排序瓶頸，產生附觸發與失效條件的假說，並逐句回查引用。</p>
+          <div class="lfor">應用 <b>投資研究、產業分析</b></div>
+        </div>
       </div>
       <a class="lab" href="https://github.com/ChiShengChen/bazaar-of-fates" target="_blank" rel="noopener">
-        <div class="ltop"><span class="lname">Bazaar of Fates</span><span class="status open">開源</span></div>
-        <h3>確定性引擎 × LLM 的產品架構</h3>
-        <p>十一套確定性計算引擎負責運算，LLM 只負責解讀：示範如何把複雜的領域規則做成可信的 AI 產品。</p>
-        <div class="lfor">應用 <b>規則型 AI 產品</b></div>
+        <div class="cfig"><img src="assets/labs/fates.webp" srcset="assets/labs/fates-768.webp 768w, assets/labs/fates.webp 1536w" sizes="(max-width: 640px) 100vw, (max-width: 1000px) 50vw, 360px" alt="確定性引擎與 LLM 產品架構示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="cbd">
+          <div class="ltop"><span class="lname">Bazaar of Fates</span><span class="status open">開源</span></div>
+          <h3>確定性引擎 × LLM 的產品架構</h3>
+          <p>十一套確定性計算引擎負責運算，LLM 只負責解讀：示範如何把複雜的領域規則做成可信的 AI 產品。</p>
+          <div class="lfor">應用 <b>規則型 AI 產品</b></div>
+        </div>
       </a>
     </div>
   </div>
@@ -1131,10 +1152,10 @@
       <h2>夥伴服務</h2>
       <span class="en">/ Partner Services</span>
     </div>
-    <p class="sec-lead reveal">串接專業夥伴，補齊數位與硬體整合需求——從量測驗證、AIoT 到工業電子，把研究級方法延伸為完整的軟硬體交付。</p>
+    <p class="sec-lead reveal">串接專業夥伴，補齊數位與硬體整合需求——從量測驗證、AOI 影像檢測、AIoT 到企業數位轉型，把研究級方法延伸為完整的軟硬體交付。</p>
     <div class="partners reveal">
       <a class="partner" href="https://scitotech.com" target="_blank" rel="noopener">
-        <div class="plogo dark"><img src="assets/partners/scito.svg" alt="識新科技 logo" loading="lazy"></div>
+        <div class="plogo scito"><img src="assets/partners/scito.webp" alt="識新科技 logo" loading="lazy" width="640" height="640"></div>
         <div class="pbd">
           <div class="ptop">
             <h3>識新科技</h3>
@@ -1148,6 +1169,23 @@
             <li>AI 影像辨識、訊號處理與遠端控制</li>
           </ul>
           <span class="psite">scitotech.com</span>
+        </div>
+      </a>
+      <a class="partner" href="https://www.royi.com.tw/" target="_blank" rel="noopener">
+        <div class="plogo"><img src="assets/partners/royi.webp" alt="嶸鐿科技 logo" loading="lazy"></div>
+        <div class="pbd">
+          <div class="ptop">
+            <h3>嶸鐿科技</h3>
+            <span class="ext">↗</span>
+          </div>
+          <div class="plat">AOI Systems</div>
+          <div class="ptag">AOI 影像檢測與產線自動化整合</div>
+          <ul>
+            <li>影像檢測與瑕疵檢測機台</li>
+            <li>三維量測、ToF 3D 檢測與 PCB 翹曲檢測</li>
+            <li>資料串流、電控與產線 UI 整合</li>
+          </ul>
+          <span class="psite">royi.com.tw</span>
         </div>
       </a>
       <a class="partner" href="https://rengiantek.info" target="_blank" rel="noopener">
