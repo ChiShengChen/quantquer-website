@@ -368,7 +368,13 @@
 
   /* ---------- partners ---------- */
   .partners{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
-  .partner{background:var(--bg);padding:clamp(1.8rem,3vw,2.4rem);display:flex;flex-direction:column;transition:background .35s;}
+  .partner{background:var(--bg);display:flex;flex-direction:column;transition:background .35s;}
+  .partner .pbd{padding:clamp(1.8rem,3vw,2.4rem);display:flex;flex-direction:column;flex:1;}
+  /* logo tile keeps its own background in both themes so brand colours stay legible */
+  .plogo{height:clamp(104px,10vw,128px);display:flex;align-items:center;justify-content:center;background:#F3F6FA;border-bottom:1px solid var(--line);}
+  .plogo.dark{background:#141925;}
+  .plogo img{max-width:72%;max-height:54%;width:auto;height:auto;display:block;transition:transform .5s cubic-bezier(.2,.7,.2,1);}
+  .partner:hover .plogo img{transform:scale(1.04);}
   .partner:hover{background:var(--bg-2);}
   .partner .ptop{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;}
   .partner h3{font-family:var(--serif);font-weight:500;font-size:1.4rem;line-height:1.2;}
@@ -1128,46 +1134,55 @@
     <p class="sec-lead reveal">串接專業夥伴，補齊數位與硬體整合需求——從量測驗證、AIoT 到工業電子，把研究級方法延伸為完整的軟硬體交付。</p>
     <div class="partners reveal">
       <a class="partner" href="https://scitotech.com" target="_blank" rel="noopener">
-        <div class="ptop">
-          <h3>識新科技</h3>
-          <span class="ext">↗</span>
+        <div class="plogo dark"><img src="assets/partners/scito.svg" alt="識新科技 logo" loading="lazy"></div>
+        <div class="pbd">
+          <div class="ptop">
+            <h3>識新科技</h3>
+            <span class="ext">↗</span>
+          </div>
+          <div class="plat">Scito Technology Co., Ltd.</div>
+          <div class="ptag">量測驗證與自動化系統整合</div>
+          <ul>
+            <li>IC 檢測、量測驗證與儀器整合</li>
+            <li>光學、運動控制與自動化檢測機台</li>
+            <li>AI 影像辨識、訊號處理與遠端控制</li>
+          </ul>
+          <span class="psite">scitotech.com</span>
         </div>
-        <div class="plat">Scito Technology Co., Ltd.</div>
-        <div class="ptag">量測驗證與自動化系統整合</div>
-        <ul>
-          <li>IC 檢測、量測驗證與儀器整合</li>
-          <li>光學、運動控制與自動化檢測機台</li>
-          <li>AI 影像辨識、訊號處理與遠端控制</li>
-        </ul>
-        <span class="psite">scitotech.com</span>
       </a>
       <a class="partner" href="https://rengiantek.info" target="_blank" rel="noopener">
-        <div class="ptop">
-          <h3>睿基科技</h3>
-          <span class="ext">↗</span>
+        <div class="plogo"><img src="assets/partners/rgtk.svg" alt="睿基科技 RGTK logo" loading="lazy"></div>
+        <div class="pbd">
+          <div class="ptop">
+            <h3>睿基科技</h3>
+            <span class="ext">↗</span>
+          </div>
+          <div class="plat">RGTK</div>
+          <div class="ptag">智慧 AIoT 畜牧管理解決方案</div>
+          <ul>
+            <li>智慧無線耳標與生理數據監控</li>
+            <li>動物影像辨識、數量統計與活動力分析</li>
+            <li>畜牧環境數據整合與健康履歷</li>
+          </ul>
+          <span class="psite">rengiantek.info</span>
         </div>
-        <div class="plat">RGTK</div>
-        <div class="ptag">智慧 AIoT 畜牧管理解決方案</div>
-        <ul>
-          <li>智慧無線耳標與生理數據監控</li>
-          <li>動物影像辨識、數量統計與活動力分析</li>
-          <li>畜牧環境數據整合與健康履歷</li>
-        </ul>
-        <span class="psite">rengiantek.info</span>
       </a>
       <a class="partner" href="https://buildpolis.com/zh-TW" target="_blank" rel="noopener">
-        <div class="ptop">
-          <h3>築邦科技</h3>
-          <span class="ext">↗</span>
+        <div class="plogo"><img src="assets/partners/zhubang.svg" alt="築邦科技 ZHUBANG logo" loading="lazy"></div>
+        <div class="pbd">
+          <div class="ptop">
+            <h3>築邦科技</h3>
+            <span class="ext">↗</span>
+          </div>
+          <div class="plat">Zhubang Technology Co., Ltd.</div>
+          <div class="ptag">中小企業數位轉型解決方案</div>
+          <ul>
+            <li>企業品牌網站設計與開發</li>
+            <li>企業戰情即時數據儀表板</li>
+            <li>客製化 ERP／CRM 與表單簽核系統</li>
+          </ul>
+          <span class="psite">buildpolis.com</span>
         </div>
-        <div class="plat">Zhubang Technology Co., Ltd.</div>
-        <div class="ptag">中小企業數位轉型解決方案</div>
-        <ul>
-          <li>企業品牌網站設計與開發</li>
-          <li>企業戰情即時數據儀表板</li>
-          <li>客製化 ERP／CRM 與表單簽核系統</li>
-        </ul>
-        <span class="psite">buildpolis.com</span>
       </a>
     </div>
   </div>
