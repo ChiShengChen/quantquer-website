@@ -27,7 +27,7 @@
 │   ├── caps/*.webp             # §01 能力示意圖（AI 生成，900×600）
 │   ├── svcs/*.webp             # §02 服務方案示意圖（AI 生成，900×600）
 │   ├── method-flow.webp        # §04 工作方式流程圖（AI 生成，1536×512）
-│   └── cases/*.webp            # §03 案例示意圖（AI 生成，1200×800，非實際系統畫面）
+│   └── cases/*.webp            # §03 案例配圖（AI 生成，1200×800）
 ├── CNAME                       # 自訂網域：quantquer.com
 ├── .nojekyll                   # 關閉 GitHub Pages 的 Jekyll 處理
 └── .gitignore
