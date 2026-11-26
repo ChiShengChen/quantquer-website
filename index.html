@@ -171,6 +171,31 @@
   .theme-toggle:hover{color:var(--accent);border-color:var(--accent-dim);}
   @media(max-width:940px){ .navlinks .lk{display:none;} }
 
+  /* ---------- mobile menu ---------- */
+  .burger{display:none;position:relative;width:38px;height:38px;flex-shrink:0;border:1px solid var(--line);border-radius:2px;background:transparent;cursor:pointer;transition:border-color .25s;}
+  .burger:hover{border-color:var(--accent-dim);}
+  .burger span{position:absolute;left:11px;right:11px;height:1.5px;background:var(--fg-dim);transition:top .3s ease,transform .3s ease,opacity .2s ease,background .25s;}
+  .burger span:nth-child(1){top:13px;}
+  .burger span:nth-child(2){top:18px;}
+  .burger span:nth-child(3){top:23px;}
+  .burger:hover span{background:var(--accent);}
+  header.menu-open .burger span:nth-child(1){top:18px;transform:rotate(45deg);}
+  header.menu-open .burger span:nth-child(2){opacity:0;}
+  header.menu-open .burger span:nth-child(3){top:18px;transform:rotate(-45deg);}
+  header.menu-open{background:var(--bg);border-bottom:1px solid var(--line);box-shadow:0 18px 40px -24px rgba(7,10,17,.35);}
+  .mnav{display:none;border-top:1px solid var(--line-soft);max-height:calc(100svh - 74px);overflow-y:auto;}
+  header.menu-open .mnav{display:block;animation:mnavIn .28s cubic-bezier(.2,.7,.2,1);}
+  @keyframes mnavIn{from{opacity:0;transform:translateY(-8px);}to{opacity:1;transform:none;}}
+  .mnav .wrap{display:grid;padding-top:.4rem;padding-bottom:1.2rem;}
+  .mnav a{display:flex;align-items:baseline;gap:1rem;padding:.85rem 0;border-bottom:1px solid var(--line-soft);font-family:var(--serif);font-size:1.12rem;font-weight:500;color:var(--fg);transition:color .2s;}
+  .mnav a:last-child{border-bottom:none;}
+  .mnav a span{font-family:var(--mono);font-size:.72rem;font-weight:400;color:var(--accent);letter-spacing:.1em;width:2rem;flex-shrink:0;}
+  .mnav a:hover,.mnav a:focus-visible{color:var(--accent);}
+  @media(max-width:940px){ .burger{display:inline-block;} }
+  @media(min-width:941px){ header.menu-open .mnav{display:none;} }
+  @media(max-width:480px){ .navlinks{gap:.7rem;} .nav-cta{padding:.5rem .75rem;} }
+  @media(prefers-reduced-motion:reduce){ header.menu-open .mnav{animation:none;} .burger span{transition:none;} }
+
   /* ---------- hero ---------- */
   .hero{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden;}
   #spectrum{position:absolute;inset:0;width:100%;height:100%;z-index:0;}
@@ -238,7 +263,8 @@
 
   /* ---------- capabilities ---------- */
   .cap-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
-  .cap{background:var(--bg);padding:clamp(1.6rem,2.4vw,2.2rem);position:relative;transition:background .35s;display:flex;flex-direction:column;}
+  .cap{background:var(--bg);position:relative;transition:background .35s;display:flex;flex-direction:column;}
+  .cap .cbd{padding:clamp(1.5rem,2.2vw,2rem);display:flex;flex-direction:column;flex:1;}
   .cap:hover{background:var(--bg-2);}
   .cap .num{font-family:var(--mono);font-size:.78rem;color:var(--accent);letter-spacing:.1em;}
   .cap h3{font-family:var(--serif);font-weight:500;font-size:1.25rem;line-height:1.35;margin:1rem 0 .3rem;}
@@ -257,11 +283,10 @@
   .cases{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
   .case{background:var(--bg);display:flex;flex-direction:column;transition:background .35s;}
   .case:hover{background:var(--bg-2);}
-  .case .cfig{position:relative;aspect-ratio:3/2;overflow:hidden;border-bottom:1px solid var(--line);background:#F3F6FA;}
-  .case .cfig img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.2,.7,.2,1);}
-  .case:hover .cfig img{transform:scale(1.025);}
-  .case .cfig .fnote{position:absolute;right:.7rem;bottom:.6rem;font-family:var(--mono);font-size:.6rem;letter-spacing:.08em;color:#5A6675;background:rgba(243,246,250,.86);padding:.12rem .45rem;border-radius:2px;}
-  html:not([data-theme="light"]) .case .cfig img{filter:brightness(.86) contrast(1.04);}
+  .cfig{position:relative;aspect-ratio:3/2;overflow:hidden;border-bottom:1px solid var(--line);background:#F3F6FA;}
+  .cfig img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.2,.7,.2,1);}
+  .case:hover .cfig img,.cap:hover .cfig img,.offer:hover .cfig img{transform:scale(1.025);}
+  html:not([data-theme="light"]) .cfig img{filter:brightness(.86) contrast(1.04);}
   .case .cbody{padding:clamp(1.6rem,2.8vw,2.3rem);display:flex;flex-direction:column;flex:1;}
   .case .ctag{font-family:var(--mono);font-size:.72rem;color:var(--accent);letter-spacing:.1em;}
   .case h3{font-family:var(--serif);font-weight:500;font-size:1.4rem;line-height:1.3;margin:.7rem 0 .8rem;}
@@ -314,6 +339,9 @@
   .step h4{font-family:var(--serif);font-weight:500;font-size:1.25rem;margin:1.4rem 0 .25rem;}
   .step .lat{font-family:var(--mono);font-size:.7rem;color:var(--fg-faint);letter-spacing:.08em;}
   .step p{color:var(--fg-dim);font-size:.92rem;margin-top:.9rem;}
+  .method-fig{border-top:1px solid var(--line);background:#F3F6FA;overflow:hidden;}
+  .method-fig img{display:block;width:100%;height:auto;}
+  html:not([data-theme="light"]) .method-fig img{filter:brightness(.86) contrast(1.04);}
   @media(max-width:860px){ .steps{grid-template-columns:repeat(2,1fr);} }
   @media(max-width:480px){ .steps{grid-template-columns:1fr;} }
 
@@ -375,7 +403,8 @@
     .svc-lat{margin-top:0;}
   }
   .offers{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
-  .offer{background:var(--bg);padding:clamp(1.6rem,2.6vw,2.2rem);display:flex;flex-direction:column;transition:background .35s;}
+  .offer{background:var(--bg);display:flex;flex-direction:column;transition:background .35s;}
+  .offer .cbd{padding:clamp(1.6rem,2.6vw,2.2rem);display:flex;flex-direction:column;flex:1;}
   .offer:hover{background:var(--bg-2);}
   .offer .on{font-family:var(--mono);font-size:.78rem;color:var(--accent);letter-spacing:.1em;display:flex;justify-content:space-between;align-items:center;gap:.8rem;}
   .offer .pick{font-size:.62rem;letter-spacing:.08em;border:1px solid var(--accent-dim);padding:.12rem .45rem;border-radius:2px;white-space:nowrap;}
@@ -466,8 +495,22 @@
       <a href="#about" class="lk">關於</a>
       <button id="themeToggle" class="theme-toggle" type="button" aria-label="切換亮色／深色模式">☀</button>
       <a href="#contact" class="nav-cta">談談你的問題</a>
+      <button id="burger" class="burger" type="button" aria-label="開啟選單" aria-expanded="false" aria-controls="mnav"><span></span><span></span><span></span></button>
     </nav>
   </div>
+  <nav class="mnav" id="mnav" aria-label="行動版選單">
+    <div class="wrap">
+      <a href="#capabilities"><span>01</span>能力</a>
+      <a href="#services"><span>02</span>服務與合作模式</a>
+      <a href="#work"><span>03</span>精選案例</a>
+      <a href="#method"><span>04</span>工作方式</a>
+      <a href="#research"><span>05</span>研究成果</a>
+      <a href="#labs"><span>06</span>Quantquer Labs</a>
+      <a href="#about"><span>07</span>關於</a>
+      <a href="#partners"><span>08</span>夥伴服務</a>
+      <a href="#contact"><span>09</span>聯絡我們</a>
+    </div>
+  </nav>
 </header>
 
 <!-- ===================== HERO ===================== -->
@@ -509,60 +552,84 @@
     </div>
     <div class="cap-grid reveal">
       <div class="cap">
-        <div class="num">01</div>
-        <h3>AI Agent 與多代理系統</h3>
-        <div class="lat">Agentic AI &amp; Multi-Agent Systems</div>
-        <p>工具調用、MCP、多代理分工與交叉查核，把重複且需要專業判斷的知識工作，變成有品質閘門的工作流程。</p>
-        <div class="ev">Berkeley AgentX-AgentBeats 第 3 名（1,300+ 隊）</div>
+        <div class="cfig"><img src="assets/caps/agent.webp" alt="AI Agent 與多代理系統示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="cbd">
+          <div class="num">01</div>
+          <h3>AI Agent 與多代理系統</h3>
+          <div class="lat">Agentic AI &amp; Multi-Agent Systems</div>
+          <p>工具調用、MCP、多代理分工與交叉查核，把重複且需要專業判斷的知識工作，變成有品質閘門的工作流程。</p>
+          <div class="ev">Berkeley AgentX-AgentBeats 第 3 名（1,300+ 隊）</div>
+        </div>
       </div>
       <div class="cap">
-        <div class="num">02</div>
-        <h3>科學 AI 與研究自動化</h3>
-        <div class="lat">AI for Science &amp; Research Automation</div>
-        <p>文獻檢索、證據查核、假說生成與實驗稽核，讓研究流程可追溯、可重現。</p>
-        <div class="ev">Paper Evidence · 自動化研究 pipeline</div>
+        <div class="cfig"><img src="assets/caps/science.webp" alt="科學 AI 與研究自動化示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="cbd">
+          <div class="num">02</div>
+          <h3>科學 AI 與研究自動化</h3>
+          <div class="lat">AI for Science &amp; Research Automation</div>
+          <p>文獻檢索、證據查核、假說生成與實驗稽核，讓研究流程可追溯、可重現。</p>
+          <div class="ev">Paper Evidence · 自動化研究 pipeline</div>
+        </div>
       </div>
       <div class="cap">
-        <div class="num">03</div>
-        <h3>臨床 AI 與腦機介面</h3>
-        <div class="lat">Clinical AI &amp; Brain–Computer Interfaces</div>
-        <p>從原始腦波與生理訊號，到臨床可用的預測與決策工具，以研究標準驗證每一步。</p>
-        <div class="ev">EEG 療效預測模型已於醫學中心門診使用</div>
+        <div class="cfig"><img src="assets/caps/clinical.webp" alt="臨床 AI 與腦機介面示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="cbd">
+          <div class="num">03</div>
+          <h3>臨床 AI 與腦機介面</h3>
+          <div class="lat">Clinical AI &amp; Brain–Computer Interfaces</div>
+          <p>從原始腦波與生理訊號，到臨床可用的預測與決策工具，以研究標準驗證每一步。</p>
+          <div class="ev">EEG 療效預測模型已於醫學中心門診使用</div>
+        </div>
       </div>
       <div class="cap">
-        <div class="num">04</div>
-        <h3>訊號處理與時序建模</h3>
-        <div class="lat">Signal Processing &amp; Time-Series</div>
-        <p>以頻域、時頻與統計方法做降噪、預測與異常偵測，在高雜訊中萃取微弱訊號。</p>
-        <div class="ev">FreqLens · Large Cognition Model</div>
+        <div class="cfig"><img src="assets/caps/signal.webp" alt="訊號處理與時序建模示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="cbd">
+          <div class="num">04</div>
+          <h3>訊號處理與時序建模</h3>
+          <div class="lat">Signal Processing &amp; Time-Series</div>
+          <p>以頻域、時頻與統計方法做降噪、預測與異常偵測，在高雜訊中萃取微弱訊號。</p>
+          <div class="ev">FreqLens · Large Cognition Model</div>
+        </div>
       </div>
       <div class="cap">
-        <div class="num">05</div>
-        <h3>金融 AI 與決策智慧</h3>
-        <div class="lat">Financial AI &amp; Decision Intelligence</div>
-        <p>事件驅動研究、投資假說生成、回測與組合分析，每個結論都能回查到證據。</p>
-        <div class="ev">AI 投資研究平台 · LLM token 效率研究</div>
+        <div class="cfig"><img src="assets/caps/finance.webp" alt="金融 AI 與決策智慧示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="cbd">
+          <div class="num">05</div>
+          <h3>金融 AI 與決策智慧</h3>
+          <div class="lat">Financial AI &amp; Decision Intelligence</div>
+          <p>事件驅動研究、投資假說生成、回測與組合分析，每個結論都能回查到證據。</p>
+          <div class="ev">AI 投資研究平台 · LLM token 效率研究</div>
+        </div>
       </div>
       <div class="cap">
-        <div class="num">06</div>
-        <h3>量子與混合機器學習</h3>
-        <div class="lat">Quantum &amp; Hybrid Machine Learning</div>
-        <p>變分量子電路與混合架構的可行性驗證，一律搭配參數相當的古典對照組，誠實回報差異。</p>
-        <div class="ev">Phys. Rev. A · Quantum Sci. Technol. · ICASSP</div>
+        <div class="cfig"><img src="assets/caps/quantum.webp" alt="量子與混合機器學習示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="cbd">
+          <div class="num">06</div>
+          <h3>量子與混合機器學習</h3>
+          <div class="lat">Quantum &amp; Hybrid Machine Learning</div>
+          <p>變分量子電路與混合架構的可行性驗證，一律搭配參數相當的古典對照組，誠實回報差異。</p>
+          <div class="ev">Phys. Rev. A · Quantum Sci. Technol. · ICASSP</div>
+        </div>
       </div>
       <div class="cap">
-        <div class="num">07</div>
-        <h3>工業 AI 與電腦視覺</h3>
-        <div class="lat">Industrial AI &amp; Computer Vision</div>
-        <p>工作站佈局最佳化、CAD 圖面解析、影像辨識與邊緣裝置部署。</p>
-        <div class="ev">機器人工作站設計 · 平面圖辨識 · 跌倒監測</div>
+        <div class="cfig"><img src="assets/caps/industrial.webp" alt="工業 AI 與電腦視覺示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="cbd">
+          <div class="num">07</div>
+          <h3>工業 AI 與電腦視覺</h3>
+          <div class="lat">Industrial AI &amp; Computer Vision</div>
+          <p>工作站佈局最佳化、CAD 圖面解析、影像辨識與邊緣裝置部署。</p>
+          <div class="ev">機器人工作站設計 · 平面圖辨識 · 跌倒監測</div>
+        </div>
       </div>
       <div class="cap">
-        <div class="num">08</div>
-        <h3>AI 產品工程與評估</h3>
-        <div class="lat">AI Product Engineering &amp; Evaluation</div>
-        <p>知識庫與 RAG、LLM 整合、全端產品、雲端部署與自動化測試，並量測 AI 是否有效、可靠、划算。</p>
-        <div class="ev">tokenbench · sevencheck 開源</div>
+        <div class="cfig"><img src="assets/caps/product.webp" alt="AI 產品工程與評估示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="cbd">
+          <div class="num">08</div>
+          <h3>AI 產品工程與評估</h3>
+          <div class="lat">AI Product Engineering &amp; Evaluation</div>
+          <p>知識庫與 RAG、LLM 整合、全端產品、雲端部署與自動化測試，並量測 AI 是否有效、可靠、划算。</p>
+          <div class="ev">tokenbench · sevencheck 開源</div>
+        </div>
       </div>
     </div>
   </div>
@@ -579,76 +646,94 @@
     <p class="sec-lead reveal">從你要解決的問題出發。每個方案在開始前，都會先一起把範圍與交付物定義清楚。</p>
     <div class="offers reveal">
       <div class="offer">
-        <div class="on"><span>01</span><span class="pick">重點服務</span></div>
-        <h3>客製化 AI Agent 系統</h3>
-        <div class="olat">Custom AI Agent Development</div>
-        <p>把重複且需要專業判斷的知識工作，變成能調用工具、存取資料、有品質控制的 AI 工作流程。</p>
-        <div class="dl">交付物 Deliverables</div>
-        <ul class="chk">
-          <li>Agent 工作流程設計與工具、資料串接</li>
-          <li>自動檢查與人工審核節點</li>
-          <li>執行紀錄、評測集與上線部署</li>
-        </ul>
+        <div class="cfig"><img src="assets/svcs/agent.webp" alt="客製化 AI Agent 系統示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="cbd">
+          <div class="on"><span>01</span><span class="pick">重點服務</span></div>
+          <h3>客製化 AI Agent 系統</h3>
+          <div class="olat">Custom AI Agent Development</div>
+          <p>把重複且需要專業判斷的知識工作，變成能調用工具、存取資料、有品質控制的 AI 工作流程。</p>
+          <div class="dl">交付物 Deliverables</div>
+          <ul class="chk">
+            <li>Agent 工作流程設計與工具、資料串接</li>
+            <li>自動檢查與人工審核節點</li>
+            <li>執行紀錄、評測集與上線部署</li>
+          </ul>
+        </div>
       </div>
       <div class="offer">
-        <div class="on"><span>02</span><span class="pick">重點服務</span></div>
-        <h3>AI 評估與成本最佳化</h3>
-        <div class="olat">AI Evaluation &amp; Optimization</div>
-        <p>不只幫你做 AI，也量測它是否有效、是否可靠，並找出降低推論成本的空間。</p>
-        <div class="dl">交付物 Deliverables</div>
-        <ul class="chk">
-          <li>針對你任務的評測集與基準</li>
-          <li>模型、提示詞與架構的比較報告</li>
-          <li>Token、延遲與品質的權衡建議</li>
-        </ul>
+        <div class="cfig"><img src="assets/svcs/eval.webp" alt="AI 評估與成本最佳化示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="cbd">
+          <div class="on"><span>02</span><span class="pick">重點服務</span></div>
+          <h3>AI 評估與成本最佳化</h3>
+          <div class="olat">AI Evaluation &amp; Optimization</div>
+          <p>不只幫你做 AI，也量測它是否有效、是否可靠，並找出降低推論成本的空間。</p>
+          <div class="dl">交付物 Deliverables</div>
+          <ul class="chk">
+            <li>針對你任務的評測集與基準</li>
+            <li>模型、提示詞與架構的比較報告</li>
+            <li>Token、延遲與品質的權衡建議</li>
+          </ul>
+        </div>
       </div>
       <div class="offer">
-        <div class="on"><span>03</span><span class="pick">重點服務</span></div>
-        <h3>研究即服務</h3>
-        <div class="olat">Research as a Service</div>
-        <p>給需要 AI 研發、但還沒有完整研究團隊的新創與中小企業：把一個未知的問題做成有結論的研究。</p>
-        <div class="dl">交付物 Deliverables</div>
-        <ul class="chk">
-          <li>文獻調查與方法選型</li>
-          <li>Baseline 實作、消融實驗與對照組</li>
-          <li>可行性報告與可重現的程式碼</li>
-        </ul>
+        <div class="cfig"><img src="assets/svcs/research.webp" alt="研究即服務示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="cbd">
+          <div class="on"><span>03</span><span class="pick">重點服務</span></div>
+          <h3>研究即服務</h3>
+          <div class="olat">Research as a Service</div>
+          <p>給需要 AI 研發、但還沒有完整研究團隊的新創與中小企業：把一個未知的問題做成有結論的研究。</p>
+          <div class="dl">交付物 Deliverables</div>
+          <ul class="chk">
+            <li>文獻調查與方法選型</li>
+            <li>Baseline 實作、消融實驗與對照組</li>
+            <li>可行性報告與可重現的程式碼</li>
+          </ul>
+        </div>
       </div>
       <div class="offer">
-        <div class="on"><span>04</span></div>
-        <h3>企業知識庫與智慧問答</h3>
-        <div class="olat">Enterprise Knowledge Base</div>
-        <p>把散落的文件變成可查詢的知識庫；文件互相矛盾時，先仲裁再回答。</p>
-        <div class="dl">交付物 Deliverables</div>
-        <ul class="chk">
-          <li>文件建庫與知識抽取流程</li>
-          <li>附引用來源的問答系統</li>
-          <li>專家審查介面與回歸評測</li>
-        </ul>
+        <div class="cfig"><img src="assets/svcs/kb.webp" alt="企業知識庫與智慧問答示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="cbd">
+          <div class="on"><span>04</span></div>
+          <h3>企業知識庫與智慧問答</h3>
+          <div class="olat">Enterprise Knowledge Base</div>
+          <p>把散落的文件變成可查詢的知識庫；文件互相矛盾時，先仲裁再回答。</p>
+          <div class="dl">交付物 Deliverables</div>
+          <ul class="chk">
+            <li>文件建庫與知識抽取流程</li>
+            <li>附引用來源的問答系統</li>
+            <li>專家審查介面與回歸評測</li>
+          </ul>
+        </div>
       </div>
       <div class="offer">
-        <div class="on"><span>05</span></div>
-        <h3>領域 AI 演算法研發</h3>
-        <div class="olat">Domain AI R&amp;D</div>
-        <p>醫療、生理訊號、金融與工業場域的模型與演算法，從資料到可部署的系統。</p>
-        <div class="dl">交付物 Deliverables</div>
-        <ul class="chk">
-          <li>模型與演算法原始碼</li>
-          <li>驗證報告（含基準與誤差分析）</li>
-          <li>可部署的推論服務或邊緣版本</li>
-        </ul>
+        <div class="cfig"><img src="assets/svcs/domain.webp" alt="領域 AI 演算法研發示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="cbd">
+          <div class="on"><span>05</span></div>
+          <h3>領域 AI 演算法研發</h3>
+          <div class="olat">Domain AI R&amp;D</div>
+          <p>醫療、生理訊號、金融與工業場域的模型與演算法，從資料到可部署的系統。</p>
+          <div class="dl">交付物 Deliverables</div>
+          <ul class="chk">
+            <li>模型與演算法原始碼</li>
+            <li>驗證報告（含基準與誤差分析）</li>
+            <li>可部署的推論服務或邊緣版本</li>
+          </ul>
+        </div>
       </div>
       <div class="offer">
-        <div class="on"><span>06</span></div>
-        <h3>AI 技術診斷與架構規劃</h3>
-        <div class="olat">AI Assessment &amp; Architecture</div>
-        <p>還不確定該不該做、該怎麼做時，先用少量投入釐清可行性、風險與路線。</p>
-        <div class="dl">交付物 Deliverables</div>
-        <ul class="chk">
-          <li>現況與可行性評估</li>
-          <li>技術選型與系統架構建議</li>
-          <li>風險清單與分階段路線圖</li>
-        </ul>
+        <div class="cfig"><img src="assets/svcs/assess.webp" alt="AI 技術診斷與架構規劃示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="cbd">
+          <div class="on"><span>06</span></div>
+          <h3>AI 技術診斷與架構規劃</h3>
+          <div class="olat">AI Assessment &amp; Architecture</div>
+          <p>還不確定該不該做、該怎麼做時，先用少量投入釐清可行性、風險與路線。</p>
+          <div class="dl">交付物 Deliverables</div>
+          <ul class="chk">
+            <li>現況與可行性評估</li>
+            <li>技術選型與系統架構建議</li>
+            <li>風險清單與分階段路線圖</li>
+          </ul>
+        </div>
       </div>
     </div>
     <p class="price-note reveal">全部採專案制報價，依範圍與交付物估算。歡迎直接來信描述需求。</p>
@@ -700,7 +785,7 @@
 
     <div class="cases reveal">
       <article class="case">
-        <div class="cfig"><img src="assets/cases/robot.webp" alt="機器人碼垛工作站佈局最佳化示意圖" loading="lazy" width="1536" height="1024"><span class="fnote">示意圖</span></div>
+        <div class="cfig"><img src="assets/cases/robot.webp" alt="機器人碼垛工作站佈局最佳化示意圖" loading="lazy" width="1536" height="1024"></div>
         <div class="cbody">
           <div class="ctag">案例 01 · 工業 AI · AI Agent</div>
           <h3>工業機器人工作站智慧設計平台</h3>
@@ -715,7 +800,7 @@
       </article>
 
       <article class="case">
-        <div class="cfig"><img src="assets/cases/kb.webp" alt="企業知識庫衝突仲裁問答系統示意圖" loading="lazy" width="1536" height="1024"><span class="fnote">示意圖</span></div>
+        <div class="cfig"><img src="assets/cases/kb.webp" alt="企業知識庫衝突仲裁問答系統示意圖" loading="lazy" width="1536" height="1024"></div>
         <div class="cbody">
           <div class="ctag">案例 02 · 企業 AI · 知識管理</div>
           <h3>設備廠商技術知識庫問答系統</h3>
@@ -730,7 +815,7 @@
       </article>
 
       <article class="case">
-        <div class="cfig"><img src="assets/cases/finance.webp" alt="AI 投資研究平台示意圖" loading="lazy" width="1536" height="1024"><span class="fnote">示意圖</span></div>
+        <div class="cfig"><img src="assets/cases/finance.webp" alt="AI 投資研究平台示意圖" loading="lazy" width="1536" height="1024"></div>
         <div class="cbody">
           <div class="ctag">案例 03 · 金融科技 · AI Agent</div>
           <h3>AI 投資研究平台</h3>
@@ -745,7 +830,7 @@
       </article>
 
       <article class="case">
-        <div class="cfig"><img src="assets/cases/floorplan.webp" alt="建築平面圖自動上色示意圖" loading="lazy" width="1536" height="1024"><span class="fnote">示意圖</span></div>
+        <div class="cfig"><img src="assets/cases/floorplan.webp" alt="建築平面圖自動上色示意圖" loading="lazy" width="1536" height="1024"></div>
         <div class="cbody">
           <div class="ctag">案例 04 · 電腦視覺 · 建築設計</div>
           <h3>建築平面圖自動上色系統</h3>
@@ -760,7 +845,7 @@
       </article>
 
       <article class="case">
-        <div class="cfig"><img src="assets/cases/eeg.webp" alt="腦波療效預測示意圖" loading="lazy" width="1536" height="1024"><span class="fnote">示意圖</span></div>
+        <div class="cfig"><img src="assets/cases/eeg.webp" alt="腦波療效預測示意圖" loading="lazy" width="1536" height="1024"></div>
         <div class="cbody">
           <div class="ctag">案例 05 · 臨床 AI · 腦波</div>
           <h3>腦波憂鬱症療效預測</h3>
@@ -775,7 +860,7 @@
       </article>
 
       <article class="case">
-        <div class="cfig"><img src="assets/cases/fall.webp" alt="長照場域即時跌倒監測示意圖" loading="lazy" width="1536" height="1024"><span class="fnote">示意圖</span></div>
+        <div class="cfig"><img src="assets/cases/fall.webp" alt="長照場域即時跌倒監測示意圖" loading="lazy" width="1536" height="1024"></div>
         <div class="cbody">
           <div class="ctag">案例 06 · 長照 · 邊緣 AI</div>
           <h3>養老院即時跌倒監測</h3>
@@ -789,7 +874,7 @@
       </article>
 
       <article class="case">
-        <div class="cfig"><img src="assets/cases/ngs.webp" alt="次世代定序影像降噪示意圖" loading="lazy" width="1536" height="1024"><span class="fnote">示意圖</span></div>
+        <div class="cfig"><img src="assets/cases/ngs.webp" alt="次世代定序影像降噪示意圖" loading="lazy" width="1536" height="1024"></div>
         <div class="cbody">
           <div class="ctag">案例 07 · 生醫影像</div>
           <h3>次世代定序影像降噪</h3>
@@ -803,7 +888,7 @@
       </article>
 
       <article class="case">
-        <div class="cfig"><img src="assets/cases/tutor.webp" alt="大學普物個人化 AI 家教示意圖" loading="lazy" width="1536" height="1024"><span class="fnote">示意圖</span></div>
+        <div class="cfig"><img src="assets/cases/tutor.webp" alt="大學普物個人化 AI 家教示意圖" loading="lazy" width="1536" height="1024"></div>
         <div class="cbody">
           <div class="ctag">案例 08 · 教育 AI</div>
           <h3>大學普物個人化 AI 家教</h3>
@@ -828,6 +913,7 @@
       <span class="en">/ How We Work</span>
     </div>
     <p class="sec-lead reveal">我們最擅長的，是從零研究一個還沒有標準答案的問題：先定義清楚、設好基準與對照組，設計方法並以實驗驗證，再把它工程化成真正能用的產品。</p>
+    <div class="method-fig reveal"><img src="assets/method-flow.webp" alt="問題定義、方法設計、原型驗證、系統交付四階段流程示意圖" loading="lazy" width="1536" height="512"></div>
     <div class="steps reveal">
       <div class="step">
         <div class="sn">01</div>
@@ -1298,6 +1384,21 @@
     try{ localStorage.setItem('theme', curTheme); }catch(e){}
     applyTheme(curTheme);
   });
+
+  // ---- mobile menu ----
+  const burger = document.getElementById('burger');
+  const mnav = document.getElementById('mnav');
+  const setMenu = (open)=>{
+    hdr.classList.toggle('menu-open', open);
+    burger.setAttribute('aria-expanded', String(open));
+    burger.setAttribute('aria-label', open ? '關閉選單' : '開啟選單');
+  };
+  const menuOpen = ()=>hdr.classList.contains('menu-open');
+  burger.addEventListener('click', ()=>setMenu(!menuOpen()));
+  mnav.querySelectorAll('a').forEach(a=>a.addEventListener('click', ()=>setMenu(false)));
+  document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && menuOpen()){ setMenu(false); burger.focus(); } });
+  document.addEventListener('click', (e)=>{ if(menuOpen() && !hdr.contains(e.target)) setMenu(false); });
+  window.matchMedia('(min-width: 941px)').addEventListener('change', (e)=>{ if(e.matches) setMenu(false); });
 
   // ---- inquiry form -> prefilled email (no third-party backend) ----
   const qform = document.getElementById('qform');
