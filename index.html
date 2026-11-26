@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script>/* default to light; honor a saved 'dark' choice. set before paint to avoid flash */(function(){try{if(localStorage.getItem('theme')!=='dark')document.documentElement.setAttribute('data-theme','light');}catch(e){document.documentElement.setAttribute('data-theme','light');}})();</script>
-<title>量維資科 Quantquer Inc. — 量化深科技顧問</title>
+<title>量維資科 Quantquer Inc. — 研究驅動的 AI 與深科技工程</title>
 <link rel="icon" type="image/png" href="assets/logo-mark.png">
 
 <!-- ===== SEO ===== -->
-<meta name="description" content="量維資科 Quantquer Inc.｜量化深科技顧問。以研究級的嚴謹方法，解決 AI/ML、訊號處理、時頻分析、臨床醫療資訊與量化策略上別人解不動的硬問題，並交付可上線的系統。">
-<meta name="keywords" content="量化顧問,AI顧問,機器學習,訊號處理,時頻分析,臨床AI,醫療AI,量化策略,EEG,BCI,Quantquer,量維資科">
+<meta name="description" content="量維資科 Quantquer Inc.｜研究驅動的 AI 與深科技工程。客製化 AI Agent、AI 評估與成本最佳化、研究即服務，以及醫療、訊號、金融與工業 AI 的演算法研發與系統交付。">
+<meta name="keywords" content="AI Agent,多代理系統,AI顧問,企業AI,知識庫,RAG,LLM評估,研究即服務,機器學習,訊號處理,時頻分析,臨床AI,醫療AI,金融AI,量化策略,工業AI,量子機器學習,EEG,BCI,Quantquer,量維資科">
 <meta name="author" content="量維資科 Quantquer Inc.">
 <meta name="theme-color" content="#F6F8FB">
 <link rel="canonical" href="https://quantquer.com/">
@@ -17,17 +17,19 @@
 <!-- ===== Open Graph ===== -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="量維資科 Quantquer Inc.">
-<meta property="og:title" content="量維資科 Quantquer Inc. — 量化深科技顧問">
-<meta property="og:description" content="以研究級的嚴謹方法，解決別人解不動的量化硬問題，交付可上線的系統。">
+<meta property="og:title" content="量維資科 Quantquer Inc. — 研究驅動的 AI 與深科技工程">
+<meta property="og:description" content="把困難的量化問題，做成可交付的系統。客製化 AI Agent、AI 評估與最佳化、研究即服務與深科技研發。">
 <meta property="og:url" content="https://quantquer.com/">
-<meta property="og:image" content="https://quantquer.com/assets/logo-full-light.png">
+<meta property="og:image" content="https://quantquer.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta property="og:locale" content="zh_TW">
 
 <!-- ===== Twitter ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="量維資科 Quantquer Inc. — 量化深科技顧問">
-<meta name="twitter:description" content="以研究級的嚴謹方法，解決別人解不動的量化硬問題，交付可上線的系統。">
-<meta name="twitter:image" content="https://quantquer.com/assets/logo-full-light.png">
+<meta name="twitter:title" content="量維資科 Quantquer Inc. — 研究驅動的 AI 與深科技工程">
+<meta name="twitter:description" content="把困難的量化問題，做成可交付的系統。客製化 AI Agent、AI 評估與最佳化、研究即服務與深科技研發。">
+<meta name="twitter:image" content="https://quantquer.com/assets/og-image.png">
 
 <!-- ===== Organization schema ===== -->
 <script type="application/ld+json">
@@ -37,8 +39,9 @@
   "name":"量維資科 Quantquer Inc.",
   "alternateName":"Quantquer",
   "url":"https://quantquer.com/",
-  "logo":"https://quantquer.com/assets/logo-full-light.png",
-  "description":"量化深科技顧問。以研究級的嚴謹方法，解決 AI/ML、訊號處理、時頻分析、臨床醫療資訊與量化策略上別人解不動的硬問題，並交付可上線的系統。",
+  "logo":"https://quantquer.com/assets/logo-full-onlight.png",
+  "description":"研究驅動的 AI 與深科技工程公司。以研究級的嚴謹方法，為企業打造客製化 AI Agent、智慧決策系統、訊號處理演算法與深科技產品，並交付可上線的系統。",
+  "knowsAbout":["AI agents","Multi-agent systems","LLM evaluation","Retrieval-augmented generation","Signal processing","Time-series modeling","Clinical AI","EEG","Brain-computer interfaces","Quantitative finance","Quantum machine learning","Computer vision","Industrial AI"],
   "email":"chisheng.m.chen@gmail.com",
   "sameAs":["https://www.linkedin.com/company/104143648/"],
   "founder":{"@type":"Person","name":"陳麒升","sameAs":["https://scholar.google.com/citations?user=5XHD7nkAAAAJ"]}
@@ -101,6 +104,7 @@
     overflow-x:hidden;
   }
   ::selection{background:rgba(45,212,191,.25);color:#fff;}
+  html[data-theme="light"] ::selection{background:rgba(0,78,161,.16);color:var(--fg);}
   a{color:inherit;text-decoration:none;}
 
   .mono{font-family:var(--mono);}
@@ -144,7 +148,7 @@
   .brand .mark{font-family:var(--serif);font-weight:600;font-size:1.2rem;letter-spacing:.02em;}
   @media(max-width:480px){ .brand .brand-txt{display:none;} .brand .logo-mark{height:30px;} }
   .brand .lat{font-family:var(--mono);font-size:.72rem;letter-spacing:.18em;color:var(--fg-faint);text-transform:uppercase;}
-  .navlinks{display:flex;align-items:center;gap:2.1rem;}
+  .navlinks{display:flex;align-items:center;gap:1.7rem;}
   .navlinks a{
     font-family:var(--mono);font-size:.78rem;letter-spacing:.05em;color:var(--fg-dim);
     transition:color .25s;
@@ -165,7 +169,7 @@
     transition:color .25s,border-color .25s,background .25s;
   }
   .theme-toggle:hover{color:var(--accent);border-color:var(--accent-dim);}
-  @media(max-width:820px){ .navlinks .lk{display:none;} }
+  @media(max-width:940px){ .navlinks .lk{display:none;} }
 
   /* ---------- hero ---------- */
   .hero{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden;}
@@ -214,8 +218,8 @@
     font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;color:var(--fg-faint);
     display:flex;align-items:center;gap:.6rem;
   }
-  .fig-cap .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 0 rgba(45,212,191,.5);animation:pulse 2.6s infinite;}
-  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(45,212,191,.45);}70%{box-shadow:0 0 0 7px rgba(45,212,191,0);}100%{box-shadow:0 0 0 0 rgba(45,212,191,0);}}
+  .fig-cap .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 0 var(--accent-dim);animation:pulse 2.6s infinite;}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 var(--accent-dim);}70%{box-shadow:0 0 0 7px transparent;}100%{box-shadow:0 0 0 0 transparent;}}
 
   /* ---------- section frame ---------- */
   section.block{padding:clamp(72px,11vh,150px) 0;position:relative;}
@@ -233,36 +237,75 @@
   .sec-lead{max-width:54ch;color:var(--fg-dim);font-size:1.05rem;margin-top:-1.8rem;margin-bottom:3.4rem;}
 
   /* ---------- capabilities ---------- */
-  .cap-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
-  .cap{background:var(--bg);padding:clamp(1.8rem,3.4vw,2.8rem);position:relative;transition:background .35s;}
+  .cap-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+  .cap{background:var(--bg);padding:clamp(1.6rem,2.4vw,2.2rem);position:relative;transition:background .35s;display:flex;flex-direction:column;}
   .cap:hover{background:var(--bg-2);}
   .cap .num{font-family:var(--mono);font-size:.78rem;color:var(--accent);letter-spacing:.1em;}
-  .cap h3{font-family:var(--serif);font-weight:500;font-size:1.45rem;margin:1.1rem 0 .35rem;}
-  .cap .lat{font-family:var(--mono);font-size:.74rem;color:var(--fg-faint);letter-spacing:.06em;}
-  .cap p{color:var(--fg-dim);font-size:.98rem;margin-top:1rem;max-width:34ch;}
-  @media(max-width:720px){ .cap-grid{grid-template-columns:1fr;} }
+  .cap h3{font-family:var(--serif);font-weight:500;font-size:1.25rem;line-height:1.35;margin:1rem 0 .3rem;}
+  .cap .lat{font-family:var(--mono);font-size:.7rem;color:var(--fg-faint);letter-spacing:.05em;line-height:1.5;}
+  .cap p{color:var(--fg-dim);font-size:.93rem;margin-top:.9rem;flex:1;}
+  .cap .ev{font-family:var(--mono);font-size:.68rem;color:var(--fg-faint);letter-spacing:.02em;line-height:1.6;margin-top:1.3rem;padding-top:.9rem;border-top:1px solid var(--line-soft);}
+  @media(max-width:1080px){ .cap-grid{grid-template-columns:repeat(2,1fr);} }
+  @media(max-width:620px){ .cap-grid{grid-template-columns:1fr;} }
+
+  /* ---------- shared check list ---------- */
+  ul.chk{list-style:none;display:grid;gap:.6rem;}
+  ul.chk li{position:relative;padding-left:1.5rem;color:var(--fg-dim);font-size:.92rem;line-height:1.55;}
+  ul.chk li::before{content:"";position:absolute;left:2px;top:.42em;width:8px;height:5px;border-left:1.6px solid var(--accent);border-bottom:1.6px solid var(--accent);transform:rotate(-45deg);}
 
   /* ---------- cases ---------- */
-  .case{
-    display:grid;grid-template-columns:1.45fr .9fr;gap:clamp(1.5rem,4vw,3.5rem);
-    padding:clamp(2.2rem,4vw,3.2rem) 0;border-top:1px solid var(--line);align-items:center;
-  }
-  .case:last-child{border-bottom:1px solid var(--line);}
-  .case .ctag{font-family:var(--mono);font-size:.74rem;color:var(--accent);letter-spacing:.1em;}
-  .case h3{font-family:var(--serif);font-weight:500;font-size:1.5rem;margin:.7rem 0 1.6rem;}
-  .pm{display:grid;gap:1.3rem;}
-  .pm .lbl{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--fg-faint);margin-bottom:.3rem;}
-  .pm p{color:var(--fg-dim);font-size:.98rem;}
-  .result{
-    border-left:1px solid var(--line);padding-left:clamp(1.4rem,3vw,2.6rem);
-  }
-  .result .big{font-family:var(--mono);font-weight:500;font-size:clamp(2.6rem,5vw,3.8rem);color:var(--accent);line-height:1;letter-spacing:-.01em;}
-  .result .rlbl{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-faint);margin-bottom:.9rem;}
-  .result .rdesc{color:var(--fg-dim);font-size:.92rem;margin-top:1rem;max-width:24ch;}
-  @media(max-width:720px){
-    .case{grid-template-columns:1fr;gap:2rem;}
-    .result{border-left:none;border-top:1px solid var(--line);padding-left:0;padding-top:1.8rem;}
-  }
+  .cases{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+  .case{background:var(--bg);display:flex;flex-direction:column;transition:background .35s;}
+  .case:hover{background:var(--bg-2);}
+  .case .cfig{position:relative;aspect-ratio:3/2;overflow:hidden;border-bottom:1px solid var(--line);background:#F3F6FA;}
+  .case .cfig img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.2,.7,.2,1);}
+  .case:hover .cfig img{transform:scale(1.025);}
+  .case .cfig .fnote{position:absolute;right:.7rem;bottom:.6rem;font-family:var(--mono);font-size:.6rem;letter-spacing:.08em;color:#5A6675;background:rgba(243,246,250,.86);padding:.12rem .45rem;border-radius:2px;}
+  html:not([data-theme="light"]) .case .cfig img{filter:brightness(.86) contrast(1.04);}
+  .case .cbody{padding:clamp(1.6rem,2.8vw,2.3rem);display:flex;flex-direction:column;flex:1;}
+  .case .ctag{font-family:var(--mono);font-size:.72rem;color:var(--accent);letter-spacing:.1em;}
+  .case h3{font-family:var(--serif);font-weight:500;font-size:1.4rem;line-height:1.3;margin:.7rem 0 .8rem;}
+  .case .cprob{color:var(--fg-dim);font-size:.95rem;}
+  .case ul.chk{margin-top:1.1rem;flex:1;}
+  .cres{display:flex;align-items:baseline;gap:1.1rem;margin-top:1.6rem;padding-top:1.3rem;border-top:1px solid var(--line);}
+  .cres .big{font-family:var(--mono);font-weight:500;font-size:clamp(2rem,3.4vw,2.6rem);color:var(--accent);line-height:1;letter-spacing:-.01em;flex-shrink:0;}
+  .cres .big small{font-size:.5em;}
+  .cres .big.word{font-family:var(--serif);font-size:1.3rem;font-weight:600;letter-spacing:.02em;}
+  .cres .rdesc{color:var(--fg-dim);font-size:.86rem;line-height:1.55;}
+  @media(max-width:760px){ .cases{grid-template-columns:1fr;} }
+  @media(max-width:420px){ .cres{flex-direction:column;gap:.6rem;} }
+
+  /* ---------- research ---------- */
+  .pubs{border-top:1px solid var(--line);}
+  .pub{display:grid;grid-template-columns:225px 1fr 140px;gap:clamp(.8rem,2.5vw,2rem);align-items:baseline;padding:1.15rem 0;border-bottom:1px solid var(--line);}
+  .pub .go{justify-content:flex-end;}
+  .pub .venue{font-family:var(--mono);font-size:.74rem;color:var(--accent);letter-spacing:.03em;line-height:1.5;}
+  .pub .ptitle{font-family:var(--serif);font-size:1.02rem;line-height:1.45;}
+  .pub .ptopic{display:block;font-family:var(--sans);font-size:.86rem;color:var(--fg-dim);margin-top:.25rem;}
+  .pub .go{display:flex;gap:1rem;font-family:var(--mono);font-size:.74rem;white-space:nowrap;}
+  .pub .go a{color:var(--fg-faint);transition:color .25s;}
+  .pub .go a:hover{color:var(--accent);}
+  .pubs-more{margin-top:1.6rem;font-family:var(--mono);font-size:.78rem;color:var(--fg-faint);}
+  .pubs-more a{color:var(--accent);}
+  .pubs-more a:hover{text-decoration:underline;}
+  @media(max-width:860px){ .pub{grid-template-columns:1fr auto;} .pub .venue{grid-column:1/-1;} }
+  @media(max-width:480px){ .pub{grid-template-columns:1fr;} .pub .go{justify-content:flex-start;} }
+
+  /* ---------- labs ---------- */
+  .labs{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+  .lab{background:var(--bg);padding:clamp(1.6rem,2.6vw,2.1rem);display:flex;flex-direction:column;transition:background .35s;}
+  a.lab:hover{background:var(--bg-2);}
+  .lab .ltop{display:flex;justify-content:space-between;align-items:center;gap:.8rem;}
+  .lab .lname{font-family:var(--mono);font-size:.98rem;font-weight:500;color:var(--fg);}
+  .status{font-family:var(--mono);font-size:.62rem;letter-spacing:.08em;padding:.15rem .5rem;border-radius:2px;border:1px solid var(--line);color:var(--fg-faint);white-space:nowrap;}
+  .status.open{color:var(--accent);border-color:var(--accent-dim);}
+  .lab h3{font-family:var(--serif);font-weight:500;font-size:1.15rem;line-height:1.35;margin-top:.9rem;}
+  .lab p{color:var(--fg-dim);font-size:.9rem;margin-top:.7rem;flex:1;}
+  .lab .lfor{font-family:var(--mono);font-size:.68rem;color:var(--fg-faint);letter-spacing:.02em;margin-top:1.2rem;}
+  .lab .lfor b{color:var(--fg-dim);font-weight:400;}
+  a.lab:hover .lname{color:var(--accent);}
+  @media(max-width:1000px){ .labs{grid-template-columns:repeat(2,1fr);} }
+  @media(max-width:640px){ .labs{grid-template-columns:1fr;} }
 
   /* ---------- method ---------- */
   .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
@@ -279,9 +322,11 @@
   .about h3{font-family:var(--serif);font-weight:600;font-size:1.7rem;}
   .about .role{font-family:var(--mono);font-size:.76rem;color:var(--accent);letter-spacing:.1em;margin-top:.4rem;}
   .about .bio{color:var(--fg-dim);font-size:1.02rem;margin-top:1.6rem;max-width:52ch;}
+  .about .bio + .bio{margin-top:1rem;}
   .affil{display:flex;flex-wrap:wrap;gap:.45rem .55rem;margin-top:1.7rem;}
   .affil span{font-family:var(--mono);font-size:.7rem;color:var(--fg-dim);border:1px solid var(--line);padding:.3rem .6rem;border-radius:2px;}
-  .badges{display:grid;grid-template-columns:1fr;gap:1px;background:var(--line);border:1px solid var(--line);}
+  .badges{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+  .badge.wide{grid-column:1/-1;}
   .badge{background:var(--bg);padding:1.4rem 1.4rem;}
   .badge .bn{font-family:var(--mono);font-weight:500;font-size:1.6rem;color:var(--accent);line-height:1.1;word-break:break-word;}
   .badge .bl{font-size:.86rem;color:var(--fg-dim);margin-top:.6rem;}
@@ -290,7 +335,8 @@
   a.badge:hover{background:var(--bg-2);}
   .badge .blink{font-family:var(--mono);font-size:.64rem;color:var(--accent);letter-spacing:.05em;margin-top:.55rem;}
   a.badge:hover .blink{text-decoration:underline;}
-  @media(max-width:760px){ .about{grid-template-columns:1fr;} }
+  @media(max-width:860px){ .about{grid-template-columns:1fr;} }
+  @media(max-width:400px){ .badges{grid-template-columns:1fr;} }
 
   /* ---------- partners ---------- */
   .partners{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
@@ -328,17 +374,46 @@
     .svc-name{display:flex;align-items:baseline;gap:.7rem;}
     .svc-lat{margin-top:0;}
   }
+  .offers{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+  .offer{background:var(--bg);padding:clamp(1.6rem,2.6vw,2.2rem);display:flex;flex-direction:column;transition:background .35s;}
+  .offer:hover{background:var(--bg-2);}
+  .offer .on{font-family:var(--mono);font-size:.78rem;color:var(--accent);letter-spacing:.1em;display:flex;justify-content:space-between;align-items:center;gap:.8rem;}
+  .offer .pick{font-size:.62rem;letter-spacing:.08em;border:1px solid var(--accent-dim);padding:.12rem .45rem;border-radius:2px;white-space:nowrap;}
+  .offer h3{font-family:var(--serif);font-weight:500;font-size:1.28rem;line-height:1.3;margin:1rem 0 .25rem;}
+  .offer .olat{font-family:var(--mono);font-size:.7rem;color:var(--fg-faint);letter-spacing:.05em;}
+  .offer p{color:var(--fg-dim);font-size:.93rem;margin-top:.9rem;}
+  .offer .dl{font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--fg-faint);margin:1.3rem 0 .6rem;}
+  .offer ul.chk{flex:1;}
+  .offer ul.chk li{font-size:.88rem;}
+  @media(max-width:1000px){ .offers{grid-template-columns:repeat(2,1fr);} }
+  @media(max-width:640px){ .offers{grid-template-columns:1fr;} }
+  .sub-head{display:flex;align-items:baseline;gap:.8rem;flex-wrap:wrap;margin:clamp(3.2rem,6vw,4.6rem) 0 1.2rem;}
+  .sub-head h3{font-family:var(--serif);font-weight:500;font-size:1.35rem;}
+  .sub-note{color:var(--fg-dim);font-size:.95rem;max-width:60ch;margin-bottom:1.6rem;}
+  .price-note{margin-top:1.4rem;font-family:var(--mono);font-size:.74rem;color:var(--fg-faint);letter-spacing:.02em;}
 
   /* ---------- contact ---------- */
-  .contact-inner{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(2rem,5vw,4rem);align-items:end;}
-  .contact h2{font-family:var(--serif);font-weight:500;font-size:clamp(2rem,4.6vw,3.4rem);line-height:1.2;}
+  .contact-inner{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(2rem,5vw,4rem);align-items:start;}
+  .qform{margin-top:2.4rem;display:grid;grid-template-columns:1fr 1fr;gap:1.1rem 1.1rem;}
+  .qform .full{grid-column:1/-1;}
+  .qform label{display:block;font-family:var(--mono);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-faint);margin-bottom:.45rem;}
+  .qform label .req{color:var(--accent);}
+  .qform input,.qform select,.qform textarea{width:100%;font-family:var(--sans);font-size:.95rem;font-weight:400;color:var(--fg);background:var(--bg-2);border:1px solid var(--line);border-radius:2px;padding:.7rem .8rem;transition:border-color .25s;}
+  .qform textarea{min-height:140px;resize:vertical;line-height:1.6;}
+  .qform input:focus,.qform select:focus,.qform textarea:focus{outline:none;border-color:var(--accent);}
+  .qform .factions{display:flex;flex-wrap:wrap;align-items:center;gap:1rem 1.4rem;}
+  .qform .factions .btn{border:none;}
+  .qform .fnote{font-family:var(--mono);font-size:.68rem;color:var(--fg-faint);letter-spacing:.02em;line-height:1.6;}
+  @media(max-width:560px){ .qform{grid-template-columns:1fr;} }
+  .mailcard{position:sticky;top:96px;}
+  .contact h2{font-family:var(--serif);font-weight:500;font-size:clamp(1.7rem,3.8vw,2.8rem);line-height:1.25;}
   .contact h2 .hl{color:var(--accent);}
   .contact .csub{color:var(--fg-dim);margin-top:1.4rem;max-width:40ch;}
   .mailcard{border:1px solid var(--line);padding:clamp(1.6rem,3vw,2.2rem);background:var(--bg-2);}
   .mailcard .ml{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--fg-faint);}
   .mailcard a.email{font-family:var(--mono);font-size:clamp(.95rem,2vw,1.25rem);color:var(--fg);display:block;margin:.7rem 0 1.6rem;letter-spacing:.01em;word-break:break-all;transition:color .25s;}
   .mailcard a.email:hover{color:var(--accent);}
-  @media(max-width:760px){ .contact-inner{grid-template-columns:1fr;align-items:start;} }
+  @media(max-width:760px){ .contact-inner{grid-template-columns:1fr;align-items:start;} .mailcard{position:static;} }
 
   /* ---------- footer ---------- */
   footer{border-top:1px solid var(--line);padding:2.8rem 0 2.2rem;}
@@ -373,14 +448,6 @@
 </head>
 <body>
 
-<template id="__bundler_thumbnail">
-  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-    <rect width="100" height="100" fill="#070A11"/>
-    <path d="M15 60 Q30 30 42 55 T62 50 T85 40" fill="none" stroke="#2DD4BF" stroke-width="2.5"/>
-    <text x="50" y="82" fill="#2DD4BF" font-family="monospace" font-size="9" text-anchor="middle">Q</text>
-  </svg>
-</template>
-
 <header id="hdr">
   <div class="wrap nav">
     <a href="#top" class="brand">
@@ -394,9 +461,9 @@
       <a href="#capabilities" class="lk">能力</a>
       <a href="#services" class="lk">服務</a>
       <a href="#work" class="lk">案例</a>
-      <a href="#method" class="lk">方法</a>
+      <a href="#research" class="lk">研究</a>
+      <a href="#labs" class="lk">Labs</a>
       <a href="#about" class="lk">關於</a>
-      <a href="#partners" class="lk">夥伴</a>
       <button id="themeToggle" class="theme-toggle" type="button" aria-label="切換亮色／深色模式">☀</button>
       <a href="#contact" class="nav-cta">談談你的問題</a>
     </nav>
@@ -409,19 +476,20 @@
   <div class="wrap">
     <div class="hero-eyebrow">
       <span class="tick"></span>
-      <span class="eyebrow">Quantitative Deep-Tech Consulting</span>
+      <span class="eyebrow">Research-Driven AI &amp; Deep-Tech Engineering</span>
     </div>
     <h1 class="hero-title">把困難的量化問題，<br>做成<span class="hl">可交付的系統</span>。</h1>
     <p class="hero-sub">
-      用研究級的嚴謹方法，解決 AI/ML、訊號處理、時序與頻域分析、臨床醫療資訊與量化策略上「別人解不動」的硬問題。
-      <span class="en">Rigorous quantitative methods for the hard problems others can't crack.</span>
+      結合前沿 AI 研究、科學計算與軟體工程，為企業打造客製化 AI Agent、智慧決策系統、訊號處理演算法與深科技產品。
+      <span class="en">From scientific discovery to production-ready intelligence.</span>
     </p>
     <div class="domains">
-      <span>AI / ML</span>
-      <span>訊號處理 Signal Processing</span>
-      <span>時頻分析 Time–Frequency</span>
-      <span>臨床醫療資訊 Clinical AI</span>
-      <span>量化策略 Quant</span>
+      <span>AI Agent</span>
+      <span>AI for Science</span>
+      <span>臨床 AI Clinical</span>
+      <span>訊號與時序 Signal &amp; Time-Series</span>
+      <span>金融與量化 Quant</span>
+      <span>工業 AI Industrial</span>
     </div>
     <div class="cta-row">
       <a href="#contact" class="btn btn-primary">談談你的問題 <span class="arr">→</span></a>
@@ -442,27 +510,59 @@
     <div class="cap-grid reveal">
       <div class="cap">
         <div class="num">01</div>
-        <h3>臨床與醫療 AI</h3>
-        <div class="lat">Clinical &amp; Medical AI</div>
-        <p>從原始生理訊號到臨床可用的決策系統，以符合研究標準的方式驗證每一步。</p>
+        <h3>AI Agent 與多代理系統</h3>
+        <div class="lat">Agentic AI &amp; Multi-Agent Systems</div>
+        <p>工具調用、MCP、多代理分工與交叉查核，把重複且需要專業判斷的知識工作，變成有品質閘門的工作流程。</p>
+        <div class="ev">Berkeley AgentX-AgentBeats 第 3 名（1,300+ 隊）</div>
       </div>
       <div class="cap">
         <div class="num">02</div>
-        <h3>訊號處理與系統</h3>
-        <div class="lat">Signal Processing &amp; EEG–BCI</div>
-        <p>在高雜訊環境中萃取微弱目標訊號，建構即時、可部署的處理鏈，如腦波(EEG)、金融資料等。</p>
+        <h3>科學 AI 與研究自動化</h3>
+        <div class="lat">AI for Science &amp; Research Automation</div>
+        <p>文獻檢索、證據查核、假說生成與實驗稽核，讓研究流程可追溯、可重現。</p>
+        <div class="ev">Paper Evidence · 自動化研究 pipeline</div>
       </div>
       <div class="cap">
         <div class="num">03</div>
-        <h3>時序與頻域方法</h3>
-        <div class="lat">Time-Series &amp; Spectral Methods</div>
-        <p>以頻域、時頻與統計方法，看見時間序列裡別人忽略的結構。</p>
+        <h3>臨床 AI 與腦機介面</h3>
+        <div class="lat">Clinical AI &amp; Brain–Computer Interfaces</div>
+        <p>從原始腦波與生理訊號，到臨床可用的預測與決策工具，以研究標準驗證每一步。</p>
+        <div class="ev">EEG 療效預測模型已於醫學中心門診使用</div>
       </div>
       <div class="cap">
         <div class="num">04</div>
-        <h3>量化策略與 ML 工程</h3>
-        <div class="lat">Quant Strategy &amp; ML Engineering</div>
-        <p>把研究想法工程化為穩健、可重現、可上線的系統。</p>
+        <h3>訊號處理與時序建模</h3>
+        <div class="lat">Signal Processing &amp; Time-Series</div>
+        <p>以頻域、時頻與統計方法做降噪、預測與異常偵測，在高雜訊中萃取微弱訊號。</p>
+        <div class="ev">FreqLens · Large Cognition Model</div>
+      </div>
+      <div class="cap">
+        <div class="num">05</div>
+        <h3>金融 AI 與決策智慧</h3>
+        <div class="lat">Financial AI &amp; Decision Intelligence</div>
+        <p>事件驅動研究、投資假說生成、回測與組合分析，每個結論都能回查到證據。</p>
+        <div class="ev">AI 投資研究平台 · LLM token 效率研究</div>
+      </div>
+      <div class="cap">
+        <div class="num">06</div>
+        <h3>量子與混合機器學習</h3>
+        <div class="lat">Quantum &amp; Hybrid Machine Learning</div>
+        <p>變分量子電路與混合架構的可行性驗證，一律搭配參數相當的古典對照組，誠實回報差異。</p>
+        <div class="ev">Phys. Rev. A · Quantum Sci. Technol. · ICASSP</div>
+      </div>
+      <div class="cap">
+        <div class="num">07</div>
+        <h3>工業 AI 與電腦視覺</h3>
+        <div class="lat">Industrial AI &amp; Computer Vision</div>
+        <p>工作站佈局最佳化、CAD 圖面解析、影像辨識與邊緣裝置部署。</p>
+        <div class="ev">機器人工作站設計 · 平面圖辨識 · 跌倒監測</div>
+      </div>
+      <div class="cap">
+        <div class="num">08</div>
+        <h3>AI 產品工程與評估</h3>
+        <div class="lat">AI Product Engineering &amp; Evaluation</div>
+        <p>知識庫與 RAG、LLM 整合、全端產品、雲端部署與自動化測試，並量測 AI 是否有效、可靠、划算。</p>
+        <div class="ev">tokenbench · sevencheck 開源</div>
       </div>
     </div>
   </div>
@@ -476,7 +576,88 @@
       <h2>服務與合作模式</h2>
       <span class="en">/ Services</span>
     </div>
-    <p class="sec-lead reveal">依問題的階段與規模，選擇最合適的合作方式——全部採 <strong>專案制</strong> 計費，範圍與交付物在開始前一起定義清楚。</p>
+    <p class="sec-lead reveal">從你要解決的問題出發。每個方案在開始前，都會先一起把範圍與交付物定義清楚。</p>
+    <div class="offers reveal">
+      <div class="offer">
+        <div class="on"><span>01</span><span class="pick">重點服務</span></div>
+        <h3>客製化 AI Agent 系統</h3>
+        <div class="olat">Custom AI Agent Development</div>
+        <p>把重複且需要專業判斷的知識工作，變成能調用工具、存取資料、有品質控制的 AI 工作流程。</p>
+        <div class="dl">交付物 Deliverables</div>
+        <ul class="chk">
+          <li>Agent 工作流程設計與工具、資料串接</li>
+          <li>自動檢查與人工審核節點</li>
+          <li>執行紀錄、評測集與上線部署</li>
+        </ul>
+      </div>
+      <div class="offer">
+        <div class="on"><span>02</span><span class="pick">重點服務</span></div>
+        <h3>AI 評估與成本最佳化</h3>
+        <div class="olat">AI Evaluation &amp; Optimization</div>
+        <p>不只幫你做 AI，也量測它是否有效、是否可靠，並找出降低推論成本的空間。</p>
+        <div class="dl">交付物 Deliverables</div>
+        <ul class="chk">
+          <li>針對你任務的評測集與基準</li>
+          <li>模型、提示詞與架構的比較報告</li>
+          <li>Token、延遲與品質的權衡建議</li>
+        </ul>
+      </div>
+      <div class="offer">
+        <div class="on"><span>03</span><span class="pick">重點服務</span></div>
+        <h3>研究即服務</h3>
+        <div class="olat">Research as a Service</div>
+        <p>給需要 AI 研發、但還沒有完整研究團隊的新創與中小企業：把一個未知的問題做成有結論的研究。</p>
+        <div class="dl">交付物 Deliverables</div>
+        <ul class="chk">
+          <li>文獻調查與方法選型</li>
+          <li>Baseline 實作、消融實驗與對照組</li>
+          <li>可行性報告與可重現的程式碼</li>
+        </ul>
+      </div>
+      <div class="offer">
+        <div class="on"><span>04</span></div>
+        <h3>企業知識庫與智慧問答</h3>
+        <div class="olat">Enterprise Knowledge Base</div>
+        <p>把散落的文件變成可查詢的知識庫；文件互相矛盾時，先仲裁再回答。</p>
+        <div class="dl">交付物 Deliverables</div>
+        <ul class="chk">
+          <li>文件建庫與知識抽取流程</li>
+          <li>附引用來源的問答系統</li>
+          <li>專家審查介面與回歸評測</li>
+        </ul>
+      </div>
+      <div class="offer">
+        <div class="on"><span>05</span></div>
+        <h3>領域 AI 演算法研發</h3>
+        <div class="olat">Domain AI R&amp;D</div>
+        <p>醫療、生理訊號、金融與工業場域的模型與演算法，從資料到可部署的系統。</p>
+        <div class="dl">交付物 Deliverables</div>
+        <ul class="chk">
+          <li>模型與演算法原始碼</li>
+          <li>驗證報告（含基準與誤差分析）</li>
+          <li>可部署的推論服務或邊緣版本</li>
+        </ul>
+      </div>
+      <div class="offer">
+        <div class="on"><span>06</span></div>
+        <h3>AI 技術診斷與架構規劃</h3>
+        <div class="olat">AI Assessment &amp; Architecture</div>
+        <p>還不確定該不該做、該怎麼做時，先用少量投入釐清可行性、風險與路線。</p>
+        <div class="dl">交付物 Deliverables</div>
+        <ul class="chk">
+          <li>現況與可行性評估</li>
+          <li>技術選型與系統架構建議</li>
+          <li>風險清單與分階段路線圖</li>
+        </ul>
+      </div>
+    </div>
+    <p class="price-note reveal">全部採專案制報價，依範圍與交付物估算。歡迎直接來信描述需求。</p>
+
+    <div class="sub-head reveal">
+      <h3>合作方式</h3>
+      <span class="en">/ Engagement Models</span>
+    </div>
+    <p class="sub-note reveal">依問題的階段與規模，選擇最合適的合作方式。</p>
     <div class="svc-list reveal">
       <div class="svc">
         <div class="svc-n">01</div>
@@ -500,8 +681,8 @@
       </div>
       <div class="svc">
         <div class="svc-n">05</div>
-        <div class="svc-name"><h3>長期技術夥伴</h3><div class="svc-lat">Long-term Partner</div></div>
-        <p class="svc-desc">以持續合作的方式深入你的團隊與場域，提供穩定的技術支援、迭代與共同研發。</p>
+        <div class="svc-name"><h3>長期技術夥伴</h3><div class="svc-lat">Long-term Partner · Fractional CTO</div></div>
+        <p class="svc-desc">以持續合作的方式深入你的團隊與場域，提供穩定的技術支援、迭代與共同研發；也可擔任兼任技術長，協助技術決策與團隊建置。</p>
       </div>
     </div>
   </div>
@@ -515,53 +696,125 @@
       <h2>精選案例</h2>
       <span class="en">/ Selected Work</span>
     </div>
+    <p class="sec-lead reveal">從工業、企業到醫療與金融，挑出能代表不同能力的案例。為保護客戶，專案名稱與客戶資訊已匿名化；配圖為示意圖，非實際系統畫面。</p>
 
-    <div class="case reveal">
-      <div>
-        <div class="ctag">案例 01 · 生醫影像</div>
-        <h3>次世代定序影像降噪</h3>
-        <div class="pm">
-          <div><div class="lbl">問題 Problem</div><p>次世代定序（NGS）影像背景雜訊高、目標訊號微弱，傳統方法難以穩定分離。</p></div>
-          <div><div class="lbl">方法 Method</div><p>設計客製化降噪演算法，結合針對該訊號特性最佳化的 AI 模型。</p></div>
+    <div class="cases reveal">
+      <article class="case">
+        <div class="cfig"><img src="assets/cases/robot.webp" alt="機器人碼垛工作站佈局最佳化示意圖" loading="lazy" width="1536" height="1024"><span class="fnote">示意圖</span></div>
+        <div class="cbody">
+          <div class="ctag">案例 01 · 工業 AI · AI Agent</div>
+          <h3>工業機器人工作站智慧設計平台</h3>
+          <p class="cprob">碼垛工作站的機器人選型、佈局與報價，需要在可達性、節拍時間與成本之間反覆權衡。</p>
+          <ul class="chk">
+            <li>多代理對話擷取需求，匯入實際廠房 CAD 平面圖</li>
+            <li>九階段最佳化：可達性搜尋、節拍估算、分群排序、運動規劃驗證</li>
+            <li>自動配置視覺相機與安全圍欄，輸出物料清單與技術設計報告</li>
+          </ul>
+          <div class="cres"><div class="big">9</div><p class="rdesc">階段最佳化流程，從一段對話需求，到可建置的 2D／3D 工作站佈局。</p></div>
         </div>
-      </div>
-      <div class="result">
-        <div class="rlbl">成果 Result</div>
-        <div class="big">+12<span style="font-size:.5em">%</span></div>
-        <p class="rdesc">客製化 AI 降噪相較既有傳統方法基準的訊號品質提升。</p>
-      </div>
-    </div>
+      </article>
 
-    <div class="case reveal">
-      <div>
-        <div class="ctag">案例 02 · 長照 / 即時系統</div>
-        <h3>養老院即時跌倒監測</h3>
-        <div class="pm">
-          <div><div class="lbl">問題 Problem</div><p>長照場域需要即時、低誤報的跌倒偵測，並能在邊緣裝置上穩定運行。</p></div>
-          <div><div class="lbl">方法 Method</div><p>建構即時 AI 跌倒監測系統，從感測到告警的完整處理鏈。</p></div>
+      <article class="case">
+        <div class="cfig"><img src="assets/cases/kb.webp" alt="企業知識庫衝突仲裁問答系統示意圖" loading="lazy" width="1536" height="1024"><span class="fnote">示意圖</span></div>
+        <div class="cbody">
+          <div class="ctag">案例 02 · 企業 AI · 知識管理</div>
+          <h3>設備廠商技術知識庫問答系統</h3>
+          <p class="cprob">同一件事在不同文件、不同專家口中說法互相矛盾，一般 RAG 會把矛盾一起丟給模型猜。</p>
+          <ul class="chk">
+            <li>把文件抽成標明「誰主張」的結構化知識卡</li>
+            <li>回答前先依權威規則仲裁衝突，回答附引用與仲裁軌跡</li>
+            <li>專家審查介面，人工裁決回寫知識庫，並以評測集守住品質</li>
+          </ul>
+          <div class="cres"><div class="big">628</div><p class="rdesc">張知識卡，由 14 份文件抽出；28 題評測中版本正確 100%、引用正確 85%。</p></div>
         </div>
-      </div>
-      <div class="result">
-        <div class="rlbl">成果 Result</div>
-        <div class="big">98<span style="font-size:.5em">%</span></div>
-        <p class="rdesc">邊緣裝置即時運行下的跌倒事件偵測準確率。</p>
-      </div>
-    </div>
+      </article>
 
-    <div class="case reveal">
-      <div>
-        <div class="ctag">案例 03 · 教育 AI</div>
-        <h3>大學普物個人化 AI 家教</h3>
-        <div class="pm">
-          <div><div class="lbl">問題 Problem</div><p>大班普通物理教學難以因材施教，學生之間的學習落差持續擴大。</p></div>
-          <div><div class="lbl">方法 Method</div><p>打造個人化 AI 家教系統，依學生狀態動態調整教學路徑。</p></div>
+      <article class="case">
+        <div class="cfig"><img src="assets/cases/finance.webp" alt="AI 投資研究平台示意圖" loading="lazy" width="1536" height="1024"><span class="fnote">示意圖</span></div>
+        <div class="cbody">
+          <div class="ctag">案例 03 · 金融科技 · AI Agent</div>
+          <h3>AI 投資研究平台</h3>
+          <p class="cprob">投資研究需要大量查證；AI 生成的結論若無法回溯來源，就無法被信任。</p>
+          <ul class="chk">
+            <li>對話式研究工作區：提問、收錄、整理成可回看版本的研究報告</li>
+            <li>新聞到研究筆記的內容生產線，繁中、簡中、英文三語自動產出</li>
+            <li>公司與供應鏈關係資料庫，每一條關係都附年報原句</li>
+          </ul>
+          <div class="cres"><div class="big word">可回溯</div><p class="rdesc">報告裡的每個關係與數字，都能點回原始出處。</p></div>
         </div>
-      </div>
-      <div class="result">
-        <div class="rlbl">成果 Result</div>
-        <div class="big">+30<span style="font-size:.5em">%</span></div>
-        <p class="rdesc">導入個人化 AI 家教後，目標學生的期末成績提升。</p>
-      </div>
+      </article>
+
+      <article class="case">
+        <div class="cfig"><img src="assets/cases/floorplan.webp" alt="建築平面圖自動上色示意圖" loading="lazy" width="1536" height="1024"><span class="fnote">示意圖</span></div>
+        <div class="cbody">
+          <div class="ctag">案例 04 · 電腦視覺 · 建築設計</div>
+          <h3>建築平面圖自動上色系統</h3>
+          <p class="cprob">建案平面圖的分區上色、材質貼圖與坪數標註，長期依賴人工繪圖。</p>
+          <ul class="chk">
+            <li>幾何演算法處理標準圖面，學習式模型定位基地圖中的建築</li>
+            <li>自動辨識房間與家具，套用材質、陰影並標註室內坪數</li>
+            <li>一次設定、整棟多樓層批次輸出 300 dpi 成品</li>
+          </ul>
+          <div class="cres"><div class="big">0.4<small>s</small></div><p class="rdesc">互動換色的反應時間；全程地端運行，圖面不離開客戶電腦。</p></div>
+        </div>
+      </article>
+
+      <article class="case">
+        <div class="cfig"><img src="assets/cases/eeg.webp" alt="腦波療效預測示意圖" loading="lazy" width="1536" height="1024"><span class="fnote">示意圖</span></div>
+        <div class="cbody">
+          <div class="ctag">案例 05 · 臨床 AI · 腦波</div>
+          <h3>腦波憂鬱症療效預測</h3>
+          <p class="cprob">非侵入式腦刺激治療的反應因人而異，臨床需要在治療前預估療效。</p>
+          <ul class="chk">
+            <li>以前額葉腦波（EEG）建立療效預測模型</li>
+            <li>跨資料集比較與驗證，研究成果發表於國際期刊</li>
+            <li>與臨床團隊合作，導入門診流程</li>
+          </ul>
+          <div class="cres"><div class="big word">門診使用中</div><p class="rdesc">模型已於醫學中心門診常規使用。</p></div>
+        </div>
+      </article>
+
+      <article class="case">
+        <div class="cfig"><img src="assets/cases/fall.webp" alt="長照場域即時跌倒監測示意圖" loading="lazy" width="1536" height="1024"><span class="fnote">示意圖</span></div>
+        <div class="cbody">
+          <div class="ctag">案例 06 · 長照 · 邊緣 AI</div>
+          <h3>養老院即時跌倒監測</h3>
+          <p class="cprob">長照場域需要即時、低誤報的跌倒偵測，並能在邊緣裝置上穩定運行。</p>
+          <ul class="chk">
+            <li>建構從感測、辨識到告警的完整即時處理鏈</li>
+            <li>針對邊緣裝置最佳化，在現場穩定運行</li>
+          </ul>
+          <div class="cres"><div class="big">98<small>%</small></div><p class="rdesc">邊緣裝置即時運行下的跌倒事件偵測準確率。</p></div>
+        </div>
+      </article>
+
+      <article class="case">
+        <div class="cfig"><img src="assets/cases/ngs.webp" alt="次世代定序影像降噪示意圖" loading="lazy" width="1536" height="1024"><span class="fnote">示意圖</span></div>
+        <div class="cbody">
+          <div class="ctag">案例 07 · 生醫影像</div>
+          <h3>次世代定序影像降噪</h3>
+          <p class="cprob">次世代定序（NGS）影像背景雜訊高、目標訊號微弱，傳統方法難以穩定分離。</p>
+          <ul class="chk">
+            <li>依訊號特性設計客製化降噪演算法</li>
+            <li>結合針對該訊號最佳化的 AI 模型</li>
+          </ul>
+          <div class="cres"><div class="big">+12<small>%</small></div><p class="rdesc">相較既有傳統方法基準的訊號品質提升。</p></div>
+        </div>
+      </article>
+
+      <article class="case">
+        <div class="cfig"><img src="assets/cases/tutor.webp" alt="大學普物個人化 AI 家教示意圖" loading="lazy" width="1536" height="1024"><span class="fnote">示意圖</span></div>
+        <div class="cbody">
+          <div class="ctag">案例 08 · 教育 AI</div>
+          <h3>大學普物個人化 AI 家教</h3>
+          <p class="cprob">大班普通物理教學難以因材施教，學生之間的學習落差持續擴大。</p>
+          <ul class="chk">
+            <li>打造個人化 AI 家教系統</li>
+            <li>依學生狀態動態調整教學路徑</li>
+          </ul>
+          <div class="cres"><div class="big">+30<small>%</small></div><p class="rdesc">導入個人化 AI 家教後，目標學生的期末成績提升。</p></div>
+        </div>
+      </article>
     </div>
   </div>
 </section>
@@ -574,7 +827,7 @@
       <h2>工作方式</h2>
       <span class="en">/ How We Work</span>
     </div>
-    <p class="sec-lead reveal">我們把每個案子當成一個研究問題：先把它定義清楚、設好基準，再用可重現的流程，把方法工程化為能真正上線的系統。</p>
+    <p class="sec-lead reveal">我們最擅長的，是從零研究一個還沒有標準答案的問題：先定義清楚、設好基準與對照組，設計方法並以實驗驗證，再把它工程化成真正能用的產品。</p>
     <div class="steps reveal">
       <div class="step">
         <div class="sn">01</div>
@@ -592,7 +845,7 @@
         <div class="sn">03</div>
         <h4>原型驗證</h4>
         <div class="lat">Validate</div>
-        <p>以研究級嚴謹度驗證，確保結果可重現、可解釋。</p>
+        <p>以基準、對照組與消融實驗驗證，確保結果可重現、可解釋。</p>
       </div>
       <div class="step">
         <div class="sn">04</div>
@@ -604,11 +857,131 @@
   </div>
 </section>
 
+<!-- ===================== RESEARCH ===================== -->
+<section class="block axis-divider" id="research">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="idx">§ 05</span>
+      <h2>研究成果</h2>
+      <span class="en">/ Research</span>
+    </div>
+    <p class="sec-lead reveal">我們自己也做研究。這些論文不一定直接對應到案子，但證明了我們能設計新方法、做出誠實的實驗，並通過同儕審查。</p>
+    <div class="pubs reveal">
+      <div class="pub">
+        <div class="venue">Physical Review A · 2025</div>
+        <div class="ptitle">Unraveling quantum environments: Transformer-assisted learning in Lindblad dynamics<span class="ptopic">以 Transformer 學習開放量子系統的環境動力學</span></div>
+        <div class="go"><a href="https://doi.org/10.1103/gsxk-45mk" target="_blank" rel="noopener">論文 ↗</a></div>
+      </div>
+      <div class="pub">
+        <div class="venue">Quantum Sci. Technol. · 2026</div>
+        <div class="ptitle">Quantum Adaptive Self-Attention for Quantum Transformer Models<span class="ptopic">量子自適應自注意力機制（QASA）</span></div>
+        <div class="go"><a href="https://doi.org/10.1088/2058-9565/ae8b21" target="_blank" rel="noopener">論文 ↗</a><a href="https://github.com/ChiShengChen/QASA" target="_blank" rel="noopener">程式碼 ↗</a></div>
+      </div>
+      <div class="pub">
+        <div class="venue">IEEE ICASSP · 2026 · Oral</div>
+        <div class="ptitle">Quantum Reinforcement Learning-Guided Diffusion Model for Image Synthesis via Hybrid Quantum-Classical Generative Model Architectures<span class="ptopic">量子強化學習引導的擴散生成模型</span></div>
+        <div class="go"><a href="https://doi.org/10.1109/ICASSP55912.2026.11461991" target="_blank" rel="noopener">論文 ↗</a></div>
+      </div>
+      <div class="pub">
+        <div class="venue">IEEE ICASSP · 2026</div>
+        <div class="ptitle">Quantum Adaptive Self-Attention for Financial Rebalancing: An Empirical Study on Automated Market Makers in Decentralized Finance<span class="ptopic">量子注意力用於去中心化金融的資產再平衡</span></div>
+        <div class="go"><a href="https://doi.org/10.1109/ICASSP55912.2026.11460972" target="_blank" rel="noopener">論文 ↗</a></div>
+      </div>
+      <div class="pub">
+        <div class="venue">IEEE ICASSP · 2025</div>
+        <div class="ptitle">Quantum Multimodal Contrastive Learning Framework<span class="ptopic">腦波與影像的量子多模態對比學習</span></div>
+        <div class="go"><a href="https://arxiv.org/abs/2408.13919" target="_blank" rel="noopener">論文 ↗</a><a href="https://github.com/ChiShengChen/QCL" target="_blank" rel="noopener">程式碼 ↗</a></div>
+      </div>
+      <div class="pub">
+        <div class="venue">IEEE SiPS · 2024</div>
+        <div class="ptitle">QEEGNet: Quantum Machine Learning for Enhanced Electroencephalography Encoding<span class="ptopic">量子機器學習腦波編碼；延伸版刊於 J. Signal Processing Systems（2026）</span></div>
+        <div class="go"><a href="https://arxiv.org/abs/2407.19214" target="_blank" rel="noopener">論文 ↗</a><a href="https://github.com/ChiShengChen/QuantumEEGNet" target="_blank" rel="noopener">程式碼 ↗</a></div>
+      </div>
+      <div class="pub">
+        <div class="venue">PLoS ONE · 2025</div>
+        <div class="ptitle">Improving fine-grained food classification using deep residual learning and selective state space models<span class="ptopic">以狀態空間模型做細粒度影像分類（Res-VMamba）</span></div>
+        <div class="go"><a href="https://doi.org/10.1371/journal.pone.0322695" target="_blank" rel="noopener">論文 ↗</a><a href="https://github.com/ChiShengChen/ResVMamba" target="_blank" rel="noopener">程式碼 ↗</a></div>
+      </div>
+      <div class="pub">
+        <div class="venue">MICCAI DEMI · 2026 · Spotlight</div>
+        <div class="ptitle">Measuring Browser Webcam Gaze Honestly: A Capture-Clock Methodology and Open Reference Implementation<span class="ptopic">瀏覽器端網路攝影機視線追蹤的量測方法</span></div>
+        <div class="go"><a href="https://arxiv.org/abs/2608.11566" target="_blank" rel="noopener">論文 ↗</a></div>
+      </div>
+      <div class="pub">
+        <div class="venue">arXiv · 2025</div>
+        <div class="ptitle">Large Cognition Model: Towards Pretrained EEG Foundation Model<span class="ptopic">跨電極配置的腦波基礎模型（LCM）</span></div>
+        <div class="go"><a href="https://arxiv.org/abs/2502.17464" target="_blank" rel="noopener">論文 ↗</a><a href="https://github.com/ChiShengChen/LCMv1" target="_blank" rel="noopener">程式碼 ↗</a></div>
+      </div>
+      <div class="pub">
+        <div class="venue">arXiv · 2024</div>
+        <div class="ptitle">Mind's Eye: Image Recognition by EEG via Multimodal Similarity-Keeping Contrastive Learning<span class="ptopic">從腦波辨識所看到的影像（MUSE）</span></div>
+        <div class="go"><a href="https://arxiv.org/abs/2406.16910" target="_blank" rel="noopener">論文 ↗</a><a href="https://github.com/ChiShengChen/MUSE_EEG" target="_blank" rel="noopener">程式碼 ↗</a></div>
+      </div>
+      <div class="pub">
+        <div class="venue">arXiv · 2026</div>
+        <div class="ptitle">FreqLens: Interpretable Frequency Attribution for Time Series Forecasting<span class="ptopic">時序預測模型的頻域可解釋性</span></div>
+        <div class="go"><a href="https://arxiv.org/abs/2602.08768" target="_blank" rel="noopener">論文 ↗</a><a href="https://github.com/ChiShengChen/FreqLens" target="_blank" rel="noopener">程式碼 ↗</a></div>
+      </div>
+    </div>
+    <p class="pubs-more reveal">完整論文列表見 <a href="https://scholar.google.com/citations?user=5XHD7nkAAAAJ&amp;hl=zh-TW" target="_blank" rel="noopener">Google Scholar ↗</a></p>
+  </div>
+</section>
+
+<!-- ===================== LABS ===================== -->
+<section class="block axis-divider" id="labs">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="idx">§ 06</span>
+      <h2>Quantquer Labs</h2>
+      <span class="en">/ 自主研發與開源</span>
+    </div>
+    <p class="sec-lead reveal">我們自己開發、自己使用的工具。每一項都標明目前狀態：已開源的可以直接看程式碼，其餘仍在內部使用或開發中。</p>
+    <div class="labs reveal">
+      <a class="lab" href="https://github.com/ChiShengChen/paper-evidence" target="_blank" rel="noopener">
+        <div class="ltop"><span class="lname">paper-evidence</span><span class="status open">開源</span></div>
+        <h3>證據導向的文獻分析</h3>
+        <p>從文獻抽出可驗證的證據；LLM 對來源的每個宣稱，都必須有原文與數字上下文支持才放行。</p>
+        <div class="lfor">應用 <b>可追溯的研究報告</b></div>
+      </a>
+      <a class="lab" href="https://github.com/ChiShengChen/tokenbench" target="_blank" rel="noopener">
+        <div class="ltop"><span class="lname">tokenbench</span><span class="status open">開源</span></div>
+        <h3>LLM 應用的 Token 效率基準</h3>
+        <p>在本機可重現地量測 LLM 應用的模型呼叫、token 用量與答對率，比較不同策略的成本與品質。</p>
+        <div class="lfor">應用 <b>企業 LLM 降本</b></div>
+      </a>
+      <a class="lab" href="https://github.com/ChiShengChen/sevencheck" target="_blank" rel="noopener">
+        <div class="ltop"><span class="lname">sevencheck</span><span class="status open">開源</span></div>
+        <h3>LLM 輸出的確定性檢查</h3>
+        <p>七類不需第二個模型的驗證，專抓「看起來合理但其實錯了」的輸出：改寫過的引文、捏造的引用、被截斷的統計。</p>
+        <div class="lfor">應用 <b>高可靠性 AI 工作流</b></div>
+      </a>
+      <div class="lab">
+        <div class="ltop"><span class="lname">AutoResearch</span><span class="status">內部使用</span></div>
+        <h3>自動化研究多代理系統</h3>
+        <p>文獻監控、構想辯論、預註冊閘門、實驗、撰稿、審稿模擬到數字稽核，關鍵節點保留人工把關。</p>
+        <div class="lfor">應用 <b>企業研發自動化</b></div>
+      </div>
+      <div class="lab">
+        <div class="ltop"><span class="lname">Hypogen</span><span class="status">開發中</span></div>
+        <h3>投資假說產生器</h3>
+        <p>從一個問題展開多層供應鏈關係、排序瓶頸，產生附觸發與失效條件的假說，並逐句回查引用。</p>
+        <div class="lfor">應用 <b>投資研究、產業分析</b></div>
+      </div>
+      <a class="lab" href="https://github.com/ChiShengChen/bazaar-of-fates" target="_blank" rel="noopener">
+        <div class="ltop"><span class="lname">Bazaar of Fates</span><span class="status open">開源</span></div>
+        <h3>確定性引擎 × LLM 的產品架構</h3>
+        <p>十一套確定性計算引擎負責運算，LLM 只負責解讀：示範如何把複雜的領域規則做成可信的 AI 產品。</p>
+        <div class="lfor">應用 <b>規則型 AI 產品</b></div>
+      </a>
+    </div>
+  </div>
+</section>
+
 <!-- ===================== ABOUT ===================== -->
 <section class="block axis-divider" id="about">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="idx">§ 05</span>
+      <span class="idx">§ 07</span>
       <h2>關於</h2>
       <span class="en">/ About</span>
     </div>
@@ -616,7 +989,8 @@
       <div class="about-info">
         <h3>陳麒升</h3>
         <div class="role">創辦人 · Founder</div>
-        <p class="bio">交大電子物理與理學院學士班雙學士，台大生醫電子與資訊學研究所碩士。 曾任聯發科（MediaTek）IC 設計工程師與OpenAI AI Trainer，後於哈佛醫學院與 BIDMC 擔任研究員。 專注於 AI 訊號處理、醫學應用與企業 AI 轉型——擅長把研究級的方法，落地成可交付的系統。</p>
+        <p class="bio">交大電子物理與理學院學士班雙學士，台大生醫電子與資訊學研究所碩士。曾任聯發科（MediaTek）IC 設計工程師與 OpenAI AI Trainer，後於哈佛醫學院與 BIDMC 擔任研究員，建構橫跨 400 萬筆以上急救紀錄的語音辨識 → LLM Agent → 預測流程。碩士期間開發的腦波療效預測模型，已在醫學中心門診常規使用。</p>
+        <p class="bio">專注於 AI Agent、訊號處理、醫學應用與企業 AI 轉型——擅長從零研究一個未知的問題，設計方法、實驗驗證，再工程化成真正能用的產品。</p>
         <div class="affil">
           <span>交大 NYCU</span>
           <span>台大 NTU</span>
@@ -627,20 +1001,30 @@
       </div>
       <div class="badges">
         <a class="badge" href="https://scholar.google.com/citations?user=5XHD7nkAAAAJ&amp;hl=zh-TW" target="_blank" rel="noopener">
-          <div class="bn">15+</div>
-          <div class="bl">第一作者論文</div>
-          <div class="ble">First-author papers</div>
+          <div class="bn">500+</div>
+          <div class="bl">學術引用</div>
+          <div class="ble">Citations</div>
           <div class="blink">Google Scholar ↗</div>
         </a>
         <div class="badge">
+          <div class="bn">15+</div>
+          <div class="bl">第一作者論文</div>
+          <div class="ble">First-author papers</div>
+        </div>
+        <div class="badge wide">
           <div class="bn">ICASSP·ICML·NeurIPS</div>
-          <div class="bl">會議審稿人</div>
+          <div class="bl">會議審稿人 · ICML 2026 Gold Reviewer</div>
           <div class="ble">Conference reviewer</div>
         </div>
         <div class="badge">
-          <div class="bn">20+</div>
+          <div class="bn">40+</div>
           <div class="bl">期刊審稿</div>
-          <div class="ble">Journal reviews</div>
+          <div class="ble">Journals reviewed</div>
+        </div>
+        <div class="badge">
+          <div class="bn">3rd</div>
+          <div class="bl">AgentX-AgentBeats 多代理競賽（1,300+ 隊）</div>
+          <div class="ble">Berkeley RDI · 2026</div>
         </div>
       </div>
     </div>
@@ -651,7 +1035,7 @@
 <section class="block axis-divider" id="partners">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="idx">§ 06</span>
+      <span class="idx">§ 08</span>
       <h2>夥伴服務</h2>
       <span class="en">/ Partner Services</span>
     </div>
@@ -708,9 +1092,58 @@
   <div class="wrap">
     <div class="contact-inner reveal">
       <div>
-        <div class="eyebrow" style="margin-bottom:1.4rem;">§ 07 / Contact</div>
+        <div class="eyebrow" style="margin-bottom:1.4rem;">§ 09 / Contact</div>
         <h2>有一個<span class="hl">別人解不動</span>的問題？<br>來談談。</h2>
         <p class="csub">告訴我們你卡在哪裡。第一次對話，我們會一起把問題定義清楚——這通常是最有價值的一步。</p>
+        <form class="qform" id="qform" novalidate>
+          <div>
+            <label for="qf-name">稱呼 <span class="req">*</span></label>
+            <input id="qf-name" name="name" type="text" autocomplete="name" required>
+          </div>
+          <div>
+            <label for="qf-org">公司／單位</label>
+            <input id="qf-org" name="org" type="text" autocomplete="organization">
+          </div>
+          <div>
+            <label for="qf-type">需求類型</label>
+            <select id="qf-type" name="type">
+              <option>客製化 AI Agent 系統</option>
+              <option>AI 評估與成本最佳化</option>
+              <option>研究即服務</option>
+              <option>企業知識庫與智慧問答</option>
+              <option>領域 AI 演算法研發（醫療／訊號／金融／工業）</option>
+              <option>AI 技術診斷與架構規劃</option>
+              <option>其他</option>
+            </select>
+          </div>
+          <div>
+            <label for="qf-stage">目前階段</label>
+            <select id="qf-stage" name="stage">
+              <option>還在想法階段</option>
+              <option>需要先驗證可行性（PoC）</option>
+              <option>要做出可用的產品（MVP）</option>
+              <option>已有系統，想改善</option>
+              <option>想找長期技術夥伴</option>
+            </select>
+          </div>
+          <div class="full">
+            <label for="qf-time">期望時程</label>
+            <select id="qf-time" name="timeline">
+              <option>尚未確定</option>
+              <option>1 個月內</option>
+              <option>1–3 個月</option>
+              <option>3 個月以上</option>
+            </select>
+          </div>
+          <div class="full">
+            <label for="qf-desc">問題描述 <span class="req">*</span></label>
+            <textarea id="qf-desc" name="desc" required placeholder="你卡在哪裡？目前有哪些資料或系統？希望達成什麼？"></textarea>
+          </div>
+          <div class="full factions">
+            <button type="submit" class="btn btn-primary">產生需求信 <span class="arr">→</span></button>
+            <span class="fnote">會開啟你的郵件軟體並帶入內容，資料不經過任何第三方。</span>
+          </div>
+        </form>
       </div>
       <div class="mailcard">
         <div class="ml">Email</div>
@@ -865,6 +1298,33 @@
     try{ localStorage.setItem('theme', curTheme); }catch(e){}
     applyTheme(curTheme);
   });
+
+  // ---- inquiry form -> prefilled email (no third-party backend) ----
+  const qform = document.getElementById('qform');
+  if(qform){
+    qform.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const name = qform.elements.name, desc = qform.elements.desc;
+      for(const el of [name, desc]){
+        if(!el.value.trim()){ el.focus(); el.reportValidity && el.reportValidity(); return; }
+      }
+      const v = k => (qform.elements[k].value || '').trim();
+      const subject = `[Quantquer] ${v('type')}｜${v('name')}`;
+      const body = [
+        `稱呼：${v('name')}`,
+        `公司／單位：${v('org') || '—'}`,
+        `需求類型：${v('type')}`,
+        `目前階段：${v('stage')}`,
+        `期望時程：${v('timeline')}`,
+        '',
+        '問題描述：',
+        v('desc')
+      ].join('\r\n');
+      window.location.href = 'mailto:chisheng.m.chen@gmail.com'
+        + '?subject=' + encodeURIComponent(subject)
+        + '&body=' + encodeURIComponent(body);
+    });
+  }
 </script>
 </body>
 </html>

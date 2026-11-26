@@ -1,6 +1,6 @@
 # 量維資科 Quantquer Inc. — 官方網站
 
-量化深科技顧問公司官網。單頁式靜態網站，以研究級的嚴謹方法，解決 AI/ML、訊號處理、時頻分析、臨床醫療資訊與量化策略上的硬問題。
+研究驅動的 AI 與深科技工程公司官網。單頁式靜態網站：客製化 AI Agent、AI 評估與最佳化、研究即服務，以及醫療、訊號、金融與工業 AI 的研發與系統交付。
 
 🌐 **線上網址**：<https://quantquer.com>
 
@@ -22,7 +22,9 @@
 ├── assets/
 │   ├── logo-mark.png           # 標誌（藍色 Q，深淺底皆適用）— favicon / nav
 │   ├── logo-full-light.png     # 完整 logo（淺色字，深色底用）— 深色版頁尾
-│   └── logo-full-onlight.png   # 完整 logo（深色字，淺色底用）— 亮色版頁尾
+│   ├── logo-full-onlight.png   # 完整 logo（深色字，淺色底用）— 亮色版頁尾、JSON-LD
+│   ├── og-image.png            # 社群分享圖 1200×630（實心淺底，LINE／FB／X 預覽用）
+│   └── cases/*.webp            # §03 案例示意圖（AI 生成，1200×800，非實際系統畫面）
 ├── CNAME                       # 自訂網域：quantquer.com
 ├── .nojekyll                   # 關閉 GitHub Pages 的 Jekyll 處理
 └── .gitignore
@@ -42,13 +44,15 @@ python3 -m http.server 8000
 | 區段 | id | 說明 |
 |------|------|------|
 | Hero | `#top` | 主標與 canvas 動畫 |
-| §01 能力 | `#capabilities` | 技術領域 |
-| §02 服務與合作模式 | `#services` | 顧問諮詢／PoC／MVP／專案外包／長期夥伴（專案制） |
-| §03 精選案例 | `#work` | 案例與成果 |
+| §01 能力 | `#capabilities` | 八大技術領域，每項附一行佐證 |
+| §02 服務與合作模式 | `#services` | 依需求的六個方案（附交付物，不公開價格）＋五種合作方式 |
+| §03 精選案例 | `#work` | 八個案例卡（客戶資訊已匿名化，配示意圖） |
 | §04 工作方式 | `#method` | Define → Design → Validate → Deliver |
-| §05 關於 | `#about` | 創辦人與資歷 |
-| §06 夥伴服務 | `#partners` | 協作夥伴 |
-| §07 聯絡 | `#contact` | Email · LINE · LinkedIn |
+| §05 研究成果 | `#research` | 代表論文（venue · 論文 · 程式碼連結） |
+| §06 Quantquer Labs | `#labs` | 自主研發工具，標明開源／內部使用／開發中 |
+| §07 關於 | `#about` | 創辦人與資歷 |
+| §08 夥伴服務 | `#partners` | 協作夥伴 |
+| §09 聯絡 | `#contact` | 需求表單（產生 mailto，不經第三方）· Email · LINE · LinkedIn |
 
 ## 編輯指南
 
