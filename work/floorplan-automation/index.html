@@ -52,8 +52,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700&amp;family=Noto+Sans+TC:wght@300;400;500&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/site.css">
+  <script type="module" src="/assets/analytics.mjs"></script>
 </head>
-<body class="topic-page">
+<body class="topic-page" data-project="floorplan-automation">
   <a href="#content" class="skip-link">跳到主要內容</a>
   <header>
     <div class="wrap nav">
@@ -78,7 +79,7 @@
           <p class="topic-audience">匿名工程案例 · 地端或邊緣運行</p>
           <p class="topic-intro">在使用者設備上辨識房間、套用材質和標註，批次產出樓層圖。</p>
           <div class="entry-links">
-            <a class="btn btn-primary" href="/?inquiry=domain-rd#contact">討論圖面自動化</a>
+            <a class="btn btn-primary" href="/project-planner/?service=domain-rd" data-analytics="service_cta_clicked" data-project="floorplan-automation" data-service="domain-rd">建立專案需求</a>
 
           </div>
         </div>
@@ -117,6 +118,7 @@
       <div class="wrap">
         <h2>驗證與證據</h2>
         <p class="topic-lead">驗收可依公開素材測試圖面相容性與輸出正確性，再針對實際裝置紀錄時間。歷史紀錄只量測已有快取的重新合成。</p>
+
         <dl class="topic-benchmark">
         <div id="floorplan-cache-recompose-historical">
           <dt>歷史快取命中後的換色重新合成 · 實際量測</dt>
@@ -146,6 +148,7 @@
         <p class="topic-intro">Recognize rooms, apply materials and add labels on the user&#39;s machine, then export floor plans in batches.</p>
         <div class="entry-links">
           <a class="text-link" href="#project-title" lang="zh-Hant">繁體中文</a>
+          <a class="text-link" href="/project-planner/?service=domain-rd&amp;lang=en" data-analytics="service_cta_clicked" data-project="floorplan-automation" data-service="domain-rd">Plan a project</a>
 
         </div>
       </div>
@@ -181,6 +184,7 @@
       <div class="wrap">
         <h2>Validation and evidence</h2>
         <p class="topic-lead">Acceptance can start with compatibility and output checks on public samples, then measure latency on the actual device. The historical timing covers cached recomposition only.</p>
+
         <dl class="topic-benchmark">
         <div id="floorplan-cache-recompose-historical-en">
           <dt>Historical recoloring recomposition on a cache hit · Measured</dt>

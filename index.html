@@ -148,6 +148,25 @@
 </section>
 
 <!-- ===================== FEATURED WORK ===================== -->
+<section class="site-showreel axis-divider" id="showreel" aria-labelledby="showreel-title">
+  <div class="wrap topic-row">
+    <div>
+      <h2 id="showreel-title">工程成果短片</h2>
+      <p class="topic-lead">從 MI-GAN 修補、光子網格到 GPU 任務實跑，用 52 秒看我們如何驗證工程成果。</p>
+      <div class="entry-links">
+        <a class="text-link" href="/downloads/quantquer-capabilities-zh.pdf" download data-analytics="capability_pdf_downloaded">下載公司技術能力簡介（PDF）</a>
+      </div>
+    </div>
+    <div class="showreel-frame">
+      <button type="button" data-showreel-play aria-label="播放 52 秒工程成果短片">
+        <img src="/assets/evidence/showreel/poster.webp" width="1280" height="720" loading="lazy" decoding="async" alt="">
+        <span>播放 · 0:52</span>
+      </button>
+      <a class="text-link showreel-fallback" href="/assets/evidence/showreel/quantquer-technical-showreel.mp4">開啟影片檔</a>
+      <noscript><a class="text-link" href="/assets/evidence/showreel/quantquer-technical-showreel.mp4">開啟工程成果短片</a></noscript>
+    </div>
+  </div>
+</section>
 <section class="featured" id="featured" aria-labelledby="featured-title">
   <div class="wrap">
     <div class="feat-head reveal">
@@ -161,7 +180,7 @@
         <div class="fbd">
           <div class="ctag">技術專題 · 半導體與邊緣 AI</div>
           <h3>晶片端生成式 AI｜人物消除與場景生成</h3>
-          <p class="fdeliv">拆解人物遮罩、GAN／Diffusion 修補與晶片端驗證。互動展示提供可重現的合成影像對照。</p>
+          <p class="fdeliv">以可重現的桌面 CPU 實驗比較 MI-GAN 與 Telea 的背景修補輸出，並規劃晶片端模型部署驗證。</p>
           <div class="cres"><p class="rdesc">自主研發 · 互動技術展示</p></div>
         </div>
       </a>
@@ -188,7 +207,7 @@
         <div class="fbd">
           <div class="ctag">技術專題 · 半導體與邊緣 AI</div>
           <h3>光子運算與故障模擬</h3>
-          <p class="fdeliv">透過雙模干涉單元，觀察相位偏移與振幅衰減如何改變兩個輸出埠。</p>
+          <p class="fdeliv">在四通道、四階段 MZI 網格中注入相位與耗損故障，量化輸出功率變化。</p>
           <div class="cres"><p class="rdesc">自主研發 · 互動技術展示</p></div>
         </div>
       </a>
@@ -736,7 +755,7 @@
             <li>建立可比較的 GAN 修補或 Diffusion 場景重建候選，檢查輸出品質。</li>
             <li>轉換模型、核對 Runtime 相容性，依目標裝置與工作負載執行完整流程驗證。</li>
           </ul>
-          <div class="cres"><p class="rdesc">展示可調整遮罩、比較遮擋輸入與還原結果，並計算遮罩內像素誤差。</p></div>
+          <div class="cres"><p class="rdesc">可切換場景、遮罩與修補輸出。桌面 CPU 結果同時列出延遲與遮罩內品質，揭示紋理差異影響兩種方法的相對表現。</p></div>
           <p class="entry-meta">生成式 AI · 電腦視覺 · 最佳化</p>
           <div class="entry-links">
             <a class="text-link" href="/work/on-device-generative-vision/">查看技術細節</a>
@@ -754,11 +773,11 @@
           <p class="entry-meta">自主研發 · 互動技術展示</p>
           <p class="cprob">光子運算架構對相位誤差與插入損耗敏感，設計初期需要釐清元件變動對輸出的影響。</p>
           <ul class="chk">
-            <li>以兩個理想耦合器和兩條光路建立干涉單元。</li>
-            <li>調整其中一條光路的相位或振幅，計算兩個輸出埠的正規化光功率。</li>
-            <li>將總輸出和理想基準比較，觀察輸出重新分布及模型內的損耗。</li>
+            <li>先以兩個理想 50:50 耦合器與雙臂相位建立可驗證的 MZI。</li>
+            <li>在四通道網格中交錯配置相鄰耦合元件，逐級傳播複數光場。</li>
+            <li>比較理想與故障的各埠輸出光強、總功率及相對輸出誤差。</li>
           </ul>
-          <div class="cres"><p class="rdesc">相位與衰減控制會更新兩個輸出埠功率及合計，供檢查模型行為。</p></div>
+          <div class="cres"><p class="rdesc">可逐階段觀察故障如何傳播，並在同一輸入下比較各埠輸出光功率、總輸出及相對差異。</p></div>
           <p class="entry-meta">模擬 · 最佳化</p>
           <div class="entry-links">
             <a class="text-link" href="/work/photonic-computing/">查看技術細節</a>
@@ -780,7 +799,7 @@
             <li>依單機資源上限與選擇的 FIFO 或回填策略判斷是否可開始工作。</li>
             <li>沿離散時間步釋放資源，更新工作狀態、時間軸和資源尖峰。</li>
           </ul>
-          <div class="cres"><p class="rdesc">展示可比較等待中的工作、已模擬排入的時段、無法排入的工作及模擬資源使用。</p></div>
+          <div class="cres"><p class="rdesc">在測試的單 GPU 執行槽設定下，兩件 CUDA 工作依序執行，CPU 工作與第一件 CUDA 工作並行。兩件 CUDA 工作的程序級取樣峰值均為 286 MiB。</p></div>
           <p class="entry-meta">GPU 排程 · 最佳化 · 模擬</p>
           <div class="entry-links">
             <a class="text-link" href="/work/gpu-orchestration/">查看技術細節</a>
@@ -802,11 +821,55 @@
             <li>驗證引文出現在原文中，並核對數字能否從引文上下文找到。</li>
             <li>需要時依公開工具設定語意支持度檢查，保留未支持或相互矛盾的主張。</li>
           </ul>
-          <div class="cres"><p class="rdesc">開放原始碼與基本查核範例，可檢查一段引文及其數字上下文。</p></div>
+          <div class="cres"><p class="rdesc">已對公開查核核心重跑四組合成引文。逐字引用與排版正規化通過，出現在其他段落的數字及原文找不到的引文被攔下。</p></div>
           <p class="entry-meta">AI Agent · 知識工程</p>
           <div class="entry-links">
             <a class="text-link" href="/work/research-automation/">查看技術細節</a>
             <a class="text-link" href="#contact" data-inquiry="research">討論科研工作流程</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="case reveal" id="professional-speech-research" data-tags="health science" data-tech="signal agent" data-origin="academic" data-stage="evaluation" data-visibility="public" data-case-kind="technical-note" data-featured="false">
+        <figure class="cfig"><img src="assets/caps/signal.webp" srcset="assets/caps/signal-768.webp 768w, assets/caps/signal.webp 1536w, assets/caps/signal-3072.webp 3072w" sizes="(max-width: 400px) calc(100vw - 40px), (max-width: 760px) 90vw, (max-width: 1180px) 45vw, 530px" alt="訊號分析的概念插圖" width="1536" height="1024" loading="lazy"></figure>
+        <div class="cbody">
+          <div class="ctag">技術專題 · 醫療與神經科技</div>
+          <h3>高雜訊專業語音辨識研究</h3>
+          <p class="en" lang="en">Speech Recognition Research for Noisy Professional Audio</p>
+          <p class="entry-meta">學術研究合作 · 工程評估</p>
+          <p class="cprob">專業通訊常有背景雜訊、縮寫和領域術語。原始轉寫的錯誤可能傳至後續資訊抽取。</p>
+          <ul class="chk">
+            <li>將自動語音辨識與後續術語校正分成兩個階段。</li>
+            <li>以參考逐字稿檢查轉寫錯誤，另行核對結構化抽取是否維持原句含義。</li>
+            <li>分別記錄原始轉寫與後處理輸出，讓研究人員能追溯差異。</li>
+          </ul>
+          <div class="cres"><p class="rdesc">公開來源支持雙階段語音研究敘事。語音辨識與下游資訊抽取各自有驗證範圍。</p></div>
+          <p class="entry-meta">訊號處理 · AI Agent</p>
+          <div class="entry-links">
+            <a class="text-link" href="/work/professional-speech-research/">查看技術細節</a>
+            <a class="text-link" href="#contact" data-inquiry="domain-rd">討論專業語音分析</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="case reveal" id="amm-rebalancing-research" data-tags="finance science" data-tech="time-series simulation" data-origin="founder-experience" data-stage="evaluation" data-visibility="public" data-case-kind="technical-note" data-featured="false">
+        <figure class="cfig"><img src="assets/cases/finance.webp" srcset="assets/cases/finance-768.webp 768w, assets/cases/finance.webp 1536w, assets/cases/finance-3072.webp 3072w" sizes="(max-width: 400px) calc(100vw - 40px), (max-width: 760px) 90vw, (max-width: 1180px) 45vw, 530px" alt="金融資料與研究分析的概念插圖" width="1536" height="1024" loading="lazy"></figure>
+        <div class="cbody">
+          <div class="ctag">技術專題 · 金融與決策智慧</div>
+          <h3>自動做市商再平衡研究</h3>
+          <p class="en" lang="en">Automated Market Maker Rebalancing Research</p>
+          <p class="entry-meta">創辦人研發經歷 · 工程評估</p>
+          <p class="cprob">自動做市商的流動性部位隨市場價格改變，比較再平衡決策時需要固定資料期間和實驗條件。</p>
+          <ul class="chk">
+            <li>將自動做市商的再平衡決策表示為二元分類問題。</li>
+            <li>按時間切分 BTC/USDC 歷史日資料，使用相同期間比較混合量子經典模型與經典、純量子基準。</li>
+            <li>依公開論文的模擬設定比較報酬、Sharpe 比率與最大回撤。</li>
+          </ul>
+          <div class="cres"><p class="rdesc">已公開方法與歷史模擬比較，可按論文中的資料期間、基準和交易設定解讀。</p></div>
+          <p class="entry-meta">時序分析 · 模擬</p>
+          <div class="entry-links">
+            <a class="text-link" href="/work/amm-rebalancing-research/">查看技術細節</a>
+            <a class="text-link" href="#contact" data-inquiry="domain-rd">討論金融資料與研究驗證</a>
           </div>
         </div>
       </article>
@@ -1099,6 +1162,7 @@
         <div class="role">創辦人 · Founder</div>
         <p class="bio">具電子物理與生醫資訊訓練，曾任數位 IC 設計工程師及 AI 新創共同創辦人與 CTO。研究涵蓋腦波訊號處理、臨床決策支援與量子機器學習。<a class="text-link" href="https://chishengchen.github.io/" target="_blank" rel="noopener">學術與專業經歷</a></p>
         <p class="bio">急救研究分為高雜訊語音處理，以及以結構化創傷資料進行預測建模。腦波療效預測源自碩士研究，後續由醫療團隊應用於門診。</p>
+        <p class="bio"><a class="text-link" href="/downloads/quantquer-capabilities-zh.pdf" download data-analytics="capability_pdf_downloaded">下載公司技術能力簡介（PDF）</a></p>
         <div class="affil">
           <span>交大 NYCU</span>
           <span>台大 NTU</span>
@@ -1298,6 +1362,10 @@
         <div class="eyebrow" style="margin-bottom:1.4rem;">§ 09 / Contact</div>
         <h2>有一個<span class="hl">別人解不動</span>的問題？<br>來談談。</h2>
         <p class="csub">先說明問題、希望交付的成果，以及現有的資料或硬體。第一次對話會一起定義可行性驗證和驗收方式。</p>
+        <div class="entry-links">
+          <a class="btn btn-primary" href="/project-planner/">建立專案需求</a>
+          <a class="text-link" href="/downloads/quantquer-capabilities-zh.pdf" download data-analytics="capability_pdf_downloaded">下載技術能力簡介</a>
+        </div>
       </div>
       <div class="mailcard">
         <div class="ml">Email</div>
@@ -1430,6 +1498,7 @@
 </footer>
 
 <script defer src="assets/portfolio.js"></script>
+<script type="module" src="/assets/showreel.mjs"></script>
 <script>
   // ---- header scroll state ----
   const hdr = document.getElementById('hdr');

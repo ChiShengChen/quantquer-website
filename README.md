@@ -23,6 +23,9 @@
 ├── semiconductor-ai/index.html # 半導體與邊緣 AI 專題
 ├── financial-intelligence/     # 金融資料與研究工程專題
 ├── labs/interactive/           # 三個瀏覽器端互動展示
+├── labs/evidence/              # 模型輸出、光子模擬、GPU 實跑及引文查核
+├── project-planner/            # 中英文專案需求評估
+├── downloads/                  # 中英文公司技術能力 PDF
 ├── work/                       # 已生成的案例及技術專題詳頁
 ├── data/projects.json          # 可公開案例資料
 ├── scripts/build-portfolio.mjs # 生成首頁卡片、案例頁及 sitemap
@@ -62,6 +65,7 @@ python3 -m http.server 8000 --bind 127.0.0.1
 - 半導體專題 <http://127.0.0.1:8000/semiconductor-ai/>
 - 英文首頁 <http://127.0.0.1:8000/en/>
 - 互動展示 <http://127.0.0.1:8000/labs/interactive/>
+- 專案需求 <http://127.0.0.1:8000/project-planner/>
 
 ## 首頁區塊
 
@@ -86,6 +90,9 @@ python3 -m http.server 8000 --bind 127.0.0.1
 - 案例與 Labs 卡片的 `id` 作為穩定錨點。首頁從生成後的卡片讀取篩選條件，案例篩選狀態保存在可分享的網址中。
 - 主題與共用樣式集中在 `assets/site.css`。主題變數位於 `:root`（深色）與 `html[data-theme="light"]`（亮色）。
 - 首頁表單依既有選項 ID 預填需求類型。同頁入口使用 `data-inquiry`，跨頁入口使用 `?inquiry=<選項 ID>#contact`。
+- 案例詳頁可使用 `evidence` 加入已審查的成果、圖像與方法連結。`/project-planner/?service=<選項 ID>` 預填相同的服務 ID。
+- `node --test scripts/test-quantquer-v23.mjs scripts/test-photonic-mesh.mjs` 驗證摘要、匿名事件、詢價回執、GPU 回放與光子數值。
+- `node scripts/generate-capabilities.mjs` 由目前網站素材產生中英文簡介。`assets/analytics.mjs` 發出的 `quantquer:analytics` 事件只含白名單欄位，預設留在瀏覽器。
 - 換 logo 時注意三個版本的用途（深底用淺色字版、淺底用深色字版）。
 
 ## 部署

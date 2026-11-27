@@ -583,6 +583,11 @@
       ],
       "references": [
         {
+          "href": "/labs/evidence/vision/",
+          "zh": "比較 MI-GAN 實際推論結果",
+          "en": "Compare measured MI-GAN outputs"
+        },
+        {
           "href": "/labs/interactive/#generative-vision",
           "zh": "操作合成影像重建展示",
           "en": "Run the synthetic reconstruction demo"
@@ -595,8 +600,8 @@
       ],
       "zh": {
         "title": "晶片端生成式 AI｜人物消除與場景生成",
-        "summary": "拆解人物遮罩、GAN／Diffusion 修補與晶片端驗證。互動展示提供可重現的合成影像對照。",
-        "metaDescription": "晶片端生成式 AI 人物消除與場景生成：取得人物遮罩，比較 GAN 修補與 Diffusion 場景重建的輸出品質，並依目標裝置轉換模型、核對 Runtime 相容性、記憶體與運算成本。",
+        "summary": "以可重現的桌面 CPU 實驗比較 MI-GAN 與 Telea 的背景修補輸出，並規劃晶片端模型部署驗證。",
+        "metaDescription": "比較公開 MI-GAN 人物遮罩修補與 Telea 基準。以桌面 CPU 量測中位數與 p95 延遲，附兩組背景、遮罩與 PSNR，再說明 NPU Runtime 相容性及部署驗收所需證據。",
         "problem": "人物消除需要補回被遮住的背景。部署到裝置時，輸出品質、模型所需記憶體和運算成本都要評估。",
         "challenge": "遮罩誤差、微小遮蔽物與跨幀一致性會改變重建品質。NPU Runtime 支援的算子、動態尺寸、精度與記憶體上限會改變部署選擇。",
         "approach": [
@@ -604,21 +609,21 @@
           "建立可比較的 GAN 修補或 Diffusion 場景重建候選，檢查輸出品質。",
           "轉換模型、核對 Runtime 相容性，依目標裝置與工作負載執行完整流程驗證。"
         ],
-        "implementation": "示範使用已知乾淨背景、合成人物及可調遮罩。在瀏覽器中以每一列左右可見像素做線性混合，重建遮罩內的區域。此基準法方便觀察遮罩和背景紋理如何影響誤差。",
-        "result": "展示可調整遮罩、比較遮擋輸入與還原結果，並計算遮罩內像素誤差。",
+        "implementation": "用兩張公開領域背景與自行製作的遮罩比較 MI-GAN 和 OpenCV Telea，保留已知乾淨背景作為參照。另保留可調整遮罩邊界的瀏覽器基準。",
+        "result": "可切換場景、遮罩與修補輸出。桌面 CPU 結果同時列出延遲與遮罩內品質，揭示紋理差異影響兩種方法的相對表現。",
         "deliverables": [
           "瀏覽器合成影像重建展示",
           "模型轉換與裝置驗證方法",
           "可供討論的品質及效能驗收規格"
         ],
-        "validation": "展示計算遮罩內的平均絕對 RGB 誤差，真值來自同一合成場景。裝置研究需另行記錄目標硬體、Runtime、解析度、精度、暖機、端到端 p50／p95 延遲、持續 FPS 與峰值記憶體。",
-        "disclosure": "自主研發技術專題。展示使用合成場景與瀏覽器基準演算法。GAN、Diffusion 與 NPU 部署屬技術流程及驗收規劃，未加入客戶素材、模型權重或硬體實測結果。",
+        "validation": "兩組測試各暖機 5 次、量測 30 次。ONNX Runtime CPU 使用 4 執行緒、批次 1；計時納入前後處理。以已知乾淨背景計算遮罩內 PSNR。",
+        "disclosure": "使用可公開模型與可公開輸入重現的自主研發專題。證據涵蓋桌面 CPU 靜態圖像推論。NPU、Diffusion、自動人物分割及全影片吞吐尚未量測。",
         "mediaAlt": "人物遮罩與晶片推論流程的概念圖",
         "service": "討論晶片端生成式影像"
       },
       "en": {
         "title": "On-device Generative Vision: Person Removal and Scene Synthesis",
-        "summary": "Examine masks, GAN and diffusion restoration, and chip-level validation. A reproducible synthetic demo lets visitors compare images.",
+        "summary": "Compare measured MI-GAN and Telea inpainting on a desktop CPU and scope model deployment on a target device.",
         "problem": "Removing a person requires reconstructing the background they covered. Device deployment adds constraints on output quality, memory and compute.",
         "challenge": "Mask error, fine occlusions and frame-to-frame consistency affect reconstruction. Operator compatibility, dynamic dimensions, precision and memory limits also affect NPU deployment.",
         "approach": [
@@ -626,19 +631,40 @@
           "Compare GAN-based restoration or diffusion-based reconstruction candidates under consistent quality criteria.",
           "Convert the model, verify runtime compatibility, and validate the complete pipeline on the target workload and device."
         ],
-        "implementation": "The demo creates a synthetic person over a known clean background and lets visitors adjust the mask. A browser baseline reconstructs masked pixels by linearly blending visible RGB samples on each scanline.",
-        "result": "Visitors can adjust the mask, compare the occluded input and reconstructed output, and inspect the error inside the mask.",
+        "implementation": "Use two public-domain backgrounds and controlled masks to run MI-GAN and OpenCV Telea. The clean backgrounds serve as references. An adjustable browser baseline is also available.",
+        "result": "Compare two scenes and their mask, reference and model output. The CPU results show both latency and image quality, including variation across scenes.",
         "deliverables": [
           "Browser-based synthetic reconstruction demo",
           "Model conversion and device validation methods",
           "Quality and performance acceptance criteria"
         ],
-        "validation": "The demo calculates mean absolute RGB error inside the mask, using the original synthetic scene as ground truth. Device studies should record the hardware, runtime, resolution, precision, warmup, end-to-end p50 and p95 latency, sustained FPS and peak memory.",
-        "disclosure": "An independent technical note with a synthetic browser baseline. GAN, diffusion and NPU deployment appear in the engineering and validation plan. Customer assets, model weights and hardware measurements are excluded.",
+        "validation": "Each measured condition uses five warm-ups and 30 runs. ONNX Runtime CPU uses four threads and batch size one. Timings include preprocessing and postprocessing. Masked PSNR uses the clean background.",
+        "disclosure": "Independent R&D reproduced with a public model and shareable inputs. The evidence covers desktop CPU still-image inference. NPU, diffusion, automatic person segmentation and full-video throughput await measurement.",
         "mediaAlt": "Concept illustration of a person-mask pipeline and on-device inference",
         "service": "Discuss on-device generative vision"
       },
-      "visibility": "public"
+      "visibility": "public",
+      "evidence": [
+        {
+          "type": "model-output",
+          "href": "/labs/evidence/vision/",
+          "zh": {
+            "title": "公開模型的背景修補對照",
+            "description": "以桌面 CPU 執行 MI-GAN 與 Telea，並用已知乾淨背景計算遮罩內的 PSNR。比較兩組影像、遮罩和重建結果。",
+            "alt": "MI-GAN 在室內測試影像上重建走廊背景的實際輸出"
+          },
+          "en": {
+            "title": "Public-model inpainting comparison",
+            "description": "MI-GAN and Telea ran on a desktop CPU. Known clean backgrounds support masked PSNR for both controlled inputs.",
+            "alt": "Actual MI-GAN output reconstructing the hallway in a controlled test image"
+          },
+          "image": {
+            "path": "/assets/evidence/vision/hallway-migan.webp",
+            "width": 768,
+            "height": 512
+          }
+        }
+      ]
     },
     {
       "slug": "photonic-computing",
@@ -660,6 +686,11 @@
       ],
       "references": [
         {
+          "href": "/labs/evidence/photonics/",
+          "zh": "操作四階段 MZI 網格",
+          "en": "Run the four-stage MZI mesh"
+        },
+        {
           "href": "/labs/interactive/#photonic-fault",
           "zh": "操作光子故障模擬",
           "en": "Run the photonic fault simulation"
@@ -668,52 +699,71 @@
           "href": "/semiconductor-ai/#photonics",
           "zh": "光子與科學運算服務",
           "en": "Photonic and scientific computing services"
+        },
+        {
+          "href": "https://arxiv.org/abs/1603.08788",
+          "zh": "MZI 網格拓撲背景論文",
+          "en": "MZI mesh topology background"
         }
       ],
       "zh": {
         "title": "光子運算與故障模擬",
-        "summary": "透過雙模干涉單元，觀察相位偏移與振幅衰減如何改變兩個輸出埠。",
-        "metaDescription": "光子運算干涉單元模擬：以雙模干涉單元調整相位偏移與振幅衰減，計算兩個輸出埠的正規化光功率，觀察相位誤差與插入損耗如何改變輸出。",
+        "summary": "在四通道、四階段 MZI 網格中注入相位與耗損故障，量化輸出功率變化。",
+        "metaDescription": "四通道、四階段光子網格故障模擬。調整 MZI 相位、功率耗損與故障位置，逐階段比較理想及故障光強、總功率與相對誤差。附解析式、功率守恆及數值回歸方法。",
         "problem": "光子運算架構對相位誤差與插入損耗敏感，設計初期需要釐清元件變動對輸出的影響。",
         "challenge": "軟體模型需要明示損耗、幅度與功率的定義，才有辦法與未來元件量測對照。",
         "approach": [
-          "以兩個理想耦合器和兩條光路建立干涉單元。",
-          "調整其中一條光路的相位或振幅，計算兩個輸出埠的正規化光功率。",
-          "將總輸出和理想基準比較，觀察輸出重新分布及模型內的損耗。"
+          "先以兩個理想 50:50 耦合器與雙臂相位建立可驗證的 MZI。",
+          "在四通道網格中交錯配置相鄰耦合元件，逐級傳播複數光場。",
+          "比較理想與故障的各埠輸出光強、總功率及相對輸出誤差。"
         ],
-        "implementation": "瀏覽器用解析式計算理想化的 Mach–Zehnder 干涉單元。互動參數代表單一路徑的偏差，輸出可立即重現。",
-        "result": "相位與衰減控制會更新兩個輸出埠功率及合計，供檢查模型行為。",
+        "implementation": "互動展示依據複數轉移矩陣，計算四階段 MZI 網格的理想與故障光場。可以選擇輸入通道、故障所在級與元件，再調相位與功率耗損。",
+        "result": "可逐階段觀察故障如何傳播，並在同一輸入下比較各埠輸出光功率、總輸出及相對差異。",
         "deliverables": [
           "單一干涉單元的互動式模擬",
           "元件假設與驗證方式"
         ],
-        "validation": "理想、無損單元的兩埠功率和等於輸入功率。相位改變輸出分配，引入衰減會改變總輸出。結果適用於標示的理想化模型。",
-        "disclosure": "自主研發的軟體模擬。此展示是單一理想干涉單元，不含晶片製造、實體元件量測或客戶架構。",
+        "validation": "用解析式、零輸入、無耗損功率守恆、參數邊界與獨立複數矩陣參考向量驗證。",
+        "disclosure": "自主研發的軟體模擬。模型採理想耦合器，未涵蓋實體元件製程、波長相依或晶片量測。",
         "mediaAlt": "科學運算與模擬工作流程的概念圖",
         "service": "討論光子模擬與科學運算"
       },
       "en": {
         "title": "Photonic Computing and Fault Simulation",
-        "summary": "Use a two-mode interferometer to inspect how phase error and amplitude loss change its two output ports.",
+        "summary": "Inject phase and attenuation faults into a four-channel, four-stage MZI mesh and quantify changes in output power.",
         "problem": "Photonic systems are sensitive to phase errors and insertion loss. Early design work needs a way to examine how changes in components affect the output.",
         "challenge": "A software model should specify how it defines loss, amplitude and power so that future device measurements can be compared with its predictions.",
         "approach": [
-          "Model an interferometer with two ideal couplers and two optical paths.",
-          "Adjust phase or amplitude in one path and evaluate the normalized power at the two ports.",
-          "Compare total power with an ideal reference to distinguish redistribution from modeled loss."
+          "Define a verifiable MZI using two ideal 50:50 couplers and an arm phase.",
+          "Alternate adjacent couplers in a four-channel mesh and propagate the complex field stage by stage.",
+          "Compare power at each port, total output power and relative output error."
         ],
-        "implementation": "The browser evaluates an analytical Mach–Zehnder model. The controls represent a deviation on one path, so the output can be reproduced immediately.",
-        "result": "Phase and attenuation controls update the power at both ports and the total, allowing direct inspection of the model.",
+        "implementation": "A complex transfer-matrix model calculates both ideal and faulty fields in a four-stage MZI mesh. Visitors can choose the input, fault stage and component, phase and power attenuation.",
+        "result": "Follow propagation through each stage and compare per-port power, total output and relative output error with the same input.",
         "deliverables": [
           "Interactive simulation of one interferometer",
           "Component assumptions and validation checks"
         ],
-        "validation": "The two port powers in the ideal lossless model sum to the input power. Phase redistributes energy. Attenuation changes the total output. Results apply to the stated idealized model.",
-        "disclosure": "This independent software simulation represents one ideal interferometer. It contains no fabrication, physical measurement or customer architecture.",
+        "validation": "Analytic cases, zero input, lossless energy conservation, boundary parameters and independent complex reference vectors validate the implementation.",
+        "disclosure": "Independent software simulation using ideal couplers. It excludes fabrication, wavelength dependence and physical device measurements.",
         "mediaAlt": "Concept illustration of scientific computing and simulation workflows",
         "service": "Discuss photonic simulation and scientific computing"
       },
-      "visibility": "public"
+      "visibility": "public",
+      "evidence": [
+        {
+          "type": "simulation",
+          "href": "/labs/evidence/photonics/",
+          "zh": {
+            "title": "四通道、四階段故障傳播",
+            "description": "選擇元件位置並調整相位與功率耗損，逐階段比較理想與故障輸出。模型以解析案例與獨立複數矩陣參考值驗證。"
+          },
+          "en": {
+            "title": "Four-channel, four-stage fault propagation",
+            "description": "Select a component and vary phase and power attenuation. Compare the ideal and faulty outputs at each stage. Analytic cases and independent complex-matrix reference values validate the model."
+          }
+        }
+      ]
     },
     {
       "slug": "gpu-orchestration",
@@ -737,6 +787,11 @@
       ],
       "references": [
         {
+          "href": "/labs/evidence/gpu/",
+          "zh": "回放單工作站 CUDA 任務",
+          "en": "Replay the measured single-workstation run"
+        },
+        {
           "href": "/labs/interactive/#gpu-orchestration",
           "zh": "操作 GPU 排程展示",
           "en": "Run the GPU scheduling demo"
@@ -749,8 +804,8 @@
       ],
       "zh": {
         "title": "GPU 運算資源排程",
-        "summary": "以合成工作比較 FIFO 與回填策略，觀察 CPU、VRAM 限制如何改變佇列。",
-        "metaDescription": "GPU 運算資源排程模擬：以合成工作比較 FIFO 與回填策略，依單機 CPU、VRAM 上限判斷工作能否開始，並呈現等待佇列、時間軸與資源使用尖峰。",
+        "summary": "回放單工作站的真實 CUDA 與 CPU 任務，並用合成佇列比較 FIFO 與回填。",
+        "metaDescription": "GPU 運算資源排程實跑與回放。檢視單工作站 CUDA 任務與 CPU 任務的提交、啟動、完成及 VRAM 取樣，另以合成工作比較 FIFO 與回填策略的等待差異。",
         "problem": "共享運算環境若同時有多個工作，必須兼顧資源需求、等待順序與資源利用。",
         "challenge": "一個排在前方的大工作可能阻擋後方能先執行的小工作。提高利用率的同時，還要理解不同工作的等待代價。",
         "approach": [
@@ -758,21 +813,21 @@
           "依單機資源上限與選擇的 FIFO 或回填策略判斷是否可開始工作。",
           "沿離散時間步釋放資源，更新工作狀態、時間軸和資源尖峰。"
         ],
-        "implementation": "以同一批合成工作、各工時和可用資源執行確定性模擬。FIFO 尊重佇列次序，回填允許符合當下容量的後續工作先開始。",
-        "result": "展示可比較等待中的工作、已模擬排入的時段、無法排入的工作及模擬資源使用。",
+        "implementation": "以隔離的實際排程器啟動兩個受控 CUDA 工作與一個 CPU 工作，保存相對時間、任務狀態和隔離佇列的 VRAM 取樣。另以固定的合成工作比較 FIFO 與回填。",
+        "result": "在測試的單 GPU 執行槽設定下，兩件 CUDA 工作依序執行，CPU 工作與第一件 CUDA 工作並行。兩件 CUDA 工作的程序級取樣峰值均為 286 MiB。",
         "deliverables": [
           "可重現的單機排程試驗",
           "工作佇列、狀態與排程時間軸",
           "供選型討論的資源配置方式"
         ],
-        "validation": "以工作開始、完成、排入與未排入狀態驗證模擬，並檢查同時執行的工作是否超過設定的 CPU 與 VRAM 上限。時間採模擬步數。",
-        "disclosure": "自主研發技術展示使用合成工作與單機模型。資源使用、等待及時間軸為模擬結果，未讀取實際 GPU 或企業工作資料。",
+        "validation": "核對實跑開始與結束時間、退出碼和 VRAM 取樣。FIFO 與回填比較沿用合成工作與模擬刻度。",
+        "disclosure": "自主研發的單工作站受控實跑使用自行製作的輸入。示範可驗證准入與並行，正式負載吞吐、多 GPU 或多使用者治理需要另行驗證。",
         "mediaAlt": "AI 系統與效能評估流程的概念圖",
         "service": "討論 GPU 資源管理及效能工程"
       },
       "en": {
         "title": "GPU Compute Orchestration",
-        "summary": "Compare FIFO and backfill with synthetic jobs and inspect how CPU and VRAM limits affect the queue.",
+        "summary": "Replay measured CUDA and CPU jobs on one workstation, and compare FIFO and backfill using a synthetic workload.",
         "problem": "A shared compute environment must balance resource demands, queue order and resource usage when several jobs arrive together.",
         "challenge": "A large job at the head of the queue can block smaller jobs that fit the currently available resources. A policy should make the waiting trade-offs visible.",
         "approach": [
@@ -780,19 +835,33 @@
           "Admit jobs under a single-machine resource limit using the selected FIFO or backfill policy.",
           "Release resources in discrete steps and update job status, the timeline and peak consumption."
         ],
-        "implementation": "The same synthetic workload runs deterministically under the configured limits. FIFO respects job order. Backfill lets a later job start when it fits current capacity.",
-        "result": "Compare pending jobs, simulated time slots, jobs that cannot fit, and simulated resource use.",
+        "implementation": "An isolated run of the real scheduler launched two controlled CUDA jobs and one CPU-only job, recording relative timestamps, job state and test-queue VRAM samples. A separate synthetic workload compares FIFO and backfill.",
+        "result": "Under a one-GPU-job limit, the two CUDA jobs ran in sequence while the CPU job overlapped the first. Sampled per-process VRAM peaked at 286 MiB for each CUDA job.",
         "deliverables": [
           "Reproducible single-machine scheduling experiment",
           "Queue, job status and timeline",
           "Resource configuration for engineering discussion"
         ],
-        "validation": "Check whether jobs start, finish or cannot be admitted, and verify that concurrent jobs respect the configured CPU and VRAM limits. Time is expressed as simulation steps.",
-        "disclosure": "This independent demo uses synthetic jobs and a single-machine model. Resource use, waiting and the timeline are simulated. No physical GPU or enterprise workload is queried.",
+        "validation": "Verify recorded start and end times, exit codes and VRAM samples. FIFO and backfill comparisons use synthetic jobs and simulation ticks.",
+        "disclosure": "Independent single-workstation test with generated inputs. The run validates admission and overlap under the stated settings. Production throughput, multi-GPU scheduling and multi-user governance require separate validation.",
         "mediaAlt": "Concept illustration of AI systems and performance evaluation",
         "service": "Discuss GPU resource management and performance engineering"
       },
-      "visibility": "public"
+      "visibility": "public",
+      "evidence": [
+        {
+          "type": "recorded-replay",
+          "href": "/labs/evidence/gpu/",
+          "zh": {
+            "title": "兩個 CUDA 任務與一個 CPU 任務",
+            "description": "在一台具 24 GiB GPU 的工作站限制 GPU 併發為一。第二個 GPU 任務等第一個釋放執行槽，CPU 任務與第一個 GPU 任務並行。"
+          },
+          "en": {
+            "title": "Two CUDA jobs and one CPU job",
+            "description": "Run on a workstation with a 24 GiB GPU and a one-GPU-job limit. The second GPU job waits for the first to release its slot while the CPU job runs alongside the first."
+          }
+        }
+      ]
     },
     {
       "slug": "research-automation",
@@ -814,6 +883,11 @@
       ],
       "references": [
         {
+          "href": "/labs/evidence/research/",
+          "zh": "回放引文查核實跑",
+          "en": "Replay the recorded quote checks"
+        },
+        {
           "href": "https://github.com/ChiShengChen/paper-evidence",
           "zh": "公開原始碼與免金鑰引文查核範例",
           "en": "Public source and no-key quote verification example"
@@ -831,12 +905,12 @@
           "需要時依公開工具設定語意支持度檢查，保留未支持或相互矛盾的主張。"
         ],
         "implementation": "公開工具的標準函式庫核心可獨立檢查文字和數字。語意判斷的設定及額外的文獻搜尋工具另有先決條件。",
-        "result": "開放原始碼與基本查核範例，可檢查一段引文及其數字上下文。",
+        "result": "已對公開查核核心重跑四組合成引文。逐字引用與排版正規化通過，出現在其他段落的數字及原文找不到的引文被攔下。",
         "deliverables": [
           "可查閱的驗證核心",
           "基本查核範例與公開使用說明"
         ],
-        "validation": "依 README 的免金鑰範例可比較正確引文與篡改字串。功能範圍為文本證據驗證。",
+        "validation": "固定公開版本與合成文字重現查核，停用模糊比對，數字須出現在引文前後各 200 字元的查核範圍。此實跑不含 LLM 語意判斷或科研推論。",
         "disclosure": "已公開的獨立開源工具。這裡只描述可查證的證據驗證功能，科研推論及研究發現由研究者另行評估。",
         "mediaAlt": "文獻證據抽取及引文驗證的概念圖",
         "service": "討論科研工作流程"
@@ -852,18 +926,198 @@
           "When configured, check semantic support and preserve incompatible or unsupported claims for review."
         ],
         "implementation": "The published standard-library core checks text and numeric context separately. Semantic judgment and additional literature search have separate configuration requirements.",
-        "result": "Public source and examples let readers inspect the citation and numeric-context checks.",
+        "result": "Four synthetic inputs were run against the public quote gate. Exact and normalized quotations passed. A number from a separate section and an unlocated quotation were blocked.",
         "deliverables": [
           "Inspectable verification core",
           "Basic checks and public documentation"
         ],
-        "validation": "The no-key example in the README lets readers compare a correct quotation with a modified one. This check concerns textual evidence.",
+        "validation": "Reproduction uses pinned public code and synthetic text, with fuzzy matching disabled and a 200-character numeric window on each side of the quotation. The run does not assess LLM faithfulness or scientific inference.",
         "disclosure": "This independent tool is open source. The page describes public evidence verification. Researchers separately evaluate scientific inference and the research findings.",
         "mediaAlt": "Concept illustration of evidence extraction and citation verification",
         "service": "Discuss research workflows"
       },
       "visibility": "public",
-      "anchor": "research-workflow-evidence"
+      "anchor": "research-workflow-evidence",
+      "evidence": [
+        {
+          "type": "recorded-replay",
+          "href": "/labs/evidence/research/",
+          "zh": {
+            "title": "公開引文查核核心實跑",
+            "description": "對指定版本重跑四組合成引文，顯示逐字與正規化匹配、錯置數字與不存在的引文。"
+          },
+          "en": {
+            "title": "Recorded execution of the public quote gate",
+            "description": "Four synthetic quotations exercise a pinned public revision against exact matches, normalized formatting, misplaced numbers and invented quotes."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "professional-speech-research",
+      "kind": "technical-note",
+      "domain": [
+        "health",
+        "science"
+      ],
+      "tech": [
+        "signal",
+        "agent"
+      ],
+      "origin": "academic",
+      "stage": "evaluation",
+      "visibility": "public",
+      "media": "caps/signal",
+      "inquiry": "domain-rd",
+      "related": [
+        "eeg-treatment-response",
+        "research-automation"
+      ],
+      "references": [
+        {
+          "href": "https://chishengchen.github.io/",
+          "zh": "創辦人公開研究資料 · EMS 語音與臨床資訊研究",
+          "en": "Founder’s public research profile · EMS speech and clinical informatics"
+        },
+        {
+          "href": "https://github.com/ChiShengChen/ChiShengChen",
+          "zh": "公開研究履歷 · 語音辨識評估與術語校正",
+          "en": "Public project profile · ASR evaluation and terminology correction"
+        }
+      ],
+      "zh": {
+        "title": "高雜訊專業語音辨識研究",
+        "summary": "分開評估專業通訊的自動轉寫與後續資訊抽取，保留原始語句供研究人員核對。",
+        "metaDescription": "量維資科創辦人參與的專業語音研究。以急救通訊為研究情境，分開處理雜訊環境的語音辨識、術語校正和結構化資訊抽取。",
+        "problem": "專業通訊常有背景雜訊、縮寫和領域術語。原始轉寫的錯誤可能傳至後續資訊抽取。",
+        "challenge": "後處理可能讓文字更順暢，也可能改變原始資訊。研究需區分轉寫錯誤、術語校正與抽取錯誤。",
+        "approach": [
+          "將自動語音辨識與後續術語校正分成兩個階段。",
+          "以參考逐字稿檢查轉寫錯誤，另行核對結構化抽取是否維持原句含義。",
+          "分別記錄原始轉寫與後處理輸出，讓研究人員能追溯差異。"
+        ],
+        "implementation": "創辦人公開研究履歷列出急救語音辨識評估，以及使用語言模型做專業術語校正與資訊抽取的兩階段流程。公開資料定義了研究方法。",
+        "result": "公開來源支持雙階段語音研究敘事。語音辨識與下游資訊抽取各自有驗證範圍。",
+        "deliverables": [
+          "公開研究方法與流程說明",
+          "語音辨識評估與下游抽取的分段設計"
+        ],
+        "validation": "公開摘要支持研究流程，聲學條件、量測結果與適用性需另依已核准的研究報告驗證。",
+        "disclosure": "此為創辦人參與的學術研究，範圍限於專業語音。原始音訊、逐字稿、結構化創傷登錄資料及現場成果不在本頁展示範圍。",
+        "mediaAlt": "訊號分析的概念插圖",
+        "service": "討論專業語音分析"
+      },
+      "en": {
+        "title": "Speech Recognition Research for Noisy Professional Audio",
+        "summary": "Evaluate speech recognition and structured information extraction separately, with a trace from the extracted information back to the utterance.",
+        "problem": "Professional radio traffic often contains background noise, abbreviations and domain-specific terminology. Transcription errors can carry into information extraction.",
+        "challenge": "Post-processing can improve readability and also change the meaning. The evaluation needs to distinguish recognition errors, terminology correction and extraction errors.",
+        "approach": [
+          "Separate automatic speech recognition from downstream terminology correction.",
+          "Use a reference transcript to examine recognition errors and review whether extracted fields preserve the meaning of the utterance.",
+          "Keep the original transcript and corrected output separately so reviewers can trace changes."
+        ],
+        "implementation": "The founder's public research profiles describe research into speech recognition for emergency communications and a second stage for domain terminology correction and information extraction.",
+        "result": "The public descriptions establish a research workflow with distinct evaluation boundaries for recognition and downstream extraction.",
+        "deliverables": [
+          "Public research methodology and workflow description",
+          "Separate evaluation design for recognition and extraction"
+        ],
+        "validation": "Public summaries document the workflow. Acoustic conditions, measured performance and applicability each require a released research evaluation.",
+        "disclosure": "This page describes academic research by the founder on professional speech. Source recordings, transcripts, structured trauma-registry records and field outcomes are outside the scope of this page.",
+        "mediaAlt": "Conceptual illustration of signal analysis",
+        "service": "Discuss professional speech analysis"
+      }
+    },
+    {
+      "slug": "amm-rebalancing-research",
+      "kind": "technical-note",
+      "domain": [
+        "finance",
+        "science"
+      ],
+      "tech": [
+        "time-series",
+        "simulation"
+      ],
+      "origin": "founder-experience",
+      "stage": "evaluation",
+      "visibility": "public",
+      "media": "cases/finance",
+      "inquiry": "domain-rd",
+      "related": [
+        "financial-intelligence",
+        "research-automation"
+      ],
+      "references": [
+        {
+          "href": "https://arxiv.org/abs/2509.16955",
+          "zh": "公開論文 · 自動做市商再平衡研究",
+          "en": "Public paper · Automated market maker rebalancing"
+        },
+        {
+          "href": "https://www.cmsworkshops.com/ICASSP2026/view_paper.php?PaperNum=14673&bare=1",
+          "zh": "IEEE ICASSP 2026 · 發表議程",
+          "en": "IEEE ICASSP 2026 · Presentation program"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "publication",
+          "href": "https://arxiv.org/abs/2509.16955",
+          "zh": {
+            "title": "公開 AMM 再平衡研究",
+            "description": "作者在同一歷史期間比較混合量子經典模型與多組基準。來源提供資料切分和回測條件。"
+          },
+          "en": {
+            "title": "Public AMM rebalancing research",
+            "description": "The authors compare a hybrid quantum-classical model with multiple baselines over the same historical period. The source documents the split and simulation conditions."
+          }
+        }
+      ],
+      "zh": {
+        "title": "自動做市商再平衡研究",
+        "summary": "在歷史資料中比較流動性部位的再平衡模型，以固定基準和按時間切分的測試降低比較偏差。",
+        "metaDescription": "量維資科創辦人共同發表的自動做市商再平衡研究。以歷史日序列、時間切分和多種基準比較模型，並檢視報酬、Sharpe 比率與最大回撤。",
+        "problem": "自動做市商的流動性部位隨市場價格改變，比較再平衡決策時需要固定資料期間和實驗條件。",
+        "challenge": "策略的歷史模擬容易受資料切分、基準選擇與交易成本假設影響。比較的適用範圍依賴這些條件。",
+        "approach": [
+          "將自動做市商的再平衡決策表示為二元分類問題。",
+          "按時間切分 BTC/USDC 歷史日資料，使用相同期間比較混合量子經典模型與經典、純量子基準。",
+          "依公開論文的模擬設定比較報酬、Sharpe 比率與最大回撤。"
+        ],
+        "implementation": "公開研究比較量子自適應自注意力模組與多組對照。論文描述 2024 年 1 月至 2025 年 1 月的歷史日資料，並依時間分為訓練、驗證與測試集。",
+        "result": "已公開方法與歷史模擬比較，可按論文中的資料期間、基準和交易設定解讀。",
+        "deliverables": [
+          "公開研究論文與比較方法",
+          "可核對的資料期間、時間切分與基準說明"
+        ],
+        "validation": "評估範圍是論文所述歷史市場與模擬條件。基準及交易設定應回到論文查驗，頁面未列出可套用於其他資產的報酬數字。",
+        "disclosure": "這項公開研究由創辦人共同撰寫，僅描述論文方法與歷史模擬。頁面未展示交易紀錄、客戶資訊或實際資產部位。",
+        "mediaAlt": "金融資料與研究分析的概念插圖",
+        "service": "討論金融資料與研究驗證"
+      },
+      "en": {
+        "title": "Automated Market Maker Rebalancing Research",
+        "summary": "Compare liquidity-position rebalancing models on historical data using fixed baselines and time-ordered testing.",
+        "problem": "The composition of automated market maker liquidity positions changes with market prices. Comparing rebalancing decisions requires a defined period and shared test conditions.",
+        "challenge": "Historical strategy simulations depend on the data split, choice of baselines and transaction-cost assumptions. Those conditions bound the comparison.",
+        "approach": [
+          "Frame automated market maker rebalancing as a binary decision problem.",
+          "Split daily BTC/USDC history in chronological order and compare hybrid quantum-classical models with classical and pure-quantum baselines over the same period.",
+          "Compare return, Sharpe ratio and maximum drawdown under the simulation conditions documented in the public paper."
+        ],
+        "implementation": "The public study compares a quantum adaptive self-attention module with several controls. It describes daily history from January 2024 through January 2025 and a chronological training, validation and test split.",
+        "result": "The publication provides methods and a historical simulation comparison with a documented period, baselines and trading assumptions.",
+        "deliverables": [
+          "Public paper and comparison method",
+          "Documented data period, chronological split and baselines"
+        ],
+        "validation": "The evaluation applies to the market history and simulation conditions reported in the paper. The publication describes its baselines and trading setup. The page publishes no return figure for other assets.",
+        "disclosure": "The founder co-authored the public study. This page describes the research design and historical simulation. Trading records, client data and actual asset positions are outside its scope.",
+        "mediaAlt": "Conceptual illustration of financial research and data analysis",
+        "service": "Discuss financial data and research validation"
+      }
     }
   ]
 }

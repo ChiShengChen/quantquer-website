@@ -52,8 +52,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700&amp;family=Noto+Sans+TC:wght@300;400;500&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/site.css">
+  <script type="module" src="/assets/analytics.mjs"></script>
 </head>
-<body class="topic-page">
+<body class="topic-page" data-project="enterprise-knowledge-arbitration">
   <a href="#content" class="skip-link">跳到主要內容</a>
   <header>
     <div class="wrap nav">
@@ -78,7 +79,7 @@
           <p class="topic-audience">匿名工程案例 · 工程評估</p>
           <p class="topic-intro">先處理不同文件間的矛盾，再回答技術問題並保留引用與版本依據。</p>
           <div class="entry-links">
-            <a class="btn btn-primary" href="/?inquiry=knowledge-base#contact">討論企業技術知識庫</a>
+            <a class="btn btn-primary" href="/project-planner/?service=knowledge-base" data-analytics="service_cta_clicked" data-project="enterprise-knowledge-arbitration" data-service="knowledge-base">建立專案需求</a>
 
           </div>
         </div>
@@ -117,6 +118,7 @@
       <div class="wrap">
         <h2>驗證與證據</h2>
         <p class="topic-lead">歷史評測分別檢查版本選擇與引用。拒答也可能拿到高版本分數，因此只呈現有明確題集條件的引用結果。</p>
+
         <dl class="topic-benchmark">
         <div id="knowledge-citation-historical">
           <dt>歷史評測的引用正確率 · 實際量測</dt>
@@ -146,6 +148,7 @@
         <p class="topic-intro">Resolve conflicts between source documents before answering, and retain citations and version choices.</p>
         <div class="entry-links">
           <a class="text-link" href="#project-title" lang="zh-Hant">繁體中文</a>
+          <a class="text-link" href="/project-planner/?service=knowledge-base&amp;lang=en" data-analytics="service_cta_clicked" data-project="enterprise-knowledge-arbitration" data-service="knowledge-base">Plan a project</a>
 
         </div>
       </div>
@@ -181,6 +184,7 @@
       <div class="wrap">
         <h2>Validation and evidence</h2>
         <p class="topic-lead">The historical evaluation checks version selection and citations separately. An abstention can score well on version selection, so this page reports citation results with their test-set context.</p>
+
         <dl class="topic-benchmark">
         <div id="knowledge-citation-historical-en">
           <dt>Citation accuracy in a historical evaluation · Measured</dt>

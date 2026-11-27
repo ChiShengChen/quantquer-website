@@ -52,8 +52,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700&amp;family=Noto+Sans+TC:wght@300;400;500&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/site.css">
+  <script type="module" src="/assets/analytics.mjs"></script>
 </head>
-<body class="topic-page">
+<body class="topic-page" data-project="adaptive-physics-tutor">
   <a href="#content" class="skip-link">跳到主要內容</a>
   <header>
     <div class="wrap nav">
@@ -78,7 +79,7 @@
           <p class="topic-audience">獨立教學應用 · 實際教學使用</p>
           <p class="topic-intro">讓學生依課程內容和理解程度選擇解說、練習與複習。</p>
           <div class="entry-links">
-            <a class="btn btn-primary" href="/?inquiry=agent#contact">討論客製化 AI Agent</a>
+            <a class="btn btn-primary" href="/project-planner/?service=agent" data-analytics="service_cta_clicked" data-project="adaptive-physics-tutor" data-service="agent">建立專案需求</a>
 
           </div>
         </div>
@@ -119,6 +120,7 @@
         <p class="topic-lead">公開內容展示教學功能和使用情境。判讀學習成效須有獨立的評估設計及資料。</p>
 
 
+
       </div>
     </section>
     <section class="topic-section axis-divider">
@@ -142,6 +144,7 @@
         <p class="topic-intro">Help students select explanations, exercises and review material based on course content and their progress.</p>
         <div class="entry-links">
           <a class="text-link" href="#project-title" lang="zh-Hant">繁體中文</a>
+          <a class="text-link" href="/project-planner/?service=agent&amp;lang=en" data-analytics="service_cta_clicked" data-project="adaptive-physics-tutor" data-service="agent">Plan a project</a>
 
         </div>
       </div>
@@ -177,6 +180,7 @@
       <div class="wrap">
         <h2>Validation and evidence</h2>
         <p class="topic-lead">The public description covers teaching features and usage. Claims about learning outcomes require a separate evaluation design and data.</p>
+
 
 
       </div>

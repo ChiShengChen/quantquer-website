@@ -123,6 +123,22 @@ for (const project of portfolio.projects) {
     validateLink(reference.href, project);
     for (const language of languages) requireText(reference[language], `${project.slug} reference`);
   }
+  for (const item of project.evidence ?? []) {
+    assert(['model-output', 'simulation', 'recorded-replay', 'public-repository', 'publication'].includes(item.type),
+      `Unknown public evidence type: ${project.slug}`);
+    validateLink(item.href, project);
+    if (item.image) {
+      assert(/^\/assets\/evidence\/[a-z0-9/-]+\.webp$/.test(item.image.path)
+        && [item.image.width, item.image.height].every(value => Number.isInteger(value) && value > 0),
+        `Invalid evidence image: ${project.slug}`);
+      await access(resolve(root, item.image.path.slice(1)));
+    }
+    for (const language of languages) {
+      requireText(item[language]?.title, `${project.slug} evidence title`);
+      requireText(item[language]?.description, `${project.slug} evidence description`);
+      if (item.image) requireText(item[language]?.alt, `${project.slug} evidence image description`);
+    }
+  }
   for (const metric of project.metrics ?? []) {
     assert(Object.hasOwn(metricTypes, metric.type), `Unknown metric type: ${project.slug}`);
     assert(/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(metric.evidenceId) && !evidenceIds.has(metric.evidenceId), `Invalid or duplicated evidence ID: ${metric.evidenceId}`);
@@ -156,6 +172,14 @@ function classification(project, language) {
 
 const detailPath = project => `/work/${project.slug}/`;
 const contactPath = project => `/?inquiry=${project.inquiry}#contact`;
+const plannerPath = (project, language = 'zh') => `/project-planner/?service=${project.inquiry}${language === 'en' ? '&amp;lang=en' : ''}`;
+const demoPath = (path, language) => {
+  if (language !== 'en') return path;
+  const url = new URL(path, site);
+  if (url.origin !== site) return path;
+  url.searchParams.set('lang', 'en');
+  return url.pathname + url.search + url.hash;
+};
 const assetSizes = {
   wide: '(max-width: 400px) calc(100vw - 40px), (max-width: 760px) 90vw, (max-width: 1180px) 45vw, 530px',
   featured: '(max-width: 400px) calc(100vw - 40px), (max-width: 760px) 90vw, (max-width: 1180px) 30vw, 355px',
@@ -231,6 +255,35 @@ const sectionLabels = {
   },
 };
 
+const evidenceLabels = {
+  'model-output': ['模型實際輸出', 'Measured model output'],
+  simulation: ['軟體模擬', 'Software simulation'],
+  'recorded-replay': ['受控實跑回放', 'Controlled recorded run'],
+  'public-repository': ['公開程式與資料', 'Public code and data'],
+  publication: ['公開論文', 'Published research'],
+};
+
+function evidenceGallery(project, language) {
+  if (!project.evidence?.length) return '';
+  const index = language === 'en' ? 1 : 0;
+  const items = project.evidence.map(item => {
+    const copy = item[language];
+    const image = item.image
+      ? `<img src="${item.image.path}" width="${item.image.width}" height="${item.image.height}" loading="lazy" decoding="async" alt="${escapeHtml(copy.alt)}">`
+      : '';
+    return `<article class="public-evidence-card topic-panel">
+      ${image}
+      <div>
+        <p class="eyebrow">${evidenceLabels[item.type][index]}</p>
+        <h3>${escapeHtml(copy.title)}</h3>
+        <p>${escapeHtml(copy.description)}</p>
+        <a class="text-link" href="${escapeHtml(demoPath(item.href, language))}">${index ? 'Open evidence and method' : '查看證據與方法'}</a>
+      </div>
+    </article>`;
+  });
+  return `<div class="public-evidence-gallery">${items.join('')}</div>`;
+}
+
 function detailSections(project, language) {
   const t = sectionLabels[language];
   const copy = project[language];
@@ -275,6 +328,7 @@ function detailSections(project, language) {
       <div class="wrap">
         <h2>${t.validation}</h2>
         <p class="topic-lead">${escapeHtml(copy.validation)}</p>
+        ${evidenceGallery(project, language)}
         ${metrics ? `<dl class="topic-benchmark">${metrics}</dl>` : ''}
         ${refs.length ? `<nav class="entry-links" aria-label="${t.refs}">${linkList(refs)}</nav>` : ''}
       </div>
@@ -301,7 +355,8 @@ function detailPage(project) {
   // Search snippet: a fuller sentence built from the page's own facts; the visible intro stays `summary`.
   const metaDescription = escapeHtml(project.zh.metaDescription ?? project.zh.summary);
   const url = `${site}${detailPath(project)}`;
-  const demo = project.references?.find(reference => reference.href.startsWith('/labs/interactive/#'));
+  const demo = project.references?.find(reference => reference.href.startsWith('/labs/evidence/'))
+    ?? project.references?.find(reference => reference.href.startsWith('/labs/interactive/#'));
   const shareAlt = '量維資科，從晶片到智慧系統。下方是模型部署至晶片的技術示意。';
   const schema = {
     '@context': 'https://schema.org', '@type': 'WebPage', name, url,
@@ -348,8 +403,9 @@ ${JSON.stringify(schema, null, 2).replaceAll('<', '\\u003c')}
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700&amp;family=Noto+Sans+TC:wght@300;400;500&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/site.css">
+  <script type="module" src="/assets/analytics.mjs"></script>
 </head>
-<body class="topic-page">
+<body class="topic-page" data-project="${project.slug}">
   <a href="#content" class="skip-link">跳到主要內容</a>
   <header>
     <div class="wrap nav">
@@ -374,7 +430,7 @@ ${JSON.stringify(schema, null, 2).replaceAll('<', '\\u003c')}
           <p class="topic-audience">${escapeHtml(classification(project, 'zh'))}</p>
           <p class="topic-intro">${description}</p>
           <div class="entry-links">
-            <a class="btn btn-primary" href="${contactPath(project)}">${escapeHtml(project.zh.service)}</a>
+            <a class="btn btn-primary" href="${plannerPath(project)}" data-analytics="service_cta_clicked" data-project="${project.slug}" data-service="${project.inquiry}">建立專案需求</a>
             ${demo ? `<a class="btn btn-ghost" href="${escapeHtml(demo.href)}">${escapeHtml(demo.zh)}</a>` : ''}
           </div>
         </div>
@@ -389,7 +445,8 @@ ${JSON.stringify(schema, null, 2).replaceAll('<', '\\u003c')}
         <p class="topic-intro">${escapeHtml(project.en.summary)}</p>
         <div class="entry-links">
           <a class="text-link" href="#project-title" lang="zh-Hant">繁體中文</a>
-          ${demo ? `<a class="text-link" href="${escapeHtml(demo.href)}">${escapeHtml(demo.en)}</a>` : ''}
+          <a class="text-link" href="${plannerPath(project, 'en')}" data-analytics="service_cta_clicked" data-project="${project.slug}" data-service="${project.inquiry}">Plan a project</a>
+          ${demo ? `<a class="text-link" href="${escapeHtml(demoPath(demo.href, 'en'))}">${escapeHtml(demo.en)}</a>` : ''}
         </div>
       </div>${detailSections(project, 'en')}
     </section>
@@ -460,7 +517,10 @@ for (const project of portfolio.projects) {
 // <lastmod>: data/projects.json `siteUpdated` (YYYY-MM-DD), or a project's own `updated`. Bump it when content changes.
 assert(/^\d{4}-\d{2}-\d{2}$/.test(portfolio.siteUpdated ?? ''), 'data/projects.json needs siteUpdated as YYYY-MM-DD');
 const routes = [
-  ...['/', '/en/', '/semiconductor-ai/', '/financial-intelligence/', '/labs/interactive/'].map(path => [path, portfolio.siteUpdated]),
+  ...[
+    '/', '/en/', '/semiconductor-ai/', '/financial-intelligence/', '/labs/interactive/',
+    '/project-planner/', '/labs/evidence/vision/', '/labs/evidence/photonics/', '/labs/evidence/gpu/', '/labs/evidence/research/',
+  ].map(path => [path, portfolio.siteUpdated]),
   ...portfolio.projects.map(project => [detailPath(project), project.updated ?? portfolio.siteUpdated]),
 ];
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>

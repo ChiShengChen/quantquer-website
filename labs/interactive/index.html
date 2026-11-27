@@ -42,6 +42,7 @@
   <link rel="stylesheet" href="../../assets/site.css">
   <link rel="stylesheet" href="../../assets/showcase.css">
   <script src="../../assets/showcase.js" defer></script>
+  <script type="module" src="/assets/analytics.mjs"></script>
 </head>
 <body class="topic-page showcase-page">
   <a href="#content" class="skip-link" data-en="Skip to content">跳到主要內容</a>
@@ -67,6 +68,12 @@
       <div class="wrap">
         <p class="eyebrow" lang="en">Quantquer Labs</p>
         <h1 id="showcase-title" data-en="Interactive technical showcase">互動技術展示</h1>
+        <div class="entry-links">
+          <a class="text-link" href="/labs/evidence/vision/" data-en-href="/labs/evidence/vision/?lang=en" data-analytics="demo_started" data-demo="vision" data-en="Compare measured MI-GAN outputs">看 MI-GAN 實際推論</a>
+          <a class="text-link" href="/labs/evidence/photonics/" data-en-href="/labs/evidence/photonics/?lang=en" data-analytics="demo_started" data-demo="photonics" data-en="Run the four-stage MZI mesh">操作四階段光子網格</a>
+          <a class="text-link" href="/labs/evidence/gpu/" data-en-href="/labs/evidence/gpu/?lang=en" data-analytics="demo_started" data-demo="gpu" data-en="Replay recorded GPU jobs">回放 GPU 實跑</a>
+          <a class="text-link" href="/labs/evidence/research/" data-en-href="/labs/evidence/research/?lang=en" data-analytics="demo_started" data-demo="research" data-en="Replay the research quote checks">回放科研引文查核</a>
+        </div>
         <p class="topic-intro" data-en="Restore a synthetic image, introduce a fault into a two-path optical mesh, and see how GPU scheduling policies compete for the same resources.">
           修復合成影像、在雙路光子網路中注入故障，並觀察 GPU 排程策略如何分配同一組運算資源。
         </p>
@@ -79,7 +86,7 @@
       </div>
     </section>
 
-    <section id="generative-vision" class="topic-section axis-divider" aria-labelledby="vision-title">
+    <section id="generative-vision" class="topic-section axis-divider" aria-labelledby="vision-title" data-demo-kind="vision">
       <div class="wrap">
         <p class="eyebrow" lang="en">Generative Vision</p>
         <h2 id="vision-title" data-en="Person removal and background restoration">人物消除與背景修復</h2>
@@ -127,7 +134,7 @@
       </div>
     </section>
 
-    <section id="photonic-fault" class="topic-section axis-divider" aria-labelledby="photon-title">
+    <section id="photonic-fault" class="topic-section axis-divider" aria-labelledby="photon-title" data-demo-kind="photonics">
       <div class="wrap">
         <p class="eyebrow" lang="en">Photonic Fault Simulation</p>
         <h2 id="photon-title" data-en="Phase drift and loss in a photonic mesh">光子網路中的相位漂移與耗損</h2>
@@ -210,7 +217,7 @@
       </div>
     </section>
 
-    <section id="gpu-orchestration" class="topic-section axis-divider" aria-labelledby="gpu-title">
+    <section id="gpu-orchestration" class="topic-section axis-divider" aria-labelledby="gpu-title" data-demo-kind="gpu">
       <div class="wrap">
         <p class="eyebrow" lang="en">GPU Orchestration</p>
         <h2 id="gpu-title" data-en="Scheduling jobs with shared GPU resources">共用 GPU 資源的任務排程</h2>

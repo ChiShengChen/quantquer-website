@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="/assets/theme.js"></script>
   <title>GPU 運算資源排程｜量維資科 Quantquer</title>
-  <meta name="description" content="GPU 運算資源排程模擬：以合成工作比較 FIFO 與回填策略，依單機 CPU、VRAM 上限判斷工作能否開始，並呈現等待佇列、時間軸與資源使用尖峰。">
+  <meta name="description" content="GPU 運算資源排程實跑與回放。檢視單工作站 CUDA 任務與 CPU 任務的提交、啟動、完成及 VRAM 取樣，另以合成工作比較 FIFO 與回填策略的等待差異。">
   <meta name="theme-color" content="#F6F8FB">
   <link rel="canonical" href="https://quantquer.com/work/gpu-orchestration/">
   <link rel="icon" href="/favicon.ico" sizes="48x48">
@@ -17,7 +17,7 @@
   <meta property="og:site_name" content="量維資科 Quantquer">
   <meta property="og:locale" content="zh_TW">
   <meta property="og:title" content="GPU 運算資源排程｜量維資科 Quantquer">
-  <meta property="og:description" content="GPU 運算資源排程模擬：以合成工作比較 FIFO 與回填策略，依單機 CPU、VRAM 上限判斷工作能否開始，並呈現等待佇列、時間軸與資源使用尖峰。">
+  <meta property="og:description" content="GPU 運算資源排程實跑與回放。檢視單工作站 CUDA 任務與 CPU 任務的提交、啟動、完成及 VRAM 取樣，另以合成工作比較 FIFO 與回填策略的等待差異。">
   <meta property="og:url" content="https://quantquer.com/work/gpu-orchestration/">
   <meta property="og:image" content="https://quantquer.com/assets/og-image-2-1.png">
   <meta property="og:image:type" content="image/png">
@@ -26,7 +26,7 @@
   <meta property="og:image:alt" content="量維資科，從晶片到智慧系統。下方是模型部署至晶片的技術示意。">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="GPU 運算資源排程｜量維資科 Quantquer">
-  <meta name="twitter:description" content="GPU 運算資源排程模擬：以合成工作比較 FIFO 與回填策略，依單機 CPU、VRAM 上限判斷工作能否開始，並呈現等待佇列、時間軸與資源使用尖峰。">
+  <meta name="twitter:description" content="GPU 運算資源排程實跑與回放。檢視單工作站 CUDA 任務與 CPU 任務的提交、啟動、完成及 VRAM 取樣，另以合成工作比較 FIFO 與回填策略的等待差異。">
   <meta name="twitter:image" content="https://quantquer.com/assets/og-image-2-1.png">
   <meta name="twitter:image:alt" content="量維資科，從晶片到智慧系統。下方是模型部署至晶片的技術示意。">
   <script type="application/ld+json">
@@ -35,7 +35,7 @@
   "@type": "WebPage",
   "name": "GPU 運算資源排程｜量維資科 Quantquer",
   "url": "https://quantquer.com/work/gpu-orchestration/",
-  "description": "GPU 運算資源排程模擬：以合成工作比較 FIFO 與回填策略，依單機 CPU、VRAM 上限判斷工作能否開始，並呈現等待佇列、時間軸與資源使用尖峰。",
+  "description": "GPU 運算資源排程實跑與回放。檢視單工作站 CUDA 任務與 CPU 任務的提交、啟動、完成及 VRAM 取樣，另以合成工作比較 FIFO 與回填策略的等待差異。",
   "inLanguage": [
     "zh-Hant",
     "en"
@@ -52,8 +52,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700&amp;family=Noto+Sans+TC:wght@300;400;500&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/site.css">
+  <script type="module" src="/assets/analytics.mjs"></script>
 </head>
-<body class="topic-page">
+<body class="topic-page" data-project="gpu-orchestration">
   <a href="#content" class="skip-link">跳到主要內容</a>
   <header>
     <div class="wrap nav">
@@ -76,10 +77,10 @@
           <h1 id="project-title">GPU 運算資源排程</h1>
           <p class="en" lang="en">GPU Compute Orchestration</p>
           <p class="topic-audience">自主研發 · 互動技術展示</p>
-          <p class="topic-intro">以合成工作比較 FIFO 與回填策略，觀察 CPU、VRAM 限制如何改變佇列。</p>
+          <p class="topic-intro">回放單工作站的真實 CUDA 與 CPU 任務，並用合成佇列比較 FIFO 與回填。</p>
           <div class="entry-links">
-            <a class="btn btn-primary" href="/?inquiry=gpu-infrastructure#contact">討論 GPU 資源管理及效能工程</a>
-            <a class="btn btn-ghost" href="/labs/interactive/#gpu-orchestration">操作 GPU 排程展示</a>
+            <a class="btn btn-primary" href="/project-planner/?service=gpu-infrastructure" data-analytics="service_cta_clicked" data-project="gpu-orchestration" data-service="gpu-infrastructure">建立專案需求</a>
+            <a class="btn btn-ghost" href="/labs/evidence/gpu/">回放單工作站 CUDA 任務</a>
           </div>
         </div>
         <figure class="cfig topic-figure"><img src="/assets/caps/product.webp" srcset="/assets/caps/product-768.webp 768w, /assets/caps/product.webp 1536w, /assets/caps/product-3072.webp 3072w" sizes="(max-width: 400px) calc(100vw - 40px), (max-width: 760px) 90vw, (max-width: 1180px) 45vw, 530px" alt="AI 系統與效能評估流程的概念圖" width="1536" height="1024" fetchpriority="high"></figure>
@@ -104,11 +105,11 @@
       <div class="wrap topic-detail-grid">
         <div>
           <h2>實作與交付</h2>
-          <p class="topic-lead">以同一批合成工作、各工時和可用資源執行確定性模擬。FIFO 尊重佇列次序，回填允許符合當下容量的後續工作先開始。</p>
+          <p class="topic-lead">以隔離的實際排程器啟動兩個受控 CUDA 工作與一個 CPU 工作，保存相對時間、任務狀態和隔離佇列的 VRAM 取樣。另以固定的合成工作比較 FIFO 與回填。</p>
         </div>
         <div class="topic-panel">
           <h3>成果</h3>
-          <p>展示可比較等待中的工作、已模擬排入的時段、無法排入的工作及模擬資源使用。</p>
+          <p>在測試的單 GPU 執行槽設定下，兩件 CUDA 工作依序執行，CPU 工作與第一件 CUDA 工作並行。兩件 CUDA 工作的程序級取樣峰值均為 286 MiB。</p>
           <ul class="chk"><li>可重現的單機排程試驗</li><li>工作佇列、狀態與排程時間軸</li><li>供選型討論的資源配置方式</li></ul>
         </div>
       </div>
@@ -116,9 +117,18 @@
     <section class="topic-section axis-divider">
       <div class="wrap">
         <h2>驗證與證據</h2>
-        <p class="topic-lead">以工作開始、完成、排入與未排入狀態驗證模擬，並檢查同時執行的工作是否超過設定的 CPU 與 VRAM 上限。時間採模擬步數。</p>
+        <p class="topic-lead">核對實跑開始與結束時間、退出碼和 VRAM 取樣。FIFO 與回填比較沿用合成工作與模擬刻度。</p>
+        <div class="public-evidence-gallery"><article class="public-evidence-card topic-panel">
 
-        <nav class="entry-links" aria-label="公開來源與展示"><ul class="topic-links"><li><a class="text-link" href="/labs/interactive/#gpu-orchestration">操作 GPU 排程展示</a></li><li><a class="text-link" href="/semiconductor-ai/#gpu-infrastructure">GPU 運算基礎設施服務</a></li></ul></nav>
+      <div>
+        <p class="eyebrow">受控實跑回放</p>
+        <h3>兩個 CUDA 任務與一個 CPU 任務</h3>
+        <p>在一台具 24 GiB GPU 的工作站限制 GPU 併發為一。第二個 GPU 任務等第一個釋放執行槽，CPU 任務與第一個 GPU 任務並行。</p>
+        <a class="text-link" href="/labs/evidence/gpu/">查看證據與方法</a>
+      </div>
+    </article></div>
+
+        <nav class="entry-links" aria-label="公開來源與展示"><ul class="topic-links"><li><a class="text-link" href="/labs/evidence/gpu/">回放單工作站 CUDA 任務</a></li><li><a class="text-link" href="/labs/interactive/#gpu-orchestration">操作 GPU 排程展示</a></li><li><a class="text-link" href="/semiconductor-ai/#gpu-infrastructure">GPU 運算基礎設施服務</a></li></ul></nav>
       </div>
     </section>
     <section class="topic-section axis-divider">
@@ -126,7 +136,7 @@
         <div>
           <h2>公開範圍及專案狀態</h2>
           <dl class="topic-benchmark"><div><dt>歸屬與階段</dt><dd>自主研發 · 互動技術展示</dd></div></dl>
-          <p class="topic-lead">自主研發技術展示使用合成工作與單機模型。資源使用、等待及時間軸為模擬結果，未讀取實際 GPU 或企業工作資料。</p>
+          <p class="topic-lead">自主研發的單工作站受控實跑使用自行製作的輸入。示範可驗證准入與並行，正式負載吞吐、多 GPU 或多使用者治理需要另行驗證。</p>
         </div>
         <div class="topic-panel">
           <h3>相關工程與服務</h3>
@@ -139,10 +149,11 @@
         <p class="eyebrow">Technical Note</p>
         <h2 id="english-title">GPU Compute Orchestration</h2>
         <p class="topic-audience">Independent Research and Development · Interactive Demonstration</p>
-        <p class="topic-intro">Compare FIFO and backfill with synthetic jobs and inspect how CPU and VRAM limits affect the queue.</p>
+        <p class="topic-intro">Replay measured CUDA and CPU jobs on one workstation, and compare FIFO and backfill using a synthetic workload.</p>
         <div class="entry-links">
           <a class="text-link" href="#project-title" lang="zh-Hant">繁體中文</a>
-          <a class="text-link" href="/labs/interactive/#gpu-orchestration">Run the GPU scheduling demo</a>
+          <a class="text-link" href="/project-planner/?service=gpu-infrastructure&amp;lang=en" data-analytics="service_cta_clicked" data-project="gpu-orchestration" data-service="gpu-infrastructure">Plan a project</a>
+          <a class="text-link" href="/labs/evidence/gpu/?lang=en">Replay the measured single-workstation run</a>
         </div>
       </div>
     <section class="topic-section axis-divider">
@@ -164,11 +175,11 @@
       <div class="wrap topic-detail-grid">
         <div>
           <h2>Implementation and deliverables</h2>
-          <p class="topic-lead">The same synthetic workload runs deterministically under the configured limits. FIFO respects job order. Backfill lets a later job start when it fits current capacity.</p>
+          <p class="topic-lead">An isolated run of the real scheduler launched two controlled CUDA jobs and one CPU-only job, recording relative timestamps, job state and test-queue VRAM samples. A separate synthetic workload compares FIFO and backfill.</p>
         </div>
         <div class="topic-panel">
           <h3>Outcome</h3>
-          <p>Compare pending jobs, simulated time slots, jobs that cannot fit, and simulated resource use.</p>
+          <p>Under a one-GPU-job limit, the two CUDA jobs ran in sequence while the CPU job overlapped the first. Sampled per-process VRAM peaked at 286 MiB for each CUDA job.</p>
           <ul class="chk"><li>Reproducible single-machine scheduling experiment</li><li>Queue, job status and timeline</li><li>Resource configuration for engineering discussion</li></ul>
         </div>
       </div>
@@ -176,9 +187,18 @@
     <section class="topic-section axis-divider">
       <div class="wrap">
         <h2>Validation and evidence</h2>
-        <p class="topic-lead">Check whether jobs start, finish or cannot be admitted, and verify that concurrent jobs respect the configured CPU and VRAM limits. Time is expressed as simulation steps.</p>
+        <p class="topic-lead">Verify recorded start and end times, exit codes and VRAM samples. FIFO and backfill comparisons use synthetic jobs and simulation ticks.</p>
+        <div class="public-evidence-gallery"><article class="public-evidence-card topic-panel">
 
-        <nav class="entry-links" aria-label="Public sources and demonstrations"><ul class="topic-links"><li><a class="text-link" href="/labs/interactive/#gpu-orchestration">Run the GPU scheduling demo</a></li><li><a class="text-link" href="/semiconductor-ai/#gpu-infrastructure">GPU compute infrastructure services</a></li></ul></nav>
+      <div>
+        <p class="eyebrow">Controlled recorded run</p>
+        <h3>Two CUDA jobs and one CPU job</h3>
+        <p>Run on a workstation with a 24 GiB GPU and a one-GPU-job limit. The second GPU job waits for the first to release its slot while the CPU job runs alongside the first.</p>
+        <a class="text-link" href="/labs/evidence/gpu/?lang=en">Open evidence and method</a>
+      </div>
+    </article></div>
+
+        <nav class="entry-links" aria-label="Public sources and demonstrations"><ul class="topic-links"><li><a class="text-link" href="/labs/evidence/gpu/">Replay the measured single-workstation run</a></li><li><a class="text-link" href="/labs/interactive/#gpu-orchestration">Run the GPU scheduling demo</a></li><li><a class="text-link" href="/semiconductor-ai/#gpu-infrastructure">GPU compute infrastructure services</a></li></ul></nav>
       </div>
     </section>
     <section class="topic-section axis-divider">
@@ -186,7 +206,7 @@
         <div>
           <h2>Project status and disclosure</h2>
           <dl class="topic-benchmark"><div><dt>Ownership and status</dt><dd>Independent Research and Development · Interactive Demonstration</dd></div></dl>
-          <p class="topic-lead">This independent demo uses synthetic jobs and a single-machine model. Resource use, waiting and the timeline are simulated. No physical GPU or enterprise workload is queried.</p>
+          <p class="topic-lead">Independent single-workstation test with generated inputs. The run validates admission and overlap under the stated settings. Production throughput, multi-GPU scheduling and multi-user governance require separate validation.</p>
         </div>
         <div class="topic-panel">
           <h3>Related work and services</h3>
