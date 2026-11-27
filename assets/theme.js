@@ -23,7 +23,6 @@
     function updateTheme() {
       const dark = mode === 'dark';
       const english = root.lang === 'en';
-      button.textContent = dark ? '☀︎' : '☾︎';
       button.setAttribute('aria-label', english
         ? (dark ? 'Switch to light mode' : 'Switch to dark mode')
         : (dark ? '切換亮色模式' : '切換深色模式'));
