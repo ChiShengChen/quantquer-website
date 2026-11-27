@@ -113,7 +113,15 @@
 .case-evidence-facts dt { color: var(--fg-dim); font-size: .85rem; }
 .case-evidence-facts dd { margin: 0; overflow-wrap: anywhere; }
 
-.case-supporting-image { width: fit-content; max-width: 100%; margin-block: 1rem; }
+.case-hero-visuals {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(185px, 100%), 1fr));
+  align-items: start;
+  gap: clamp(.75rem, 1.7vw, 1.1rem);
+  min-width: 0;
+  scroll-margin-top: 88px;
+}
+.case-supporting-image { min-width: 0; }
 .case-supporting-image > a { display: block; border: 1px solid var(--line); cursor: zoom-in; }
-.case-supporting-image img { display: block; max-width: 100%; height: auto; }
+.case-supporting-image img { display: block; width: 100%; height: auto; }
 .case-supporting-image figcaption { margin-top: .4rem; font-size: .88rem; color: var(--fg-dim); }

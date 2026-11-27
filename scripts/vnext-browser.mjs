@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
+import { caseVisuals } from '../data/case-visuals.mjs';
 
 const require = createRequire(import.meta.url);
 const { chromium } = require(process.env.QUANTQUER_PLAYWRIGHT || 'playwright');
@@ -215,21 +216,34 @@ try {
     assert.equal(new URL(page.url()).search, '');
   }
 
-  for (const [path, source] of [
-    ['/work/industrial-robotics/', 'https://chishengchen.github.io/projects.html'],
-    ['/en/work/eeg-treatment-response/', 'https://chishengchen.github.io/teaser_jad.png'],
-  ]) {
-    await open(path);
-    const evidence = page.locator(path.startsWith('/en/') ? '#case-evidence-en' : '#case-evidence');
-    assert.equal(await evidence.locator(`figcaption a[href="${source}"]`).count(), 1);
-    const picture = evidence.locator('.case-supporting-image img');
-    await picture.scrollIntoViewIfNeeded();
-    await picture.evaluate(img => img.decode());
+  // Public evidence in case heroes and the artwork fallback.
+  for (const [locale, width] of [['zh', 390], ['en', 1440]]) {
+    await page.setViewportSize({ width, height: 900 });
+    const prefix = locale === 'en' ? '/en' : '';
+    for (const [slug, visuals] of Object.entries(caseVisuals)) {
+      await open(`${prefix}/work/${slug}/`);
+      const gallery = page.locator('.topic-hero #case-images');
+      const images = gallery.locator('img');
+      assert.equal(await images.count(), visuals.length, slug);
+      for (const [index, image] of (await images.all()).entries()) {
+        const visual = visuals[index];
+        const file = visual.files[locale === 'en' ? 1 : 0] ?? visual.files[0];
+        assert.equal(await image.getAttribute('src'), file.path);
+        assert.equal(await image.locator('..').getAttribute('href'), file.path);
+        await image.evaluate(img => img.decode());
+        assert.deepEqual(await image.evaluate(img => [img.naturalWidth, img.naturalHeight]), [file.width, file.height]);
+        if (visual.source) assert.equal(await gallery.locator('figcaption a').last().getAttribute('href'), visual.source[locale === 'en' ? 1 : 0]);
+      }
+      assert.equal(await page.evaluate(() => document.documentElement.scrollWidth), width, slug);
+    }
   }
 
+  await page.setViewportSize({ width: 390, height: 844 });
   await open('/work/surgical-gauze-detection/#english');
   assert.equal(await page.locator('#english').count(), 1);
   assert.equal(await page.locator('#technical-diagram-en').count(), 1);
+  assert.equal(await page.locator('main .topic-hero img[src="/assets/cases/surgical-gauze.webp"]').count(), 1);
+  assert.ok(await page.locator('a[href="https://link.springer.com/article/10.1007/s10439-022-03033-9"]').count());
   assert.deepEqual(await page.locator('.case-evidence-facts dt').allTextContents(), ['成果歸屬', '專案成熟度', '公開證據分類']);
   await page.locator('#themeToggle').click();
   assert.equal(await page.locator('html').getAttribute('data-theme'), 'dark');
@@ -432,7 +446,7 @@ try {
   assert.equal(await page.locator('.nf-art').count(), 1);
   assert.deepEqual([...defects], []);
   await writeFile(resolve(out, 'layout.json'), JSON.stringify(snapshots, null, 2));
-  console.log('PASS brand copy, illustrated cases in both themes, navigation, language, AND case filters, Labs filters, 3 new demos, 5 GPU strategies, vision controls, DXF, benchmark and PDF downloads, video controls, form fallback and mocked retry, 10 preserved URLs, custom 404 and browser errors');
+  console.log('PASS brand copy, illustrated homepage in both themes, case evidence visuals, navigation, language, AND case filters, Labs filters, 3 new demos, 5 GPU strategies, vision controls, DXF, benchmark and PDF downloads, video controls, form fallback and mocked retry, 10 preserved URLs, custom 404 and browser errors');
 } finally {
   await browser.close();
 }

@@ -3,6 +3,7 @@ import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { caseDiagramIcons } from './case-diagram-icons.mjs';
 import { caseEvidence, evidenceTypes } from '../data/studio-case-evidence.mjs';
+import { caseVisuals } from '../data/case-visuals.mjs';
 import { featuredEvidence } from '../data/studio-featured.mjs';
 import { renderStudioPage, studioPath } from './vnext-layout.mjs';
 
@@ -92,24 +93,24 @@ function validateLink(href, project) {
 assert(slugs.size === portfolio.projects.length, 'Project slugs must be unique');
 assert(featured.size === portfolio.featured.length && featured.size >= 4 && featured.size <= 6, 'Use four to six distinct featured projects');
 for (const slug of featured) assert(slugs.has(slug), `Unknown featured project: ${slug}`);
+for (const slug of Object.keys(caseVisuals)) assert(slugs.has(slug), `Unknown case visual: ${slug}`);
 for (const slug of Object.keys(caseDiagrams)) assert(slugs.has(slug), `Unknown case diagram: ${slug}`);
 
 for (const project of portfolio.projects) {
   const classification = caseEvidence[project.slug];
   assert(classification?.types.every(type => Object.hasOwn(evidenceTypes, type)) && classification.types.length && /^[a-z-]+$/.test(classification.solution), `Missing evidence classification or solution: ${project.slug}`);
   const anchor = project.anchor ?? project.slug;
-  const visual = featuredEvidence[project.slug]?.visual;
-  if (visual) {
-    assert([1, 2].includes(visual.files.length), `Expected one shared or two localized featured images: ${project.slug}`);
+  for (const visual of caseVisuals[project.slug] ?? []) {
+    assert([1, 2].includes(visual.files.length), `Expected one shared or two localized case images: ${project.slug}`);
     for (const { path, width, height } of visual.files) {
-      assert(/^\/assets\/evidence\/featured\/[a-z0-9-]+\.webp$/.test(path)
-        && [width, height].every(value => Number.isInteger(value) && value > 0), `Invalid featured image: ${project.slug}`);
+      assert(/^\/assets\/evidence\/[a-z0-9/-]+\.webp$/.test(path)
+        && [width, height].every(value => Number.isInteger(value) && value > 0), `Invalid case image: ${project.slug}`);
       await access(resolve(root, path.slice(1)));
     }
-    assert([visual.alt, visual.caption].every(pair => Array.isArray(pair) && pair.length === languages.length), `Missing featured image translations: ${project.slug}`);
+    assert([visual.alt, visual.caption].every(pair => Array.isArray(pair) && pair.length === languages.length), `Missing case image translations: ${project.slug}`);
     for (const language of languages) {
-      requireText(label(visual, 'alt', language), `${project.slug} featured image alt`);
-      requireText(label(visual, 'caption', language), `${project.slug} featured image caption`);
+      requireText(label(visual, 'alt', language), `${project.slug} case image alt`);
+      requireText(label(visual, 'caption', language), `${project.slug} case image caption`);
       if (visual.source) validateLink(label(visual, 'source', language), project);
     }
   }
@@ -357,15 +358,14 @@ function evidenceGallery(project, language) {
   return `<div class="public-evidence-gallery">${items.join('')}</div>`;
 }
 
-function supportingImage(visual, language) {
-  if (!visual) return '';
+function caseVisualFigure(visual, language, priority) {
   const en = language === 'en';
   const { path, width, height } = visual.files[Number(en)] ?? visual.files[0];
   const source = visual.source
-    ? ` <a class="text-link" href="${escapeHtml(label(visual, 'source', language))}">${en ? 'Image source' : '圖片來源'}</a>`
+    ? ` <a class="text-link" href="${escapeHtml(label(visual, 'source', language))}">${en ? 'Source' : '來源'}</a>`
     : '';
   return `<figure class="case-supporting-image">
-          <a href="${escapeHtml(path)}"><img src="${escapeHtml(path)}" width="${width}" height="${height}" alt="${escapeHtml(label(visual, 'alt', language))}" loading="lazy" decoding="async"></a>
+          <a href="${escapeHtml(path)}"><img src="${escapeHtml(path)}" width="${width}" height="${height}" alt="${escapeHtml(label(visual, 'alt', language))}" decoding="async"${priority ? ' fetchpriority="high"' : ''}></a>
           <figcaption>${escapeHtml(label(visual, 'caption', language))}${source}</figcaption>
         </figure>`;
 }
@@ -419,7 +419,6 @@ function detailSections(project, language) {
         <p class="topic-lead">${escapeHtml(copy.validation)}</p>${proof ? `\n        <p class="topic-lead">${escapeHtml(label(proof, 'evidence', language))}</p>` : ''}
         <p class="entry-meta">${t.evidenceType} · ${escapeHtml(evidenceStatus(project, language))}</p>
         ${evidenceGallery(project, language)}
-        ${supportingImage(proof?.visual, language)}
         ${metrics ? `<dl class="topic-benchmark">${metrics}</dl>` : ''}
         ${refs.length ? `<nav class="entry-links" aria-label="${t.refs}">${linkList(refs)}</nav>` : ''}
       </div>
@@ -466,6 +465,10 @@ function detailPage(project, language) {
         </div>
       </div>${detailSections(project, 'en')}
     </section>`;
+  const visuals = caseVisuals[project.slug];
+  const heroMedia = visuals
+    ? `<div class="case-hero-visuals" id="case-images">${visuals.map((visual, index) => caseVisualFigure(visual, language, index === 0)).join('\n')}</div>`
+    : projectImage(project, { online: true, priority: true, language });
   const content = `<section class="topic-hero" aria-labelledby="project-title">
       <div class="wrap topic-hero-grid">
         <div>
@@ -484,7 +487,7 @@ function detailPage(project, language) {
             <a class="text-link" href="#${diagramAnchor(language)}">${sectionLabels[language].diagram}</a>
           </div>
         </div>
-        ${projectImage(project, { online: true, priority: true, language })}
+        ${heroMedia}
       </div>
     </section>${detailSections(project, language)}${translated}`;
   return renderStudioPage({

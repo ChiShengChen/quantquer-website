@@ -48,7 +48,7 @@
           "供審查的佈局及假設"
         ],
         "validation": "公開範圍是軟體設計交付。佈局檢查及節拍估算適用於設定的作業與限制，工廠驗收需依設備和場域另行執行。",
-        "disclosure": "保留匿名工程案例，圖像為設計流程示意。客戶圖面、現場資料與設備驗收結果留在原專案。",
+        "disclosure": "工程案例維持匿名。頁面展示創辦人獨立公開工具中的示例配置。客戶圖面、現場資料與設備驗收結果留在原專案。",
         "mediaAlt": "碼垛工作站與機器人配置的概念圖",
         "service": "討論機器人選型與工作站設計"
       },
@@ -70,7 +70,7 @@
           "Layouts and assumptions for engineering review"
         ],
         "validation": "The published scope covers a software design delivery. Layout checks and cycle-time estimates apply to the configured task and constraints. Factory acceptance depends on the physical equipment and site.",
-        "disclosure": "The engineering engagement is anonymized. The artwork illustrates the design workflow. Customer drawings, site data and equipment acceptance results remain with the project.",
+        "disclosure": "The engineering engagement is anonymized. The screenshot shows an example layout in the founder’s independent public tool. Customer drawings, site data and equipment acceptance results remain with the project.",
         "mediaAlt": "Concept illustration of a robotic palletizing workcell layout",
         "service": "Discuss robot selection and workcell design"
       },
@@ -115,7 +115,7 @@
           "期刊發表與跨資料集比較"
         ],
         "validation": "論文定義的群體、比較條件與結果適用於該研究。門診使用狀態由研究團隊成員公開說明。",
-        "disclosure": "此頁記載學術合作，呈現研究方法及公開來源。圖像為概念圖，本頁不提供病患資料。",
+        "disclosure": "此頁記載學術合作。圖片為作者公開的研究流程圖，本頁不提供病患資料。",
         "mediaAlt": "額葉腦波特徵用於療效研究的概念圖",
         "service": "討論訊號與臨床 AI 研究"
       },
@@ -136,7 +136,7 @@
           "Peer-reviewed results and cross-dataset comparison"
         ],
         "validation": "The population, comparisons and results reported in the paper apply to that study. A member of the research team publicly documented outpatient use.",
-        "disclosure": "This page describes an academic collaboration and cites its public research. The artwork is conceptual. Patient data is excluded.",
+        "disclosure": "This page describes an academic collaboration and includes the author’s public study workflow. Patient data is excluded.",
         "mediaAlt": "Concept illustration of frontal EEG features for treatment-response research",
         "service": "Discuss signal processing and clinical AI research"
       },
@@ -313,7 +313,7 @@
           "版本與引用評測方法"
         ],
         "validation": "歷史評測分別檢查版本選擇與引用。拒答也可能拿到高版本分數，因此只呈現有明確題集條件的引用結果。",
-        "disclosure": "匿名工程案例。圖像為知識流程概念圖，技術手冊與題集另行管理。",
+        "disclosure": "匿名工程案例。公開畫面以合成文件示範版本仲裁，客戶技術手冊與評測題集另行管理。",
         "mediaAlt": "企業文件、知識卡與引用查核流程的概念圖",
         "service": "討論企業技術知識庫"
       },
@@ -335,7 +335,7 @@
           "Version and citation evaluation method"
         ],
         "validation": "The historical evaluation checks version selection and citations separately. An abstention can score well on version selection, so this page reports citation results with their test-set context.",
-        "disclosure": "This engineering case is anonymized. The artwork illustrates the knowledge workflow. Technical manuals and evaluation questions are managed separately.",
+        "disclosure": "This engineering case is anonymized. The public screenshot demonstrates version arbitration with synthetic documents. Customer manuals and evaluation questions are managed separately.",
         "mediaAlt": "Concept illustration of enterprise documents, knowledge cards and citation checking",
         "service": "Discuss an enterprise technical knowledge base"
       },
@@ -521,6 +521,11 @@
       ],
       "references": [
         {
+          "href": "https://link.springer.com/article/10.1007/s10439-022-03033-9",
+          "zh": "共同發表的論文與圖例 · 腹腔鏡術中紗布辨識",
+          "en": "Co-authored paper and figures · Intraoperative surgical gauze detection"
+        },
+        {
           "href": "https://cdn.who.int/media/docs/default-source/patient-safety/9789241598590-eng-checklist.pdf",
           "zh": "紗布盤點流程背景 · WHO 手術安全查核表",
           "en": "Counting workflow context · WHO Surgical Safety Checklist"
@@ -671,7 +676,7 @@
           "對話解說與個人化練習流程"
         ],
         "validation": "公開內容展示教學功能和使用情境。判讀學習成效須有獨立的評估設計及資料。",
-        "disclosure": "獨立教育應用。圖像為概念圖，學生個資及使用紀錄不在公開範圍。",
+        "disclosure": "獨立教育應用。公開畫面顯示學習模式選單，學生個資及使用紀錄不在公開範圍。",
         "mediaAlt": "個人化物理家教與教學路徑的概念圖",
         "service": "討論客製化 AI Agent"
       },
@@ -692,7 +697,7 @@
           "Dialogue explanations and adaptive practice"
         ],
         "validation": "The public description covers teaching features and usage. Claims about learning outcomes require a separate evaluation design and data.",
-        "disclosure": "This is an independent educational application. The artwork is conceptual. Student identities and usage records are excluded.",
+        "disclosure": "This is an independent educational application. The public screen shows the learning-mode menu. Student identities and usage records are excluded.",
         "mediaAlt": "Concept illustration of an adaptive physics tutor and learning path",
         "service": "Discuss a custom AI Agent"
       },
