@@ -1,0 +1,179 @@
+{
+  "industrial-robotics": {
+    "zh": { "title": "從工站需求到可交付的設計", "note": "工程流程圖解。節拍與可達性依工站配置估算，現場驗收另行量測。" },
+    "en": { "title": "From workcell requirements to design deliverables", "note": "Engineering workflow diagram. Cycle time and reach depend on the workcell configuration. Site acceptance uses separate measurements." },
+    "stages": [
+      { "icon": "layout", "zh": "需求與廠房圖面", "en": "Requirements and facility drawings" },
+      { "icon": "arm", "zh": "設備選型與可達性", "en": "Equipment selection and reach" },
+      { "icon": "package", "zh": "方案比較與交付", "en": "Design comparison and handover" }
+    ]
+  },
+  "eeg-treatment-response": {
+    "zh": { "title": "從治療前額葉腦波到跨資料集驗證", "note": "依創辦人共同發表的研究繪製。圖解呈現訊號、特徵與驗證設計，預測表現以論文的研究條件為準。" },
+    "en": { "title": "From pretreatment frontal EEG to cross-dataset validation", "note": "Original diagram based on the founder’s co-authored study. It shows signal, feature and validation stages. The paper defines the conditions for predictive performance." },
+    "stages": [
+      { "icon": "eeg", "zh": "治療前額葉 EEG", "en": "Pretreatment frontal EEG" },
+      { "icon": "features", "zh": "特徵與分類比較", "en": "Feature and classifier comparison" },
+      { "icon": "cohorts", "zh": "獨立資料集驗證", "en": "Validation across datasets" }
+    ],
+    "sources": [
+      { "href": "https://pubmed.ncbi.nlm.nih.gov/37579885/", "zh": "創辦人共同發表 · 額葉 EEG 與療效預測", "en": "Founder co-authored study on frontal EEG and treatment response" }
+    ]
+  },
+  "ngs-denoising": {
+    "zh": { "title": "定序影像的訊號與背景分離", "note": "工程流程圖解。訊號圖樣為概念示意，兩種方法的比較需使用相同輸入與品質指標。" },
+    "en": { "title": "Separating signal from background in sequencing images", "note": "Engineering workflow diagram with schematic signal patterns. Compare both methods using the same inputs and quality measure." },
+    "stages": [
+      { "icon": "noise", "zh": "辨識訊號與背景", "en": "Identify signal and background" },
+      { "icon": "filter", "zh": "依訊號特性降噪", "en": "Denoise for the signal characteristics" },
+      { "icon": "quality", "zh": "與基準影像比較", "en": "Compare with baseline images" }
+    ]
+  },
+  "financial-intelligence": {
+    "zh": { "title": "從來源文件到可回查的投資研究", "note": "產品流程圖解。下方論文是創辦人在股市預測與金融再平衡的相關研究，範圍為各論文所載的歷史資料與實驗方法。" },
+    "en": { "title": "From source documents to traceable investment research", "note": "Product workflow diagram. The linked papers are the founder’s related research on equity forecasting and rebalancing. Their findings apply to the stated datasets and experiments." },
+    "stages": [
+      { "icon": "documents", "zh": "匯整原始資料", "en": "Collect source documents" },
+      { "icon": "graph", "zh": "建立公司與供應鏈關係", "en": "Connect companies and supply chains" },
+      { "icon": "workspace", "zh": "研究工作區與引用", "en": "Work with queries and citations" }
+    ],
+    "sources": [
+      { "href": "https://arxiv.org/abs/2512.06630", "zh": "創辦人相關預印本 · 橫斷面股票報酬預測", "en": "Founder’s related preprint on cross-sectional equity return prediction" },
+      { "href": "https://arxiv.org/abs/2509.16955", "zh": "創辦人相關研究 · AMM 再平衡", "en": "Founder’s related research on AMM rebalancing" }
+    ]
+  },
+  "enterprise-knowledge-arbitration": {
+    "zh": { "title": "有版本衝突時如何產生可查核的回答", "note": "工程流程圖解。從文件主張、來源與版本一路保留到答案，讓專家覆核後可回寫裁決。" },
+    "en": { "title": "How conflicting document versions become a verifiable answer", "note": "Engineering workflow diagram. Claims retain source and version information through to the answer so experts can review and record a decision." },
+    "stages": [
+      { "icon": "documents", "zh": "抽取文件主張與版本", "en": "Extract claims and document versions" },
+      { "icon": "arbitration", "zh": "依權威與版本解衝突", "en": "Resolve conflicts by authority and version" },
+      { "icon": "citation", "zh": "答案、引用與專家覆核", "en": "Answer, citations and expert review" }
+    ]
+  },
+  "floorplan-automation": {
+    "zh": { "title": "平面圖從幾何線段變成可編輯的上色圖", "note": "工程流程圖解。區域辨識、材質疊圖與人工修正分階段處理。" },
+    "en": { "title": "Turning floor-plan geometry into an editable colored drawing", "note": "Engineering workflow diagram. Region recognition, material overlays and human corrections are processed in distinct stages." },
+    "stages": [
+      { "icon": "layout", "zh": "解析平面圖線段", "en": "Parse floor-plan geometry" },
+      { "icon": "regions", "zh": "定位區域並套用樣式", "en": "Locate regions and apply styles" },
+      { "icon": "layers", "zh": "修正並批次輸出", "en": "Review corrections and export" }
+    ]
+  },
+  "fall-detection": {
+    "zh": { "title": "從邊緣感測到人員覆核", "note": "工程流程圖解。場域的感測位置、可見範圍與誤報需依部署條件驗證。" },
+    "en": { "title": "From edge sensing to staff review", "note": "Engineering workflow diagram. Sensor placement, coverage and false alerts require validation under the deployment conditions." },
+    "stages": [
+      { "icon": "sensing", "zh": "擷取場域活動訊號", "en": "Capture activity signals" },
+      { "icon": "edge", "zh": "邊緣端辨識候選事件", "en": "Identify candidate events at the edge" },
+      { "icon": "alert", "zh": "告警並保留覆核紀錄", "en": "Alert staff and retain review records" }
+    ]
+  },
+  "surgical-gauze-detection": {
+    "zh": { "title": "從體內術野辨識紗布並建立時間線", "note": "依創辦人共同發表的研究繪製。論文評估腹腔鏡或微創手術影片中的紗布辨識與出現時間線，工程案例另列候選訓練設定及驗證項目。" },
+    "en": { "title": "From gauze detection inside the operative field to a review timeline", "note": "Original diagram informed by the founder’s co-authored studies. The studies assess gauze detection and appearance timelines in laparoscopic or minimally invasive surgical video. The engineering case lists candidate training settings and validation separately." },
+    "stages": [
+      { "icon": "gauze", "zh": "標註體內術野可見的紗布", "en": "Annotate gauze visible inside the patient" },
+      { "icon": "detector", "zh": "比較偵測模型與誤報過濾", "en": "Compare detectors and false-positive filtering" },
+      { "icon": "timeline", "zh": "對照時間線與人工標註", "en": "Compare the timeline against annotations" }
+    ],
+    "sources": [
+      { "href": "https://scholars.lib.ntu.edu.tw/entities/publication/23eb5cb5-098b-4a86-bed9-6dfda82ba102", "zh": "共同發表 · 腹腔鏡紗布辨識（2023）", "en": "Co-authored study on laparoscopic gauze detection (2023)" },
+      { "href": "https://scholars.lib.ntu.edu.tw/entities/publication/3d3132c6-e8f4-4543-a109-843eebfec194", "zh": "共同發表 · 微創手術紗布辨識與追蹤（2026）", "en": "Co-authored study on gauze detection and tracking (2026)" }
+    ]
+  },
+  "pig-behavior-tracking": {
+    "zh": { "title": "以同一個追蹤 ID 串起豬隻動作片段", "note": "工程評估流程圖解。驗收項目包括交會或遮擋後的 ID 切換、站立／行走／躺臥的分類差異與串流延遲。" },
+    "en": { "title": "Linking pig behavior clips through a consistent track ID", "note": "Engineering evaluation diagram. Test ID switches after crossings or occlusion, errors among standing, walking and lying, and streaming latency." },
+    "stages": [
+      { "icon": "pen", "zh": "豬舍影像與個體定位", "en": "Pen video and individual detections" },
+      { "icon": "tracks", "zh": "跨影格連結同一隻豬", "en": "Link individual pigs across frames" },
+      { "icon": "actions", "zh": "辨識動作片段與起迄", "en": "Classify and timestamp actions" }
+    ]
+  },
+  "adaptive-physics-tutor": {
+    "zh": { "title": "教材檢索如何支援普物解說與練習", "note": "教學流程圖解。教材索引和學生狀態用於組織解說與練習。" },
+    "en": { "title": "How course retrieval supports physics explanations and practice", "note": "Teaching workflow diagram. The course index and student state help organize explanations and exercises." },
+    "stages": [
+      { "icon": "documents", "zh": "整理課程教材", "en": "Organize course materials" },
+      { "icon": "search", "zh": "依問題檢索與解說", "en": "Retrieve and explain relevant material" },
+      { "icon": "lesson", "zh": "安排個別練習與複習", "en": "Select practice and review" }
+    ]
+  },
+  "on-device-generative-vision": {
+    "zh": { "title": "從遮罩、修補候選到裝置驗收", "note": "工程流程圖解。公開實測涵蓋 MI-GAN 與 Telea 的桌面 CPU 靜態影像，創辦人的 Diffusion 論文提供另一項生成方法的研究背景。" },
+    "en": { "title": "From the mask and inpainting candidates to device validation", "note": "Engineering workflow diagram. The public experiment covers MI-GAN and Telea on desktop CPU still images. The founder’s diffusion paper provides research context for another generation approach." },
+    "stages": [
+      { "icon": "mask", "zh": "建立人物遮罩", "en": "Create the person mask" },
+      { "icon": "inpaint", "zh": "比較修補候選輸出", "en": "Compare inpainting outputs" },
+      { "icon": "edge", "zh": "規劃裝置上的部署驗收", "en": "Plan validation on the target device" }
+    ],
+    "sources": [
+      { "href": "/labs/evidence/vision/#comparison", "zh": "查看 MI-GAN／Telea 實際輸出", "en": "Compare measured MI-GAN and Telea outputs" },
+      { "href": "https://openaccess.thecvf.com/content/ICCV2023/papers/Sargsyan_MI-GAN_A_Simple_Baseline_for_Image_Inpainting_on_Mobile_Devices_ICCV_2023_paper.pdf", "zh": "方法來源 · MI-GAN 論文圖 2", "en": "Method reference · MI-GAN paper, Figure 2" },
+      { "href": "https://arxiv.org/abs/2509.14163", "zh": "創辦人相關研究 · Diffusion 影像生成", "en": "Founder’s related research on diffusion image synthesis" }
+    ]
+  },
+  "photonic-computing": {
+    "zh": { "title": "單一干涉單元如何組成多級光路", "note": "軟體模擬流程圖解。Clements 等人的論文圖 1 提供干涉儀網格的拓撲背景。本站四通道範例的數值可在獨立模擬中核對。" },
+    "en": { "title": "How individual interferometers form a multistage optical path", "note": "Software simulation diagram. Figure 1 of Clements et al. provides topology background. The site’s four-channel example can be checked in the independent simulation." },
+    "stages": [
+      { "icon": "mzi", "zh": "建立雙臂 MZI", "en": "Model a two-arm MZI" },
+      { "icon": "mesh", "zh": "交錯耦合並逐級傳播", "en": "Couple adjacent channels and propagate by stage" },
+      { "icon": "ports", "zh": "對照理想與故障輸出", "en": "Compare ideal and faulty outputs" }
+    ],
+    "sources": [
+      { "href": "https://arxiv.org/html/1603.08788", "zh": "拓撲背景 · Clements 等人論文圖 1", "en": "Topology background · Clements et al., Figure 1" },
+      { "href": "/labs/evidence/photonics/#simulator", "zh": "操作四階段網格模擬", "en": "Run the four-stage mesh simulation" }
+    ]
+  },
+  "gpu-orchestration": {
+    "zh": { "title": "任務從排隊、准入到釋放資源", "note": "圖解說明 FIFO 與回填的合成比較。另一份實跑紀錄呈現單工作站的 CUDA／CPU 排程時間與 VRAM 取樣。" },
+    "en": { "title": "How jobs wait, receive resources and release them", "note": "The diagram explains the synthetic FIFO and backfill comparison. A separate single-workstation run provides real CUDA/CPU timestamps and VRAM samples." },
+    "stages": [
+      { "icon": "resources", "zh": "宣告 CPU 與 VRAM 需求", "en": "Declare CPU and VRAM requirements" },
+      { "icon": "queue", "zh": "依策略及可用容量准入", "en": "Admit jobs by policy and available capacity" },
+      { "icon": "gantt", "zh": "釋放資源並更新時間軸", "en": "Release resources and update the timeline" }
+    ],
+    "sources": [
+      { "href": "/labs/evidence/gpu/", "zh": "單工作站 CUDA／CPU 實跑回放", "en": "Recorded CUDA and CPU run on one workstation" }
+    ]
+  },
+  "research-automation": {
+    "zh": { "title": "把主張追溯到原文、數字與審查紀錄", "note": "依公開 Paper Evidence 工具繪製。引文和數字的查核可在重現實驗中逐筆核對。" },
+    "en": { "title": "Trace claims back to passages, numbers and review records", "note": "Original diagram based on the public Paper Evidence tool. Individual quote and number checks can be inspected in the reproducible run." },
+    "stages": [
+      { "icon": "evidence", "zh": "保留證據卡與原文位置", "en": "Record evidence cards and source locations" },
+      { "icon": "citation", "zh": "核對字句與附近數字", "en": "Check the quote and nearby numbers" },
+      { "icon": "checks", "zh": "標註仍需審查的主張", "en": "Flag claims for review" }
+    ],
+    "sources": [
+      { "href": "https://github.com/ChiShengChen/paper-evidence", "zh": "創辦人公開工具 · Paper Evidence", "en": "Founder’s public Paper Evidence repository" },
+      { "href": "/labs/evidence/research/", "zh": "四種引文查核結果", "en": "Review the four recorded quote checks" }
+    ]
+  },
+  "professional-speech-research": {
+    "zh": { "title": "拆開評估轉寫、術語校正與資訊抽取", "note": "研究流程圖解。創辦人共同發表的會議口頭報告聚焦院前急救通訊與後續預測，個案辨識與抽取效能需依各自的資料和指標評估。" },
+    "en": { "title": "Evaluate transcription, terminology correction and extraction separately", "note": "Research workflow diagram. The founder’s co-authored conference presentation addresses prehospital radio communication and downstream prediction. Recognition and extraction each require an appropriate dataset and metric." },
+    "stages": [
+      { "icon": "waveform", "zh": "將通訊語音轉成文字", "en": "Transcribe the audio" },
+      { "icon": "correction", "zh": "比對術語與抽取資訊", "en": "Review terms and extracted information" },
+      { "icon": "comparison", "zh": "分開保存輸出供核對", "en": "Retain separate outputs for review" }
+    ],
+    "sources": [
+      { "href": "https://chishengchen.github.io/publications.html#abstracts", "zh": "共同發表 · 院前急救通訊會議報告（ACS 2026）", "en": "Co-authored ACS 2026 presentation on prehospital radio communication" }
+    ]
+  },
+  "amm-rebalancing-research": {
+    "zh": { "title": "固定歷史條件，比較資產部位再平衡模型", "note": "依創辦人共同發表的研究繪製。比較在同一歷史區間及時間切分下進行，指標的適用範圍以論文的模擬條件為準。" },
+    "en": { "title": "Comparing rebalancing models under shared historical conditions", "note": "Original diagram based on the founder’s co-authored study. Models share a historical period and chronological splits. The paper defines the simulation conditions for each metric." },
+    "stages": [
+      { "icon": "rebalance", "zh": "定義是否再平衡的決策", "en": "Define the rebalance decision" },
+      { "icon": "history", "zh": "依時間切分並比較模型", "en": "Split by time and compare models" },
+      { "icon": "comparison", "zh": "對照報酬與風險指標", "en": "Compare return and risk measures" }
+    ],
+    "sources": [
+      { "href": "https://arxiv.org/html/2509.16955v1", "zh": "創辦人共同發表 · QASA 與 AMM 再平衡", "en": "Founder co-authored study on QASA and AMM rebalancing" }
+    ]
+  }
+}

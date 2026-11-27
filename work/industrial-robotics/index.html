@@ -52,6 +52,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700&amp;family=Noto+Sans+TC:wght@300;400;500&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/site.css">
+  <link rel="stylesheet" href="/assets/case-diagram.css">
   <script type="module" src="/assets/analytics.mjs"></script>
 </head>
 <body class="topic-page" data-project="industrial-robotics">
@@ -81,6 +82,7 @@
           <div class="entry-links">
             <a class="btn btn-primary" href="/project-planner/?service=robotics" data-analytics="service_cta_clicked" data-project="industrial-robotics" data-service="robotics">建立專案需求</a>
 
+            <a class="text-link" href="#technical-diagram">技術圖解</a>
           </div>
         </div>
         <figure class="cfig topic-figure"><img src="/assets/cases/robot.webp" srcset="/assets/cases/robot-768.webp 768w, /assets/cases/robot.webp 1536w, /assets/cases/robot-3072.webp 3072w" sizes="(max-width: 400px) calc(100vw - 40px), (max-width: 760px) 90vw, (max-width: 1180px) 45vw, 530px" alt="碼垛工作站與機器人配置的概念圖" width="1536" height="1024" fetchpriority="high"></figure>
@@ -95,9 +97,33 @@
     <section class="topic-section axis-divider">
       <div class="wrap">
         <h2>技術方法與架構</h2>
-        <figure class="topic-flow">
-          <figcaption>處理流程</figcaption>
-          <ol><li><span>從自然語言需求抽取工程規格，並整合廠房 CAD 圖面。</span></li><li><span>篩選機器人與設備候選，建立工作站佈局並檢查空間可達性。</span></li><li><span>比較候選方案的節拍估算與運動限制，輸出 2D／3D 檢視、CAD 與物料清單。</span></li></ol>
+        <figure class="case-diagram" id="technical-diagram" aria-labelledby="technical-diagram-caption">
+          <figcaption id="technical-diagram-caption">從工站需求到可交付的設計</figcaption>
+          <ol class="case-diagram-stages" role="list">
+            <li>
+              <svg class="case-diagram-icon" viewBox="0 0 96 64" width="96" height="64" aria-hidden="true" focusable="false"><rect x="13" y="10" width="70" height="44"/><path d="M44 10v17m0 10v17M13 32h20m11 0h17m10 0h12"/><path class="accent" d="M18 15h21v12H18zm31 22h28v12H49z"/></svg>
+              <div>
+                <strong>需求與廠房圖面</strong>
+                <p>從自然語言需求抽取工程規格，並整合廠房 CAD 圖面。</p>
+              </div>
+            </li>
+            <li>
+              <svg class="case-diagram-icon" viewBox="0 0 96 64" width="96" height="64" aria-hidden="true" focusable="false"><path d="M17 53h62M30 53l5-10 12-11m-6-6 12-10m6 5 10 5v7m-4 0h8"/><circle cx="34" cy="44" r="5"/><circle cx="44" cy="28" r="6"/><circle cx="57" cy="17" r="6"/><path class="accent" d="M69 39h13m-7-5v10M15 42a28 28 0 0 1 22-26"/></svg>
+              <div>
+                <strong>設備選型與可達性</strong>
+                <p>篩選機器人與設備候選，建立工作站佈局並檢查空間可達性。</p>
+              </div>
+            </li>
+            <li>
+              <svg class="case-diagram-icon" viewBox="0 0 96 64" width="96" height="64" aria-hidden="true" focusable="false"><path d="m14 22 19-10 19 10v23L33 55l-19-10zM14 22l19 10 19-10M33 32v23M60 18h20m-20 9h20m-20 9h16m-16 9h20"/><path class="accent" d="m60 52 4 4 7-7"/></svg>
+              <div>
+                <strong>方案比較與交付</strong>
+                <p>比較候選方案的節拍估算與運動限制，輸出 2D／3D 檢視、CAD 與物料清單。</p>
+              </div>
+            </li>
+          </ol>
+          <p class="case-diagram-note">工程流程圖解。節拍與可達性依工站配置估算，現場驗收另行量測。</p>
+
         </figure>
       </div>
     </section>
@@ -146,6 +172,7 @@
           <a class="text-link" href="#project-title" lang="zh-Hant">繁體中文</a>
           <a class="text-link" href="/project-planner/?service=robotics&amp;lang=en" data-analytics="service_cta_clicked" data-project="industrial-robotics" data-service="robotics">Plan a project</a>
 
+          <a class="text-link" href="#technical-diagram-en">Technical diagram</a>
         </div>
       </div>
     <section class="topic-section axis-divider">
@@ -157,9 +184,33 @@
     <section class="topic-section axis-divider">
       <div class="wrap">
         <h2>Technical approach and architecture</h2>
-        <figure class="topic-flow">
-          <figcaption>Workflow</figcaption>
-          <ol><li><span>Extract engineering requirements from natural language and incorporate facility CAD drawings.</span></li><li><span>Screen robot and equipment candidates, build workcell layouts and check spatial reachability.</span></li><li><span>Compare candidate cycle-time estimates and motion constraints, then export 2D and 3D views, CAD and a bill of materials.</span></li></ol>
+        <figure class="case-diagram" id="technical-diagram-en" aria-labelledby="technical-diagram-en-caption">
+          <figcaption id="technical-diagram-en-caption">From workcell requirements to design deliverables</figcaption>
+          <ol class="case-diagram-stages" role="list">
+            <li>
+              <svg class="case-diagram-icon" viewBox="0 0 96 64" width="96" height="64" aria-hidden="true" focusable="false"><rect x="13" y="10" width="70" height="44"/><path d="M44 10v17m0 10v17M13 32h20m11 0h17m10 0h12"/><path class="accent" d="M18 15h21v12H18zm31 22h28v12H49z"/></svg>
+              <div>
+                <strong>Requirements and facility drawings</strong>
+                <p>Extract engineering requirements from natural language and incorporate facility CAD drawings.</p>
+              </div>
+            </li>
+            <li>
+              <svg class="case-diagram-icon" viewBox="0 0 96 64" width="96" height="64" aria-hidden="true" focusable="false"><path d="M17 53h62M30 53l5-10 12-11m-6-6 12-10m6 5 10 5v7m-4 0h8"/><circle cx="34" cy="44" r="5"/><circle cx="44" cy="28" r="6"/><circle cx="57" cy="17" r="6"/><path class="accent" d="M69 39h13m-7-5v10M15 42a28 28 0 0 1 22-26"/></svg>
+              <div>
+                <strong>Equipment selection and reach</strong>
+                <p>Screen robot and equipment candidates, build workcell layouts and check spatial reachability.</p>
+              </div>
+            </li>
+            <li>
+              <svg class="case-diagram-icon" viewBox="0 0 96 64" width="96" height="64" aria-hidden="true" focusable="false"><path d="m14 22 19-10 19 10v23L33 55l-19-10zM14 22l19 10 19-10M33 32v23M60 18h20m-20 9h20m-20 9h16m-16 9h20"/><path class="accent" d="m60 52 4 4 7-7"/></svg>
+              <div>
+                <strong>Design comparison and handover</strong>
+                <p>Compare candidate cycle-time estimates and motion constraints, then export 2D and 3D views, CAD and a bill of materials.</p>
+              </div>
+            </li>
+          </ol>
+          <p class="case-diagram-note">Engineering workflow diagram. Cycle time and reach depend on the workcell configuration. Site acceptance uses separate measurements.</p>
+
         </figure>
       </div>
     </section>

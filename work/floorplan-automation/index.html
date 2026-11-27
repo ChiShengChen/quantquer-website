@@ -52,6 +52,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700&amp;family=Noto+Sans+TC:wght@300;400;500&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/site.css">
+  <link rel="stylesheet" href="/assets/case-diagram.css">
   <script type="module" src="/assets/analytics.mjs"></script>
 </head>
 <body class="topic-page" data-project="floorplan-automation">
@@ -81,6 +82,7 @@
           <div class="entry-links">
             <a class="btn btn-primary" href="/project-planner/?service=domain-rd" data-analytics="service_cta_clicked" data-project="floorplan-automation" data-service="domain-rd">建立專案需求</a>
 
+            <a class="text-link" href="#technical-diagram">技術圖解</a>
           </div>
         </div>
         <figure class="cfig topic-figure"><img src="/assets/cases/floorplan.webp" srcset="/assets/cases/floorplan-768.webp 768w, /assets/cases/floorplan.webp 1536w, /assets/cases/floorplan-3072.webp 3072w" sizes="(max-width: 400px) calc(100vw - 40px), (max-width: 760px) 90vw, (max-width: 1180px) 45vw, 530px" alt="自動分區上色與標註平面圖的概念圖" width="1536" height="1024" fetchpriority="high"></figure>
@@ -95,9 +97,33 @@
     <section class="topic-section axis-divider">
       <div class="wrap">
         <h2>技術方法與架構</h2>
-        <figure class="topic-flow">
-          <figcaption>處理流程</figcaption>
-          <ol><li><span>以幾何演算法處理標準圖面，依圖面特徵選擇辨識方法。</span></li><li><span>定位房間與家具，套用材質、陰影及面積標註。</span></li><li><span>保留繪圖人員的修正及多樓層批次輸出流程。</span></li></ol>
+        <figure class="case-diagram" id="technical-diagram" aria-labelledby="technical-diagram-caption">
+          <figcaption id="technical-diagram-caption">平面圖從幾何線段變成可編輯的上色圖</figcaption>
+          <ol class="case-diagram-stages" role="list">
+            <li>
+              <svg class="case-diagram-icon" viewBox="0 0 96 64" width="96" height="64" aria-hidden="true" focusable="false"><rect x="13" y="10" width="70" height="44"/><path d="M44 10v17m0 10v17M13 32h20m11 0h17m10 0h12"/><path class="accent" d="M18 15h21v12H18zm31 22h28v12H49z"/></svg>
+              <div>
+                <strong>解析平面圖線段</strong>
+                <p>以幾何演算法處理標準圖面，依圖面特徵選擇辨識方法。</p>
+              </div>
+            </li>
+            <li>
+              <svg class="case-diagram-icon" viewBox="0 0 96 64" width="96" height="64" aria-hidden="true" focusable="false"><rect x="13" y="9" width="70" height="46"/><path d="M43 9v46M43 31h40"/><path class="accent tint" d="M18 14h20v36H18zm30 0h30v12H48zm0 22h30v14H48z"/></svg>
+              <div>
+                <strong>定位區域並套用樣式</strong>
+                <p>定位房間與家具，套用材質、陰影及面積標註。</p>
+              </div>
+            </li>
+            <li>
+              <svg class="case-diagram-icon" viewBox="0 0 96 64" width="96" height="64" aria-hidden="true" focusable="false"><path d="m12 25 36-15 36 15-36 15zM12 33l36 15 36-15M12 41l36 15 36-15"/><path class="accent" d="m33 25 15-6 15 6-15 6z"/></svg>
+              <div>
+                <strong>修正並批次輸出</strong>
+                <p>保留繪圖人員的修正及多樓層批次輸出流程。</p>
+              </div>
+            </li>
+          </ol>
+          <p class="case-diagram-note">工程流程圖解。區域辨識、材質疊圖與人工修正分階段處理。</p>
+
         </figure>
       </div>
     </section>
@@ -150,6 +176,7 @@
           <a class="text-link" href="#project-title" lang="zh-Hant">繁體中文</a>
           <a class="text-link" href="/project-planner/?service=domain-rd&amp;lang=en" data-analytics="service_cta_clicked" data-project="floorplan-automation" data-service="domain-rd">Plan a project</a>
 
+          <a class="text-link" href="#technical-diagram-en">Technical diagram</a>
         </div>
       </div>
     <section class="topic-section axis-divider">
@@ -161,9 +188,33 @@
     <section class="topic-section axis-divider">
       <div class="wrap">
         <h2>Technical approach and architecture</h2>
-        <figure class="topic-flow">
-          <figcaption>Workflow</figcaption>
-          <ol><li><span>Process standardized drawings geometrically and select recognition methods according to drawing features.</span></li><li><span>Locate rooms and furniture, then apply materials, shadows and area labels.</span></li><li><span>Retain manual correction and multi-floor batch export workflows.</span></li></ol>
+        <figure class="case-diagram" id="technical-diagram-en" aria-labelledby="technical-diagram-en-caption">
+          <figcaption id="technical-diagram-en-caption">Turning floor-plan geometry into an editable colored drawing</figcaption>
+          <ol class="case-diagram-stages" role="list">
+            <li>
+              <svg class="case-diagram-icon" viewBox="0 0 96 64" width="96" height="64" aria-hidden="true" focusable="false"><rect x="13" y="10" width="70" height="44"/><path d="M44 10v17m0 10v17M13 32h20m11 0h17m10 0h12"/><path class="accent" d="M18 15h21v12H18zm31 22h28v12H49z"/></svg>
+              <div>
+                <strong>Parse floor-plan geometry</strong>
+                <p>Process standardized drawings geometrically and select recognition methods according to drawing features.</p>
+              </div>
+            </li>
+            <li>
+              <svg class="case-diagram-icon" viewBox="0 0 96 64" width="96" height="64" aria-hidden="true" focusable="false"><rect x="13" y="9" width="70" height="46"/><path d="M43 9v46M43 31h40"/><path class="accent tint" d="M18 14h20v36H18zm30 0h30v12H48zm0 22h30v14H48z"/></svg>
+              <div>
+                <strong>Locate regions and apply styles</strong>
+                <p>Locate rooms and furniture, then apply materials, shadows and area labels.</p>
+              </div>
+            </li>
+            <li>
+              <svg class="case-diagram-icon" viewBox="0 0 96 64" width="96" height="64" aria-hidden="true" focusable="false"><path d="m12 25 36-15 36 15-36 15zM12 33l36 15 36-15M12 41l36 15 36-15"/><path class="accent" d="m33 25 15-6 15 6-15 6z"/></svg>
+              <div>
+                <strong>Review corrections and export</strong>
+                <p>Retain manual correction and multi-floor batch export workflows.</p>
+              </div>
+            </li>
+          </ol>
+          <p class="case-diagram-note">Engineering workflow diagram. Region recognition, material overlays and human corrections are processed in distinct stages.</p>
+
         </figure>
       </div>
     </section>

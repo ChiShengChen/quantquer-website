@@ -527,13 +527,13 @@
       "zh": {
         "title": "手術中體內紗布即時辨識",
         "summary": "在術中影像中定位患者體內術野可見的紗布，提供影格標記供醫護人員覆核。",
-        "metaDescription": "手術中體內紗布即時辨識工程案例。以 YOLOv6 與 YOLOv7 的單類別偵測設定，規劃定位患者體內術野可見的紗布，以及遮擋、誤報和端到端延遲驗證。",
+        "metaDescription": "手術中體內紗布即時辨識。圖解從微創手術影片標註體內可見紗布、比較物件偵測模型，到用出現時間線與人工標註對照。附創辦人共同發表的研究與工程驗證範圍。",
         "problem": "紗布置於患者體內術野時，可見範圍會隨取像角度與遮擋變動。畫面上的位置與時間標記能協助醫護回看特定影格。",
         "challenge": "紗布摺疊、變形或部分被組織與器械遮擋時，影像中的外觀可能改變。術野反光與畫面模糊也須納入測試。",
         "approach": [
-          "在術中影像標註體內術野可見的紗布，區分訓練、驗證與測試片段。",
-          "準備 YOLOv6 與 YOLOv7 的紗布訓練設定，作為比較候選。",
-          "規劃將定位框與影格時間戳一起顯示，供人工覆核及延遲測試。"
+          "在微創手術影片的影格標註體內術野可見的紗布。",
+          "公開研究比較 YOLO 系列與 Faster R-CNN，並評估過濾誤報的調節模組。",
+          "將偵測結果轉為紗布出現的時間線，逐影格與人工標註對照。"
         ],
         "implementation": "已有 YOLOv6 與 YOLOv7 的紗布單類別設定及訓練入口。針對體內術野的串流方案，規劃分段量測取像、推論及疊圖時間。",
         "result": "已備妥單類別訓練資料切分設定與兩組候選模型的訓練入口。",
@@ -542,7 +542,7 @@
           "影像疊圖與人工覆核流程規劃",
           "工況與端到端延遲驗證計畫"
         ],
-        "validation": "後續以經授權的獨立術中影像評估可見紗布的漏檢、誤報和從取像到疊圖的延遲，並記錄遮擋程度。臨床使用與實際效能待驗證。",
+        "validation": "共同發表的研究用手術影片和人工標註驗證辨識與時間線。工程端的串流部署另需以經授權的獨立影像評估漏檢、誤報及端到端延遲。",
         "disclosure": "匿名研發案例。辨識範圍是術中影像裡可見的體內紗布，定位標記供人工覆核。配圖為剖面概念示意。",
         "mediaAlt": "剖面示意圖，辨識框標出患者體內術野中的紗布",
         "service": "討論手術影像辨識技術"
@@ -553,9 +553,9 @@
         "problem": "The view of gauze placed inside the patient can change with camera angle and occlusion. Position markers and timestamps help staff revisit a particular frame.",
         "challenge": "Folding, deformation and partial occlusion by tissue or instruments can change how gauze appears. Glare and blur in the operative field also need separate testing.",
         "approach": [
-          "Annotate gauze visible inside the patient as a single object class and separate training, validation and test clips.",
-          "Prepare gauze training configurations for YOLOv6 and YOLOv7 as comparison candidates.",
-          "Plan timestamped detection boxes for human review and latency testing."
+          "Annotate gauze visible inside the patient in frames from minimally invasive surgical video.",
+          "The published studies compare YOLO-family detectors and Faster R-CNN, and assess a regulating module for false detections.",
+          "Convert detections to a gauze appearance timeline and compare it frame by frame with human annotations."
         ],
         "implementation": "Single-class gauze configurations and training entry points exist for YOLOv6 and YOLOv7. The planned streaming evaluation of the internal operative field times capture, inference and the overlay separately.",
         "result": "The existing work includes dataset split definitions and entry points for training both detector candidates.",
@@ -564,7 +564,7 @@
           "Planned video overlay and human review workflow",
           "Test plan for operating conditions and end-to-end latency"
         ],
-        "validation": "Use authorized, held-out intraoperative clips to measure misses, false detections and capture-to-overlay latency for visible gauze. Document the degree of occlusion. Clinical use and performance await validation.",
+        "validation": "The co-authored studies evaluated detection and timelines against human annotations in surgical video. Streaming deployment requires separate validation of misses, false detections and end-to-end latency using authorized held-out clips.",
         "disclosure": "This anonymized development case covers gauze visible inside the patient in operative footage. Detection boxes support human review. The image is a conceptual cutaway.",
         "mediaAlt": "Conceptual cutaway with a detection box around gauze in the operative field inside the patient",
         "service": "Discuss surgical video recognition"

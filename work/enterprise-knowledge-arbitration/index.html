@@ -52,6 +52,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700&amp;family=Noto+Sans+TC:wght@300;400;500&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/site.css">
+  <link rel="stylesheet" href="/assets/case-diagram.css">
   <script type="module" src="/assets/analytics.mjs"></script>
 </head>
 <body class="topic-page" data-project="enterprise-knowledge-arbitration">
@@ -81,6 +82,7 @@
           <div class="entry-links">
             <a class="btn btn-primary" href="/project-planner/?service=knowledge-base" data-analytics="service_cta_clicked" data-project="enterprise-knowledge-arbitration" data-service="knowledge-base">建立專案需求</a>
 
+            <a class="text-link" href="#technical-diagram">技術圖解</a>
           </div>
         </div>
         <figure class="cfig topic-figure"><img src="/assets/cases/kb.webp" srcset="/assets/cases/kb-768.webp 768w, /assets/cases/kb.webp 1536w, /assets/cases/kb-3072.webp 3072w" sizes="(max-width: 400px) calc(100vw - 40px), (max-width: 760px) 90vw, (max-width: 1180px) 45vw, 530px" alt="企業文件、知識卡與引用查核流程的概念圖" width="1536" height="1024" fetchpriority="high"></figure>
@@ -95,9 +97,33 @@
     <section class="topic-section axis-divider">
       <div class="wrap">
         <h2>技術方法與架構</h2>
-        <figure class="topic-flow">
-          <figcaption>處理流程</figcaption>
-          <ol><li><span>從文件萃取結構化主張，保存來源和版本。</span></li><li><span>依權威與版本規則處理衝突，輸出答案、引用及理由。</span></li><li><span>提供專家審查並將裁決回寫，以測試題檢查版本選擇和引用。</span></li></ol>
+        <figure class="case-diagram" id="technical-diagram" aria-labelledby="technical-diagram-caption">
+          <figcaption id="technical-diagram-caption">有版本衝突時如何產生可查核的回答</figcaption>
+          <ol class="case-diagram-stages" role="list">
+            <li>
+              <svg class="case-diagram-icon" viewBox="0 0 96 64" width="96" height="64" aria-hidden="true" focusable="false"><path d="M25 15V8h31l14 14v28h-8M56 8v14h14M17 15h28l13 13v28H17zM45 15v13h13m-33 8h25m-25 8h19"/><path class="accent" d="M25 50h12"/></svg>
+              <div>
+                <strong>抽取文件主張與版本</strong>
+                <p>從文件萃取結構化主張，保存來源和版本。</p>
+              </div>
+            </li>
+            <li>
+              <svg class="case-diagram-icon" viewBox="0 0 96 64" width="96" height="64" aria-hidden="true" focusable="false"><path d="M14 15h23v12H14zm0 22h23v12H14zm45-11h23v12H59zM37 21h10v22H37m10-11h12"/><path class="accent" d="m66 31 3 3 6-6"/></svg>
+              <div>
+                <strong>依權威與版本解衝突</strong>
+                <p>依權威與版本規則處理衝突，輸出答案、引用及理由。</p>
+              </div>
+            </li>
+            <li>
+              <svg class="case-diagram-icon" viewBox="0 0 96 64" width="96" height="64" aria-hidden="true" focusable="false"><path d="M20 10h32l12 12v31H20zM52 10v12h12m-35 5h20m-20 8h24m-24 8h14"/><path class="accent" d="M55 39h23m-16-5-7 5 7 5"/></svg>
+              <div>
+                <strong>答案、引用與專家覆核</strong>
+                <p>提供專家審查並將裁決回寫，以測試題檢查版本選擇和引用。</p>
+              </div>
+            </li>
+          </ol>
+          <p class="case-diagram-note">工程流程圖解。從文件主張、來源與版本一路保留到答案，讓專家覆核後可回寫裁決。</p>
+
         </figure>
       </div>
     </section>
@@ -150,6 +176,7 @@
           <a class="text-link" href="#project-title" lang="zh-Hant">繁體中文</a>
           <a class="text-link" href="/project-planner/?service=knowledge-base&amp;lang=en" data-analytics="service_cta_clicked" data-project="enterprise-knowledge-arbitration" data-service="knowledge-base">Plan a project</a>
 
+          <a class="text-link" href="#technical-diagram-en">Technical diagram</a>
         </div>
       </div>
     <section class="topic-section axis-divider">
@@ -161,9 +188,33 @@
     <section class="topic-section axis-divider">
       <div class="wrap">
         <h2>Technical approach and architecture</h2>
-        <figure class="topic-flow">
-          <figcaption>Workflow</figcaption>
-          <ol><li><span>Extract structured claims from source documents while retaining their source and version.</span></li><li><span>Apply authority and version rules to resolve conflicts and show the answer, citations and rationale.</span></li><li><span>Support expert review and update decisions, using an evaluation set to check version selection and citations.</span></li></ol>
+        <figure class="case-diagram" id="technical-diagram-en" aria-labelledby="technical-diagram-en-caption">
+          <figcaption id="technical-diagram-en-caption">How conflicting document versions become a verifiable answer</figcaption>
+          <ol class="case-diagram-stages" role="list">
+            <li>
+              <svg class="case-diagram-icon" viewBox="0 0 96 64" width="96" height="64" aria-hidden="true" focusable="false"><path d="M25 15V8h31l14 14v28h-8M56 8v14h14M17 15h28l13 13v28H17zM45 15v13h13m-33 8h25m-25 8h19"/><path class="accent" d="M25 50h12"/></svg>
+              <div>
+                <strong>Extract claims and document versions</strong>
+                <p>Extract structured claims from source documents while retaining their source and version.</p>
+              </div>
+            </li>
+            <li>
+              <svg class="case-diagram-icon" viewBox="0 0 96 64" width="96" height="64" aria-hidden="true" focusable="false"><path d="M14 15h23v12H14zm0 22h23v12H14zm45-11h23v12H59zM37 21h10v22H37m10-11h12"/><path class="accent" d="m66 31 3 3 6-6"/></svg>
+              <div>
+                <strong>Resolve conflicts by authority and version</strong>
+                <p>Apply authority and version rules to resolve conflicts and show the answer, citations and rationale.</p>
+              </div>
+            </li>
+            <li>
+              <svg class="case-diagram-icon" viewBox="0 0 96 64" width="96" height="64" aria-hidden="true" focusable="false"><path d="M20 10h32l12 12v31H20zM52 10v12h12m-35 5h20m-20 8h24m-24 8h14"/><path class="accent" d="M55 39h23m-16-5-7 5 7 5"/></svg>
+              <div>
+                <strong>Answer, citations and expert review</strong>
+                <p>Support expert review and update decisions, using an evaluation set to check version selection and citations.</p>
+              </div>
+            </li>
+          </ol>
+          <p class="case-diagram-note">Engineering workflow diagram. Claims retain source and version information through to the answer so experts can review and record a decision.</p>
+
         </figure>
       </div>
     </section>

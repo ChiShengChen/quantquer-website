@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="/assets/theme.js"></script>
   <title>手術中體內紗布即時辨識｜量維資科 Quantquer</title>
-  <meta name="description" content="手術中體內紗布即時辨識工程案例。以 YOLOv6 與 YOLOv7 的單類別偵測設定，規劃定位患者體內術野可見的紗布，以及遮擋、誤報和端到端延遲驗證。">
+  <meta name="description" content="手術中體內紗布即時辨識。圖解從微創手術影片標註體內可見紗布、比較物件偵測模型，到用出現時間線與人工標註對照。附創辦人共同發表的研究與工程驗證範圍。">
   <meta name="theme-color" content="#F6F8FB">
   <link rel="canonical" href="https://quantquer.com/work/surgical-gauze-detection/">
   <link rel="icon" href="/favicon.ico" sizes="48x48">
@@ -17,7 +17,7 @@
   <meta property="og:site_name" content="量維資科 Quantquer">
   <meta property="og:locale" content="zh_TW">
   <meta property="og:title" content="手術中體內紗布即時辨識｜量維資科 Quantquer">
-  <meta property="og:description" content="手術中體內紗布即時辨識工程案例。以 YOLOv6 與 YOLOv7 的單類別偵測設定，規劃定位患者體內術野可見的紗布，以及遮擋、誤報和端到端延遲驗證。">
+  <meta property="og:description" content="手術中體內紗布即時辨識。圖解從微創手術影片標註體內可見紗布、比較物件偵測模型，到用出現時間線與人工標註對照。附創辦人共同發表的研究與工程驗證範圍。">
   <meta property="og:url" content="https://quantquer.com/work/surgical-gauze-detection/">
   <meta property="og:image" content="https://quantquer.com/assets/og-image-2-1.png">
   <meta property="og:image:type" content="image/png">
@@ -26,7 +26,7 @@
   <meta property="og:image:alt" content="量維資科，從晶片到智慧系統。下方是模型部署至晶片的技術示意。">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="手術中體內紗布即時辨識｜量維資科 Quantquer">
-  <meta name="twitter:description" content="手術中體內紗布即時辨識工程案例。以 YOLOv6 與 YOLOv7 的單類別偵測設定，規劃定位患者體內術野可見的紗布，以及遮擋、誤報和端到端延遲驗證。">
+  <meta name="twitter:description" content="手術中體內紗布即時辨識。圖解從微創手術影片標註體內可見紗布、比較物件偵測模型，到用出現時間線與人工標註對照。附創辦人共同發表的研究與工程驗證範圍。">
   <meta name="twitter:image" content="https://quantquer.com/assets/og-image-2-1.png">
   <meta name="twitter:image:alt" content="量維資科，從晶片到智慧系統。下方是模型部署至晶片的技術示意。">
   <script type="application/ld+json">
@@ -35,7 +35,7 @@
   "@type": "WebPage",
   "name": "手術中體內紗布即時辨識｜量維資科 Quantquer",
   "url": "https://quantquer.com/work/surgical-gauze-detection/",
-  "description": "手術中體內紗布即時辨識工程案例。以 YOLOv6 與 YOLOv7 的單類別偵測設定，規劃定位患者體內術野可見的紗布，以及遮擋、誤報和端到端延遲驗證。",
+  "description": "手術中體內紗布即時辨識。圖解從微創手術影片標註體內可見紗布、比較物件偵測模型，到用出現時間線與人工標註對照。附創辦人共同發表的研究與工程驗證範圍。",
   "inLanguage": [
     "zh-Hant",
     "en"
@@ -52,6 +52,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700&amp;family=Noto+Sans+TC:wght@300;400;500&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/site.css">
+  <link rel="stylesheet" href="/assets/case-diagram.css">
   <script type="module" src="/assets/analytics.mjs"></script>
 </head>
 <body class="topic-page" data-project="surgical-gauze-detection">
@@ -81,6 +82,7 @@
           <div class="entry-links">
             <a class="btn btn-primary" href="/project-planner/?service=edge-ai" data-analytics="service_cta_clicked" data-project="surgical-gauze-detection" data-service="edge-ai">建立專案需求</a>
 
+            <a class="text-link" href="#technical-diagram">技術圖解</a>
           </div>
         </div>
         <figure class="cfig topic-figure"><img src="/assets/cases/surgical-gauze.webp" srcset="/assets/cases/surgical-gauze-768.webp 768w, /assets/cases/surgical-gauze.webp 1536w, /assets/cases/surgical-gauze-3072.webp 3072w" sizes="(max-width: 400px) calc(100vw - 40px), (max-width: 760px) 90vw, (max-width: 1180px) 45vw, 530px" alt="剖面示意圖，辨識框標出患者體內術野中的紗布" width="1536" height="1024" fetchpriority="high"></figure>
@@ -95,9 +97,33 @@
     <section class="topic-section axis-divider">
       <div class="wrap">
         <h2>技術方法與架構</h2>
-        <figure class="topic-flow">
-          <figcaption>處理流程</figcaption>
-          <ol><li><span>在術中影像標註體內術野可見的紗布，區分訓練、驗證與測試片段。</span></li><li><span>準備 YOLOv6 與 YOLOv7 的紗布訓練設定，作為比較候選。</span></li><li><span>規劃將定位框與影格時間戳一起顯示，供人工覆核及延遲測試。</span></li></ol>
+        <figure class="case-diagram" id="technical-diagram" aria-labelledby="technical-diagram-caption">
+          <figcaption id="technical-diagram-caption">從體內術野辨識紗布並建立時間線</figcaption>
+          <ol class="case-diagram-stages" role="list">
+            <li>
+              <svg class="case-diagram-icon" viewBox="0 0 96 64" width="96" height="64" aria-hidden="true" focusable="false"><path d="M10 22h12l10 10h32l10-10h12M10 38h13l7 9h36l7-9h13"/><rect x="38" y="27" width="20" height="10" rx="2"/><path d="M42 27v10m4-10v10m4-10v10m4-10v10m-16-5h20"/><path class="accent" d="M34 29v-5h6m16 0h6v5m0 6v5h-6m-16 0h-6v-5"/></svg>
+              <div>
+                <strong>標註體內術野可見的紗布</strong>
+                <p>在微創手術影片的影格標註體內術野可見的紗布。</p>
+              </div>
+            </li>
+            <li>
+              <svg class="case-diagram-icon" viewBox="0 0 96 64" width="96" height="64" aria-hidden="true" focusable="false"><rect x="13" y="12" width="70" height="40" rx="2"/><path d="M16 43l14-11 11 7 14-16 25 19"/><path class="accent" d="M42 29v-8h8m12 0h8v8m0 9v8h-8m-12 0h-8v-8"/></svg>
+              <div>
+                <strong>比較偵測模型與誤報過濾</strong>
+                <p>公開研究比較 YOLO 系列與 Faster R-CNN，並評估過濾誤報的調節模組。</p>
+              </div>
+            </li>
+            <li>
+              <svg class="case-diagram-icon" viewBox="0 0 96 64" width="96" height="64" aria-hidden="true" focusable="false"><path d="M12 43h72M20 38v10m18-10v10m20-10v10m18-10v10M26 14h20v17H26zm26 0h20v17H52z"/><path class="accent" d="M58 11v42m-3-39h6"/></svg>
+              <div>
+                <strong>對照時間線與人工標註</strong>
+                <p>將偵測結果轉為紗布出現的時間線，逐影格與人工標註對照。</p>
+              </div>
+            </li>
+          </ol>
+          <p class="case-diagram-note">依創辦人共同發表的研究繪製。論文評估腹腔鏡或微創手術影片中的紗布辨識與出現時間線，工程案例另列候選訓練設定及驗證項目。</p>
+          <nav class="case-diagram-sources" aria-label="圖解來源"><ul class="topic-links"><li><a class="text-link" href="https://scholars.lib.ntu.edu.tw/entities/publication/23eb5cb5-098b-4a86-bed9-6dfda82ba102">共同發表 · 腹腔鏡紗布辨識（2023）</a></li><li><a class="text-link" href="https://scholars.lib.ntu.edu.tw/entities/publication/3d3132c6-e8f4-4543-a109-843eebfec194">共同發表 · 微創手術紗布辨識與追蹤（2026）</a></li></ul></nav>
         </figure>
       </div>
     </section>
@@ -117,7 +143,7 @@
     <section class="topic-section axis-divider">
       <div class="wrap">
         <h2>驗證與證據</h2>
-        <p class="topic-lead">後續以經授權的獨立術中影像評估可見紗布的漏檢、誤報和從取像到疊圖的延遲，並記錄遮擋程度。臨床使用與實際效能待驗證。</p>
+        <p class="topic-lead">共同發表的研究用手術影片和人工標註驗證辨識與時間線。工程端的串流部署另需以經授權的獨立影像評估漏檢、誤報及端到端延遲。</p>
 
 
         <nav class="entry-links" aria-label="公開來源與展示"><ul class="topic-links"><li><a class="text-link" href="https://cdn.who.int/media/docs/default-source/patient-safety/9789241598590-eng-checklist.pdf">紗布盤點流程背景 · WHO 手術安全查核表</a></li></ul></nav>
@@ -146,6 +172,7 @@
           <a class="text-link" href="#project-title" lang="zh-Hant">繁體中文</a>
           <a class="text-link" href="/project-planner/?service=edge-ai&amp;lang=en" data-analytics="service_cta_clicked" data-project="surgical-gauze-detection" data-service="edge-ai">Plan a project</a>
 
+          <a class="text-link" href="#technical-diagram-en">Technical diagram</a>
         </div>
       </div>
     <section class="topic-section axis-divider">
@@ -157,9 +184,33 @@
     <section class="topic-section axis-divider">
       <div class="wrap">
         <h2>Technical approach and architecture</h2>
-        <figure class="topic-flow">
-          <figcaption>Workflow</figcaption>
-          <ol><li><span>Annotate gauze visible inside the patient as a single object class and separate training, validation and test clips.</span></li><li><span>Prepare gauze training configurations for YOLOv6 and YOLOv7 as comparison candidates.</span></li><li><span>Plan timestamped detection boxes for human review and latency testing.</span></li></ol>
+        <figure class="case-diagram" id="technical-diagram-en" aria-labelledby="technical-diagram-en-caption">
+          <figcaption id="technical-diagram-en-caption">From gauze detection inside the operative field to a review timeline</figcaption>
+          <ol class="case-diagram-stages" role="list">
+            <li>
+              <svg class="case-diagram-icon" viewBox="0 0 96 64" width="96" height="64" aria-hidden="true" focusable="false"><path d="M10 22h12l10 10h32l10-10h12M10 38h13l7 9h36l7-9h13"/><rect x="38" y="27" width="20" height="10" rx="2"/><path d="M42 27v10m4-10v10m4-10v10m4-10v10m-16-5h20"/><path class="accent" d="M34 29v-5h6m16 0h6v5m0 6v5h-6m-16 0h-6v-5"/></svg>
+              <div>
+                <strong>Annotate gauze visible inside the patient</strong>
+                <p>Annotate gauze visible inside the patient in frames from minimally invasive surgical video.</p>
+              </div>
+            </li>
+            <li>
+              <svg class="case-diagram-icon" viewBox="0 0 96 64" width="96" height="64" aria-hidden="true" focusable="false"><rect x="13" y="12" width="70" height="40" rx="2"/><path d="M16 43l14-11 11 7 14-16 25 19"/><path class="accent" d="M42 29v-8h8m12 0h8v8m0 9v8h-8m-12 0h-8v-8"/></svg>
+              <div>
+                <strong>Compare detectors and false-positive filtering</strong>
+                <p>The published studies compare YOLO-family detectors and Faster R-CNN, and assess a regulating module for false detections.</p>
+              </div>
+            </li>
+            <li>
+              <svg class="case-diagram-icon" viewBox="0 0 96 64" width="96" height="64" aria-hidden="true" focusable="false"><path d="M12 43h72M20 38v10m18-10v10m20-10v10m18-10v10M26 14h20v17H26zm26 0h20v17H52z"/><path class="accent" d="M58 11v42m-3-39h6"/></svg>
+              <div>
+                <strong>Compare the timeline against annotations</strong>
+                <p>Convert detections to a gauze appearance timeline and compare it frame by frame with human annotations.</p>
+              </div>
+            </li>
+          </ol>
+          <p class="case-diagram-note">Original diagram informed by the founder’s co-authored studies. The studies assess gauze detection and appearance timelines in laparoscopic or minimally invasive surgical video. The engineering case lists candidate training settings and validation separately.</p>
+          <nav class="case-diagram-sources" aria-label="Diagram sources"><ul class="topic-links"><li><a class="text-link" href="https://scholars.lib.ntu.edu.tw/entities/publication/23eb5cb5-098b-4a86-bed9-6dfda82ba102">Co-authored study on laparoscopic gauze detection (2023)</a></li><li><a class="text-link" href="https://scholars.lib.ntu.edu.tw/entities/publication/3d3132c6-e8f4-4543-a109-843eebfec194">Co-authored study on gauze detection and tracking (2026)</a></li></ul></nav>
         </figure>
       </div>
     </section>
@@ -179,7 +230,7 @@
     <section class="topic-section axis-divider">
       <div class="wrap">
         <h2>Validation and evidence</h2>
-        <p class="topic-lead">Use authorized, held-out intraoperative clips to measure misses, false detections and capture-to-overlay latency for visible gauze. Document the degree of occlusion. Clinical use and performance await validation.</p>
+        <p class="topic-lead">The co-authored studies evaluated detection and timelines against human annotations in surgical video. Streaming deployment requires separate validation of misses, false detections and end-to-end latency using authorized held-out clips.</p>
 
 
         <nav class="entry-links" aria-label="Public sources and demonstrations"><ul class="topic-links"><li><a class="text-link" href="https://cdn.who.int/media/docs/default-source/patient-safety/9789241598590-eng-checklist.pdf">Counting workflow context · WHO Surgical Safety Checklist</a></li></ul></nav>

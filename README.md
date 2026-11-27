@@ -86,6 +86,7 @@ python3 -m http.server 8000 --bind 127.0.0.1
 ## 編輯指南
 
 - 案例的雙語內容、歸屬、階段、來源和服務連結由 `data/projects.json` 維護，只收錄公開資料。變更後執行 `node scripts/build-portfolio.mjs`，最後用 `node scripts/build-portfolio.mjs --check` 檢查首頁區塊、案例詳頁和 sitemap 同步。
+- 案例技術圖解的雙語標題、對應流程和來源位於 `data/case-diagrams.json`。圖解的步驟說明由案例資料帶入，論文連結標明與案例的關係。
 - 案例頁的搜尋摘要用 `zh.metaDescription`（約 70–95 字，只用頁面上已有的事實），沒有填時沿用 `zh.summary`；頁面上的開頭介紹仍是 `summary`。sitemap 的 `<lastmod>` 取 `siteUpdated`（YYYY-MM-DD），單一案例可用 `updated` 覆寫，內容有變動時記得更新日期。
 - 案例與 Labs 卡片的 `id` 作為穩定錨點。首頁從生成後的卡片讀取篩選條件，案例篩選狀態保存在可分享的網址中。
 - 主題與共用樣式集中在 `assets/site.css`。主題變數位於 `:root`（深色）與 `html[data-theme="light"]`（亮色）。

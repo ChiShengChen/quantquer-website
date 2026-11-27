@@ -52,6 +52,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700&amp;family=Noto+Sans+TC:wght@300;400;500&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/site.css">
+  <link rel="stylesheet" href="/assets/case-diagram.css">
   <script type="module" src="/assets/analytics.mjs"></script>
 </head>
 <body class="topic-page" data-project="eeg-treatment-response">
@@ -81,6 +82,7 @@
           <div class="entry-links">
             <a class="btn btn-primary" href="/project-planner/?service=domain-rd" data-analytics="service_cta_clicked" data-project="eeg-treatment-response" data-service="domain-rd">建立專案需求</a>
 
+            <a class="text-link" href="#technical-diagram">技術圖解</a>
           </div>
         </div>
         <figure class="cfig topic-figure"><img src="/assets/cases/eeg.webp" srcset="/assets/cases/eeg-768.webp 768w, /assets/cases/eeg.webp 1536w, /assets/cases/eeg-3072.webp 3072w" sizes="(max-width: 400px) calc(100vw - 40px), (max-width: 760px) 90vw, (max-width: 1180px) 45vw, 530px" alt="額葉腦波特徵用於療效研究的概念圖" width="1536" height="1024" fetchpriority="high"></figure>
@@ -95,9 +97,33 @@
     <section class="topic-section axis-divider">
       <div class="wrap">
         <h2>技術方法與架構</h2>
-        <figure class="topic-flow">
-          <figcaption>處理流程</figcaption>
-          <ol><li><span>從治療前額葉腦波擷取線性與非線性特徵。</span></li><li><span>比較腦波特徵與分類方法對治療反應預測的影響。</span></li><li><span>依論文定義比較不同資料集與門診群體。</span></li></ol>
+        <figure class="case-diagram" id="technical-diagram" aria-labelledby="technical-diagram-caption">
+          <figcaption id="technical-diagram-caption">從治療前額葉腦波到跨資料集驗證</figcaption>
+          <ol class="case-diagram-stages" role="list">
+            <li>
+              <svg class="case-diagram-icon" viewBox="0 0 96 64" width="96" height="64" aria-hidden="true" focusable="false"><path d="M16 50V29a18 18 0 0 1 36 0v21M21 50h26M62 20h5l4-5 4 11 4-6h6m-23 17h5l4-7 4 13 4-6h6"/><g class="accent"><circle cx="28" cy="27" r="3"/><circle cx="41" cy="27" r="3"/><circle cx="35" cy="37" r="3"/></g></svg>
+              <div>
+                <strong>治療前額葉 EEG</strong>
+                <p>從治療前額葉腦波擷取線性與非線性特徵。</p>
+              </div>
+            </li>
+            <li>
+              <svg class="case-diagram-icon" viewBox="0 0 96 64" width="96" height="64" aria-hidden="true" focusable="false"><path d="M11 48h74M18 43V30h8v13m9 0V14h8v29m9 0V23h8v20m9 0V34h8v9"/><path class="accent" d="M18 30h8m9-16h8m9 9h8m9 11h8"/></svg>
+              <div>
+                <strong>特徵與分類比較</strong>
+                <p>比較腦波特徵與分類方法對治療反應預測的影響。</p>
+              </div>
+            </li>
+            <li>
+              <svg class="case-diagram-icon" viewBox="0 0 96 64" width="96" height="64" aria-hidden="true" focusable="false"><rect x="10" y="13" width="32" height="38" rx="3"/><rect x="54" y="13" width="32" height="38" rx="3"/><path d="M17 24h18m-18 8h18m-18 8h10m34-16h18m-18 8h18"/><path class="accent" d="m62 41 4 4 8-9"/></svg>
+              <div>
+                <strong>獨立資料集驗證</strong>
+                <p>依論文定義比較不同資料集與門診群體。</p>
+              </div>
+            </li>
+          </ol>
+          <p class="case-diagram-note">依創辦人共同發表的研究繪製。圖解呈現訊號、特徵與驗證設計，預測表現以論文的研究條件為準。</p>
+          <nav class="case-diagram-sources" aria-label="圖解來源"><ul class="topic-links"><li><a class="text-link" href="https://pubmed.ncbi.nlm.nih.gov/37579885/">創辦人共同發表 · 額葉 EEG 與療效預測</a></li></ul></nav>
         </figure>
       </div>
     </section>
@@ -146,6 +172,7 @@
           <a class="text-link" href="#project-title" lang="zh-Hant">繁體中文</a>
           <a class="text-link" href="/project-planner/?service=domain-rd&amp;lang=en" data-analytics="service_cta_clicked" data-project="eeg-treatment-response" data-service="domain-rd">Plan a project</a>
 
+          <a class="text-link" href="#technical-diagram-en">Technical diagram</a>
         </div>
       </div>
     <section class="topic-section axis-divider">
@@ -157,9 +184,33 @@
     <section class="topic-section axis-divider">
       <div class="wrap">
         <h2>Technical approach and architecture</h2>
-        <figure class="topic-flow">
-          <figcaption>Workflow</figcaption>
-          <ol><li><span>Extract linear and nonlinear features from pretreatment frontal EEG.</span></li><li><span>Compare feature sets and classifiers for treatment-response prediction.</span></li><li><span>Compare datasets and outpatient cohorts under the protocol documented in the paper.</span></li></ol>
+        <figure class="case-diagram" id="technical-diagram-en" aria-labelledby="technical-diagram-en-caption">
+          <figcaption id="technical-diagram-en-caption">From pretreatment frontal EEG to cross-dataset validation</figcaption>
+          <ol class="case-diagram-stages" role="list">
+            <li>
+              <svg class="case-diagram-icon" viewBox="0 0 96 64" width="96" height="64" aria-hidden="true" focusable="false"><path d="M16 50V29a18 18 0 0 1 36 0v21M21 50h26M62 20h5l4-5 4 11 4-6h6m-23 17h5l4-7 4 13 4-6h6"/><g class="accent"><circle cx="28" cy="27" r="3"/><circle cx="41" cy="27" r="3"/><circle cx="35" cy="37" r="3"/></g></svg>
+              <div>
+                <strong>Pretreatment frontal EEG</strong>
+                <p>Extract linear and nonlinear features from pretreatment frontal EEG.</p>
+              </div>
+            </li>
+            <li>
+              <svg class="case-diagram-icon" viewBox="0 0 96 64" width="96" height="64" aria-hidden="true" focusable="false"><path d="M11 48h74M18 43V30h8v13m9 0V14h8v29m9 0V23h8v20m9 0V34h8v9"/><path class="accent" d="M18 30h8m9-16h8m9 9h8m9 11h8"/></svg>
+              <div>
+                <strong>Feature and classifier comparison</strong>
+                <p>Compare feature sets and classifiers for treatment-response prediction.</p>
+              </div>
+            </li>
+            <li>
+              <svg class="case-diagram-icon" viewBox="0 0 96 64" width="96" height="64" aria-hidden="true" focusable="false"><rect x="10" y="13" width="32" height="38" rx="3"/><rect x="54" y="13" width="32" height="38" rx="3"/><path d="M17 24h18m-18 8h18m-18 8h10m34-16h18m-18 8h18"/><path class="accent" d="m62 41 4 4 8-9"/></svg>
+              <div>
+                <strong>Validation across datasets</strong>
+                <p>Compare datasets and outpatient cohorts under the protocol documented in the paper.</p>
+              </div>
+            </li>
+          </ol>
+          <p class="case-diagram-note">Original diagram based on the founder’s co-authored study. It shows signal, feature and validation stages. The paper defines the conditions for predictive performance.</p>
+          <nav class="case-diagram-sources" aria-label="Diagram sources"><ul class="topic-links"><li><a class="text-link" href="https://pubmed.ncbi.nlm.nih.gov/37579885/">Founder co-authored study on frontal EEG and treatment response</a></li></ul></nav>
         </figure>
       </div>
     </section>

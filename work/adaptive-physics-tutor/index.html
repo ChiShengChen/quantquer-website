@@ -52,6 +52,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700&amp;family=Noto+Sans+TC:wght@300;400;500&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/site.css">
+  <link rel="stylesheet" href="/assets/case-diagram.css">
   <script type="module" src="/assets/analytics.mjs"></script>
 </head>
 <body class="topic-page" data-project="adaptive-physics-tutor">
@@ -81,6 +82,7 @@
           <div class="entry-links">
             <a class="btn btn-primary" href="/project-planner/?service=agent" data-analytics="service_cta_clicked" data-project="adaptive-physics-tutor" data-service="agent">建立專案需求</a>
 
+            <a class="text-link" href="#technical-diagram">技術圖解</a>
           </div>
         </div>
         <figure class="cfig topic-figure"><img src="/assets/cases/tutor.webp" srcset="/assets/cases/tutor-768.webp 768w, /assets/cases/tutor.webp 1536w, /assets/cases/tutor-3072.webp 3072w" sizes="(max-width: 400px) calc(100vw - 40px), (max-width: 760px) 90vw, (max-width: 1180px) 45vw, 530px" alt="個人化物理家教與教學路徑的概念圖" width="1536" height="1024" fetchpriority="high"></figure>
@@ -95,9 +97,33 @@
     <section class="topic-section axis-divider">
       <div class="wrap">
         <h2>技術方法與架構</h2>
-        <figure class="topic-flow">
-          <figcaption>處理流程</figcaption>
-          <ol><li><span>整理課程教材與檢索索引。</span></li><li><span>結合教材檢索與對話介面，產生貼近課程的解說和練習。</span></li><li><span>依學生狀態調整練習或複習建議。</span></li></ol>
+        <figure class="case-diagram" id="technical-diagram" aria-labelledby="technical-diagram-caption">
+          <figcaption id="technical-diagram-caption">教材檢索如何支援普物解說與練習</figcaption>
+          <ol class="case-diagram-stages" role="list">
+            <li>
+              <svg class="case-diagram-icon" viewBox="0 0 96 64" width="96" height="64" aria-hidden="true" focusable="false"><path d="M25 15V8h31l14 14v28h-8M56 8v14h14M17 15h28l13 13v28H17zM45 15v13h13m-33 8h25m-25 8h19"/><path class="accent" d="M25 50h12"/></svg>
+              <div>
+                <strong>整理課程教材</strong>
+                <p>整理課程教材與檢索索引。</p>
+              </div>
+            </li>
+            <li>
+              <svg class="case-diagram-icon" viewBox="0 0 96 64" width="96" height="64" aria-hidden="true" focusable="false"><path d="M13 12h48v40H13zm8 9h28m-28 8h20m-20 8h13"/><circle class="accent" cx="60" cy="39" r="10"/><path class="accent" d="m67 46 11 10"/></svg>
+              <div>
+                <strong>依問題檢索與解說</strong>
+                <p>結合教材檢索與對話介面，產生貼近課程的解說和練習。</p>
+              </div>
+            </li>
+            <li>
+              <svg class="case-diagram-icon" viewBox="0 0 96 64" width="96" height="64" aria-hidden="true" focusable="false"><path d="M13 14c14-3 25-1 35 7 10-8 21-10 35-7v35c-14-3-25-1-35 7-10-8-21-10-35-7zM48 21v35M21 23c7-1 13 1 19 4m-19 5c7-1 13 1 19 4m17-9c6-3 12-5 19-4"/><path class="accent" d="m58 40 4 4 8-9"/></svg>
+              <div>
+                <strong>安排個別練習與複習</strong>
+                <p>依學生狀態調整練習或複習建議。</p>
+              </div>
+            </li>
+          </ol>
+          <p class="case-diagram-note">教學流程圖解。教材索引和學生狀態用於組織解說與練習。</p>
+
         </figure>
       </div>
     </section>
@@ -146,6 +172,7 @@
           <a class="text-link" href="#project-title" lang="zh-Hant">繁體中文</a>
           <a class="text-link" href="/project-planner/?service=agent&amp;lang=en" data-analytics="service_cta_clicked" data-project="adaptive-physics-tutor" data-service="agent">Plan a project</a>
 
+          <a class="text-link" href="#technical-diagram-en">Technical diagram</a>
         </div>
       </div>
     <section class="topic-section axis-divider">
@@ -157,9 +184,33 @@
     <section class="topic-section axis-divider">
       <div class="wrap">
         <h2>Technical approach and architecture</h2>
-        <figure class="topic-flow">
-          <figcaption>Workflow</figcaption>
-          <ol><li><span>Organize course material and build a retrieval index.</span></li><li><span>Connect course retrieval and dialogue to support explanations and exercises.</span></li><li><span>Adapt practice or review recommendations to the learner&#39;s state.</span></li></ol>
+        <figure class="case-diagram" id="technical-diagram-en" aria-labelledby="technical-diagram-en-caption">
+          <figcaption id="technical-diagram-en-caption">How course retrieval supports physics explanations and practice</figcaption>
+          <ol class="case-diagram-stages" role="list">
+            <li>
+              <svg class="case-diagram-icon" viewBox="0 0 96 64" width="96" height="64" aria-hidden="true" focusable="false"><path d="M25 15V8h31l14 14v28h-8M56 8v14h14M17 15h28l13 13v28H17zM45 15v13h13m-33 8h25m-25 8h19"/><path class="accent" d="M25 50h12"/></svg>
+              <div>
+                <strong>Organize course materials</strong>
+                <p>Organize course material and build a retrieval index.</p>
+              </div>
+            </li>
+            <li>
+              <svg class="case-diagram-icon" viewBox="0 0 96 64" width="96" height="64" aria-hidden="true" focusable="false"><path d="M13 12h48v40H13zm8 9h28m-28 8h20m-20 8h13"/><circle class="accent" cx="60" cy="39" r="10"/><path class="accent" d="m67 46 11 10"/></svg>
+              <div>
+                <strong>Retrieve and explain relevant material</strong>
+                <p>Connect course retrieval and dialogue to support explanations and exercises.</p>
+              </div>
+            </li>
+            <li>
+              <svg class="case-diagram-icon" viewBox="0 0 96 64" width="96" height="64" aria-hidden="true" focusable="false"><path d="M13 14c14-3 25-1 35 7 10-8 21-10 35-7v35c-14-3-25-1-35 7-10-8-21-10-35-7zM48 21v35M21 23c7-1 13 1 19 4m-19 5c7-1 13 1 19 4m17-9c6-3 12-5 19-4"/><path class="accent" d="m58 40 4 4 8-9"/></svg>
+              <div>
+                <strong>Select practice and review</strong>
+                <p>Adapt practice or review recommendations to the learner&#39;s state.</p>
+              </div>
+            </li>
+          </ol>
+          <p class="case-diagram-note">Teaching workflow diagram. The course index and student state help organize explanations and exercises.</p>
+
         </figure>
       </div>
     </section>

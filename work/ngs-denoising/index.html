@@ -52,6 +52,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700&amp;family=Noto+Sans+TC:wght@300;400;500&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/site.css">
+  <link rel="stylesheet" href="/assets/case-diagram.css">
   <script type="module" src="/assets/analytics.mjs"></script>
 </head>
 <body class="topic-page" data-project="ngs-denoising">
@@ -81,6 +82,7 @@
           <div class="entry-links">
             <a class="btn btn-primary" href="/project-planner/?service=domain-rd" data-analytics="service_cta_clicked" data-project="ngs-denoising" data-service="domain-rd">建立專案需求</a>
 
+            <a class="text-link" href="#technical-diagram">技術圖解</a>
           </div>
         </div>
         <figure class="cfig topic-figure"><img src="/assets/cases/ngs.webp" srcset="/assets/cases/ngs-768.webp 768w, /assets/cases/ngs.webp 1536w, /assets/cases/ngs-3072.webp 3072w" sizes="(max-width: 400px) calc(100vw - 40px), (max-width: 760px) 90vw, (max-width: 1180px) 45vw, 530px" alt="生醫影像訊號與背景雜訊的概念圖" width="1536" height="1024" fetchpriority="high"></figure>
@@ -95,9 +97,33 @@
     <section class="topic-section axis-divider">
       <div class="wrap">
         <h2>技術方法與架構</h2>
-        <figure class="topic-flow">
-          <figcaption>處理流程</figcaption>
-          <ol><li><span>分析原始影像中的目標訊號與背景特徵。</span></li><li><span>結合影像處理與針對訊號特性調整的模型。</span></li><li><span>依同一影像品質指標與基準方法比較。</span></li></ol>
+        <figure class="case-diagram" id="technical-diagram" aria-labelledby="technical-diagram-caption">
+          <figcaption id="technical-diagram-caption">定序影像的訊號與背景分離</figcaption>
+          <ol class="case-diagram-stages" role="list">
+            <li>
+              <svg class="case-diagram-icon" viewBox="0 0 96 64" width="96" height="64" aria-hidden="true" focusable="false"><rect x="14" y="10" width="68" height="44" rx="2"/><path d="M22 21h.1m8 8h.1m8-11h.1m16 10h.1m13-7h.1m7 14h.1m-15 8h.1m-21 2h.1m-15-8h.1m22-3h.1m25 10h.1"/><g class="accent"><circle cx="40" cy="29" r="4"/><circle cx="56" cy="36" r="4"/></g></svg>
+              <div>
+                <strong>辨識訊號與背景</strong>
+                <p>分析原始影像中的目標訊號與背景特徵。</p>
+              </div>
+            </li>
+            <li>
+              <svg class="case-diagram-icon" viewBox="0 0 96 64" width="96" height="64" aria-hidden="true" focusable="false"><path d="M14 15h68L59 35v13l-18 6V35zM24 23h48m-39 7h30"/><path class="accent" d="M43 35h10m-9 7h9"/></svg>
+              <div>
+                <strong>依訊號特性降噪</strong>
+                <p>結合影像處理與針對訊號特性調整的模型。</p>
+              </div>
+            </li>
+            <li>
+              <svg class="case-diagram-icon" viewBox="0 0 96 64" width="96" height="64" aria-hidden="true" focusable="false"><path d="M12 14h29v36H12zm43 0h29v36H55zM20 39l5-10 7 7m31 3 6-10 7 7"/><path class="accent" d="M24 24h.1m43 0h.1M45 32h6"/></svg>
+              <div>
+                <strong>與基準影像比較</strong>
+                <p>依同一影像品質指標與基準方法比較。</p>
+              </div>
+            </li>
+          </ol>
+          <p class="case-diagram-note">工程流程圖解。訊號圖樣為概念示意，兩種方法的比較需使用相同輸入與品質指標。</p>
+
         </figure>
       </div>
     </section>
@@ -146,6 +172,7 @@
           <a class="text-link" href="#project-title" lang="zh-Hant">繁體中文</a>
           <a class="text-link" href="/project-planner/?service=domain-rd&amp;lang=en" data-analytics="service_cta_clicked" data-project="ngs-denoising" data-service="domain-rd">Plan a project</a>
 
+          <a class="text-link" href="#technical-diagram-en">Technical diagram</a>
         </div>
       </div>
     <section class="topic-section axis-divider">
@@ -157,9 +184,33 @@
     <section class="topic-section axis-divider">
       <div class="wrap">
         <h2>Technical approach and architecture</h2>
-        <figure class="topic-flow">
-          <figcaption>Workflow</figcaption>
-          <ol><li><span>Characterize target signals and background in the source images.</span></li><li><span>Combine image processing with a model adapted to the signal characteristics.</span></li><li><span>Compare settings against a reference method using a consistent image-quality measure.</span></li></ol>
+        <figure class="case-diagram" id="technical-diagram-en" aria-labelledby="technical-diagram-en-caption">
+          <figcaption id="technical-diagram-en-caption">Separating signal from background in sequencing images</figcaption>
+          <ol class="case-diagram-stages" role="list">
+            <li>
+              <svg class="case-diagram-icon" viewBox="0 0 96 64" width="96" height="64" aria-hidden="true" focusable="false"><rect x="14" y="10" width="68" height="44" rx="2"/><path d="M22 21h.1m8 8h.1m8-11h.1m16 10h.1m13-7h.1m7 14h.1m-15 8h.1m-21 2h.1m-15-8h.1m22-3h.1m25 10h.1"/><g class="accent"><circle cx="40" cy="29" r="4"/><circle cx="56" cy="36" r="4"/></g></svg>
+              <div>
+                <strong>Identify signal and background</strong>
+                <p>Characterize target signals and background in the source images.</p>
+              </div>
+            </li>
+            <li>
+              <svg class="case-diagram-icon" viewBox="0 0 96 64" width="96" height="64" aria-hidden="true" focusable="false"><path d="M14 15h68L59 35v13l-18 6V35zM24 23h48m-39 7h30"/><path class="accent" d="M43 35h10m-9 7h9"/></svg>
+              <div>
+                <strong>Denoise for the signal characteristics</strong>
+                <p>Combine image processing with a model adapted to the signal characteristics.</p>
+              </div>
+            </li>
+            <li>
+              <svg class="case-diagram-icon" viewBox="0 0 96 64" width="96" height="64" aria-hidden="true" focusable="false"><path d="M12 14h29v36H12zm43 0h29v36H55zM20 39l5-10 7 7m31 3 6-10 7 7"/><path class="accent" d="M24 24h.1m43 0h.1M45 32h6"/></svg>
+              <div>
+                <strong>Compare with baseline images</strong>
+                <p>Compare settings against a reference method using a consistent image-quality measure.</p>
+              </div>
+            </li>
+          </ol>
+          <p class="case-diagram-note">Engineering workflow diagram with schematic signal patterns. Compare both methods using the same inputs and quality measure.</p>
+
         </figure>
       </div>
     </section>

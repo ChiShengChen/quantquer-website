@@ -1,12 +1,14 @@
 import { readFile, writeFile, mkdir, access, rename, rm, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { caseDiagramIcons } from './case-diagram-icons.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const site = 'https://quantquer.com';
 const shareImage = `${site}/assets/og-image-2-1.png`;
 const checking = process.argv.slice(2).includes('--check');
 const portfolio = JSON.parse(await readFile(resolve(root, 'data/projects.json'), 'utf8'));
+const caseDiagrams = JSON.parse(await readFile(resolve(root, 'data/case-diagrams.json'), 'utf8'));
 
 const domains = {
   semiconductor: ['半導體與邊緣 AI', 'Semiconductor and Edge AI'],
@@ -88,6 +90,7 @@ function validateLink(href, project) {
 assert(slugs.size === portfolio.projects.length, 'Project slugs must be unique');
 assert(featured.size === portfolio.featured.length && featured.size >= 4 && featured.size <= 6, 'Use four to six distinct featured projects');
 for (const slug of featured) assert(slugs.has(slug), `Unknown featured project: ${slug}`);
+for (const slug of Object.keys(caseDiagrams)) assert(slugs.has(slug), `Unknown case diagram: ${slug}`);
 
 for (const project of portfolio.projects) {
   const anchor = project.anchor ?? project.slug;
@@ -122,6 +125,22 @@ for (const project of portfolio.projects) {
   for (const reference of project.references ?? []) {
     validateLink(reference.href, project);
     for (const language of languages) requireText(reference[language], `${project.slug} reference`);
+  }
+  const diagram = caseDiagrams[project.slug];
+  assert(diagram && Array.isArray(diagram.stages), `Missing case diagram: ${project.slug}`);
+  assert(diagram.stages.length === project.zh.approach.length && diagram.stages.length === project.en.approach.length,
+    `Diagram stages must match the case workflow: ${project.slug}`);
+  for (const language of languages) {
+    requireText(diagram[language]?.title, `${project.slug} diagram title`);
+    requireText(diagram[language]?.note, `${project.slug} diagram note`);
+    for (const stage of diagram.stages) {
+      assert(Object.hasOwn(caseDiagramIcons, stage.icon), `Unknown icon in ${project.slug}: ${stage.icon}`);
+      requireText(stage[language], `${project.slug} diagram stage`);
+    }
+  }
+  for (const source of diagram.sources ?? []) {
+    validateLink(source.href, project);
+    for (const language of languages) requireText(source[language], `${project.slug} diagram source`);
   }
   for (const item of project.evidence ?? []) {
     assert(['model-output', 'simulation', 'recorded-replay', 'public-repository', 'publication'].includes(item.type),
@@ -242,18 +261,45 @@ function linkList(links) {
 
 const sectionLabels = {
   zh: {
-    problem: '產業問題與工程挑戰', approach: '技術方法與架構', flow: '處理流程',
+    problem: '產業問題與工程挑戰', approach: '技術方法與架構', diagram: '技術圖解', diagramSources: '圖解來源',
     implementation: '實作與交付', result: '成果', validation: '驗證與證據',
     disclosure: '公開範圍及專案狀態', refs: '公開來源與展示', related: '相關工程與服務',
     ownership: '歸屬與階段', benchmark: '量測範圍',
   },
   en: {
-    problem: 'Industry problem and engineering challenge', approach: 'Technical approach and architecture', flow: 'Workflow',
+    problem: 'Industry problem and engineering challenge', approach: 'Technical approach and architecture',
+    diagram: 'Technical diagram', diagramSources: 'Diagram sources',
     implementation: 'Implementation and deliverables', result: 'Outcome', validation: 'Validation and evidence',
     disclosure: 'Project status and disclosure', refs: 'Public sources and demonstrations', related: 'Related work and services',
     ownership: 'Ownership and status', benchmark: 'Measurement scope',
   },
 };
+
+const diagramAnchor = language => language === 'en' ? 'technical-diagram-en' : 'technical-diagram';
+
+function renderCaseDiagram(project, language) {
+  const diagram = caseDiagrams[project.slug];
+  const copy = diagram[language];
+  const captionId = diagramAnchor(language) + '-caption';
+  const stages = diagram.stages.map((stage, index) => `
+            <li>
+              <svg class="case-diagram-icon" viewBox="0 0 96 64" width="96" height="64" aria-hidden="true" focusable="false">${caseDiagramIcons[stage.icon]}</svg>
+              <div>
+                <strong>${escapeHtml(stage[language])}</strong>
+                <p>${escapeHtml(project[language].approach[index])}</p>
+              </div>
+            </li>`).join('');
+  const sources = (diagram.sources ?? []).map(source => ({
+    href: demoPath(source.href, language), name: source[language],
+  }));
+  return `<figure class="case-diagram" id="${diagramAnchor(language)}" aria-labelledby="${captionId}">
+          <figcaption id="${captionId}">${escapeHtml(copy.title)}</figcaption>
+          <ol class="case-diagram-stages" role="list">${stages}
+          </ol>
+          <p class="case-diagram-note">${escapeHtml(copy.note)}</p>
+          ${sources.length ? `<nav class="case-diagram-sources" aria-label="${sectionLabels[language].diagramSources}">${linkList(sources)}</nav>` : ''}
+        </figure>`;
+}
 
 const evidenceLabels = {
   'model-output': ['模型實際輸出', 'Measured model output'],
@@ -288,7 +334,6 @@ function detailSections(project, language) {
   const t = sectionLabels[language];
   const copy = project[language];
   const { refs, related } = publicLinks(project, language);
-  const ordered = copy.approach.map(step => `<li><span>${escapeHtml(step)}</span></li>`).join('');
   const deliverables = copy.deliverables.map(item => `<li>${escapeHtml(item)}</li>`).join('');
   const metrics = (project.metrics ?? []).map(metric => `
         <div id="${metric.evidenceId}${language === 'en' ? '-en' : ''}">
@@ -305,10 +350,7 @@ function detailSections(project, language) {
     <section class="topic-section axis-divider">
       <div class="wrap">
         <h2>${t.approach}</h2>
-        <figure class="topic-flow">
-          <figcaption>${t.flow}</figcaption>
-          <ol>${ordered}</ol>
-        </figure>
+        ${renderCaseDiagram(project, language)}
       </div>
     </section>
     <section class="topic-section axis-divider">
@@ -403,6 +445,7 @@ ${JSON.stringify(schema, null, 2).replaceAll('<', '\\u003c')}
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700&amp;family=Noto+Sans+TC:wght@300;400;500&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/site.css">
+  <link rel="stylesheet" href="/assets/case-diagram.css">
   <script type="module" src="/assets/analytics.mjs"></script>
 </head>
 <body class="topic-page" data-project="${project.slug}">
@@ -432,6 +475,7 @@ ${JSON.stringify(schema, null, 2).replaceAll('<', '\\u003c')}
           <div class="entry-links">
             <a class="btn btn-primary" href="${plannerPath(project)}" data-analytics="service_cta_clicked" data-project="${project.slug}" data-service="${project.inquiry}">建立專案需求</a>
             ${demo ? `<a class="btn btn-ghost" href="${escapeHtml(demo.href)}">${escapeHtml(demo.zh)}</a>` : ''}
+            <a class="text-link" href="#${diagramAnchor('zh')}">${sectionLabels.zh.diagram}</a>
           </div>
         </div>
         ${projectImage(project, 'wide', { online: true, priority: true })}
@@ -447,6 +491,7 @@ ${JSON.stringify(schema, null, 2).replaceAll('<', '\\u003c')}
           <a class="text-link" href="#project-title" lang="zh-Hant">繁體中文</a>
           <a class="text-link" href="${plannerPath(project, 'en')}" data-analytics="service_cta_clicked" data-project="${project.slug}" data-service="${project.inquiry}">Plan a project</a>
           ${demo ? `<a class="text-link" href="${escapeHtml(demoPath(demo.href, 'en'))}">${escapeHtml(demo.en)}</a>` : ''}
+          <a class="text-link" href="#${diagramAnchor('en')}">${sectionLabels.en.diagram}</a>
         </div>
       </div>${detailSections(project, 'en')}
     </section>

@@ -1,0 +1,109 @@
+.case-diagram {
+  margin-top: 1.4rem;
+  padding: clamp(1rem, 2.6vw, 1.8rem);
+  border: 1px solid var(--line);
+  background: var(--bg-2);
+  scroll-margin-top: 1.5rem;
+}
+
+.case-diagram figcaption {
+  margin-bottom: 1rem;
+  color: var(--fg);
+  font-family: var(--serif);
+  font-size: clamp(1.12rem, 2.3vw, 1.55rem);
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.case-diagram-stages {
+  display: grid;
+  grid-auto-columns: minmax(0, 1fr);
+  grid-auto-flow: column;
+  gap: 1.25rem;
+  margin: 0;
+  list-style: none;
+}
+
+.case-diagram-stages li {
+  position: relative;
+  min-width: 0;
+  padding: clamp(.7rem, 1.65vw, 1.2rem);
+  border: 1px solid var(--line);
+  background: var(--bg);
+}
+
+.case-diagram-stages li:not(:last-child)::after {
+  position: absolute;
+  inset: 2.8rem -1rem auto auto;
+  width: .52rem;
+  height: .52rem;
+  border-top: 1.5px solid var(--accent);
+  border-right: 1.5px solid var(--accent);
+  transform: rotate(45deg);
+  content: "";
+}
+
+.case-diagram-icon {
+  display: block;
+  width: min(100%, 7rem);
+  height: auto;
+  margin: 0 auto .65rem;
+  fill: none;
+  color: var(--fg-dim);
+  stroke: currentColor;
+  stroke-width: 1.45;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.case-diagram-icon .accent { stroke: var(--accent); }
+
+.case-diagram-icon .tint {
+  fill: var(--accent);
+  fill-opacity: .13;
+}
+
+.case-diagram-stages strong {
+  display: block;
+  margin-bottom: .25rem;
+  color: var(--fg);
+  font-size: .98rem;
+  font-weight: 600;
+}
+
+.case-diagram-stages p,
+.case-diagram-note {
+  color: var(--fg-dim);
+  font-size: .9rem;
+  font-weight: 400;
+}
+
+.case-diagram-note { margin-top: .8rem; }
+
+.case-diagram-sources .topic-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .3rem 1.1rem;
+  margin-top: .45rem;
+  font-size: .85rem;
+}
+
+.case-diagram-sources a { display: inline-block; }
+
+@media (max-width: 690px) {
+  .case-diagram-stages { grid-auto-flow: row; }
+
+  .case-diagram-stages li {
+    display: grid;
+    grid-template-columns: minmax(4rem, 22%) minmax(0, 1fr);
+    align-items: start;
+    gap: .65rem;
+  }
+
+  .case-diagram-icon { margin: .05rem auto 0; }
+
+  .case-diagram-stages li:not(:last-child)::after {
+    inset: auto auto -1rem 1.8rem;
+    transform: rotate(135deg);
+  }
+}
