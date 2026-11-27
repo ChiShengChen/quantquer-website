@@ -277,9 +277,23 @@
   .feat h3{font-family:var(--serif);font-weight:500;font-size:1.4rem;line-height:1.3;margin:.6rem 0 .7rem;}
   .feat .fdeliv{color:var(--fg);font-size:1rem;line-height:1.7;flex:1;}
   @media(max-width:760px){ .feats{grid-template-columns:1fr;} }
+  .feat.flag,.case.flag{grid-column:1/-1;}
+  @media(min-width:761px){
+    .feat.flag,.case.flag{flex-direction:row;}
+    .feat.flag .cfig,.case.flag .cfig{flex:0 0 50%;border-bottom:0;border-right:1px solid var(--line);}
+    .feat.flag .cfig img,.case.flag .cfig img{object-fit:contain;}
+  }
+  .feat.flag .cfig,.case.flag .cfig,.cap.lead .cfig{background:#EFF4F9;}
+  html:not([data-theme="light"]) .feat.flag .cfig,html:not([data-theme="light"]) .case.flag .cfig,html:not([data-theme="light"]) .cap.lead .cfig{background:#0A111C;}
+  .fspecs{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:1.5rem;}
+  .fspecs div{background:var(--bg);padding:.85rem .95rem;transition:background .35s;}
+  .feat:hover .fspecs div{background:var(--bg-2);}
+  .fspecs dt{font-family:var(--mono);font-weight:500;font-size:clamp(1.2rem,2vw,1.55rem);color:var(--accent);line-height:1.1;letter-spacing:-.01em;}
+  .fspecs dd{margin:.4rem 0 0;font-size:.8rem;color:var(--fg-dim);line-height:1.45;}
+  @media(max-width:480px){ .fspecs div{padding:.7rem .6rem;} .fspecs dt{font-size:1.05rem;white-space:nowrap;} .fspecs dd{font-size:.74rem;} }
 
   /* ---------- capabilities ---------- */
-  .cap-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+  .cap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
   .cap{background:var(--bg);position:relative;transition:background .35s;display:flex;flex-direction:column;}
   .cap .cbd{padding:clamp(1.5rem,2.2vw,2rem);display:flex;flex-direction:column;flex:1;}
   .cap:hover{background:var(--bg-2);}
@@ -288,8 +302,8 @@
   .cap .lat{font-family:var(--mono);font-size:.7rem;color:var(--fg-faint);letter-spacing:.05em;line-height:1.5;}
   .cap p{color:var(--fg-dim);font-size:.93rem;margin-top:.9rem;flex:1;}
   .cap .ev{font-family:var(--mono);font-size:.68rem;color:var(--fg-faint);letter-spacing:.02em;line-height:1.6;margin-top:1.3rem;padding-top:.9rem;border-top:1px solid var(--line-soft);}
-  @media(max-width:1080px){ .cap-grid{grid-template-columns:repeat(2,1fr);} }
-  @media(max-width:620px){ .cap-grid{grid-template-columns:1fr;} }
+  @media(max-width:1080px){ .cap-grid{grid-template-columns:repeat(2,1fr);} .cap.lead{grid-column:1/-1;flex-direction:row;} .cap.lead .cfig{flex:0 0 50%;border-bottom:0;border-right:1px solid var(--line);} .cap.lead .cfig img{object-fit:contain;} }
+  @media(max-width:620px){ .cap-grid{grid-template-columns:1fr;} .cap.lead{flex-direction:column;} .cap.lead .cfig{flex:none;aspect-ratio:3/2;border-right:0;border-bottom:1px solid var(--line);} .cap.lead .cfig img{object-fit:cover;} }
 
   /* ---------- shared check list ---------- */
   ul.chk{list-style:none;display:grid;gap:.6rem;}
@@ -578,9 +592,22 @@
   <div class="wrap">
     <div class="feat-head reveal">
       <h2 class="eyebrow" id="featured-title">代表案例 / Featured Work</h2>
-      <a href="#work" class="feat-all">看全部 8 個案例 →</a>
+      <a href="#work" class="feat-all">看全部 9 個案例 →</a>
     </div>
     <div class="feats reveal">
+      <a class="feat flag" href="#work">
+        <div class="cfig"><img src="assets/cases/edge.webp" srcset="assets/cases/edge-768.webp 768w, assets/cases/edge.webp 1536w" sizes="(max-width: 760px) 100vw, 530px" alt="手機晶片端即時人物消除與背景重建示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="fbd">
+          <div class="ctag">邊緣 AI · 生成式影像</div>
+          <h3>晶片端即時生成式影像引擎</h3>
+          <p class="fdeliv">把人物偵測與 GAN／Diffusion 生成模型壓縮到手機 NPU 上，即時消除影片中的人物並重建背景，不必依賴雲端算力。</p>
+          <dl class="fspecs">
+            <div><dt>INT8</dt><dd>量化感知訓練</dd></div>
+            <div><dt>NPU</dt><dd>手機端推論</dd></div>
+            <div><dt>20+ FPS</dt><dd>即時處理目標</dd></div>
+          </dl>
+        </div>
+      </a>
       <a class="feat" href="#work">
         <div class="cfig"><img src="assets/cases/robot.webp" srcset="assets/cases/robot-768.webp 768w, assets/cases/robot.webp 1536w" sizes="(max-width: 760px) 100vw, 530px" alt="機器人碼垛工作站佈局最佳化示意圖" loading="lazy" width="1536" height="1024"></div>
         <div class="fbd">
@@ -591,12 +618,12 @@
         </div>
       </a>
       <a class="feat" href="#work">
-        <div class="cfig"><img src="assets/cases/kb.webp" srcset="assets/cases/kb-768.webp 768w, assets/cases/kb.webp 1536w" sizes="(max-width: 760px) 100vw, 530px" alt="企業知識庫衝突仲裁問答系統示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="cfig"><img src="assets/cases/eeg.webp" srcset="assets/cases/eeg-768.webp 768w, assets/cases/eeg.webp 1536w" sizes="(max-width: 760px) 100vw, 530px" alt="腦波療效預測示意圖" loading="lazy" width="1536" height="1024"></div>
         <div class="fbd">
-          <div class="ctag">企業 AI · 知識管理</div>
-          <h3>設備廠商技術知識庫問答系統</h3>
-          <p class="fdeliv">交付一套知識庫問答系統：文件說法互相矛盾時先依權威規則仲裁，再附上引用回答。</p>
-          <div class="cres"><div class="big">100<small>%</small></div><p class="rdesc">28 題評測的版本正確率；引用正確率 85%。</p></div>
+          <div class="ctag">臨床 AI · 腦波</div>
+          <h3>腦波憂鬱症療效預測</h3>
+          <p class="fdeliv">以前額葉腦波在治療前預估療效，與臨床團隊合作導入門診流程。</p>
+          <div class="cres"><div class="big word">門診使用中</div><p class="rdesc">模型已於醫學中心門診常規使用。</p></div>
         </div>
       </a>
     </div>
@@ -612,6 +639,7 @@
       <span class="en">/ Capabilities</span>
     </div>
     <div class="domains cap-domains reveal">
+      <span>邊緣 AI Edge AI</span>
       <span>AI Agent</span>
       <span>AI for Science</span>
       <span>臨床 AI Clinical</span>
@@ -620,10 +648,20 @@
       <span>工業 AI Industrial</span>
     </div>
     <div class="cap-grid reveal">
-      <div class="cap">
-        <div class="cfig"><img src="assets/caps/agent.webp" srcset="assets/caps/agent-768.webp 768w, assets/caps/agent.webp 1536w" sizes="(max-width: 620px) 100vw, (max-width: 1080px) 50vw, 270px" alt="AI Agent 與多代理系統示意圖" loading="lazy" width="1536" height="1024"></div>
+      <div class="cap lead">
+        <div class="cfig"><img src="assets/caps/edge.webp" srcset="assets/caps/edge-768.webp 768w, assets/caps/edge.webp 1536w" sizes="(max-width: 620px) 100vw, (max-width: 1080px) 50vw, 370px" alt="生成式模型壓縮並部署到晶片示意圖" loading="lazy" width="1536" height="1024"></div>
         <div class="cbd">
           <div class="num">01</div>
+          <h3>邊緣 AI 與晶片端生成式 AI</h3>
+          <div class="lat">Edge AI &amp; On-device Generative AI</div>
+          <p>把 Diffusion、GAN 等生成式模型壓縮並部署到 NPU、GPU 與嵌入式硬體：INT8 量化、量化感知訓練（QAT）與 NPU 模型轉換，在有限算力、記憶體與延遲下即時推論。</p>
+          <div class="ev">前聯發科 IC 設計 · 手機 NPU 即時人物消除</div>
+        </div>
+      </div>
+      <div class="cap">
+        <div class="cfig"><img src="assets/caps/agent.webp" srcset="assets/caps/agent-768.webp 768w, assets/caps/agent.webp 1536w" sizes="(max-width: 620px) 100vw, (max-width: 1080px) 50vw, 370px" alt="AI Agent 與多代理系統示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="cbd">
+          <div class="num">02</div>
           <h3>AI Agent 與多代理系統</h3>
           <div class="lat">Agentic AI &amp; Multi-Agent Systems</div>
           <p>工具調用、MCP、多代理分工與交叉查核，把重複且需要專業判斷的知識工作，變成有品質閘門的工作流程。</p>
@@ -631,9 +669,9 @@
         </div>
       </div>
       <div class="cap">
-        <div class="cfig"><img src="assets/caps/science.webp" srcset="assets/caps/science-768.webp 768w, assets/caps/science.webp 1536w" sizes="(max-width: 620px) 100vw, (max-width: 1080px) 50vw, 270px" alt="科學 AI 與研究自動化示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="cfig"><img src="assets/caps/science.webp" srcset="assets/caps/science-768.webp 768w, assets/caps/science.webp 1536w" sizes="(max-width: 620px) 100vw, (max-width: 1080px) 50vw, 370px" alt="科學 AI 與研究自動化示意圖" loading="lazy" width="1536" height="1024"></div>
         <div class="cbd">
-          <div class="num">02</div>
+          <div class="num">03</div>
           <h3>科學 AI 與研究自動化</h3>
           <div class="lat">AI for Science &amp; Research Automation</div>
           <p>文獻檢索、證據查核、假說生成與實驗稽核，讓研究流程可追溯、可重現。</p>
@@ -641,9 +679,9 @@
         </div>
       </div>
       <div class="cap">
-        <div class="cfig"><img src="assets/caps/clinical.webp" srcset="assets/caps/clinical-768.webp 768w, assets/caps/clinical.webp 1536w" sizes="(max-width: 620px) 100vw, (max-width: 1080px) 50vw, 270px" alt="臨床 AI 與腦機介面示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="cfig"><img src="assets/caps/clinical.webp" srcset="assets/caps/clinical-768.webp 768w, assets/caps/clinical.webp 1536w" sizes="(max-width: 620px) 100vw, (max-width: 1080px) 50vw, 370px" alt="臨床 AI 與腦機介面示意圖" loading="lazy" width="1536" height="1024"></div>
         <div class="cbd">
-          <div class="num">03</div>
+          <div class="num">04</div>
           <h3>臨床 AI 與腦機介面</h3>
           <div class="lat">Clinical AI &amp; Brain–Computer Interfaces</div>
           <p>從原始腦波與生理訊號，到臨床可用的預測與決策工具，以研究標準驗證每一步。</p>
@@ -651,9 +689,9 @@
         </div>
       </div>
       <div class="cap">
-        <div class="cfig"><img src="assets/caps/signal.webp" srcset="assets/caps/signal-768.webp 768w, assets/caps/signal.webp 1536w" sizes="(max-width: 620px) 100vw, (max-width: 1080px) 50vw, 270px" alt="訊號處理與時序建模示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="cfig"><img src="assets/caps/signal.webp" srcset="assets/caps/signal-768.webp 768w, assets/caps/signal.webp 1536w" sizes="(max-width: 620px) 100vw, (max-width: 1080px) 50vw, 370px" alt="訊號處理與時序建模示意圖" loading="lazy" width="1536" height="1024"></div>
         <div class="cbd">
-          <div class="num">04</div>
+          <div class="num">05</div>
           <h3>訊號處理與時序建模</h3>
           <div class="lat">Signal Processing &amp; Time-Series</div>
           <p>以頻域、時頻與統計方法做降噪、預測與異常偵測，在高雜訊中萃取微弱訊號。</p>
@@ -661,9 +699,9 @@
         </div>
       </div>
       <div class="cap">
-        <div class="cfig"><img src="assets/caps/finance.webp" srcset="assets/caps/finance-768.webp 768w, assets/caps/finance.webp 1536w" sizes="(max-width: 620px) 100vw, (max-width: 1080px) 50vw, 270px" alt="金融 AI 與決策智慧示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="cfig"><img src="assets/caps/finance.webp" srcset="assets/caps/finance-768.webp 768w, assets/caps/finance.webp 1536w" sizes="(max-width: 620px) 100vw, (max-width: 1080px) 50vw, 370px" alt="金融 AI 與決策智慧示意圖" loading="lazy" width="1536" height="1024"></div>
         <div class="cbd">
-          <div class="num">05</div>
+          <div class="num">06</div>
           <h3>金融 AI 與決策智慧</h3>
           <div class="lat">Financial AI &amp; Decision Intelligence</div>
           <p>事件驅動研究、投資假說生成、回測與組合分析，每個結論都能回查到證據。</p>
@@ -671,9 +709,9 @@
         </div>
       </div>
       <div class="cap">
-        <div class="cfig"><img src="assets/caps/quantum.webp" srcset="assets/caps/quantum-768.webp 768w, assets/caps/quantum.webp 1536w" sizes="(max-width: 620px) 100vw, (max-width: 1080px) 50vw, 270px" alt="量子與混合機器學習示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="cfig"><img src="assets/caps/quantum.webp" srcset="assets/caps/quantum-768.webp 768w, assets/caps/quantum.webp 1536w" sizes="(max-width: 620px) 100vw, (max-width: 1080px) 50vw, 370px" alt="量子與混合機器學習示意圖" loading="lazy" width="1536" height="1024"></div>
         <div class="cbd">
-          <div class="num">06</div>
+          <div class="num">07</div>
           <h3>量子與混合機器學習</h3>
           <div class="lat">Quantum &amp; Hybrid Machine Learning</div>
           <p>變分量子電路與混合架構的可行性驗證，一律搭配參數相當的古典對照組，誠實回報差異。</p>
@@ -681,9 +719,9 @@
         </div>
       </div>
       <div class="cap">
-        <div class="cfig"><img src="assets/caps/industrial.webp" srcset="assets/caps/industrial-768.webp 768w, assets/caps/industrial.webp 1536w" sizes="(max-width: 620px) 100vw, (max-width: 1080px) 50vw, 270px" alt="工業 AI 與電腦視覺示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="cfig"><img src="assets/caps/industrial.webp" srcset="assets/caps/industrial-768.webp 768w, assets/caps/industrial.webp 1536w" sizes="(max-width: 620px) 100vw, (max-width: 1080px) 50vw, 370px" alt="工業 AI 與電腦視覺示意圖" loading="lazy" width="1536" height="1024"></div>
         <div class="cbd">
-          <div class="num">07</div>
+          <div class="num">08</div>
           <h3>工業 AI 與電腦視覺</h3>
           <div class="lat">Industrial AI &amp; Computer Vision</div>
           <p>工作站佈局最佳化、CAD 圖面解析、影像辨識與邊緣裝置部署。</p>
@@ -691,9 +729,9 @@
         </div>
       </div>
       <div class="cap">
-        <div class="cfig"><img src="assets/caps/product.webp" srcset="assets/caps/product-768.webp 768w, assets/caps/product.webp 1536w" sizes="(max-width: 620px) 100vw, (max-width: 1080px) 50vw, 270px" alt="AI 產品工程與評估示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="cfig"><img src="assets/caps/product.webp" srcset="assets/caps/product-768.webp 768w, assets/caps/product.webp 1536w" sizes="(max-width: 620px) 100vw, (max-width: 1080px) 50vw, 370px" alt="AI 產品工程與評估示意圖" loading="lazy" width="1536" height="1024"></div>
         <div class="cbd">
-          <div class="num">08</div>
+          <div class="num">09</div>
           <h3>AI 產品工程與評估</h3>
           <div class="lat">AI Product Engineering &amp; Evaluation</div>
           <p>知識庫與 RAG、LLM 整合、全端產品、雲端部署與自動化測試，並量測 AI 是否有效、可靠、划算。</p>
@@ -785,7 +823,7 @@
           <ul class="chk">
             <li>模型與演算法原始碼</li>
             <li>驗證報告（含基準與誤差分析）</li>
-            <li>可部署的推論服務或邊緣版本</li>
+            <li>可部署的推論服務，或量化後的邊緣／NPU 版本</li>
           </ul>
         </div>
       </div>
@@ -850,13 +888,29 @@
       <h2>精選案例</h2>
       <span class="en">/ Selected Work</span>
     </div>
-    <p class="sec-lead reveal">從工業、企業到醫療與金融，挑出能代表不同能力的案例。為保護客戶，專案名稱與客戶資訊已匿名化。</p>
+    <p class="sec-lead reveal">從晶片端、工業、企業到醫療與金融，挑出能代表不同能力的案例。為保護客戶，專案名稱與客戶資訊已匿名化。</p>
 
     <div class="cases reveal">
+      <article class="case flag">
+        <div class="cfig"><img src="assets/cases/edge.webp" srcset="assets/cases/edge-768.webp 768w, assets/cases/edge.webp 1536w" sizes="(max-width: 760px) 100vw, 530px" alt="手機晶片端即時人物消除與背景重建示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="cbody">
+          <div class="ctag">案例 01 · 邊緣 AI · 生成式影像</div>
+          <h3>晶片端即時生成式影像引擎</h3>
+          <p class="cprob">影片人物消除要靠生成式模型重建被遮住的背景，這類模型通常只能在雲端 GPU 上跑。要在手機上即時處理，模型得重新壓縮，並配合晶片的運算格式。</p>
+          <ul class="chk">
+            <li>人物偵測模型（YOLO）以量化感知訓練（QAT）做到 INT8，符合 NPU 的運算格式</li>
+            <li>MI-GAN、LaMa 修補模型輕量化並轉換到手機 NPU，逐幀消除人物、重建背景</li>
+            <li>延伸到晶片端的 Diffusion 場景生成</li>
+            <li>同一合作也處理影音多模態：結合臉部影像的說話者分段與音源分離</li>
+          </ul>
+          <div class="cres"><div class="big word">手機 NPU</div><p class="rdesc">生成式模型直接在手機晶片上執行，影像不必上傳雲端；效能目標為每秒 20 幀以上。</p></div>
+        </div>
+      </article>
+
       <article class="case">
         <div class="cfig"><img src="assets/cases/robot.webp" srcset="assets/cases/robot-768.webp 768w, assets/cases/robot.webp 1536w" sizes="(max-width: 760px) 100vw, 530px" alt="機器人碼垛工作站佈局最佳化示意圖" loading="lazy" width="1536" height="1024"></div>
         <div class="cbody">
-          <div class="ctag">案例 01 · 工業 AI · AI Agent</div>
+          <div class="ctag">案例 02 · 工業 AI · AI Agent</div>
           <h3>工業機器人工作站智慧設計平台</h3>
           <p class="cprob">碼垛工作站的機器人選型、佈局與報價，需要在可達性、節拍時間與成本之間反覆權衡。</p>
           <ul class="chk">
@@ -869,54 +923,9 @@
       </article>
 
       <article class="case">
-        <div class="cfig"><img src="assets/cases/kb.webp" srcset="assets/cases/kb-768.webp 768w, assets/cases/kb.webp 1536w" sizes="(max-width: 760px) 100vw, 530px" alt="企業知識庫衝突仲裁問答系統示意圖" loading="lazy" width="1536" height="1024"></div>
-        <div class="cbody">
-          <div class="ctag">案例 02 · 企業 AI · 知識管理</div>
-          <h3>設備廠商技術知識庫問答系統</h3>
-          <p class="cprob">同一件事在不同文件、不同專家口中說法互相矛盾，一般 RAG 會把矛盾一起丟給模型猜。</p>
-          <ul class="chk">
-            <li>把文件抽成標明「誰主張」的結構化知識卡</li>
-            <li>回答前先依權威規則仲裁衝突，回答附引用與仲裁軌跡</li>
-            <li>專家審查介面，人工裁決回寫知識庫，並以評測集守住品質</li>
-          </ul>
-          <div class="cres"><div class="big">100<small>%</small></div><p class="rdesc">28 題評測的版本正確率；引用正確率 85%。知識庫由 14 份文件抽出 628 張知識卡。</p></div>
-        </div>
-      </article>
-
-      <article class="case">
-        <div class="cfig"><img src="assets/cases/finance.webp" srcset="assets/cases/finance-768.webp 768w, assets/cases/finance.webp 1536w" sizes="(max-width: 760px) 100vw, 530px" alt="AI 投資研究平台示意圖" loading="lazy" width="1536" height="1024"></div>
-        <div class="cbody">
-          <div class="ctag">案例 03 · 金融科技 · AI Agent</div>
-          <h3>AI 投資研究平台</h3>
-          <p class="cprob">投資研究需要大量查證；AI 生成的結論若無法回溯來源，就無法被信任。</p>
-          <ul class="chk">
-            <li>對話式研究工作區：提問、收錄、整理成可回看版本的研究報告</li>
-            <li>新聞到研究筆記的內容生產線，繁中、簡中、英文三語自動產出</li>
-            <li>公司與供應鏈關係資料庫，每一條關係都附年報原句</li>
-          </ul>
-          <div class="cres"><div class="big word">可回溯</div><p class="rdesc">報告裡的每個關係與數字，都能點回原始出處。</p></div>
-        </div>
-      </article>
-
-      <article class="case">
-        <div class="cfig"><img src="assets/cases/floorplan.webp" srcset="assets/cases/floorplan-768.webp 768w, assets/cases/floorplan.webp 1536w" sizes="(max-width: 760px) 100vw, 530px" alt="建築平面圖自動上色示意圖" loading="lazy" width="1536" height="1024"></div>
-        <div class="cbody">
-          <div class="ctag">案例 04 · 電腦視覺 · 建築設計</div>
-          <h3>建築平面圖自動上色系統</h3>
-          <p class="cprob">建案平面圖的分區上色、材質貼圖與坪數標註，長期依賴人工繪圖。</p>
-          <ul class="chk">
-            <li>幾何演算法處理標準圖面，學習式模型定位基地圖中的建築</li>
-            <li>自動辨識房間與家具，套用材質、陰影並標註室內坪數</li>
-            <li>一次設定、整棟多樓層批次輸出 300 dpi 成品</li>
-          </ul>
-          <div class="cres"><div class="big">0.4<small>s</small></div><p class="rdesc">互動換色的反應時間；全程地端運行，圖面不離開客戶電腦。</p></div>
-        </div>
-      </article>
-
-      <article class="case">
         <div class="cfig"><img src="assets/cases/eeg.webp" srcset="assets/cases/eeg-768.webp 768w, assets/cases/eeg.webp 1536w" sizes="(max-width: 760px) 100vw, 530px" alt="腦波療效預測示意圖" loading="lazy" width="1536" height="1024"></div>
         <div class="cbody">
-          <div class="ctag">案例 05 · 臨床 AI · 腦波</div>
+          <div class="ctag">案例 03 · 臨床 AI · 腦波</div>
           <h3>腦波憂鬱症療效預測</h3>
           <p class="cprob">非侵入式腦刺激治療的反應因人而異，臨床需要在治療前預估療效。</p>
           <ul class="chk">
@@ -929,23 +938,9 @@
       </article>
 
       <article class="case">
-        <div class="cfig"><img src="assets/cases/fall.webp" srcset="assets/cases/fall-768.webp 768w, assets/cases/fall.webp 1536w" sizes="(max-width: 760px) 100vw, 530px" alt="長照場域即時跌倒監測示意圖" loading="lazy" width="1536" height="1024"></div>
-        <div class="cbody">
-          <div class="ctag">案例 06 · 長照 · 邊緣 AI</div>
-          <h3>養老院即時跌倒監測</h3>
-          <p class="cprob">長照場域需要即時、低誤報的跌倒偵測，並能在邊緣裝置上穩定運行。</p>
-          <ul class="chk">
-            <li>建構從感測、辨識到告警的完整即時處理鏈</li>
-            <li>針對邊緣裝置最佳化，在現場穩定運行</li>
-          </ul>
-          <div class="cres"><div class="big">98<small>%</small></div><p class="rdesc">邊緣裝置即時運行下的跌倒事件偵測準確率。</p></div>
-        </div>
-      </article>
-
-      <article class="case">
         <div class="cfig"><img src="assets/cases/ngs.webp" srcset="assets/cases/ngs-768.webp 768w, assets/cases/ngs.webp 1536w" sizes="(max-width: 760px) 100vw, 530px" alt="次世代定序影像降噪示意圖" loading="lazy" width="1536" height="1024"></div>
         <div class="cbody">
-          <div class="ctag">案例 07 · 生醫影像</div>
+          <div class="ctag">案例 04 · 生醫影像</div>
           <h3>次世代定序影像降噪</h3>
           <p class="cprob">次世代定序（NGS）影像背景雜訊高、目標訊號微弱，傳統方法難以穩定分離。</p>
           <ul class="chk">
@@ -957,9 +952,68 @@
       </article>
 
       <article class="case">
+        <div class="cfig"><img src="assets/cases/finance.webp" srcset="assets/cases/finance-768.webp 768w, assets/cases/finance.webp 1536w" sizes="(max-width: 760px) 100vw, 530px" alt="AI 投資研究平台示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="cbody">
+          <div class="ctag">案例 05 · 金融科技 · AI Agent</div>
+          <h3>AI 投資研究平台</h3>
+          <p class="cprob">投資研究需要大量查證；AI 生成的結論若無法回溯來源，就無法被信任。</p>
+          <ul class="chk">
+            <li>對話式研究工作區：提問、收錄、整理成可回看版本的研究報告</li>
+            <li>新聞到研究筆記的內容生產線，繁中、簡中、英文三語自動產出</li>
+            <li>公司與供應鏈關係資料庫，每一條關係都附年報原句</li>
+          </ul>
+          <div class="cres"><div class="big word">可回溯</div><p class="rdesc">報告裡的每個關係與數字，都能點回原始出處。</p></div>
+        </div>
+      </article>
+
+      <article class="case">
+        <div class="cfig"><img src="assets/cases/kb.webp" srcset="assets/cases/kb-768.webp 768w, assets/cases/kb.webp 1536w" sizes="(max-width: 760px) 100vw, 530px" alt="企業知識庫衝突仲裁問答系統示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="cbody">
+          <div class="ctag">案例 06 · 企業 AI · 知識管理</div>
+          <h3>設備廠商技術知識庫問答系統</h3>
+          <p class="cprob">同一件事在不同文件、不同專家口中說法互相矛盾，一般 RAG 會把矛盾一起丟給模型猜。</p>
+          <ul class="chk">
+            <li>把文件抽成標明「誰主張」的結構化知識卡</li>
+            <li>回答前先依權威規則仲裁衝突，回答附引用與仲裁軌跡</li>
+            <li>專家審查介面，人工裁決回寫知識庫，並以評測集守住品質</li>
+          </ul>
+          <div class="cres"><div class="big">100<small>%</small></div><p class="rdesc">28 題評測的版本正確率；引用正確率 85%。知識庫由 14 份文件抽出 628 張知識卡。</p></div>
+        </div>
+      </article>
+
+      <article class="case">
+        <div class="cfig"><img src="assets/cases/floorplan.webp" srcset="assets/cases/floorplan-768.webp 768w, assets/cases/floorplan.webp 1536w" sizes="(max-width: 760px) 100vw, 530px" alt="建築平面圖自動上色示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="cbody">
+          <div class="ctag">案例 07 · 電腦視覺 · 建築設計</div>
+          <h3>建築平面圖自動上色系統</h3>
+          <p class="cprob">建案平面圖的分區上色、材質貼圖與坪數標註，長期依賴人工繪圖。</p>
+          <ul class="chk">
+            <li>幾何演算法處理標準圖面，學習式模型定位基地圖中的建築</li>
+            <li>自動辨識房間與家具，套用材質、陰影並標註室內坪數</li>
+            <li>一次設定、整棟多樓層批次輸出 300 dpi 成品</li>
+          </ul>
+          <div class="cres"><div class="big">0.4<small>s</small></div><p class="rdesc">互動換色的反應時間；全程地端運行，圖面不離開客戶電腦。</p></div>
+        </div>
+      </article>
+
+      <article class="case">
+        <div class="cfig"><img src="assets/cases/fall.webp" srcset="assets/cases/fall-768.webp 768w, assets/cases/fall.webp 1536w" sizes="(max-width: 760px) 100vw, 530px" alt="長照場域即時跌倒監測示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="cbody">
+          <div class="ctag">案例 08 · 長照 · 邊緣 AI</div>
+          <h3>養老院即時跌倒監測</h3>
+          <p class="cprob">長照場域需要即時、低誤報的跌倒偵測，並能在邊緣裝置上穩定運行。</p>
+          <ul class="chk">
+            <li>建構從感測、辨識到告警的完整即時處理鏈</li>
+            <li>針對邊緣裝置最佳化，在現場穩定運行</li>
+          </ul>
+          <div class="cres"><div class="big">98<small>%</small></div><p class="rdesc">邊緣裝置即時運行下的跌倒事件偵測準確率。</p></div>
+        </div>
+      </article>
+
+      <article class="case">
         <div class="cfig"><img src="assets/cases/tutor.webp" srcset="assets/cases/tutor-768.webp 768w, assets/cases/tutor.webp 1536w" sizes="(max-width: 760px) 100vw, 530px" alt="大學普物個人化 AI 家教示意圖" loading="lazy" width="1536" height="1024"></div>
         <div class="cbody">
-          <div class="ctag">案例 08 · 教育 AI</div>
+          <div class="ctag">案例 09 · 教育 AI</div>
           <h3>大學普物個人化 AI 家教</h3>
           <p class="cprob">大班普通物理教學難以因材施教，學生之間的學習落差持續擴大。</p>
           <ul class="chk">
