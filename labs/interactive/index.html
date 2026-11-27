@@ -237,24 +237,78 @@
                 <option value="12" data-en="12 cores">12 核心</option>
               </select>
             </label>
-            <label class="showcase-control" for="gpu-policy">
-              <span data-en="Scheduling policy">排程策略</span>
-              <select id="gpu-policy">
-                <option value="fifo" data-en="Strict FIFO">嚴格先進先出</option>
-                <option value="backfill" data-en="Backfill">候補排程</option>
-              </select>
-            </label>
             <label class="showcase-control" for="gpu-jobs">
               <span class="showcase-control-name"><span data-en="Job count">任務數</span><output for="gpu-jobs" id="gpu-jobs-value">6</output></span>
               <input id="gpu-jobs" type="range" min="4" max="8" value="6">
             </label>
+          </div>
+          <div class="gpu-replay" id="gpu-replay">
+            <div class="gpu-playback">
+              <div class="gpu-actions">
+                <button id="gpu-play" class="gpu-play" type="button" aria-controls="gpu-replay gpu-queue">播放</button>
+                <button id="gpu-step" type="button" aria-controls="gpu-replay gpu-queue" data-en="Step">單步</button>
+                <button id="gpu-reset" type="button" aria-controls="gpu-replay gpu-queue" data-en="Reset">重設</button>
+              </div>
+              <div class="gpu-playback-options">
+                <label class="showcase-control gpu-policy-control" for="gpu-policy">
+                  <span data-en="Policy">策略</span>
+                  <select id="gpu-policy">
+                    <option value="fifo" data-en="Strict FIFO">嚴格先進先出</option>
+                    <option value="backfill" data-en="Backfill">候補排程</option>
+                  </select>
+                </label>
+                <label class="showcase-check" for="gpu-compare">
+                  <input id="gpu-compare" type="checkbox" checked>
+                  <span data-en="Compare policies">比較兩種策略</span>
+                </label>
+              </div>
+            </div>
+            <label class="showcase-control gpu-time-control" for="gpu-time">
+              <span class="showcase-control-name">
+                <span data-en="Simulation time">模擬時間</span>
+                <output id="gpu-time-value" for="gpu-time" aria-live="off"></output>
+              </span>
+              <input id="gpu-time" type="range" min="-1" max="0" value="-1">
+            </label>
+            <div class="gpu-stage">
+              <div class="gpu-resources">
+                <div class="gpu-meter">
+                  <div class="gpu-meter-label"><span>VRAM</span><output id="gpu-vram-used" aria-live="off"></output></div>
+                  <div id="gpu-vram-segments" class="gpu-segments" aria-hidden="true"></div>
+                </div>
+                <div class="gpu-meter">
+                  <div class="gpu-meter-label"><span data-en="CPU cores">CPU 核心</span><output id="gpu-cpu-used" aria-live="off"></output></div>
+                  <div id="gpu-cpu-segments" class="gpu-segments" aria-hidden="true"></div>
+                </div>
+              </div>
+              <div class="gpu-lanes">
+                <section class="gpu-lane" aria-labelledby="gpu-waiting-label">
+                  <h3 id="gpu-waiting-label" data-en="Waiting">等待中</h3>
+                  <ul id="gpu-waiting"></ul>
+                </section>
+                <section class="gpu-lane" aria-labelledby="gpu-running-label">
+                  <h3 id="gpu-running-label" data-en="Running">執行中</h3>
+                  <ul id="gpu-running"></ul>
+                </section>
+                <section class="gpu-lane" aria-labelledby="gpu-completed-label">
+                  <h3 id="gpu-completed-label" data-en="Completed">已完成</h3>
+                  <ul id="gpu-completed"></ul>
+                </section>
+              </div>
+              <p id="gpu-decision" class="gpu-decision" aria-live="polite"></p>
+              <p id="gpu-over-capacity" class="gpu-over-capacity" hidden></p>
+            </div>
+            <p id="gpu-comparison" class="gpu-comparison" hidden>
+              <strong id="gpu-divergence" aria-live="polite"></strong>
+              <span id="gpu-totals"></span>
+            </p>
           </div>
           <p class="showcase-result" id="gpu-result" role="status"></p>
           <table class="showcase-table queue-table">
             <caption data-en="Queue and execution timeline (simulated ticks)">任務佇列與執行區間（模擬刻度）</caption>
             <thead><tr>
               <th scope="col" data-en="Job">任務</th>
-              <th scope="col" data-en="Required resources">資源需求</th>
+              <th scope="col" data-en="Resources">資源</th>
               <th scope="col" data-en="Start–finish">開始至完成</th>
             </tr></thead>
             <tbody id="gpu-queue"></tbody>

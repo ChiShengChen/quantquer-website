@@ -308,6 +308,204 @@ html[data-theme="light"] .photon-flow {
   background: var(--accent);
 }
 
+.gpu-replay {
+  display: grid;
+  gap: .75rem;
+  --gpu-job-0: #3984d2;
+  --gpu-job-1: #16977f;
+  --gpu-job-2: #a879ce;
+  --gpu-job-3: #d78a42;
+  --gpu-job-4: #ca6c8d;
+  --gpu-job-5: #7f9b39;
+  --gpu-job-6: #747dd0;
+  --gpu-job-7: #af7958;
+}
+
+.gpu-playback,
+.gpu-actions,
+.gpu-playback-options {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .35rem .6rem;
+}
+
+.gpu-playback {
+  justify-content: space-between;
+}
+
+.gpu-playback-options { gap: .2rem 1rem; }
+
+.gpu-policy-control {
+  display: flex;
+  align-items: center;
+  gap: .45rem;
+  font-size: .86rem;
+}
+
+.gpu-policy-control select {
+  width: auto;
+  padding-inline: .45rem;
+}
+
+.gpu-actions button {
+  min-height: 44px;
+  padding: .4rem .85rem;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--fg);
+  font: inherit;
+  font-size: .86rem;
+  cursor: pointer;
+}
+
+.gpu-actions button:hover:enabled {
+  border-color: var(--accent);
+}
+
+.gpu-actions button:disabled {
+  opacity: .55;
+  cursor: default;
+}
+
+.gpu-actions .gpu-play {
+  min-width: 5rem;
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--bg);
+  font-weight: 600;
+}
+
+.gpu-time-control input[type="range"] {
+  accent-color: var(--accent);
+}
+
+.gpu-stage {
+  display: grid;
+  gap: .9rem;
+  padding: clamp(.65rem, 2vw, 1rem);
+  border: 1px solid var(--line);
+  background: var(--bg);
+}
+
+.gpu-resources,
+.gpu-lanes {
+  display: grid;
+  gap: .6rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.gpu-meter-label {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: .12rem .4rem;
+  margin-bottom: .25rem;
+  font-size: .78rem;
+  font-weight: 600;
+}
+
+.gpu-meter-label output {
+  color: var(--fg-dim);
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.gpu-segments {
+  display: flex;
+  height: .65rem;
+  overflow: hidden;
+  background: var(--line);
+}
+
+.gpu-segments > span {
+  flex: 0 0 auto;
+  width: 0;
+  background: var(--gpu-job-color);
+  transition: width 240ms ease-out;
+}
+
+.gpu-lanes {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.gpu-lane {
+  min-width: 0;
+  min-height: 6.3rem;
+  padding: .5rem;
+  border: 1px solid var(--line);
+  background: var(--panel);
+}
+
+.gpu-lane h3 {
+  margin: 0 0 .35rem;
+  color: var(--fg-dim);
+  font-family: var(--sans);
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.gpu-lane ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.gpu-card {
+  display: flex;
+  align-items: baseline;
+  gap: .3rem;
+  width: fit-content;
+  max-width: 100%;
+  padding: .15rem .4rem;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  font-size: .76rem;
+  overflow-wrap: anywhere;
+}
+
+.gpu-card::before {
+  content: '';
+  flex: 0 0 .45rem;
+  align-self: center;
+  height: .45rem;
+  border-radius: 50%;
+  background: var(--gpu-job-color);
+}
+
+#gpu-running .gpu-card {
+  border-color: var(--gpu-job-color);
+}
+
+.gpu-decision,
+.gpu-over-capacity,
+.gpu-comparison {
+  font-size: .84rem;
+}
+
+.gpu-decision {
+  min-height: 2.6em;
+}
+
+.gpu-over-capacity,
+.gpu-comparison {
+  color: var(--fg-dim);
+}
+
+.gpu-comparison strong {
+  display: block;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.queue-table th:first-child { width: 23%; }
+.queue-table th:nth-child(2) { width: 16%; }
+
 .queue-table .gpu-detail {
   display: block;
   color: var(--fg-dim);
@@ -321,15 +519,89 @@ html[data-theme="light"] .photon-flow {
   font-size: .85rem;
 }
 
-.queue-table .showcase-track {
-  margin-bottom: .25rem;
+.gpu-rail {
+  --gpu-policy-color: var(--accent);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 2.8rem;
+  align-items: center;
+  gap: .35rem;
+}
+
+.gpu-rail[data-policy="backfill"] { --gpu-policy-color: #287560; }
+html[data-theme="dark"] .gpu-rail[data-policy="backfill"] { --gpu-policy-color: #91bf80; }
+.gpu-rail + .gpu-rail { margin-top: .25rem; }
+.queue-table[data-compare="true"] .gpu-rail {
+  grid-template-columns: 4.2rem minmax(0, 1fr) 2.8rem;
+}
+
+.gpu-policy-tag,
+.gpu-interval {
+  color: var(--gpu-policy-color);
+  font-size: .75rem;
+  white-space: nowrap;
+}
+
+.gpu-interval { text-align: right; }
+
+.gpu-track {
+  position: relative;
+  height: .6rem;
+  background: var(--line);
+}
+
+.gpu-track::after {
+  content: '';
+  position: absolute;
+  inset-block: -.2rem;
+  inset-inline-start: clamp(0px, var(--gpu-cursor, 0%), calc(100% - 2px));
+  width: 2px;
+  background: var(--fg);
+  transition: inset-inline-start 200ms ease-out;
+}
+
+.gpu-window {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: var(--gpu-start);
+  width: var(--gpu-width);
+  border: 1px solid var(--gpu-policy-color);
+}
+
+.gpu-window > span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--gpu-policy-color);
+  transition: width 200ms ease-out;
+}
+
+@media (max-width: 699px) {
+  .gpu-controls > :last-child { grid-column: 1 / -1; }
+  .gpu-lanes { grid-template-columns: 1fr; }
+  .gpu-lane {
+    display: grid;
+    grid-template-columns: 5rem minmax(0, 1fr);
+    align-items: center;
+    min-height: 2.5rem;
+    gap: .45rem;
+  }
+  .gpu-lane h3 { margin: 0; }
+  .queue-table th:first-child { width: 28%; }
+  .queue-table th:nth-child(2) { width: 20%; }
+  .queue-table[data-compare="true"] .gpu-rail {
+    grid-template-columns: minmax(0, 1fr) 2.8rem;
+  }
+  .queue-table .gpu-rail[data-secondary="true"],
+  .queue-table .gpu-policy-tag { display: none; }
+  .gpu-rail + .gpu-rail { margin-top: 0; }
 }
 
 @media (min-width: 780px) {
-  .photon-controls,
-  .gpu-controls {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
+  .photon-controls { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+@media (min-width: 700px) {
+  .gpu-controls { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 
 @media (max-width: 500px) {
@@ -342,5 +614,8 @@ html[data-theme="light"] .photon-flow {
 
 @media (prefers-reduced-motion: reduce) {
   .showcase-page .theme-toggle,
-  .showcase-page .navlinks a { transition: none; }
+  .showcase-page .navlinks a,
+  .gpu-segments > span,
+  .gpu-track::after,
+  .gpu-window > span { transition: none; }
 }

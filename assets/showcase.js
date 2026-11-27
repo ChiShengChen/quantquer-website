@@ -402,14 +402,16 @@
     const admits = (job, resources) => job.vram <= resources.vram && job.cpu <= resources.cpu;
     const waiting = jobs.filter(job => admits(job, capacity));
     const schedules = new Map();
+    const frames = [];
     let active = [];
-    let time = 0;
     let peak = 0;
     let finish = 0;
 
     while (waiting.length || active.length) {
+      const time = frames.length;
       active = active.filter(job => schedules.get(job).end > time);
       const available = { ...capacity };
+      const started = [];
       for (const job of active) {
         available.vram -= job.vram;
         available.cpu -= job.cpu;
@@ -424,15 +426,16 @@
         const end = time + job.duration;
         schedules.set(job, { start: time, end });
         active.push(job);
+        started.push(job);
         available.vram -= job.vram;
         available.cpu -= job.cpu;
         finish = Math.max(finish, end);
       }
       peak = Math.max(peak, capacity.vram - available.vram);
-      time += 1;
+      frames.push({ started, head: waiting[0], available });
     }
 
-    return { schedules, finish, peak, blocked: jobs.length - schedules.size };
+    return { schedules, frames, finish, peak, blocked: jobs.length - schedules.size };
   }
 
   function initializeGpuScheduler() {
@@ -442,51 +445,284 @@
     const jobCount = element('gpu-jobs');
     const queue = element('gpu-queue');
     const result = element('gpu-result');
+    const play = element('gpu-play');
+    const step = element('gpu-step');
+    const time = element('gpu-time');
+    const timeOutput = element('gpu-time-value');
+    const compare = element('gpu-compare');
+    const comparison = element('gpu-comparison');
+    const differenceMessage = element('gpu-divergence');
+    const comparisonTotals = element('gpu-totals');
+    const decision = element('gpu-decision');
+    const overCapacity = element('gpu-over-capacity');
+    const waiting = element('gpu-waiting');
+    const running = element('gpu-running');
+    const completed = element('gpu-completed');
+    const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+    const resources = ['vram', 'cpu'].map(key => ({
+      key,
+      bar: element('gpu-' + key + '-segments'),
+      usage: element('gpu-' + key + '-used'),
+    }));
+    const policies = ['fifo', 'backfill'];
+    const policyName = { fifo: 'FIFO', backfill: 'Backfill' };
+    const jobName = job => translate(job.zh, job.en);
+    let jobs, capacity, simulations, finish, divergence;
+    let cards = [];
+    let rails = [];
+    let tick = -1;
+    let timer = null;
+
+    function configure() {
+      stop();
+      tick = -1;
+      jobs = syntheticJobs.slice(0, Number(jobCount.value));
+      capacity = { vram: Number(vram.value), cpu: Number(cpu.value) };
+      const [fifo, backfill] = policies.map(name => simulateQueue(jobs, capacity, name));
+      simulations = { fifo, backfill };
+      finish = Math.max(fifo.finish, backfill.finish);
+      divergence = -1;
+      for (let index = 0; index < finish; index += 1) {
+        const first = fifo.frames[index]?.started ?? [];
+        const second = backfill.frames[index]?.started ?? [];
+        if (first.length !== second.length || first.some(job => !second.includes(job))) {
+          divergence = index;
+          break;
+        }
+      }
+      element('gpu-jobs-value').value = String(jobs.length);
+      time.max = String(finish);
+      time.disabled = finish === 0;
+      for (const lane of [waiting, running, completed]) lane.replaceChildren();
+      for (const { bar } of resources) bar.replaceChildren();
+      cards = jobs.flatMap((job, index) => {
+        if (!fifo.schedules.has(job)) return [];
+        const card = document.createElement('li');
+        const color = `var(--gpu-job-${index})`;
+        card.className = 'gpu-card';
+        card.dataset.order = index;
+        card.style.setProperty('--gpu-job-color', color);
+        waiting.append(card);
+        const segments = resources.map(resource => {
+          const segment = document.createElement('span');
+          segment.style.setProperty('--gpu-job-color', color);
+          resource.bar.append(segment);
+          return segment;
+        });
+        return [{ job, index, card, segments }];
+      });
+      render();
+    }
+
+    function buildRail(name, timing) {
+      const rail = document.createElement('div');
+      rail.className = 'gpu-rail';
+      rail.dataset.policy = name;
+      rail.dataset.secondary = String(name !== policy.value);
+      const track = document.createElement('div');
+      track.className = 'gpu-track';
+      track.setAttribute('aria-hidden', 'true');
+      const windowBar = document.createElement('span');
+      windowBar.className = 'gpu-window';
+      windowBar.style.setProperty('--gpu-start', timing.start / finish * 100 + '%');
+      windowBar.style.setProperty('--gpu-width', (timing.end - timing.start) / finish * 100 + '%');
+      const elapsed = document.createElement('span');
+      windowBar.append(elapsed);
+      track.append(windowBar);
+      const label = document.createElement('span');
+      label.className = 'gpu-interval';
+      label.textContent = timing.start + '–' + timing.end;
+      if (compare.checked) {
+        const tag = document.createElement('span');
+        tag.className = 'gpu-policy-tag';
+        tag.textContent = policyName[name] + ' ';
+        rail.append(tag);
+      }
+      rail.append(track, label);
+      rails.push({ timing, elapsed });
+      return rail;
+    }
 
     function render() {
-      const jobs = syntheticJobs.slice(0, Number(jobCount.value));
-      const capacity = { vram: Number(vram.value), cpu: Number(cpu.value) };
-      const { schedules, finish, peak, blocked } = simulateQueue(jobs, capacity, policy.value);
-      element('gpu-jobs-value').value = String(jobs.length);
+      if (!simulations) {
+        configure();
+        return;
+      }
+      for (const { job, card, segments } of cards) {
+        card.textContent = jobName(job);
+        segments[0].title = `${jobName(job)} · ${job.vram} GB`;
+        segments[1].title = translate(`${jobName(job)} · ${job.cpu} 核心`, `${jobName(job)} · ${job.cpu} cores`);
+      }
+      const { schedules, finish: total, peak, blocked } = simulations[policy.value];
+      const visiblePolicies = compare.checked ? policies : [policy.value];
+      rails = [];
+      queue.closest('table').dataset.compare = String(compare.checked);
       const rows = jobs.map(job => {
         const row = document.createElement('tr');
         const name = document.createElement('th');
         name.scope = 'row';
-        name.textContent = translate(job.zh, job.en);
+        name.textContent = jobName(job);
         row.append(name);
 
-        const resources = row.insertCell();
-        resources.textContent = job.vram + ' GB';
+        const demand = row.insertCell();
+        demand.textContent = job.vram + ' GB';
         const cores = document.createElement('span');
         cores.className = 'gpu-detail';
         cores.textContent = translate(job.cpu + ' 核心', job.cpu + ' cores');
-        resources.append(cores);
+        demand.append(cores);
 
-        const span = row.insertCell();
-        const timing = schedules.get(job);
-        if (timing) {
-          const track = document.createElement('div');
-          track.className = 'showcase-track';
-          track.setAttribute('aria-hidden', 'true');
-          const bar = document.createElement('span');
-          bar.style.setProperty('--showcase-start', timing.start / finish * 100 + '%');
-          bar.style.setProperty('--showcase-width', job.duration / finish * 100 + '%');
-          track.append(bar);
-          span.append(track, timing.start + '–' + timing.end);
+        const timeline = row.insertCell();
+        if (schedules.has(job)) {
+          timeline.append(...visiblePolicies.map(name => buildRail(name, simulations[name].schedules.get(job))));
         } else {
-          span.textContent = translate('超出容量', 'Over capacity');
+          timeline.textContent = translate('超出容量', 'Over capacity');
         }
         return row;
       });
       queue.replaceChildren(...rows);
       result.textContent = translate(
-        `完成 ${schedules.size}／${jobs.length} 件 · 超出容量 ${blocked} 件 · 耗時 ${finish} 刻度 · VRAM 峰值 ${peak} GB`,
-        `Completed ${schedules.size} / ${jobs.length} · ${blocked} over capacity · ${finish} ticks · ${peak} GB peak VRAM`
+        `${policyName[policy.value]} · 完成 ${schedules.size}／${jobs.length} 件 · 超出容量 ${blocked} 件 · 耗時 ${total} 刻度 · VRAM 峰值 ${peak} GB`,
+        `${policyName[policy.value]} · Completed ${schedules.size} / ${jobs.length} · ${blocked} over capacity · ${total} ticks · ${peak} GB peak VRAM`
       );
+      overCapacity.hidden = blocked === 0;
+      const excluded = jobs.filter(job => !schedules.has(job)).map(jobName);
+      overCapacity.textContent = translate(`超出設備總容量（${excluded.join('、')}）`, `Over device capacity (${excluded.join(', ')})`);
+      comparison.hidden = !compare.checked;
+      comparisonTotals.textContent = translate(
+        `FIFO ${simulations.fifo.finish} 刻度 · Backfill ${simulations.backfill.finish} 刻度`,
+        `FIFO ${simulations.fifo.finish} ticks · Backfill ${simulations.backfill.finish} ticks`
+      );
+      renderFrame();
     }
 
-    for (const input of [vram, cpu, policy]) input.addEventListener('change', render);
-    jobCount.addEventListener('input', render);
+    function describeFrame(simulation, frame) {
+      if (tick < 0) return translate('所有任務將在刻度 0 到達。', 'All jobs arrive at tick 0.');
+      if (tick >= simulation.finish) return translate('可排程的任務已全部完成。', 'All eligible jobs have completed.');
+      const { head, available, started } = frame;
+      if (!head) return translate('所有可排程的任務都已啟動。', 'All eligible jobs have started.');
+      const limits = [];
+      if (head.vram > available.vram) limits.push(translate(`需要 ${head.vram} GB，剩 ${available.vram} GB`, `needs ${head.vram} GB with ${available.vram} GB free`));
+      if (head.cpu > available.cpu) limits.push(translate(`需要 ${head.cpu} 核心，剩 ${available.cpu} 核心`, `needs ${head.cpu} cores with ${available.cpu} free`));
+      const later = started.filter(job => jobs.indexOf(job) > jobs.indexOf(head)).map(jobName);
+      const reason = limits.join(' · ');
+      const waitingReason = translate(`${jobName(head)}仍在等待（${reason}）。`, `${jobName(head)} is waiting (${reason}).`);
+      if (!later.length || (compare.checked && tick === divergence)) return waitingReason;
+      return waitingReason + translate(`${later.join('、')}先執行。`, ` Backfill starts ${later.join(', ')} first.`);
+    }
+
+    function renderFrame(animate = false) {
+      const simulation = simulations[policy.value];
+      const frame = simulation.frames[tick] ?? { available: capacity };
+      const playing = timer !== null;
+      const tickLabel = tick < 0 ? translate('就緒', 'Ready') : translate(`刻度 ${tick}／${finish}`, `Tick ${tick} / ${finish}`);
+      timeOutput.value = tickLabel;
+      time.value = String(tick);
+      time.setAttribute('aria-valuetext', tickLabel);
+      play.textContent = playing ? translate('暫停', 'Pause') : tick >= finish ? translate('重播', 'Replay') : translate('播放', 'Play');
+      play.disabled = finish === 0;
+      step.disabled = tick >= finish;
+
+      const moves = [];
+      for (const { job, index, card, segments } of cards) {
+        const { start, end } = simulation.schedules.get(job);
+        const active = start <= tick && tick < end;
+        const lane = tick < start ? waiting : active ? running : completed;
+        if (card.parentNode !== lane) {
+          const before = animate && !reducedMotion.matches ? card.getBoundingClientRect() : null;
+          moves.push({ card, index, lane, before });
+        }
+        segments.forEach((segment, keyIndex) => {
+          const { key } = resources[keyIndex];
+          segment.style.width = active ? job[key] / capacity[key] * 100 + '%' : '0%';
+        });
+      }
+      for (const { card, lane, index } of moves) {
+        const next = Array.from(lane.children).find(child => Number(child.dataset.order) > index);
+        lane.insertBefore(card, next ?? null);
+      }
+      for (const { card, before } of moves) {
+        card.getAnimations().forEach(animation => animation.cancel());
+        if (!before) continue;
+        const after = card.getBoundingClientRect();
+        card.animate([
+          { transform: `translate(${before.left - after.left}px, ${before.top - after.top}px)` },
+          { transform: 'none' },
+        ], { duration: 260, easing: 'ease-out' });
+      }
+      for (const { key, usage } of resources) {
+        const unit = key === 'vram' ? 'GB' : translate('核心', 'cores');
+        usage.value = `${capacity[key] - frame.available[key]} / ${capacity[key]} ${unit}`;
+      }
+      queue.style.setProperty('--gpu-cursor', Math.max(0, tick) / (finish || 1) * 100 + '%');
+      for (const { timing, elapsed } of rails) {
+        const progress = Math.min(1, Math.max(0, (tick - timing.start) / (timing.end - timing.start)));
+        elapsed.style.width = progress * 100 + '%';
+      }
+      decision.setAttribute('aria-live', playing ? 'off' : 'polite');
+      const message = describeFrame(simulation, frame);
+      if (decision.textContent !== message) decision.textContent = message;
+
+      const notice = compare.checked && tick >= 0 && tick === divergence ? describeDivergence() : '';
+      if (differenceMessage.textContent !== notice) differenceMessage.textContent = notice;
+    }
+
+    function describeDivergence() {
+      const starts = policies.map(name => simulations[name].frames[tick]?.started ?? []);
+      const decisions = policies.flatMap((name, index) => {
+        const only = starts[index].filter(job => !starts[1 - index].includes(job));
+        if (!only.length) return [];
+        const names = only.map(jobName).join(translate('、', ', '));
+        return [translate(`${policyName[name]} 此時啟動${names}。`, `${policyName[name]} starts ${names} at this tick.`)];
+      });
+      return translate('策略首次分歧。', 'First difference. ') + decisions.join(' ');
+    }
+
+    function stop() {
+      clearInterval(timer);
+      timer = null;
+    }
+
+    function advance() {
+      if (tick >= finish) return;
+      tick += 1;
+      if (tick >= finish || (compare.checked && tick === divergence)) stop();
+      renderFrame(true);
+    }
+
+    play.addEventListener('click', () => {
+      if (timer !== null) {
+        stop();
+      } else {
+        if (tick >= finish) tick = -1;
+        timer = setInterval(advance, 650);
+      }
+      renderFrame();
+    });
+    step.addEventListener('click', () => {
+      stop();
+      advance();
+    });
+    element('gpu-reset').addEventListener('click', () => {
+      stop();
+      tick = -1;
+      renderFrame();
+    });
+    time.addEventListener('input', () => {
+      stop();
+      tick = Number(time.value);
+      renderFrame();
+    });
+    for (const input of [policy, compare]) input.addEventListener('change', () => {
+      stop();
+      render();
+    });
+    for (const input of [vram, cpu]) input.addEventListener('change', configure);
+    jobCount.addEventListener('input', configure);
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden || timer === null) return;
+      stop();
+      renderFrame();
+    });
     return render;
   }
 
