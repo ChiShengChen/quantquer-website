@@ -298,12 +298,14 @@ function detailPage(project) {
   const name = `${project.zh.title}｜量維資科 Quantquer`;
   const title = escapeHtml(name);
   const description = escapeHtml(project.zh.summary);
+  // Search snippet: a fuller sentence built from the page's own facts; the visible intro stays `summary`.
+  const metaDescription = escapeHtml(project.zh.metaDescription ?? project.zh.summary);
   const url = `${site}${detailPath(project)}`;
   const demo = project.references?.find(reference => reference.href.startsWith('/labs/interactive/#'));
   const shareAlt = '量維資科，從晶片到智慧系統。下方是模型部署至晶片的技術示意。';
   const schema = {
     '@context': 'https://schema.org', '@type': 'WebPage', name, url,
-    description: project.zh.summary,
+    description: project.zh.metaDescription ?? project.zh.summary,
     inLanguage: ['zh-Hant', 'en'],
     isPartOf: { '@id': `${site}/#website` },
     publisher: { '@id': `${site}/#organization` },
@@ -316,15 +318,18 @@ function detailPage(project) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="/assets/theme.js"></script>
   <title>${title}</title>
-  <meta name="description" content="${description}">
+  <meta name="description" content="${metaDescription}">
   <meta name="theme-color" content="#F6F8FB">
   <link rel="canonical" href="${url}">
-  <link rel="icon" type="image/png" href="/assets/logo-mark.png">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/icon-192.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/icon-96.png">
+  <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="量維資科 Quantquer">
   <meta property="og:locale" content="zh_TW">
   <meta property="og:title" content="${title}">
-  <meta property="og:description" content="${description}">
+  <meta property="og:description" content="${metaDescription}">
   <meta property="og:url" content="${url}">
   <meta property="og:image" content="${shareImage}">
   <meta property="og:image:type" content="image/png">
@@ -333,7 +338,7 @@ function detailPage(project) {
   <meta property="og:image:alt" content="${shareAlt}">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${title}">
-  <meta name="twitter:description" content="${description}">
+  <meta name="twitter:description" content="${metaDescription}">
   <meta name="twitter:image" content="${shareImage}">
   <meta name="twitter:image:alt" content="${shareAlt}">
   <script type="application/ld+json">
@@ -452,13 +457,15 @@ for (const project of portfolio.projects) {
   if (!checking) await mkdir(directory, { recursive: true });
   await writeOutput(resolve(directory, 'index.html'), detailPage(project).replace(/[ \t]+$/gm, ''));
 }
+// <lastmod>: data/projects.json `siteUpdated` (YYYY-MM-DD), or a project's own `updated`. Bump it when content changes.
+assert(/^\d{4}-\d{2}-\d{2}$/.test(portfolio.siteUpdated ?? ''), 'data/projects.json needs siteUpdated as YYYY-MM-DD');
 const routes = [
-  '/', '/en/', '/semiconductor-ai/', '/financial-intelligence/', '/labs/interactive/',
-  ...portfolio.projects.map(detailPath),
+  ...['/', '/en/', '/semiconductor-ai/', '/financial-intelligence/', '/labs/interactive/'].map(path => [path, portfolio.siteUpdated]),
+  ...portfolio.projects.map(project => [detailPath(project), project.updated ?? portfolio.siteUpdated]),
 ];
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${routes.map(route => `  <url><loc>${site}${route}</loc></url>`).join('\n')}
+${routes.map(([route, lastmod]) => `  <url><loc>${site}${route}</loc><lastmod>${lastmod}</lastmod></url>`).join('\n')}
 </urlset>
 `;
 await writeOutput(resolve(root, 'sitemap.xml'), sitemap);

@@ -12,7 +12,7 @@
 - **字型**：Google Fonts（Noto Serif TC / Noto Sans TC / IBM Plex Mono）。
 - **Hero 動畫**：`<canvas>` 即時繪製訊號頻譜（PSD 包絡 + live signal trace），支援 `prefers-reduced-motion`。
 - **雙主題**：亮色（預設，品牌藍 `#004EA1`）／深色（teal `#2DD4BF`），右上角切換，偏好存於 `localStorage`，於繪製前套用以避免閃爍。
-- **SEO**。Open Graph、Twitter Card、JSON-LD、逐頁 canonical、`sitemap.xml` 和 `robots.txt`。
+- **SEO**。Open Graph、Twitter Card、JSON-LD（Organization 含正式名稱與統編）、逐頁 canonical、`sitemap.xml`（含 `<lastmod>`）和 `robots.txt`；自訂 `404.html`（noindex）。網站圖示為 `favicon.ico` 與 `assets/icons/`（48／96／192 px，符合 Google 搜尋結果的 48 倍數規格；180 px `apple-touch-icon` 為白底）。
 
 ## 專案結構
 
@@ -27,6 +27,7 @@
 ├── data/projects.json          # 可公開案例資料
 ├── scripts/build-portfolio.mjs # 生成首頁卡片、案例頁及 sitemap
 ├── sitemap.xml / robots.txt    # 搜尋引擎索引
+├── 404.html / favicon.ico      # 自訂找不到頁面（noindex）、根目錄網站圖示
 ├── assets/
 │   ├── site.css                # 共用排版、主題及響應式樣式
 │   ├── theme.js                # 明暗主題與相應插圖
@@ -81,6 +82,7 @@ python3 -m http.server 8000 --bind 127.0.0.1
 ## 編輯指南
 
 - 案例的雙語內容、歸屬、階段、來源和服務連結由 `data/projects.json` 維護，只收錄公開資料。變更後執行 `node scripts/build-portfolio.mjs`，最後用 `node scripts/build-portfolio.mjs --check` 檢查首頁區塊、案例詳頁和 sitemap 同步。
+- 案例頁的搜尋摘要用 `zh.metaDescription`（約 70–95 字，只用頁面上已有的事實），沒有填時沿用 `zh.summary`；頁面上的開頭介紹仍是 `summary`。sitemap 的 `<lastmod>` 取 `siteUpdated`（YYYY-MM-DD），單一案例可用 `updated` 覆寫，內容有變動時記得更新日期。
 - 案例與 Labs 卡片的 `id` 作為穩定錨點。首頁從生成後的卡片讀取篩選條件，案例篩選狀態保存在可分享的網址中。
 - 主題與共用樣式集中在 `assets/site.css`。主題變數位於 `:root`（深色）與 `html[data-theme="light"]`（亮色）。
 - 首頁表單依既有選項 ID 預填需求類型。同頁入口使用 `data-inquiry`，跨頁入口使用 `?inquiry=<選項 ID>#contact`。
