@@ -125,6 +125,14 @@ try {
       await picture.scrollIntoViewIfNeeded();
       await picture.evaluate(img => img.decode());
       assert.match(await picture.evaluate(img => img.currentSrc), /\/assets\/(labs|svcs|caps)\/[^/]+\.webp$/);
+      const frame = await picture.locator('..').boundingBox();
+      assert.ok(frame && Math.abs(frame.width - frame.height * 1.5) <= 2, 'Homepage illustrations show the full 3:2 frame');
+    }
+    const engagementImages = page.locator('#engagements .home-section-art');
+    for (const figure of await engagementImages.all()) {
+      const figureBox = await figure.boundingBox();
+      const cardBox = await figure.locator('..').boundingBox();
+      assert.ok(figureBox && cardBox && cardBox.width - figureBox.width <= 2, 'An engagement illustration spans its card');
     }
     await page.locator('#themeToggle').click();
     for (const [index, card] of (await cards.all()).entries()) {
