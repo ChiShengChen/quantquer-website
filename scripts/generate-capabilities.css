@@ -1,0 +1,122 @@
+@page { size: A4; margin: 0; }
+
+:root {
+  color: #101a24;
+  font-family: 'Noto Sans', 'Noto Sans CJK TC', sans-serif;
+  font-size: 10pt;
+  font-weight: 400;
+  line-height: 1.45;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+  --ink: #101a24;
+  --dark: #0c121c;
+  --teal: #2dd4bf;
+  --blue: #004ea1;
+  --dim: #4b5765;
+  --line: #ccd7e3;
+  --panel: #f6f8fb;
+  --mono: 'IBM Plex Mono', monospace;
+  --serif: 'Noto Serif', 'Noto Serif CJK TC', serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+body, h1, h2, h3, p, dl, dd, figure, ol, ul { margin: 0; }
+ol, ul { padding: 0; list-style: none; }
+a { color: var(--blue); text-underline-offset: 2px; }
+h1, h2, h3 { font-family: var(--serif); line-height: 1.2; }
+
+.page {
+  position: relative;
+  width: 210mm;
+  height: 297mm;
+  padding: 16mm 16mm 24mm;
+  break-after: page;
+}
+
+.page:last-child { break-after: auto; }
+.eyebrow { color: var(--blue); font-family: var(--mono); font-size: 9pt; font-weight: 600; letter-spacing: .08em; }
+.page-heading { border-top: 1px solid var(--line); padding-top: 5mm; margin-bottom: 8mm; }
+.page-heading h2 { font-size: 28pt; margin: 2mm 0 3.5mm; }
+.page-heading p:last-child { color: var(--dim); max-width: 154mm; }
+.page-footer {
+  position: absolute;
+  left: 16mm;
+  right: 16mm;
+  bottom: 11mm;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding-top: 3mm;
+  border-top: 1px solid var(--line);
+  color: var(--dim);
+  font-size: 8.5pt;
+}
+
+.cover { padding-top: 0; }
+.cover-hero {
+  margin: 0 -16mm 10mm;
+  padding: 9mm 16mm 13mm;
+  color: #eaedf2;
+  background: linear-gradient(135deg, #0c121c 32%, #142c49 100%);
+  border-bottom: 2mm solid var(--teal);
+}
+
+.cover-topline { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 5mm; }
+.cover-logo { width: 47mm; height: auto; margin-left: -5.5mm; }
+.cover-edition { color: #b5c2ce; font-family: var(--mono); font-size: 8.5pt; padding-top: 7mm; }
+.cover-hero .eyebrow { color: var(--teal); }
+.cover-hero h1 { max-width: 166mm; font-size: 34pt; margin: 2mm 0 4mm; }
+.cover-hero .cover-company { color: #b5c2ce; font-size: 11pt; font-weight: 500; }
+.cover-summary { font-size: 12pt; margin-bottom: 10mm; max-width: 163mm; }
+.cover h2 { font-size: 21pt; margin-bottom: 5mm; }
+.stack { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3mm; }
+.stack li { background: var(--panel); border-top: 1px solid var(--blue); padding: 4.5mm; min-height: 25mm; }
+.stack h3 { color: var(--blue); font-size: 13pt; margin-bottom: 1.5mm; }
+.stack p { font-size: 10pt; }
+.cover-contact { display: flex; flex-wrap: wrap; gap: 3mm 6mm; margin-top: 8mm; font-size: 10pt; }
+
+.capability-list { border-top: 1px solid var(--line); }
+.capability {
+  display: grid;
+  grid-template-columns: 52mm minmax(0, 1fr);
+  gap: 5mm;
+  padding: 4.5mm 3.5mm;
+  border-bottom: 1px solid var(--line);
+}
+.capability:nth-child(odd) { background: var(--panel); }
+.capability h3 { font-size: 13pt; }
+.capability p + p { margin-top: 1.5mm; }
+.capability strong { color: var(--blue); font-weight: 600; }
+.capability .deliverable { font-size: 9.5pt; }
+
+.work-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4.5mm; }
+.case { display: flex; flex-direction: column; border: 1px solid var(--line); background: #fff; }
+.case-image { display: block; width: 100%; height: 29mm; object-fit: cover; object-position: center; }
+.case-body { display: flex; flex: 1; flex-direction: column; padding: 4mm; }
+.case-status { color: var(--blue); font-size: 7.5pt; font-weight: 600; margin-bottom: 1.25mm; }
+.case h3 { font-size: 12.5pt; margin-bottom: 3mm; }
+.case dl { display: grid; grid-template-columns: 19.5mm minmax(0, 1fr); gap: 1.3mm 1.5mm; margin-bottom: 3.5mm; }
+.case dt, .case dd { font-size: 8.5pt; }
+.case dt { color: var(--dim); font-weight: 600; }
+.case a { margin-top: auto; font-size: 8.5pt; }
+.historical-note { margin-top: 3mm; color: var(--dim); font-size: 8.2pt; }
+
+.engagement-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4mm; }
+.engagement {
+  min-height: 31mm;
+  padding: 4.5mm;
+  border-top: 1px solid var(--line);
+  background: var(--panel);
+}
+.engagement h3 { color: var(--blue); font-size: 14pt; margin-bottom: 2mm; }
+.contact-panel {
+  margin-top: 12mm;
+  padding: 9mm;
+  background: var(--dark);
+  color: #eaedf2;
+  border-top: 1px solid var(--teal);
+}
+.contact-panel h3 { font-size: 20pt; margin-bottom: 3mm; }
+.contact-panel p { max-width: 137mm; }
+.contact-panel ul { display: flex; flex-wrap: wrap; gap: 3mm 7mm; margin-top: 5mm; }
+.contact-panel a { color: var(--teal); font-weight: 600; }
