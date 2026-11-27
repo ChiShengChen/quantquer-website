@@ -7,34 +7,39 @@ export const escapeHtml = value => String(value).replace(/[&<>"']/g, c => ({
   '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
 })[c]);
 
-const navigation = [
-  ['/solutions/', '解決方案', 'Solutions'], ['/services/', '服務', 'Services'],
-  ['/work/', '案例', 'Work'], ['/labs/', 'Labs', 'Labs'],
-  ['/research/', '研究', 'Research'], ['/company/', '公司', 'Company'],
+export const navigation = [
+  ['/solutions/', '解決方案', 'Solutions'], ['/work/', '工程案例', 'Engineering Work'],
+  ['/labs/', 'Labs', 'Labs'], ['/company/', '公司', 'Company'],
 ];
-const themeIcon = '<svg class="ti ti-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 14.6A8.3 8.3 0 0 1 9.4 3.8a8.3 8.3 0 1 0 10.8 10.8Z"/></svg><svg class="ti ti-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.35 5.35l1.55 1.55M17.1 17.1l1.55 1.55M5.35 18.65l1.55-1.55M17.1 6.9l1.55-1.55"/></svg>';
+export const themeIcon = '<svg class="ti ti-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 14.6A8.3 8.3 0 0 1 9.4 3.8a8.3 8.3 0 1 0 10.8 10.8Z"/></svg><svg class="ti ti-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.35 5.35l1.55 1.55M17.1 17.1l1.55 1.55M5.35 18.65l1.55-1.55M17.1 6.9l1.55-1.55"/></svg>';
+
+export function languageLink(route, locale) {
+  const en = locale === 'en';
+  const language = en ? '繁體中文' : 'English';
+  const alternate = en ? 'zh-Hant' : 'en';
+  const compact = en ? '繁中' : 'EN';
+  return `<a class="studio-header-language" href="${studioPath(route, en ? 'zh' : 'en')}" lang="${alternate}" hreflang="${alternate}" aria-label="${compact} · ${language}" data-analytics="language_switched"><span class="locale-full">${language}</span><span class="locale-compact" aria-hidden="true">${compact}</span></a>`;
+}
 
 export function studioHeader(locale, route) {
   const en = locale === 'en';
   const local = path => studioPath(path, locale);
   const contact = en ? 'Contact' : '聯絡';
-  const language = en ? '繁體中文' : 'English';
   const links = navigation.map(([path, zh, english]) => `<a href="${local(path)}"${route === path ? ' aria-current="page"' : ''}>${en ? english : zh}</a>`).join('\n      ');
   return `<header class="studio-header">
   <div class="wrap nav studio-header-inner">
-    <a class="brand" href="${local('/')}" aria-label="${en ? 'Quantquer home' : '量維資科首頁'}"><img class="logo-mark" src="/assets/logo-mark.png" alt="" width="34" height="34"><span class="brand-txt"><span class="mark">${en ? 'Quantquer' : '量維資科'}</span>${en ? '' : '<span class="lat">Quantquer</span>'}</span></a>
+    <a class="brand" href="${local('/')}" aria-label="${en ? 'Quantquer home' : '量維資科 Quantquer 首頁'}"><img class="logo-mark" src="/assets/logo-mark.png" alt="" width="34" height="34"><span class="brand-txt"><span class="mark">${en ? 'Quantquer' : '量維資科'}</span>${en ? '' : '<span class="lat">Quantquer</span>'}</span></a>
     <nav class="navlinks studio-desktop-nav" aria-label="${en ? 'Main navigation' : '主要導覽'}">
       ${links}
     </nav>
     <div class="navlinks studio-header-controls">
-      <a class="studio-header-language" href="${studioPath(route, en ? 'zh' : 'en')}" lang="${en ? 'zh-Hant' : 'en'}">${language}</a>
+      ${languageLink(route, locale)}
       <button id="themeToggle" class="theme-toggle" type="button" aria-label="${en ? 'Switch theme' : '切換明暗主題'}">${themeIcon}</button>
       <a class="nav-cta studio-contact-link" data-analytics="contact_cta_clicked" href="${local('/contact/')}"${route === '/contact/' ? ' aria-current="page"' : ''}>${contact}</a>
       <details class="studio-mobile-nav">
         <summary class="burger" aria-label="${en ? 'Menu' : '選單'}"><span></span><span></span><span></span></summary>
         <nav aria-label="${en ? 'Mobile navigation' : '行動版導覽'}">${links}
           <a href="${local('/contact/')}" data-analytics="contact_cta_clicked">${contact}</a>
-          <a href="${studioPath(route, en ? 'zh' : 'en')}" lang="${en ? 'zh-Hant' : 'en'}">${language}</a>
         </nav>
       </details>
     </div>
@@ -49,6 +54,8 @@ export function studioFooter(locale) {
     <a href="${local('/')}"><img class="foot-logo on-light" src="/assets/logo-full-onlight.png" alt="Quantquer" loading="lazy" width="160" height="47"><img class="foot-logo on-dark" src="/assets/logo-full-light.png" alt="Quantquer" loading="lazy" width="160" height="47"></a>
     <nav aria-label="${en ? 'Footer links' : '頁尾連結'}">
       <a href="${local('/company/')}">${en ? 'Company' : '關於量維'}</a>
+      <a href="${local('/services/')}">${en ? 'Services' : '服務'}</a>
+      <a href="${local('/research/')}">${en ? 'Publications' : '研究成果'}</a>
       <a href="${local('/capabilities/')}">${en ? 'Capabilities' : '能力簡介'}</a>
       <a href="${local('/labs/evidence/')}">${en ? 'Evidence' : '工程證據'}</a>
       <a href="${local('/contact/')}">${en ? 'Contact' : '聯絡'}</a>

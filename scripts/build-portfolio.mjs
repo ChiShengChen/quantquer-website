@@ -245,7 +245,6 @@ function featuredCard(project, language = 'zh') {
   return `      <article class="home-case topic-panel">
         <p class="eyebrow">${escapeHtml(label(domains, project.domain[0], language))}</p>
         <h3><a href="${detailPath(project, language)}">${t('title')}</a></h3>
-        <p>${t('problem')}</p>
         <p class="home-case-output">${t('output')}</p>
         <figure class="home-case-image">
           <a class="home-case-zoom" href="${escapeHtml(file.path)}" aria-label="${en ? 'Open full-size image' : '開啟完整圖片'} · ${t('title')}"><img src="${escapeHtml(file.path)}" width="${file.width}" height="${file.height}" alt="${alt}" loading="lazy" decoding="async"></a>
@@ -295,13 +294,13 @@ function linkList(links) {
 
 const sectionLabels = {
   zh: {
-    problem: '產業問題與工程挑戰', approach: '技術方法與架構', diagram: '技術圖解', diagramSources: '圖解來源',
+    problem: '產業問題與工程挑戰', constraints: '工程限制', origin: '成果歸屬', maturity: '專案成熟度', approach: '技術方法與架構', diagram: '技術圖解', diagramSources: '圖解來源',
     implementation: '實作與交付', result: '成果', validation: '驗證與證據',
     disclosure: '公開範圍及專案狀態', refs: '公開來源與展示', related: '相關工程與服務',
     ownership: '歸屬與階段', benchmark: '量測範圍', solution: '相關解決方案', demo: '操作合成情境展示', evidenceType: '公開證據分類',
   },
   en: {
-    problem: 'Industry problem and engineering challenge', approach: 'Technical approach and architecture',
+    problem: 'Industry problem and engineering challenge', constraints: 'Engineering constraints', origin: 'Provenance', maturity: 'Project maturity', approach: 'Technical approach and architecture',
     diagram: 'Technical diagram', diagramSources: 'Diagram sources',
     implementation: 'Implementation and deliverables', result: 'Outcome', validation: 'Validation and evidence',
     disclosure: 'Project status and disclosure', refs: 'Public sources and demonstrations', related: 'Related work and services',
@@ -383,7 +382,9 @@ function detailSections(project, language) {
     <section class="topic-section axis-divider">
       <div class="wrap">
         <h2>${t.problem}</h2>
-        <p class="topic-lead">${escapeHtml(copy.problem)} ${escapeHtml(copy.challenge)}</p>
+        <p class="topic-lead">${escapeHtml(copy.problem)}</p>
+        <h3>${t.constraints}</h3>
+        <p class="topic-lead">${escapeHtml(copy.challenge)}</p>
       </div>
     </section>
     <section class="topic-section axis-divider">
@@ -433,6 +434,7 @@ function detailSections(project, language) {
 function detailPage(project, language) {
   const en = language === 'en';
   const copy = project[language];
+  const t = sectionLabels[language];
   const route = detailPath(project);
   const demo = project.references?.find(reference => reference.href.startsWith('/labs/evidence/'))
     ?? project.references?.find(reference => reference.href.startsWith('/labs/interactive/#'));
@@ -462,8 +464,12 @@ function detailPage(project, language) {
           <p class="eyebrow">${projectType(project, language)}</p>
           <h1 id="project-title">${escapeHtml(copy.title)}</h1>
           ${en ? '' : `<p class="en" lang="en">${escapeHtml(project.en.title)}</p>`}
-          <p class="topic-audience">${escapeHtml(classification(project, language))} · ${escapeHtml(evidenceStatus(project, language))}</p>
           <p class="topic-intro">${escapeHtml(copy.summary)}</p>
+          <dl class="case-evidence-facts">
+            <div><dt>${t.origin}</dt><dd>${escapeHtml(label(origins, project.origin, language))}</dd></div>
+            <div><dt>${t.maturity}</dt><dd>${escapeHtml(label(stages, project.stage, language))}</dd></div>
+            <div><dt>${t.evidenceType}</dt><dd>${escapeHtml(evidenceStatus(project, language))}</dd></div>
+          </dl>
           <div class="entry-links">
             <a class="btn btn-primary" href="${contactPath(project, language)}" data-analytics="service_cta_clicked" data-project="${project.slug}" data-service="${project.inquiry}">${en ? 'Discuss a similar project' : '討論類似專案'}</a>
             ${evidenceAction}
@@ -574,16 +580,27 @@ for (const language of languages) {
     </div></section>`,
   }));
 }
+function featuredSection(locale) {
+  const cards = portfolio.featured.map(slug => featuredCard(slugs.get(slug), locale));
+  const grid = items => `<div class="home-featured-grid">\n${items.join('\n')}\n    </div>`;
+  const more = locale === 'en' ? 'Show three more case studies' : '展開另外三個代表案例';
+  return `${grid(cards.slice(0, 3))}
+    <details class="home-featured-more">
+      <summary>${more}</summary>
+      ${grid(cards.slice(3))}
+    </details>`;
+}
+
 const indexFile = resolve(root, 'index.html');
 const home = await readFile(indexFile, 'utf8');
 const sections = generatedBlock(
-  generatedBlock(home, 'featured', portfolio.featured.map(slug => featuredCard(slugs.get(slug))).join('\n')),
+  generatedBlock(home, 'featured', featuredSection('zh')),
   'cases',
   portfolio.projects.map(caseCard).join('\n\n'),
 );
 await writeOutput(indexFile, sections, home);
 const englishFile = resolve(root, 'en/index.html');
 const englishHome = await readFile(englishFile, 'utf8');
-const englishSection = generatedBlock(englishHome, 'featured', portfolio.featured.map(slug => featuredCard(slugs.get(slug), 'en')).join('\n'));
+const englishSection = generatedBlock(englishHome, 'featured', featuredSection('en'));
 await writeOutput(englishFile, englishSection, englishHome);
 console.log(`${checking ? 'Verified' : 'Generated'} ${portfolio.projects.length} case studies in two languages, case indexes and homepage cards.`);

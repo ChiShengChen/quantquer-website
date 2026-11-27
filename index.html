@@ -89,40 +89,27 @@
 <!-- STUDIO:navigation:START -->
 <header id="hdr">
   <div class="wrap nav">
-    <a href="#top" class="brand">
-      <img src="assets/logo-mark.png" class="logo-mark" alt="量維資科 Quantquer logo">
-      <span class="brand-txt">
-        <span class="mark">量維資科</span>
-        <span class="lat">Quantquer</span>
-      </span>
+    <a href="#top" class="brand" aria-label="量維資科 Quantquer 首頁">
+      <img src="/assets/logo-mark.png" class="logo-mark" alt="" width="34" height="34">
+      <span class="brand-txt"><span class="mark">量維資科</span><span class="lat">Quantquer</span></span>
     </a>
     <nav class="navlinks" aria-label="主要導覽">
       <a href="/solutions/" class="lk">解決方案</a>
-      <a href="/services/" class="lk">服務</a>
-      <a href="/work/" class="lk">案例</a>
-      <a href="/research/" class="lk">研究</a>
+      <a href="/work/" class="lk">工程案例</a>
       <a href="/labs/" class="lk">Labs</a>
       <a href="/company/" class="lk">公司</a>
-      <a href="en/" class="lk" lang="en">English</a>
-      <button id="themeToggle" class="theme-toggle" type="button" aria-label="切換亮色／深色模式"><svg class="ti ti-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 14.6A8.3 8.3 0 0 1 9.4 3.8a8.3 8.3 0 1 0 10.8 10.8Z"/></svg><svg class="ti ti-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.35 5.35l1.55 1.55M17.1 17.1l1.55 1.55M5.35 18.65l1.55-1.55M17.1 6.9l1.55-1.55"/></svg></button>
-      <a href="/contact/" class="nav-cta" data-analytics="contact_cta_clicked">討論你的專案</a>
-      <button id="burger" class="burger" type="button" aria-label="開啟選單" aria-expanded="false" aria-controls="mnav"><span></span><span></span><span></span></button>
+      <a class="studio-header-language" href="/en/" lang="en" hreflang="en" aria-label="EN · English" data-analytics="language_switched"><span class="locale-full">English</span><span class="locale-compact" aria-hidden="true">EN</span></a>
+      <button id="themeToggle" class="theme-toggle" type="button" aria-label="切換明暗主題"><svg class="ti ti-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 14.6A8.3 8.3 0 0 1 9.4 3.8a8.3 8.3 0 1 0 10.8 10.8Z"/></svg><svg class="ti ti-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.35 5.35l1.55 1.55M17.1 17.1l1.55 1.55M5.35 18.65l1.55-1.55M17.1 6.9l1.55-1.55"/></svg></button>
+      <a href="/contact/" class="nav-cta home-nav-contact" data-analytics="contact_cta_clicked">聯絡</a>
+      <button id="burger" class="burger" type="button" aria-label="開啟選單" data-open-label="開啟選單" data-close-label="關閉選單" aria-expanded="false" aria-controls="mnav"><span></span><span></span><span></span></button>
     </nav>
   </div>
-  <nav class="mnav" id="mnav" aria-label="行動版選單">
-    <div class="wrap">
-      <a href="/solutions/"><span>01</span>解決方案</a>
-      <a href="/services/"><span>02</span>服務與合作模式</a>
-      <a href="semiconductor-ai/"><span aria-hidden="true">↗</span>半導體與 Edge AI</a>
-      <a href="/work/"><span>03</span>工程案例</a>
-      <a href="#method"><span>04</span>工作方式</a>
-      <a href="/research/"><span>05</span>研究成果</a>
-      <a href="/labs/"><span>06</span>Quantquer Labs</a>
-      <a href="labs/interactive/"><span aria-hidden="true">↗</span>互動展示</a>
-      <a href="/company/"><span>07</span>關於量維</a>
-      <a href="#partners"><span>08</span>夥伴服務</a>
-      <a href="/contact/" data-analytics="contact_cta_clicked"><span>09</span>聯絡我們</a>
-      <a href="en/" lang="en"><span aria-hidden="true">EN</span>English</a>
+  <nav class="mnav" id="mnav" aria-label="行動版導覽">
+    <div class="wrap"><a href="/solutions/">解決方案</a>
+      <a href="/work/">工程案例</a>
+      <a href="/labs/">Labs</a>
+      <a href="/company/">公司</a>
+      <a href="/contact/" data-analytics="contact_cta_clicked">聯絡</a>
     </div>
   </nav>
 </header>
@@ -141,11 +128,6 @@
     <p class="hero-sub">
       我們為半導體、工業、醫療與科技企業提供客製化 AI 演算法、模型部署、智慧代理系統及高效能運算基礎設施研發。
     </p>
-    <ul class="pillars" aria-label="三大技術支柱">
-      <li><b>Edge AI</b><span>晶片端生成式 AI</span></li>
-      <li><b>Agentic AI</b><span>AI Agent 與多代理系統</span></li>
-      <li><b>Scientific AI</b><span>科學、臨床與訊號 AI</span></li>
-    </ul>
     <div class="cta-row">
       <a href="/contact/" class="btn btn-primary" data-analytics="contact_cta_clicked">討論你的專案 <span class="arr" aria-hidden="true">→</span></a>
       <a href="#featured" class="btn btn-ghost">查看工程成果 <span class="arr" aria-hidden="true">→</span></a>
@@ -156,15 +138,25 @@
 <section class="home-brand axis-divider" id="brand" aria-labelledby="brand-slogan">
   <div class="wrap home-brand-inner">
     <div>
-      <p class="eyebrow" lang="en">Quantquer</p>
       <h2 id="brand-slogan" lang="en">Quantify to Conquer.</h2>
-      <p class="topic-lead" lang="en">From Silicon to Intelligence.</p>
       <p class="topic-lead">研究驅動的深科技工程工作室</p>
     </div>
     <nav class="entry-links anchor-target" id="engineering-credentials" aria-label="工程實績與研究"><a class="text-link" href="/work/industrial-robotics/">已交付工程</a><a class="text-link" href="/research/">研究發表</a><a class="text-link" href="/labs/projects/">開源工具</a></nav>
   </div>
 </section>
-<section class="studio-home-section axis-divider" id="core-solutions"><div class="wrap"><h2>四大工程解決方案</h2><ul class="home-solution-grid"><li><a href="/solutions/semiconductor-edge-ai/"><span class="eyebrow" lang="en">Silicon Intelligence</span><span>晶片端與嵌入式 AI</span></a></li><li><a href="/solutions/ai-reliability/"><span class="eyebrow" lang="en">Agentic Intelligence</span><span>企業 Agent 可靠性</span></a></li><li><a href="/solutions/gpu-infrastructure/"><span class="eyebrow" lang="en">Compute Intelligence</span><span>GPU 運算基礎設施</span></a></li><li><a href="/solutions/scientific-ai/"><span class="eyebrow" lang="en">Scientific Intelligence</span><span>科學運算與研究工程</span></a></li></ul><p class="home-first-offer"><a class="text-link" href="/services/technical-consulting/#architecture-assessment">從 AI 架構評估開始（典型約 1–2 週）</a></p></div></section>
+<section class="studio-home-section axis-divider" id="core-solutions"><div class="wrap"><h2>四大工程解決方案</h2><ul class="home-solution-grid"><li class="topic-panel">
+      <h3><a href="/solutions/semiconductor-edge-ai/">晶片端與嵌入式 AI</a></h3>
+      <p>模型需要在目標晶片運行。評估算子與資源，交付裝置驗證計畫。</p>
+      <a class="text-link" href="/labs/evidence/vision/" aria-label="查看證據 · 晶片端與嵌入式 AI">查看證據</a></li><li class="topic-panel">
+      <h3><a href="/solutions/ai-reliability/">企業 Agent 可靠性</a></h3>
+      <p>代理流程需要穩定且可稽核。設計工具流程，交付評估集與失敗回復規則。</p>
+      <a class="text-link" href="/labs/demos/reliability/" aria-label="查看證據 · 企業 Agent 可靠性">查看證據</a></li><li class="topic-panel">
+      <h3><a href="/solutions/gpu-infrastructure/">GPU 運算基礎設施</a></h3>
+      <p>多種工作需要共用 GPU。驗證排程策略，交付 PoC、執行紀錄與容量建議。</p>
+      <a class="text-link" href="/labs/evidence/gpu/" aria-label="查看證據 · GPU 運算基礎設施">查看證據</a></li><li class="topic-panel">
+      <h3><a href="/solutions/scientific-ai/">科學運算與研究工程</a></h3>
+      <p>研究假設或模擬需要驗證。建立數值模型與可重跑實驗，交付資料及方法。</p>
+      <a class="text-link" href="/labs/evidence/photonics/" aria-label="查看證據 · 科學運算與研究工程">查看證據</a></li></ul></div></section>
 <!-- STUDIO:hero:END -->
 <section class="studio-home-section home-featured axis-divider" id="featured" aria-labelledby="featured-title">
   <div class="wrap">
@@ -172,12 +164,11 @@
       <h2 id="featured-title">代表案例與技術專題</h2>
       <a href="/work/" class="feat-all">全部案例</a>
     </div>
-    <div class="home-featured-grid">
       <!-- GENERATED:featured:START -->
+<div class="home-featured-grid">
       <article class="home-case topic-panel">
         <p class="eyebrow">工業智慧</p>
         <h3><a href="/work/industrial-robotics/">工業機器人工作站設計</a></h3>
-        <p>在廠房、機器人可達性與設備限制下規劃工作站。</p>
         <p class="home-case-output">可審查的 2D／3D 配置、CAD 與物料清單。</p>
         <figure class="home-case-image">
           <a class="home-case-zoom" href="/assets/evidence/featured/robotics.webp" aria-label="開啟完整圖片 · 工業機器人工作站設計"><img src="/assets/evidence/featured/robotics.webp" width="760" height="437" alt="工作站配置工具顯示 3D 佈局、輸入規格與配置評分" loading="lazy" decoding="async"></a>
@@ -189,7 +180,6 @@
       <article class="home-case topic-panel">
         <p class="eyebrow">半導體與邊緣 AI</p>
         <h3><a href="/work/on-device-generative-vision/">生成式影像修補與晶片端部署</a></h3>
-        <p>比較遮住區域的重建品質與運算成本。</p>
         <p class="home-case-output">修補前後對照、逐次量測與裝置驗證規劃。</p>
         <figure class="home-case-image">
           <a class="home-case-zoom" href="/assets/evidence/vision/hallway-migan.webp" aria-label="開啟完整圖片 · 生成式影像修補與晶片端部署"><img src="/assets/evidence/vision/hallway-migan.webp" width="768" height="512" alt="MI-GAN 在室內測試影像上重建走廊背景的實際輸出" loading="lazy" decoding="async"></a>
@@ -201,7 +191,6 @@
       <article class="home-case topic-panel">
         <p class="eyebrow">AI Agent 與企業智慧</p>
         <h3><a href="/work/enterprise-knowledge-arbitration/">企業技術文件仲裁</a></h3>
-        <p>設備文件版本衝突時，回答需要可追查的依據。</p>
         <p class="home-case-output">含文件版本、引用及人工覆核的問答流程。</p>
         <figure class="home-case-image">
           <a class="home-case-zoom" href="/assets/evidence/featured/knowledge-zh.webp" aria-label="開啟完整圖片 · 企業技術文件仲裁"><img src="/assets/evidence/featured/knowledge-zh.webp" width="1052" height="232" alt="同一組合成設備文件下，關鍵詞檢索與文件仲裁選出不同版本的壓力上限" loading="lazy" decoding="async"></a>
@@ -210,10 +199,13 @@
         <p class="home-case-proof">歷史引用正確率 85%，限當時 28 題評測。</p>
         <a class="text-link" href="/work/enterprise-knowledge-arbitration/#case-evidence">查看評測條件</a>
       </article>
+    </div>
+    <details class="home-featured-more">
+      <summary>展開另外三個代表案例</summary>
+      <div class="home-featured-grid">
       <article class="home-case topic-panel">
         <p class="eyebrow">AI 基礎設施與產品工程</p>
         <h3><a href="/work/gpu-orchestration/">GPU 運算資源排程</a></h3>
-        <p>共用 GPU 任務排隊與 VRAM 需求難以預估。</p>
         <p class="home-case-output">排程回放、任務事件與程序 VRAM 樣本。</p>
         <figure class="home-case-image">
           <a class="home-case-zoom" href="/assets/evidence/featured/gpu-zh.webp" aria-label="開啟完整圖片 · GPU 運算資源排程"><img src="/assets/evidence/featured/gpu-zh.webp" width="994" height="194" alt="單工作站受控實跑的程序 VRAM 取樣與保留量時間軸" loading="lazy" decoding="async"></a>
@@ -225,7 +217,6 @@
       <article class="home-case topic-panel">
         <p class="eyebrow">醫療與神經科技</p>
         <h3><a href="/work/eeg-treatment-response/">臨床 EEG 治療反應研究</a></h3>
-        <p>研究治療前額葉 EEG 與腦刺激治療反應的關係。</p>
         <p class="home-case-output">可追查的訊號特徵與研究評估流程。</p>
         <figure class="home-case-image">
           <a class="home-case-zoom" href="/assets/evidence/featured/eeg-research.webp" aria-label="開啟完整圖片 · 臨床 EEG 治療反應研究"><img src="/assets/evidence/featured/eeg-research.webp" width="520" height="313" alt="額葉 EEG 研究的六步流程，包含訊號前處理、特徵擷取、模型訓練與跨資料集驗證" loading="lazy" decoding="async"></a>
@@ -237,7 +228,6 @@
       <article class="home-case topic-panel">
         <p class="eyebrow">半導體與邊緣 AI</p>
         <h3><a href="/work/photonic-computing/">光子網格與故障模擬</a></h3>
-        <p>檢查局部相位與耗損如何改變光子網路輸出。</p>
         <p class="home-case-output">互動故障注入、輸出功率與固定測試資料。</p>
         <figure class="home-case-image">
           <a class="home-case-zoom" href="/assets/evidence/featured/photonics-zh.webp" aria-label="開啟完整圖片 · 光子網格與故障模擬"><img src="/assets/evidence/featured/photonics-zh.webp" width="986" height="289" alt="四通道光子網格中的干涉單元、故障位置與模擬輸出光功率" loading="lazy" decoding="async"></a>
@@ -246,40 +236,43 @@
         <p class="home-case-proof">四通道、四階段理想 MZI 的數值模擬。</p>
         <a class="text-link" href="/labs/evidence/photonics/">操作光子模擬</a>
       </article>
-      <!-- GENERATED:featured:END -->
     </div>
+    </details>
+      <!-- GENERATED:featured:END -->
   </div>
 </section>
 
 
 
 <!-- STUDIO:conversion:START -->
-<section class="studio-home-section axis-divider" id="engineering-evidence"><div class="wrap"><h2>Quantquer Labs 與工程證據</h2><p class="topic-lead">查看量測條件、操作展示或下載可重跑的原始資料。</p><div class="entry-links"><a class="text-link" href="/labs/benchmarks/">Benchmark</a><a class="text-link" href="/labs/demos/">互動展示</a><a class="text-link" href="/labs/evidence/">原始資料與方法</a><a class="text-link" href="/labs/projects/">開源工具</a></div></div></section>
-<section class="studio-home-section axis-divider" id="engagements"><div class="wrap"><h2>開始合作</h2><div class="home-engagement-grid"><div><ul class="home-rows"><li><a class="text-link" href="/services/technical-consulting/#architecture-assessment">AI 架構評估</a><span class="home-duration">典型約 1–2 週</span><p>交付瓶頸分析、風險清單與驗證路線。</p></li><li><a class="text-link" href="/services/feasibility-study/#edge-feasibility">邊緣 AI 可行性研究</a><span class="home-duration">典型約 3–6 週</span><p>交付算子相容性、資源分析及裝置驗證計畫。</p></li><li><a class="text-link" href="/services/custom-rd/">客製研發與交付</a><span class="home-duration">依需求評估</span><p>共同定義原型、驗收、文件與移交範圍。</p></li></ul><div class="entry-links"><a class="text-link" href="/services/fractional-cto/">兼任技術長與長期合作</a><a class="text-link" href="/company/#engagement-terms">NDA、IP 與交付方式</a></div></div><div class="topic-panel home-finder" data-solution-finder hidden>
-    <h3>依問題找合作方式</h3>
+<section class="studio-home-section axis-divider" id="engineering-evidence"><div class="wrap"><h2>工程證據</h2><div class="home-proof-grid"><div><p class="topic-lead">查看量測條件、操作展示或下載可重跑的原始資料。</p><div class="entry-links"><a class="text-link" href="/labs/benchmarks/">Benchmark</a><a class="text-link" href="/labs/evidence/">原始資料與方法</a></div></div><div><h3><a href="/labs/">Quantquer Labs</a></h3><div class="entry-links"><a class="text-link" href="/labs/interactive/#gpu-orchestration">GPU 排程互動展示</a><a class="text-link" href="/labs/projects/#project-paper-evidence">Paper Evidence 開源工具</a><a class="text-link" href="/labs/evidence/photonics/">光子網路數值模型</a></div></div></div></div></section>
+<section class="studio-home-section axis-divider" id="engagements"><div class="wrap"><h2>開始合作</h2><div class="home-engagement-grid"><div><ul class="home-rows"><li><a class="text-link" href="/services/technical-consulting/#architecture-assessment">AI 架構評估</a><span class="home-duration">典型約 1–2 週</span><p>交付瓶頸分析、風險清單與驗證路線。</p></li><li><a class="text-link" href="/services/feasibility-study/#edge-feasibility">邊緣 AI 可行性研究</a><span class="home-duration">典型約 3–6 週</span><p>交付算子相容性、資源分析及裝置驗證計畫。</p></li><li><a class="text-link" href="/services/custom-rd/">客製研發與交付</a><span class="home-duration">依需求評估</span><p>共同定義原型、驗收、文件與移交範圍。</p></li><li><a class="text-link" href="/services/fractional-cto/">兼任技術長與長期合作</a><span class="home-duration">依需求評估</span><p>持續提供技術評估、架構決策與研發支援。</p></li></ul><div class="entry-links"><a class="text-link" href="/company/#engagement-terms">NDA、IP 與交付方式</a></div></div><details class="home-finder" data-solution-finder hidden>
+    <summary>依問題找合作方式</summary>
     <label for="home-solution-choice">你的團隊現在要解決什麼？</label>
     <select id="home-solution-choice"><option value="">選擇技術問題</option><option value="edge-ai">把模型部署到晶片或邊緣裝置</option><option value="agent">建立可靠、可稽核的企業 AI Agent</option><option value="gpu-infrastructure">管理 GPU 任務或降低推論成本</option><option value="research">驗證科研、模擬或演算法問題</option><option value="assessment">我還在評估技術方向</option></select>
     <div aria-live="polite"><div class="home-finder-result" data-solution-result="edge-ai" hidden>
-      <strong>Silicon Intelligence</strong><p>算子相容性、資源評估與部署驗證計畫。</p>
+      <strong>Silicon Intelligence</strong><p>評估算子與資源，交付裝置驗證計畫。</p>
       <div class="entry-links"><a class="text-link" href="/solutions/semiconductor-edge-ai/">查看建議的解決方案</a><a class="text-link" href="/contact/?service=edge-ai#rfp" data-analytics="service_cta_clicked" data-service="edge-ai">討論這項需求</a></div>
     </div><div class="home-finder-result" data-solution-result="agent" hidden>
-      <strong>Agentic Intelligence</strong><p>可稽核的工具流程、評估集與失敗回復規則。</p>
+      <strong>Agentic Intelligence</strong><p>設計工具流程，交付評估集與失敗回復規則。</p>
       <div class="entry-links"><a class="text-link" href="/solutions/ai-reliability/">查看建議的解決方案</a><a class="text-link" href="/contact/?service=agent#rfp" data-analytics="service_cta_clicked" data-service="agent">討論這項需求</a></div>
     </div><div class="home-finder-result" data-solution-result="gpu-infrastructure" hidden>
-      <strong>Compute Intelligence</strong><p>排程 PoC、執行紀錄與容量建議。</p>
+      <strong>Compute Intelligence</strong><p>驗證排程策略，交付 PoC、執行紀錄與容量建議。</p>
       <div class="entry-links"><a class="text-link" href="/solutions/gpu-infrastructure/">查看建議的解決方案</a><a class="text-link" href="/contact/?service=gpu-infrastructure#rfp" data-analytics="service_cta_clicked" data-service="gpu-infrastructure">討論這項需求</a></div>
     </div><div class="home-finder-result" data-solution-result="research" hidden>
-      <strong>Scientific Intelligence</strong><p>可重跑實驗、驗證資料與方法紀錄。</p>
+      <strong>Scientific Intelligence</strong><p>建立數值模型與可重跑實驗，交付資料及方法。</p>
       <div class="entry-links"><a class="text-link" href="/solutions/scientific-ai/">查看建議的解決方案</a><a class="text-link" href="/contact/?service=research#rfp" data-analytics="service_cta_clicked" data-service="research">討論這項需求</a></div>
     </div><div class="home-finder-result" data-solution-result="assessment" hidden>
       <strong>AI 架構評估</strong><p>交付架構瓶頸、風險與下一步驗證計畫。</p>
       <div class="entry-links"><a class="text-link" href="/services/technical-consulting/">查看建議的解決方案</a><a class="text-link" href="/contact/?service=assessment#rfp" data-analytics="service_cta_clicked" data-service="assessment">討論這項需求</a></div>
     </div></div>
-  </div></div></div></section>
+  </details></div></div></section>
 <section class="studio-home-section axis-divider" id="studio-architecture"><div class="wrap"><h2>研究、公司與合作夥伴</h2><div class="entry-links"><a class="text-link" href="/research/">研究成果</a><a class="text-link" href="/company/">公司與創辦人</a><a class="text-link" href="/#partners">合作夥伴</a><a class="text-link" href="/downloads/quantquer-capabilities-zh.pdf">能力簡介 PDF</a></div></div></section>
-<section class="studio-home-section axis-divider" id="project-contact"><div class="wrap"><h2>從工程問題開始</h2><p class="topic-lead">有目標裝置、現有系統或一個需要驗證的想法，就可以開始討論。</p><div class="entry-links"><a class="btn btn-primary" data-analytics="contact_cta_clicked" href="mailto:chisheng.m.chen@gmail.com?subject=Quantquer%20project%20inquiry">直接 Email</a><a class="btn btn-ghost" href="/contact/#rfp">準備完整專案需求</a></div></div></section>
+<section class="studio-home-section axis-divider" id="project-contact"><div class="wrap"><h2>從工程問題開始</h2><div class="entry-links"><a class="btn btn-primary" data-analytics="contact_cta_clicked" href="/contact/">討論你的專案</a><a class="btn btn-ghost" href="/contact/#rfp">準備完整專案需求</a></div></div></section>
 <!-- STUDIO:conversion:END -->
 <section class="home-archive studio-home-section axis-divider" aria-labelledby="home-archive-heading"><div class="wrap"><h2 id="home-archive-heading">技術與公司索引</h2></div>
+  <details class="home-archive-directory" data-home-archive>
+    <summary><span class="wrap">展開技術與公司索引</span></summary>
   <details class="home-archive-item" data-home-archive>
     <summary><span class="wrap">工程成果短片</span></summary>
 <section class="site-showreel axis-divider" id="showreel" aria-labelledby="showreel-title">
@@ -1620,6 +1613,7 @@
   </div>
 </section>
   </details>
+  </details>
 </section>
 </main>
 
@@ -1638,17 +1632,16 @@
   <div class="wrap foot-btm">
     <div class="fmeta">© 2026 Quantquer Inc. · 以量化征服難題</div>
   </div>
+  <div class="wrap home-footer-resources">
+    <!-- STUDIO:resources:START -->
+<nav class="home-footer-links" aria-label="網站資源"><a class="text-link" href="/work/">工程案例</a><a class="text-link" href="/services/">服務</a><a class="text-link" href="/research/">研究成果</a><a class="text-link" href="/labs/">Labs</a><a class="text-link" href="/contact/">聯絡</a></nav>
+<!-- STUDIO:resources:END -->
+  </div>
 </footer>
 
 <script defer src="assets/portfolio.js"></script>
 <script type="module" src="/assets/showreel.mjs"></script>
 <script>
-  // ---- header scroll state ----
-  const hdr = document.getElementById('hdr');
-  const onScroll = () => { hdr.classList.toggle('scrolled', window.scrollY > 30); };
-  window.addEventListener('scroll', onScroll, {passive:true});
-  onScroll();
-
   // ---- reveal on scroll ----
   if ('IntersectionObserver' in window) {
     const io = new IntersectionObserver((entries)=>{
@@ -1657,146 +1650,6 @@
     document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
     document.documentElement.classList.add('reveal-ready');
   }
-
-  // ---- spectrum / signal motif ----
-  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const canvas = document.getElementById('spectrum');
-  const ctx = canvas.getContext('2d');
-  let W=0,H=0,dpr=1, scrollY=0;
-  let waveformVisible = true;
-  let animationFrame = null;
-  // theme-aware colors (re-read on theme switch)
-  let accent='#2DD4BF', gridColor='rgba(255,255,255,0.035)', axisColor='rgba(255,255,255,0.06)';
-  function readColors(){
-    const cs = getComputedStyle(document.documentElement);
-    accent    = (cs.getPropertyValue('--accent').trim()      || accent);
-    gridColor = (cs.getPropertyValue('--canvas-grid').trim() || gridColor);
-    axisColor = (cs.getPropertyValue('--canvas-axis').trim() || axisColor);
-  }
-  readColors();
-
-  function resize(){
-    dpr = Math.min(2, window.devicePixelRatio||1);
-    const r = canvas.getBoundingClientRect();
-    W = r.width; H = r.height;
-    canvas.width = Math.round(W*dpr); canvas.height = Math.round(H*dpr);
-    ctx.setTransform(dpr,0,0,dpr,0,0);
-  }
-  const gauss = (u,mu,s)=>Math.exp(-Math.pow((u-mu)/s,2)/2);
-
-  function draw(t){
-    ctx.clearRect(0,0,W,H);
-    const sn = Math.min(1, scrollY / Math.max(1,H));   // 0..1 scroll within hero
-    const base = H*0.60;
-    const par = scrollY*0.06;                            // parallax drift
-
-    // --- frequency grid (vertical) ---
-    ctx.lineWidth = 1;
-    ctx.strokeStyle = gridColor;
-    const step = Math.max(70, W/14);
-    for(let x=step; x<W; x+=step){
-      ctx.beginPath(); ctx.moveTo(x, H*0.16); ctx.lineTo(x, H*0.92); ctx.stroke();
-    }
-    // --- baseline axis ---
-    ctx.strokeStyle = axisColor;
-    ctx.beginPath(); ctx.moveTo(0, base - par); ctx.lineTo(W, base - par); ctx.stroke();
-
-    // --- PSD envelope (filled, with peaks) ---
-    ctx.beginPath();
-    ctx.moveTo(0, base - par);
-    for(let x=0; x<=W; x+=3){
-      const u = x/W;
-      const breathe = 0.92 + 0.08*Math.sin(t*0.0006);
-      const psd = (gauss(u,0.20,0.045)*0.55 + gauss(u,0.50,0.085)*1.0 + gauss(u,0.79,0.05)*0.42) * breathe;
-      const yy = (base - par) - psd*H*0.155*(1 - sn*0.5);
-      ctx.lineTo(x, yy);
-    }
-    ctx.lineTo(W, base - par); ctx.closePath();
-    const g = ctx.createLinearGradient(0, base-H*0.22, 0, base);
-    g.addColorStop(0, accent+'16');   // ~8% alpha
-    g.addColorStop(1, accent+'00');
-    ctx.fillStyle = g; ctx.fill();
-    ctx.strokeStyle = accent+'29'; ctx.lineWidth = 1; ctx.stroke();   // ~16% alpha
-
-    // --- live signal trace ---
-    const amp = H*0.115 * (1 - sn*0.45);
-    ctx.beginPath();
-    for(let x=0; x<=W; x+=2){
-      const u = x/W;
-      let y = Math.sin(u*4.2  + t*0.00045)*0.62
-            + Math.sin(u*9.3  + t*0.00075)*0.46
-            + Math.sin(u*21.0 - t*0.00095)*0.24
-            + Math.sin(u*46.0 + t*0.00130)*0.11;
-      const env = gauss(u,0.5,0.46);           // taper at edges
-      const yy = (base - par) - y*amp*env;
-      x===0 ? ctx.moveTo(x,yy) : ctx.lineTo(x,yy);
-    }
-    ctx.strokeStyle = accent; ctx.lineWidth = 1.6; ctx.stroke();
-
-    // soft second harmonic ghost
-    ctx.beginPath();
-    for(let x=0; x<=W; x+=3){
-      const u = x/W;
-      let y = Math.sin(u*6.5 - t*0.0005)*0.5 + Math.sin(u*15 + t*0.0009)*0.3;
-      const env = gauss(u,0.5,0.46);
-      const yy = (base - par) - y*amp*0.55*env + 14;
-      x===0 ? ctx.moveTo(x,yy) : ctx.lineTo(x,yy);
-    }
-    ctx.strokeStyle = accent+'38'; ctx.lineWidth = 1; ctx.stroke();   // ~22% alpha
-  }
-
-  function frame(t){
-    draw(t);
-    animationFrame = requestAnimationFrame(frame);
-  }
-
-  function updateWaveform(){
-    if(waveformVisible && !document.hidden && !reducedMotion.matches){
-      if(animationFrame === null) animationFrame = requestAnimationFrame(frame);
-      return;
-    }
-    if(animationFrame !== null){
-      cancelAnimationFrame(animationFrame);
-      animationFrame = null;
-    }
-    if(waveformVisible && !document.hidden && reducedMotion.matches) draw(0);
-  }
-
-  window.addEventListener('resize', ()=>{
-    resize();
-    updateWaveform();
-  }, {passive:true});
-  window.addEventListener('scroll', ()=>{ scrollY = window.scrollY; }, {passive:true});
-  if ('IntersectionObserver' in window) {
-    new IntersectionObserver(([entry]) => {
-      waveformVisible = entry.isIntersecting;
-      updateWaveform();
-    }).observe(canvas);
-  }
-  document.addEventListener('visibilitychange', updateWaveform);
-  reducedMotion.addEventListener('change', updateWaveform);
-  resize();
-  updateWaveform();
-
-  document.addEventListener('quantquer:themechange', ()=>{
-    readColors();
-    updateWaveform();
-  });
-
-  // ---- mobile menu ----
-  const burger = document.getElementById('burger');
-  const mnav = document.getElementById('mnav');
-  const setMenu = (open)=>{
-    hdr.classList.toggle('menu-open', open);
-    burger.setAttribute('aria-expanded', String(open));
-    burger.setAttribute('aria-label', open ? '關閉選單' : '開啟選單');
-  };
-  const menuOpen = ()=>hdr.classList.contains('menu-open');
-  burger.addEventListener('click', ()=>setMenu(!menuOpen()));
-  mnav.querySelectorAll('a').forEach(a=>a.addEventListener('click', ()=>setMenu(false)));
-  document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && menuOpen()){ setMenu(false); burger.focus(); } });
-  document.addEventListener('click', (e)=>{ if(menuOpen() && !hdr.contains(e.target)) setMenu(false); });
-  window.matchMedia('(min-width: 941px)').addEventListener('change', (e)=>{ if(e.matches) setMenu(false); });
 
   // ---- inquiry form -> mail draft or clipboard (no third-party backend) ----
   const qform = document.getElementById('qform');

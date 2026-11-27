@@ -11,8 +11,6 @@ const submit = document.getElementById('contact-submit');
 const delivery = document.getElementById('contact-delivery');
 const summary = document.getElementById('contact-summary');
 const status = document.getElementById('contact-status');
-const manual = document.getElementById('contact-manual');
-const briefField = document.getElementById('contact-brief');
 const projectType = new URL(location.href).searchParams.get('service');
 const labels = {
   required: l('請填寫此欄位。', 'Complete this field.'),
@@ -22,6 +20,7 @@ const labels = {
 };
 if (Object.hasOwn(projectTypes, projectType)) form.elements.projectType.value = projectType;
 submit.hidden = !endpoint;
+submit.disabled = !endpoint;
 delivery.textContent = endpoint
   ? l('你可直接送出，也可開啟郵件草稿或複製內容。', 'Send the inquiry directly, open an email draft or copy your brief.')
   : l('填寫後可產生郵件草稿，或複製內容到你的信箱寄送。', 'Prepare an email draft or copy your inquiry into your preferred email service.');
@@ -42,7 +41,7 @@ function updateError(activeForm, field, error) {
 }
 
 function readForm() {
-  manual.hidden = true;
+  document.getElementById('contact-manual').hidden = true;
   status.textContent = '';
   const { values, errors } = validateContact(Object.fromEntries(new FormData(form)));
   for (const field of fields) updateError(form, field, errors[field.name]);
@@ -63,10 +62,11 @@ form.addEventListener('input', event => {
 });
 form.addEventListener('focusin', () => track('inquiry_started', { channel: endpoint ? 'web' : 'email' }), { once: true });
 function wireSubmission(activeForm, button, notice, readValues, mode) {
+  if (!endpoint) return;
   let pending;
   activeForm.addEventListener('submit', async event => {
     event.preventDefault();
-    if (!endpoint || button.disabled) return;
+    if (button.disabled) return;
     const values = readValues();
     if (!values) return;
     const fingerprint = JSON.stringify(values);
@@ -95,58 +95,89 @@ function wireSubmission(activeForm, button, notice, readValues, mode) {
 }
 
 wireSubmission(form, submit, status, readForm, 'full');
+if (!endpoint) form.addEventListener('submit', event => {
+  event.preventDefault();
+  const values = readForm();
+  if (values) openDraft(values, status, 'contact');
+});
 
-if (endpoint) {
-  const quick = document.getElementById('quick-inquiry');
-  const quickStatus = document.getElementById('quick-status');
-  const readQuick = () => {
-    quickStatus.textContent = '';
-    const { values, errors } = validateContact(Object.fromEntries(new FormData(quick)), 'quick');
-    for (const field of quickFields) updateError(quick, field, errors[field.name]);
-    const first = Object.keys(errors)[0];
-    if (!first) return values;
-    quickStatus.textContent = l('請檢查標示的欄位。', 'Review the highlighted fields.');
-    quick.elements[first].focus();
-    return null;
-  };
-  quick.addEventListener('input', event => {
-    const field = quickFields.find(item => item.name === event.target.name);
-    if (field) updateError(quick, field);
-  });
-  quick.addEventListener('focusin', () => track('inquiry_started', { channel: 'web' }), { once: true });
-  wireSubmission(quick, document.getElementById('quick-submit'), quickStatus, readQuick, 'quick');
-  document.getElementById('contact-quick').hidden = false;
+function revealCopy(brief, prefix) {
+  const textarea = document.getElementById(`${prefix}-brief`);
+  document.getElementById(`${prefix}-manual`).hidden = false;
+  textarea.value = brief;
+  textarea.focus();
+  textarea.select();
 }
 
-document.getElementById('contact-draft').addEventListener('click', () => {
-  const values = readForm();
-  if (!values) return;
+function openDraft(values, notice, prefix) {
   const subject = l('Quantquer 專案討論', 'Quantquer project inquiry');
   const brief = contactBrief(values, locale);
   const draft = `mailto:chisheng.m.chen@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(brief)}`;
   if (draft.length > 1800) {
-    briefField.value = brief;
-    manual.hidden = false;
-    briefField.select();
-    status.textContent = l('內容較長，請複製後貼到郵件。', 'This brief is long. Copy it into your email.');
+    revealCopy(brief, prefix);
+    notice.textContent = l('內容較長，請複製後貼到郵件。', 'This brief is long. Copy it into your email.');
     return;
   }
-  status.textContent = l('請在郵件程式確認內容並寄送。', 'Review and send the draft from your email application.');
+  notice.textContent = l('請在郵件程式確認內容並寄送。', 'Review and send the draft from your email application.');
   location.href = draft;
-});
+}
 
-document.getElementById('contact-copy').addEventListener('click', async () => {
-  const values = readForm();
-  if (!values) return;
+async function copyBrief(values, notice, prefix) {
   const brief = contactBrief(values, locale);
   try {
     await navigator.clipboard.writeText(brief);
-    status.textContent = l('已複製。請貼到郵件並寄至 chisheng.m.chen@gmail.com。', 'Copied. Paste the inquiry into an email to chisheng.m.chen@gmail.com.');
+    notice.textContent = l('已複製。請貼到郵件並寄至 chisheng.m.chen@gmail.com。', 'Copied. Paste the inquiry into an email to chisheng.m.chen@gmail.com.');
   } catch {
-    briefField.value = brief;
-    manual.hidden = false;
-    briefField.select();
-    briefField.focus();
-    status.textContent = l('請手動複製已選取的內容。', 'Copy the selected text manually.');
+    revealCopy(brief, prefix);
+    notice.textContent = l('請手動複製已選取的內容。', 'Copy the selected text manually.');
   }
+}
+
+const quick = document.getElementById('quick-inquiry');
+const quickStatus = document.getElementById('quick-status');
+const quickSubmit = document.getElementById('quick-submit');
+const quickCopy = document.getElementById('quick-copy');
+function readQuick() {
+  document.getElementById('quick-manual').hidden = true;
+  quickStatus.textContent = '';
+  const { values, errors } = validateContact(Object.fromEntries(new FormData(quick)), 'quick');
+  for (const field of quickFields) updateError(quick, field, errors[field.name]);
+  const first = Object.keys(errors)[0];
+  if (!first) return values;
+  quickStatus.textContent = l('請檢查標示的欄位。', 'Review the highlighted fields.');
+  quick.elements[first].focus();
+  return null;
+}
+
+quick.addEventListener('input', event => {
+  const field = quickFields.find(item => item.name === event.target.name);
+  if (field) updateError(quick, field);
+  if (!quick.querySelector('[aria-invalid="true"]')) quickStatus.textContent = '';
 });
+quick.addEventListener('focusin', () => track('inquiry_started', { channel: endpoint ? 'web' : 'email' }), { once: true });
+if (endpoint) {
+  quickSubmit.textContent = l('送出簡短需求', 'Send a quick inquiry');
+  document.getElementById('quick-delivery').textContent = l('你可直接送出或複製內容自行寄出。', 'Send the inquiry directly or copy it into your email.');
+  wireSubmission(quick, quickSubmit, quickStatus, readQuick, 'quick');
+} else {
+  quick.addEventListener('submit', event => {
+    event.preventDefault();
+    const values = readQuick();
+    if (values) openDraft(values, quickStatus, 'quick');
+  });
+}
+quickCopy.addEventListener('click', () => {
+  const values = readQuick();
+  if (values) copyBrief(values, quickStatus, 'quick');
+});
+document.getElementById('contact-draft').addEventListener('click', () => {
+  const values = readForm();
+  if (values) openDraft(values, status, 'contact');
+});
+document.getElementById('contact-copy').addEventListener('click', () => {
+  const values = readForm();
+  if (values) copyBrief(values, status, 'contact');
+});
+
+quickSubmit.disabled = false;
+quickCopy.disabled = false;

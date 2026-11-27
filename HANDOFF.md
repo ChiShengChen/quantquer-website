@@ -1,4 +1,28 @@
-# Quantquer vNext 交付
+# Quantquer 官網交付
+
+## Website Refinement 候選版
+
+基線為正式站及 `origin/main` 的 `9f68ea7`，候選分支為 `feat/quantquer-website-refinement`。此次調整以既有 GitHub Pages 靜態架構交付，正式發布待授權。
+
+- 兩種語系使用原版 Canvas 頻譜與訊號。固定包絡與漸層改為快取，手機首屏和選單可直接換語言。
+- 首頁以四個方案連到交付物與證據。初始呈現三個代表案例，另外三案與既有內容使用原生展開區。原連結與錨點保留。頁尾補上服務、研究及工程案例入口。
+- 16 組雙語案例各自標示歸屬、成熟度與公開證據。Benchmark 增列測試條件、方法及未披露的欄位。工程證據中心連到可下載資料、架構圖、公開代碼、研究與原影片。
+- 短詢價提供姓名、信箱與問題。靜態預設使用郵件草稿或複製，完整 RFP 與直接 Email 仍可用。同源直送、預約與匿名量測均為選配。
+- 98 個索引路徑保留 canonical 與雙語對應。修正兩個舊證據頁缺少的社群分享屬性。驗證程式新增 hreflang、分享資訊及 JSON-LD 檢查。
+
+### 檔案與驗收
+
+首頁生成器是 `scripts/build-vnext-home.mjs`，Canvas 與行動導覽在 `assets/studio-waveform.mjs`、`assets/studio-home.mjs`。內頁共用 `scripts/vnext-layout.mjs`。案例、證據及詢價使用各自既有生成器，執行 `node scripts/build-vnext.mjs` 更新靜態 HTML。不要手改其產物。
+
+[調整前稽核](docs/website-audit.md) · [設計系統](docs/design-system.md) · [資訊架構](docs/information-architecture.md) · [驗收、效能與前後截圖](docs/website-validation.md)
+
+### 發布與待確認
+
+正式發布時，先 `git fetch origin main` 同步來源，再核對期間的改動並整合候選提交。執行建置、測試與連結檢查，推送經核准的 `main` 後等待既有 Pages 工作流程。頁面生效以正式 URL 的畫面、metadata 與互動核對。GitHub Pages 無需新增環境變數。
+
+直接送件需另外配置同源 `/api/inquiry` 與 `.env.example` 所列的伺服器環境變數。完成正式收件與資料保留審核後，才設定 `assets/studio-integrations.mjs` 的端點。HTTPS 會議及匿名事件收集可個別開啟。實體 NPU、正式多 GPU 效能和實體光子晶片的測量資料目前仍待補齊。 [發布與回退](docs/DEPLOYMENT.md)
+
+## 歷史紀錄 · Quantquer vNext
 
 ## 本次成果
 

@@ -17,3 +17,4 @@ html[data-theme="light"] .studio-inquiry { --inquiry-error: #982d22; }
 .studio-inquiry[hidden], .studio-inquiry [hidden], .studio-contact-aside [hidden] { display: none; }
 @media (max-width: 760px) { .studio-contact-grid { grid-template-columns: 1fr; } }
 @media (max-width: 520px) { .studio-inquiry { grid-template-columns: 1fr; } }
+.studio-inquiry .btn { min-height: 44px; white-space: normal; }

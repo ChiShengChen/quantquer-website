@@ -21,19 +21,24 @@ for (const locale of ['zh', 'en']) {
   const mailSubject = encodeURIComponent(l('Quantquer 技術需求', 'Quantquer engineering inquiry'));
   const content = `<section class="topic-hero"><div class="wrap"><p class="eyebrow">Quantquer Engineering</p><h1>${title}</h1><p class="topic-intro">${description}</p>
     <div class="entry-links">
-      <a class="btn btn-primary" id="contact-direct-email" data-analytics="contact_cta_clicked" href="mailto:${email}?subject=${mailSubject}">${l('直接 Email', 'Email us directly')}</a>
-      <a class="btn btn-ghost" href="#rfp">${l('準備完整專案需求', 'Prepare a detailed project brief')}</a>
+      <a class="btn btn-ghost" id="contact-direct-email" data-analytics="contact_cta_clicked" href="mailto:${email}?subject=${mailSubject}">${l('直接 Email', 'Email us directly')}</a>
+      <a class="btn btn-ghost" href="#rfp">${l('準備完整專案需求', 'Detailed project brief')}</a>
       <template id="contact-booking"><a class="btn btn-ghost" data-analytics="contact_cta_clicked">${l('預約技術會議', 'Book a technical meeting')}</a></template>
     </div>
     <p class="topic-audience">${l('先寫技術問題與目標即可。', 'Start with your technical problem and the outcome you need.')} <a class="text-link" href="mailto:${email}">${email}</a></p>
-    <div id="contact-quick" class="topic-panel studio-quick-panel" hidden>
+    <div id="contact-quick" class="topic-panel studio-quick-panel">
       <h2>${l('快速聯絡', 'Quick inquiry')}</h2>
-      <form id="quick-inquiry" class="studio-inquiry" novalidate aria-describedby="quick-privacy">
+      <p id="quick-delivery">${l('填寫後可開啟郵件草稿，也可複製內容自行寄出。', 'Open an email draft or copy your message to send it yourself.')}</p>
+      <form id="quick-inquiry" class="studio-inquiry" novalidate aria-describedby="quick-delivery quick-privacy">
         ${inputs(quickFields, 'quick')}
         <div class="studio-inquiry-trap" aria-hidden="true"><label>${l('請留空', 'Leave empty')} <input name="website" type="text" tabindex="-1" autocomplete="off"></label></div>
         <p id="quick-privacy" class="full">${l('請概述問題，不要填入機密資料。', 'Briefly describe your problem without including confidential data.')}</p>
-        <div class="entry-links full"><button type="submit" class="btn btn-primary" id="quick-submit">${l('送出簡短需求', 'Send a quick inquiry')}</button></div>
+        <div class="entry-links full">
+          <button type="submit" class="btn btn-primary" id="quick-submit" disabled>${l('開啟郵件草稿', 'Open email draft')}</button>
+          <button type="button" class="btn btn-ghost" id="quick-copy" disabled>${l('複製需求內容', 'Copy inquiry')}</button>
+        </div>
         <p id="quick-status" class="full" role="status"></p>
+        <div class="full" id="quick-manual" hidden><label for="quick-brief">${l('手動複製需求內容', 'Copy your inquiry manually')}</label><textarea id="quick-brief" rows="6" readonly></textarea></div>
       </form>
     </div>
   </div></section>
@@ -48,7 +53,7 @@ for (const locale of ['zh', 'en']) {
         <p id="contact-summary" class="studio-contact-error full" role="alert" hidden></p>
         <p id="contact-privacy" class="full">${l('這些資料用於回覆本次詢問。郵件草稿及複製功能在你的瀏覽器產生內容。', 'We use these details to respond to your inquiry. Your browser prepares the email draft and copyable brief.')}</p>
         <div class="entry-links full">
-          <button type="submit" class="btn btn-primary" id="contact-submit" hidden>${l('送出專案需求', 'Send project inquiry')}</button>
+          <button type="submit" class="btn btn-primary" id="contact-submit" hidden disabled>${l('送出專案需求', 'Send project inquiry')}</button>
           <button type="button" class="btn btn-ghost" id="contact-draft">${l('開啟郵件草稿', 'Open email draft')}</button>
           <button type="button" class="btn btn-ghost" id="contact-copy">${l('複製需求內容', 'Copy inquiry')}</button>
         </div>
@@ -64,5 +69,5 @@ for (const locale of ['zh', 'en']) {
       <a class="text-link" href="${studioPath('/company/', locale)}#engagement-terms">${l('NDA、IP、資料與交付方式', 'NDA, IP, data and delivery practices')}</a>
     </aside>
   </div></section>`;
-  await writeStudioPage({ route, locale, title, description, content, breadcrumbs: [{ href: studioPath('/', locale), label: l('首頁', 'Home') }], structuredData: { '@type': 'ContactPage' }, styles: ['/assets/studio-contact.css'], scripts: ['/assets/studio-contact.mjs'], extraHead: '<noscript><style>#studio-inquiry{display:none}</style></noscript>' }, { check: process.argv.includes('--check') });
+  await writeStudioPage({ route, locale, title, description, content, breadcrumbs: [{ href: studioPath('/', locale), label: l('首頁', 'Home') }], structuredData: { '@type': 'ContactPage' }, styles: ['/assets/studio-contact.css'], scripts: ['/assets/studio-contact.mjs'], extraHead: '<noscript><style>#contact-quick,#studio-inquiry{display:none}</style></noscript>' }, { check: process.argv.includes('--check') });
 }

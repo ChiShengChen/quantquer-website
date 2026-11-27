@@ -35,7 +35,7 @@ function renderLanguage(locale) {
   const a = (href, label, className = 'text-link', attributes = '') => `<a class="${className}" href="${escape(href)}"${attributes}>${t(label)}</a>`;
   const solutionPath = id => `/solutions/${id}/`;
   const servicePath = id => `/services/${id}/`;
-  const casePath = id => `/work/${id}/${english ? '#english' : ''}`;
+  const casePath = id => local(`/work/${id}/`);
   const demoPath = href => {
     if (!english) return href;
     const url = new URL(href, origin);
@@ -166,8 +166,8 @@ function renderLanguage(locale) {
     const name = ['研究與發表', 'Research & Publications'];
     const intro = ['精選創辦人與研究團隊的同行審查論文、會議成果及預印本，並提供原文與可查閱的程式碼。', 'Selected peer-reviewed publications, conference papers, and preprints by the founder and research teams, with primary sources and public code where available.'];
     const publication = paper => `<li><h3 lang="en">${escape(paper.title)}</h3>
-<p class="offering-duration" lang="en">${escape(paper.venue)}</p><p>${t(paper.detail)}</p><div class="entry-links">${a(paper.href, ['原始發表', 'Primary source'])}
-${paper.code ? a(paper.code, ['公開程式碼', 'Public code']) : ''}${paper.preprint ? a(paper.preprint, ['預印本', 'Preprint']) : ''}</div></li>`;
+<p class="offering-duration" lang="en">${escape(paper.venue)}</p><p>${t(paper.detail)}</p><div class="entry-links">${a(paper.href, ['原始發表', 'Primary source'], 'text-link', ' data-analytics="publication_clicked"')}
+${paper.code ? a(paper.code, ['公開程式碼', 'Public code'], 'text-link', ' data-analytics="repository_clicked"') : ''}${paper.preprint ? a(paper.preprint, ['預印本', 'Preprint'], 'text-link', ' data-analytics="publication_clicked"') : ''}</div></li>`;
     return page('/research/', name, intro, hero(['Quantquer Research', 'Quantquer Research'], name, intro, profileLinks() + nav(publicationGroups.map(group => [group.id, group.title]))) +
       publicationGroups.map(group => section(group.id, group.title, `<ul class="offering-papers">${group.papers.map(publication).join('')}</ul>`)).join('') +
       section('research-methods', ['工程應用與重現', 'Engineering applications and reproducibility'], buttons(local('/solutions/scientific-ai/'), ['科學 AI 解決方案', 'Scientific AI solutions'], demoPath('/labs/evidence/research/'), ['重播引文查核', 'Replay evidence checks'])), null, { '@type': 'CollectionPage' });

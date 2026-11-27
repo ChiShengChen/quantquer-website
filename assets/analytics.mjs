@@ -12,6 +12,10 @@ const events = {
   showreel_started: [],
   showreel_completed: [],
   capability_pdf_downloaded: [],
+  benchmark_viewed: [],
+  repository_clicked: [],
+  publication_clicked: [],
+  language_switched: [],
   service_cta_clicked: ['service', 'project'],
   project_planner_started: ['service'],
   project_planner_step_completed: ['service', 'step'],
@@ -71,6 +75,7 @@ if (typeof document !== 'undefined') {
     const demo = event.target.closest?.('[data-demo-kind]')?.dataset.demoKind;
     if (demo) track('demo_interacted', { demo });
   });
+  if (/^(?:\/en)?\/labs\/benchmarks\/$/.test(location.pathname)) track('benchmark_viewed');
   const project = document.body.dataset.project;
   if (project) track('case_study_viewed', { project });
   const solution = /^(?:\/en)?\/solutions\/([a-z-]+)\/$/.exec(location.pathname)?.[1];

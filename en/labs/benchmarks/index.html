@@ -51,26 +51,21 @@
     <a class="brand" href="/en/" aria-label="Quantquer home"><img class="logo-mark" src="/assets/logo-mark.png" alt="" width="34" height="34"><span class="brand-txt"><span class="mark">Quantquer</span></span></a>
     <nav class="navlinks studio-desktop-nav" aria-label="Main navigation">
       <a href="/en/solutions/">Solutions</a>
-      <a href="/en/services/">Services</a>
-      <a href="/en/work/">Work</a>
+      <a href="/en/work/">Engineering Work</a>
       <a href="/en/labs/">Labs</a>
-      <a href="/en/research/">Research</a>
       <a href="/en/company/">Company</a>
     </nav>
     <div class="navlinks studio-header-controls">
-      <a class="studio-header-language" href="/labs/benchmarks/" lang="zh-Hant">繁體中文</a>
+      <a class="studio-header-language" href="/labs/benchmarks/" lang="zh-Hant" hreflang="zh-Hant" aria-label="繁中 · 繁體中文" data-analytics="language_switched"><span class="locale-full">繁體中文</span><span class="locale-compact" aria-hidden="true">繁中</span></a>
       <button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch theme"><svg class="ti ti-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 14.6A8.3 8.3 0 0 1 9.4 3.8a8.3 8.3 0 1 0 10.8 10.8Z"/></svg><svg class="ti ti-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.35 5.35l1.55 1.55M17.1 17.1l1.55 1.55M5.35 18.65l1.55-1.55M17.1 6.9l1.55-1.55"/></svg></button>
       <a class="nav-cta studio-contact-link" data-analytics="contact_cta_clicked" href="/en/contact/">Contact</a>
       <details class="studio-mobile-nav">
         <summary class="burger" aria-label="Menu"><span></span><span></span><span></span></summary>
         <nav aria-label="Mobile navigation"><a href="/en/solutions/">Solutions</a>
-      <a href="/en/services/">Services</a>
-      <a href="/en/work/">Work</a>
+      <a href="/en/work/">Engineering Work</a>
       <a href="/en/labs/">Labs</a>
-      <a href="/en/research/">Research</a>
       <a href="/en/company/">Company</a>
           <a href="/en/contact/" data-analytics="contact_cta_clicked">Contact</a>
-          <a href="/labs/benchmarks/" lang="zh-Hant">繁體中文</a>
         </nav>
       </details>
     </div>
@@ -104,6 +99,7 @@
     <h2>Controlled Single-GPU Scheduling Trace</h2>
     <p class="topic-lead">Scheduling events and per-process VRAM samples from two CUDA jobs and one CPU job.</p>
     <p>One 24 GiB GPU, 1 GPU slot, and 2 execution slots. Each CUDA fixture allocates 32 MiB. Wait is start minus submission, and duration is completion minus start.</p>
+    <p>The release omits the GPU model, OS, scheduler and driver versions, and comparative scheduler baseline. The trace can be replayed below. The original runtime is unavailable.</p>
     <div class="lab-hub-table-wrap"><table class="lab-hub-table">
     <caption>Timing and memory derived from the three-job trace</caption>
     <thead><tr><th scope="col">Job</th><th scope="col">Wait (s)</th><th scope="col">Run (s)</th><th scope="col">GPU reservation (MiB)</th><th scope="col">Peak sampled process VRAM (MiB)</th><th scope="col">Exit code</th></tr></thead>
@@ -116,6 +112,7 @@
     <p class="lab-hub-meta"><span>Simulated</span></p>
     <h2>Four-Stage Photonic Mesh Fault</h2>
     <p class="topic-lead">Model outputs for a specified input and fault condition.</p>
+    <p>A JavaScript model computes results for a four-channel, four-stage ideal MZI mesh. The fault-free network is the baseline. Host hardware and browser version are unreported.</p>
     <p>The first input port has 100% normalized power. Cell 2-23 has a +35° phase offset and 20% local attenuation.</p>
     <div class="lab-hub-table-wrap"><table class="lab-hub-table">
     <caption>Simulated power at ideal and faulted output ports</caption>
@@ -129,6 +126,7 @@
     <p class="lab-hub-meta"><span>Replayed</span></p>
     <h2>Paper Evidence Quote and Number Checks</h2>
     <p class="topic-lead">Four synthetic inputs and recorded outcomes from pinned open source.</p>
+    <p>Host hardware, OS and comparator are unreported. The pinned version and fixtures below reproduce the results.</p>
     <p>A pinned public verification core checks numbers within 200 characters on either side of the quote, with fuzzy matching disabled.</p>
     <div class="lab-hub-table-wrap"><table class="lab-hub-table">
     <caption>Replay results for four synthetic inputs</caption>
@@ -136,13 +134,15 @@
     <tbody><tr><th scope="row">Exact quote</th><td>EXACT</td><td>Passed</td></tr><tr><th scope="row">Normalized quote</th><td>NORMALIZED</td><td>Passed</td></tr><tr><th scope="row">Out-of-context number</th><td>NUM_FAIL</td><td>Blocked</td></tr><tr><th scope="row">Unlocated quote</th><td>FAIL</td><td>Blocked</td></tr></tbody>
   </table></div>
     <p>The outcomes cover four deterministic synthetic inputs. Claim truth, semantic interpretation, and overall model accuracy need separate validation.</p>
-    <div class="entry-links lab-hub-links"><a class="text-link" href="/assets/evidence/research/quote-gate.json" download>Download raw JSON</a><a class="text-link" href="/labs/evidence/research/?lang=en">Open evidence viewer</a><a class="text-link" href="https://github.com/ChiShengChen/paper-evidence/tree/ac6e83c63252049bbccbf19bbf7f3dbc334ac0b7">Inspect pinned open source</a></div>
+    <div class="entry-links lab-hub-links"><a class="text-link" href="/assets/evidence/research/quote-gate.json" download>Download raw JSON</a><a class="text-link" href="/labs/evidence/research/?lang=en">Open evidence viewer</a><a class="text-link" href="https://github.com/ChiShengChen/paper-evidence/tree/ac6e83c63252049bbccbf19bbf7f3dbc334ac0b7" data-analytics="repository_clicked">Inspect pinned open source</a></div>
   </div></section>
   </main>
   <footer><div class="wrap foot studio-footer">
     <a href="/en/"><img class="foot-logo on-light" src="/assets/logo-full-onlight.png" alt="Quantquer" loading="lazy" width="160" height="47"><img class="foot-logo on-dark" src="/assets/logo-full-light.png" alt="Quantquer" loading="lazy" width="160" height="47"></a>
     <nav aria-label="Footer links">
       <a href="/en/company/">Company</a>
+      <a href="/en/services/">Services</a>
+      <a href="/en/research/">Publications</a>
       <a href="/en/capabilities/">Capabilities</a>
       <a href="/en/labs/evidence/">Evidence</a>
       <a href="/en/contact/">Contact</a>

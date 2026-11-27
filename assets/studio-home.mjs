@@ -1,4 +1,39 @@
 import { track } from './analytics.mjs';
+import './studio-waveform.mjs';
+
+const header = document.getElementById('hdr');
+const menuButton = document.getElementById('burger');
+const menu = document.getElementById('mnav');
+
+function updateHeader() {
+  header.classList.toggle('scrolled', window.scrollY > 30);
+}
+window.addEventListener('scroll', updateHeader, { passive: true });
+updateHeader();
+
+function setMenu(open) {
+  header.classList.toggle('menu-open', open);
+  menuButton.setAttribute('aria-expanded', String(open));
+  menuButton.setAttribute('aria-label', open ? menuButton.dataset.closeLabel : menuButton.dataset.openLabel);
+}
+
+const menuOpen = () => header.classList.contains('menu-open');
+menuButton.addEventListener('click', () => setMenu(!menuOpen()));
+menu.addEventListener('click', event => {
+  if (event.target.closest('a')) setMenu(false);
+});
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && menuOpen()) {
+    setMenu(false);
+    menuButton.focus();
+  }
+});
+document.addEventListener('click', event => {
+  if (menuOpen() && !header.contains(event.target)) setMenu(false);
+});
+matchMedia('(min-width: 941px)').addEventListener('change', event => {
+  if (event.matches) setMenu(false);
+});
 
 const finder = document.querySelector('[data-solution-finder]');
 if (finder) {
@@ -23,10 +58,13 @@ function revealArchive(hash) {
   } catch {
     return;
   }
-  const archive = anchor?.closest('details[data-home-archive]');
-  if (!archive || archive.open) return;
-  archive.open = true;
-  requestAnimationFrame(() => anchor.scrollIntoView());
+  let opened = false;
+  for (let node = anchor; node; node = node.parentElement) {
+    if (!node.matches('details[data-home-archive]') || node.open) continue;
+    node.open = true;
+    opened = true;
+  }
+  if (opened) requestAnimationFrame(() => anchor.scrollIntoView());
 }
 
 revealArchive(location.hash);

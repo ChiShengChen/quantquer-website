@@ -37,7 +37,7 @@ async function screenshot(name, fullPage = false) {
 }
 
 try {
-  const widths = [360, 390, 768, 1024, 1440];
+  const widths = [320, 360, 390, 768, 1024, 1440, 1920];
   const samples = [
     '/', '/en/', '/solutions/semiconductor-edge-ai/', '/en/solutions/ai-reliability/',
     '/services/feasibility-study/', '/work/', '/en/work/enterprise-knowledge-arbitration/',
@@ -91,14 +91,16 @@ try {
     await open(path);
     const brand = page.locator('#brand');
     assert.equal(await brand.getByRole('heading').textContent(), 'Quantify to Conquer.');
-    assert.equal(await brand.locator('p.topic-lead').first().textContent(), 'From Silicon to Intelligence.');
-    assert.equal(await brand.locator('p.topic-lead').last().textContent(), path === '/en/'
+      assert.equal(await brand.locator('p.topic-lead').last().textContent(), path === '/en/'
       ? 'Research-Driven Deep-Tech Engineering Studio'
       : '研究驅動的深科技工程工作室');
     assert.match(await page.locator('meta[property="og:title"]').getAttribute('content'), /Quantify to Conquer\.$/);
     assert.ok(await brand.evaluate(section => section.offsetTop >= document.querySelector('#top').offsetHeight));
-    assert.equal(await page.locator('#core-solutions li a').count(), 4);
-    assert.equal(await page.locator('#featured .home-case').count(), 6);
+    assert.equal(await page.locator('#core-solutions li h3 a').count(), 4);
+    assert.equal(await page.locator('#core-solutions li .text-link').count(), 4);
+    assert.equal(await page.locator('#featured .home-case:visible').count(), 3);
+    await page.locator('.home-featured-more summary').press('Enter');
+    assert.equal(await page.locator('#featured .home-case:visible').count(), 6);
     const caseImages = page.locator('#featured .home-case-image img');
     assert.equal(await caseImages.count(), 6);
     for (const picture of await caseImages.all()) {
@@ -111,6 +113,7 @@ try {
     assert.equal(await page.locator('#featured figcaption a[href="https://chishengchen.github.io/teaser_jad.png"]').count(), 1);
     assert.equal(await page.locator('[data-home-archive][open]').count(), 0);
     const finder = page.locator('[data-solution-finder]');
+    await finder.locator('summary').press('Enter');
     for (const service of ['edge-ai', 'agent', 'gpu-infrastructure', 'research', 'assessment']) {
       await finder.locator('select').selectOption(service);
       const visible = finder.locator('[data-solution-result]:visible');
@@ -121,10 +124,29 @@ try {
 
   // Desktop and keyboard-driven mobile navigation plus equivalent locales.
   await open('/');
+  await page.keyboard.press('Tab');
+  assert.equal(await page.locator(':focus').getAttribute('href'), '#content');
+  await page.keyboard.press('Enter');
+  assert.equal(await page.locator(':focus').getAttribute('id'), 'content');
   await page.locator('#hdr .navlinks a[href="/solutions/"]').click();
   assert.equal(new URL(page.url()).pathname, '/solutions/');
   await page.locator('.studio-header-language').click();
   assert.equal(new URL(page.url()).pathname, '/en/solutions/');
+  await page.setViewportSize({ width: 320, height: 568 });
+  await open('/');
+  for (const path of ['/', '/en/']) {
+    assert.equal(new URL(page.url()).pathname, path);
+    await page.evaluate(() => document.fonts.ready);
+    const canvas = page.locator('#spectrum');
+    assert.equal(await canvas.getAttribute('aria-hidden'), 'true');
+    await page.waitForFunction(() => {
+      const canvas = document.getElementById('spectrum');
+      return canvas.getContext('2d').getImageData(0, Math.round(canvas.height * .6), canvas.width, 1).data.some(value => value !== 0);
+    });
+    const actions = await page.locator('.hero .cta-row').boundingBox();
+    assert.ok(actions.y + actions.height <= 568, path);
+    await page.locator('#hdr .studio-header-language').click();
+  }
   await page.setViewportSize({ width: 360, height: 800 });
   await open('/');
   await page.locator('#burger').press('Enter');
@@ -184,6 +206,7 @@ try {
   await open('/work/surgical-gauze-detection/#english');
   assert.equal(await page.locator('#english').count(), 1);
   assert.equal(await page.locator('#technical-diagram-en').count(), 1);
+  assert.deepEqual(await page.locator('.case-evidence-facts dt').allTextContents(), ['成果歸屬', '專案成熟度', '公開證據分類']);
   await page.locator('#themeToggle').click();
   assert.equal(await page.locator('html').getAttribute('data-theme'), 'dark');
   await open('/en/work/surgical-gauze-detection/');
@@ -239,6 +262,27 @@ try {
   await page.locator('#vision-evidence-method').selectOption('telea');
   await page.waitForFunction(() => document.getElementById('vision-evidence-base').src.endsWith('/forest-telea.webp'));
   assert.match(await page.locator('#deployment').textContent(), /NPU/);
+  await open('/labs/evidence/photonics/?lang=en');
+  const result = page.locator('#mesh-summary');
+  const withFault = await result.textContent();
+  await page.locator('#mesh-fault').uncheck();
+  assert.notEqual(await result.textContent(), withFault);
+  await page.locator('#mesh-reset').click();
+  await page.waitForFunction(expected => document.getElementById('mesh-summary').textContent === expected, withFault);
+
+  await open('/labs/interactive/?lang=en#generative-vision');
+  const visionSummary = page.locator('#vision-result');
+  const defaultPadding = await visionSummary.textContent();
+  await page.locator('#vision-mask').selectOption('18');
+  assert.notEqual(await visionSummary.textContent(), defaultPadding);
+  await page.locator('#photon-fault-enabled').uncheck();
+  assert.ok((await page.locator('#photon-result').textContent()).trim());
+  await page.locator('#gpu-policy').selectOption('fifo');
+  await page.locator('#gpu-step').press('Enter');
+  assert.notEqual(await page.locator('#gpu-time').inputValue(), '-1');
+  await page.locator('#gpu-reset').click();
+  assert.equal(await page.locator('#gpu-time').inputValue(), '-1');
+
   await open('/en/capabilities/');
   assert.ok(await page.locator('a[download][href="/downloads/quantquer-capabilities-en.pdf"]').first().isVisible());
 
@@ -246,7 +290,21 @@ try {
   await open('/en/contact/?service=gpu-infrastructure');
   assert.equal(await page.locator('#inquiry-projectType').inputValue(), 'gpu-infrastructure');
   assert.equal(await page.locator('#contact-submit').isVisible(), false);
-  assert.equal(await page.locator('#contact-quick').isVisible(), false);
+  assert.ok(await page.locator('#contact-quick').isVisible());
+  assert.equal(await page.locator('#quick-submit').textContent(), 'Open email draft');
+  assert.equal(await page.locator('#quick-inquiry [required]').count(), 3);
+  await page.locator('#quick-submit').click();
+  assert.equal(await page.locator('#quick-name').getAttribute('aria-invalid'), 'true');
+  assert.ok(await page.locator('#quick-name').evaluate(node => node === document.activeElement));
+  for (const [key, value] of Object.entries({
+    name: 'Synthetic Tester', email: 'tester@example.com', challenge: 'A short technical question.',
+  })) await page.locator(`#quick-${key}`).fill(value);
+  await page.locator('#quick-copy').click();
+  await page.waitForFunction(() => /copied|manually/i.test(document.getElementById('quick-status').textContent));
+  await page.locator('#quick-challenge').fill('Synthetic longer input for testing. '.repeat(49));
+  await page.locator('#quick-submit').click();
+  assert.ok(await page.locator('#quick-brief').isVisible());
+  assert.match(await page.locator('#quick-brief').inputValue(), /Synthetic longer input/);
   assert.match(await page.locator('#contact-direct-email').getAttribute('href'), /^mailto:/);
   assert.ok(await page.locator('#inquiry-hardware').isVisible());
   assert.ok(await page.locator('#inquiry-nda').isVisible());
@@ -315,6 +373,16 @@ try {
     if (anchor) assert.equal(await page.locator(`[id="${anchor}"]`).count(), 1, path);
     if (path.startsWith('/#')) assert.ok(await page.locator(`#${anchor}`).isVisible(), path);
   }
+  await open('/#showreel');
+  await page.locator('[data-showreel-play]').press('Enter');
+  const movie = page.locator('#showreel video');
+  await movie.waitFor({ state: 'visible' });
+  assert.equal(await movie.locator('track').count(), 2);
+  assert.ok(await movie.evaluate(video => video.controls && video.playsInline));
+  await page.waitForFunction(() => document.querySelector('#showreel video').readyState >= 2);
+  await movie.evaluate(video => video.pause());
+  assert.equal(await movie.evaluate(video => video.paused), true);
+
   await open('/#research-quantum');
   assert.ok(await page.locator('#research-quantum').isVisible());
   await open('/#edge-ai-deployment');
@@ -323,12 +391,16 @@ try {
   try {
     const staticHome = await staticContext.newPage();
     await staticHome.goto(base + '/');
+    assert.equal(await staticHome.locator('#featured .home-case:visible').count(), 3);
+    await staticHome.locator('.home-featured-more summary').click();
     assert.equal(await staticHome.locator('#featured .home-case:visible').count(), 6);
     assert.equal(await staticHome.locator('[data-solution-finder]').isVisible(), false);
-    await staticHome.locator('details[data-home-archive]').filter({ has: staticHome.locator('#work') }).locator('summary').click();
+    await staticHome.locator('.home-archive-directory > summary').click();
+    await staticHome.locator('.home-archive-item').filter({ has: staticHome.locator('#work') }).locator(':scope > summary').click();
     assert.equal(await staticHome.locator('#case-list article:visible').count(), 16);
     await staticHome.goto(base + '/contact/');
     assert.ok(await staticHome.locator('#contact-direct-email').isVisible());
+    assert.equal(await staticHome.locator('#contact-quick').isVisible(), false);
   } finally {
     await staticContext.close();
   }
@@ -338,7 +410,7 @@ try {
   assert.equal(await page.locator('.nf-art').count(), 1);
   assert.deepEqual([...defects], []);
   await writeFile(resolve(out, 'layout.json'), JSON.stringify(snapshots, null, 2));
-  console.log('PASS brand copy, navigation, language, theme, AND case filters, Labs filters, 3 new demos, 5 GPU strategies, vision controls, DXF, benchmark and PDF downloads, form fallback and mocked retry, 10 preserved URLs, custom 404 and browser errors');
+  console.log('PASS brand copy, navigation, language, theme, AND case filters, Labs filters, 3 new demos, 5 GPU strategies, vision controls, DXF, benchmark and PDF downloads, video controls, form fallback and mocked retry, 10 preserved URLs, custom 404 and browser errors');
 } finally {
   await browser.close();
 }

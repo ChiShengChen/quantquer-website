@@ -25,7 +25,10 @@
   .studio-mobile-nav, .studio-mobile-nav summary { display: block; }
 }
 @media (max-width: 520px) {
-  .studio-header-language, .studio-header-controls .studio-contact-link { display: none; }
+  .studio-header-controls .studio-contact-link { display: none; }
+  .studio-mobile-nav summary span:nth-child(1) { top: 16px; }
+  .studio-mobile-nav summary span:nth-child(2), .studio-mobile-nav[open] summary span:nth-child(1), .studio-mobile-nav[open] summary span:nth-child(3) { top: 21px; }
+  .studio-mobile-nav summary span:nth-child(3) { top: 26px; }
   .studio-footer nav { width: 100%; }
 }
 .work-index-grid { margin-top: 22px; gap: 16px; }

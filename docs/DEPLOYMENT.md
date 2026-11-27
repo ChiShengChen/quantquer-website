@@ -10,7 +10,7 @@ python3 scripts/check-vnext-links.py
 python3 scripts/preview-vnext.py --port 8766
 ```
 
-查看 <http://127.0.0.1:8766/>、`/en/`、`/labs/benchmarks/` 和 `/contact/`。基線另從 `git archive d2d07d5` 匯出，使用 `scripts/preview-vnext.py --port 8767 --directory <基線路徑>`。測試環境安裝 Playwright，若 Chromium 由工作機提供，執行時設定 `CHROME_PATH`。
+查看 <http://127.0.0.1:8766/>、`/en/`、`/labs/benchmarks/` 和 `/contact/`。比較目前候選版時，基線可從 `git archive 9f68ea7` 匯出，使用 `scripts/preview-vnext.py --port 8767 --directory <基線路徑>`。測試環境安裝 Playwright，若 Chromium 由工作機提供，執行時設定 `CHROME_PATH`。
 
 ```sh
 node scripts/vnext-browser.mjs
@@ -43,4 +43,4 @@ GitHub Pages 的一般模式使用公布的 Gmail、產生郵件草稿和複製�
 
 經核准的 `bookingUrl` 須為 HTTPS。可選的 `analyticsPath` 須為同源 `/api/…`，觸發團隊定義的匿名事件，不包含表單欄位、Cookie、查詢參數或外部 referrer。服務端 IP 與日誌政策須另行確認。
 
-首頁方案導引發出 `solution_finder_used`，只附支援清單上的服務代碼。當直接收件啟用時，快速詢價以 `mode: "quick"` 送出姓名、信箱與問題，完整 RFP 以 `mode: "full"` 送出。舊版完整表單仍相容。短表單及預約分別依設定顯示，預設入口可使用公開信箱。
+首頁方案導引發出 `solution_finder_used`，只附支援清單上的服務代碼。當直接收件啟用時，快速詢價以 `mode: "quick"` 送出姓名、信箱與問題，完整 RFP 以 `mode: "full"` 送出。舊版完整表單仍相容。短表單預設使用郵件草稿與複製，停用 JavaScript 時顯示公開信箱。預約依設定顯示。Benchmark 瀏覽、程式庫、論文及語言切換也發出允許清單事件。

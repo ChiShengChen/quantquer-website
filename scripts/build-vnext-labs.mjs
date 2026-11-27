@@ -45,8 +45,8 @@ function labPath(path, locale, legacy = false) {
   return base + '?lang=en' + (fragment ? '#' + fragment : '');
 }
 
-function link(href, label, { download = false } = {}) {
-  return `<a class="text-link" href="${h(href)}"${download ? ' download' : ''}>${h(label)}</a>`;
+function link(href, label, { download = false, event } = {}) {
+  return `<a class="text-link" href="${h(href)}"${download ? ' download' : ''}${event ? ` data-analytics="${event}"` : ''}>${h(label)}</a>`;
 }
 
 function rowLinks(links) {
@@ -84,7 +84,7 @@ function landingPage(locale) {
 function projectResources(project, locale) {
   const t = translate(locale);
   const repo = project.repo
-    ? link(project.repo, value(project.repoLabel, locale) || t('程式庫', 'Repository'))
+    ? link(project.repo, value(project.repoLabel, locale) || t('程式庫', 'Repository'), { event: 'repository_clicked' })
     : t('未公開', 'Unavailable publicly');
   const demonstration = project.demo
     ? link(labPath(project.demo, locale, project.legacy), t('操作展示', 'Open demo'))
@@ -239,6 +239,7 @@ function gpuBenchmark(locale) {
       `${gpu.deviceMemoryMiB / 1024} GiB 單 GPU 工作站、${gpu.gpuSlots} 個 GPU 槽和 ${gpu.executionSlots} 個執行槽。每項 CUDA 工作配置 ${gpu.allocationMiB} MiB。等待時間由開始減提交，執行時間由完成減開始。`,
       `One ${gpu.deviceMemoryMiB / 1024} GiB GPU, ${gpu.gpuSlots} GPU slot, and ${gpu.executionSlots} execution slots. Each CUDA fixture allocates ${gpu.allocationMiB} MiB. Wait is start minus submission, and duration is completion minus start.`
     )}</p>
+    <p>${t('公開紀錄未列 GPU 型號、作業系統、排程器與驅動版本，亦未列對照排程器。可透過下方紀錄重播核對，不含原執行環境。', 'The release omits the GPU model, OS, scheduler and driver versions, and comparative scheduler baseline. The trace can be replayed below. The original runtime is unavailable.')}</p>
     ${table(t('三項工作依紀錄推算的時間與記憶體', 'Timing and memory derived from the three-job trace'),
       [t('工作', 'Job'), t('等待 (s)', 'Wait (s)'), t('執行 (s)', 'Run (s)'), t('GPU 保留 (MiB)', 'GPU reservation (MiB)'), t('程序 VRAM 峰值抽樣 (MiB)', 'Peak sampled process VRAM (MiB)'), t('結束碼', 'Exit code')],
       gpuRows.map(job => [job.id, job.queueWait.toFixed(3), job.runDuration.toFixed(3), job.requestedMiB, job.group === 'GPU' ? job.peakMiB : '—', job.exitCode])
@@ -252,7 +253,8 @@ function photonicsBenchmark(locale) {
   const fixture = photonicFixture.result;
   const powerLoss = round(fixture.relativePowerLoss * 100, 3);
   return benchmarkSection(experiments[2], locale,
-    `<p>${t('第一輸入埠為 100% 正規化功率，2-23 單元設為 +35° 相位偏移及 20% 局部功率衰減。', 'The first input port has 100% normalized power. Cell 2-23 has a +35° phase offset and 20% local attenuation.')}</p>
+    `<p>${t('資料由四通道、四階段理想 MZI 的 JavaScript 數值模型計算，基線為無故障網路。執行端硬體及瀏覽器版本未列。', 'A JavaScript model computes results for a four-channel, four-stage ideal MZI mesh. The fault-free network is the baseline. Host hardware and browser version are unreported.')}</p>
+    <p>${t('第一輸入埠為 100% 正規化功率，2-23 單元設為 +35° 相位偏移及 20% 局部功率衰減。', 'The first input port has 100% normalized power. Cell 2-23 has a +35° phase offset and 20% local attenuation.')}</p>
     ${table(t('理想與故障輸出埠的模擬功率', 'Simulated power at ideal and faulted output ports'),
       [t('輸出埠', 'Output port'), t('理想正規化功率', 'Ideal normalized power'), t('故障下正規化功率', 'Faulted normalized power')],
       fixture.idealPortPowers.map((power, index) => [index + 1, round(power, 6), round(fixture.faultedPortPowers[index], 6)]))}
@@ -270,12 +272,13 @@ function researchBenchmark(locale) {
     'out-of-context': t('數字上下文不符', 'Out-of-context number'), unlocated: t('無法定位', 'Unlocated quote'),
   };
   return benchmarkSection(experiments[3], locale,
-    `<p>${t('固定公開版查核核心。引用數字的上下文視窗為前後各 200 個字元，關閉模糊比對。', 'A pinned public verification core checks numbers within 200 characters on either side of the quote, with fuzzy matching disabled.')}</p>
+    `<p>${t('公開資料未列執行硬體、作業系統或比較基線。結果依下列固定版本及測試輸入重跑。', 'Host hardware, OS and comparator are unreported. The pinned version and fixtures below reproduce the results.')}</p>
+    <p>${t('固定公開版查核核心。引用數字的上下文視窗為前後各 200 個字元，關閉模糊比對。', 'A pinned public verification core checks numbers within 200 characters on either side of the quote, with fuzzy matching disabled.')}</p>
     ${table(t('四組合成輸入重跑結果', 'Replay results for four synthetic inputs'),
       [t('案例', 'Fixture'), t('狀態碼', 'Status'), t('判定', 'Decision')],
       quoteGate.cases.map(item => [labels[item.id], item.status, item.passed ? t('通過', 'Passed') : t('擋下', 'Blocked')]))}
     <p>${t('結果涵蓋這四組確定性的合成輸入。研究論點的真實性、語意推論與模型整體準確率需另行驗證。', 'The outcomes cover four deterministic synthetic inputs. Claim truth, semantic interpretation, and overall model accuracy need separate validation.')}</p>`,
-    [link(quoteGate.repository + '/tree/' + quoteGate.commit, t('查看固定開源版本', 'Inspect pinned open source'))]);
+    [link(quoteGate.repository + '/tree/' + quoteGate.commit, t('查看固定開源版本', 'Inspect pinned open source'), { event: 'repository_clicked' })]);
 }
 
 function benchmarksPage(locale) {
@@ -299,6 +302,10 @@ function evidencePage(locale) {
         <div><dt>${t('實測', 'Measured')}</dt><dd>${t('從記錄的環境直接取得數值。', 'Values captured directly in the recorded environment.')}</dd></div>
         <div><dt>${t('重播', 'Replayed')}</dt><dd>${t('檢查既有實跑事件，或以固定版本程式與測試輸入重跑。', 'Inspect recorded events or repeat fixtures through pinned source.')}</dd></div>
         <div><dt>${t('模擬', 'Simulated')}</dt><dd>${t('數值來自明確定義的模型、參數與假設。', 'Values computed from a model and identified inputs and assumptions.')}</dd></div>
+        <div><dt>${t('已發表', 'Published')}</dt><dd>${t('有公開論文或正式出版來源可查。', 'A public paper or formal publication is available.')}</dd></div>
+        <div><dt>${t('可重現', 'Reproducible')}</dt><dd>${t('提供固定版本、輸入資料與重跑步驟。', 'Pinned code, inputs and steps are available.')}</dd></div>
+        <div><dt>${t('原型', 'Prototype')}</dt><dd>${t('在明列的情境中展示可運作的實作。', 'A working implementation is demonstrated under stated conditions.')}</dd></div>
+        <div><dt>${t('概念示意', 'Conceptual')}</dt><dd>${t('圖解或示範用於說明方法。', 'A diagram or demonstration explains a method.')}</dd></div>
       </dl>
       <div class="lab-hub-grid">
         ${experiments.map(experiment => `<article class="topic-panel lab-hub-card">
@@ -309,6 +316,14 @@ function evidencePage(locale) {
         </article>`).join('')}
       </div>
       ${rowLinks([link(jsonPath, t('下載全部結果索引', 'Download all indexed results'), { download: true }), link(readme, t('重跑說明', 'Reproduction guide'))])}
+      <h2>${t('更多工程資料', 'More engineering material')}</h2>
+      ${rowLinks([
+        link(labPath('/labs/demos/', locale), t('互動展示', 'Interactive demos')),
+        link(labPath('/work/', locale), t('案例架構圖', 'Case study architecture')),
+        link(labPath('/research/', locale), t('論文與研究成果', 'Publications and research')),
+        link(labPath('/labs/projects/', locale), t('公開程式與文件', 'Open source and documentation')),
+        link('/#showreel', t('工程展示影片', 'Engineering showreel')),
+      ])}
     </div></section>`;
 }
 
