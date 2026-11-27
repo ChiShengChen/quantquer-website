@@ -20,6 +20,30 @@
     .nf h1{font-family:var(--serif);font-weight:600;font-size:clamp(2rem,5vw,3.4rem);line-height:1.2;margin:1rem 0 1.2rem;}
     .nf-lead{color:var(--fg-dim);font-size:1.05rem;max-width:40ch;}
     .nf-en{color:var(--fg-faint);font-family:var(--mono);font-size:.82rem;margin-top:.6rem;}
+    .nf-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:clamp(2rem,5vw,4.5rem);align-items:center;}
+    .nf-fig{border:1px solid var(--line);margin:0;}
+    .nf-art{display:block;width:100%;height:auto;
+      --a-bg:#F3F6FA;--a-line:#004EA1;--a-grid:#8FB2DA;--a-top:#E6EEF8;--a-tile:#D3E2F3;--a-side-l:#C9DCF0;--a-side-r:#B7CFEA;--a-node:#FFFFFF;--a-teal:#14B8A6;--a-glow:rgba(45,212,191,.28);--a-lens:rgba(255,255,255,.65);}
+    html:not([data-theme="light"]) .nf-art{
+      --a-bg:#0C121C;--a-line:#9DB9E0;--a-grid:#3A5578;--a-top:#14213A;--a-tile:#1B2C48;--a-side-l:#182740;--a-side-r:#121E33;--a-node:#0C121C;--a-teal:#2DD4BF;--a-glow:rgba(45,212,191,.22);--a-lens:rgba(157,185,224,.10);}
+    .nf-art{background:var(--a-bg);}
+    .nf-art .a-top{fill:var(--a-top);}
+    .nf-art .a-tile{fill:var(--a-tile);}
+    .nf-art .a-side-l{fill:var(--a-side-l);}
+    .nf-art .a-side-r{fill:var(--a-side-r);}
+    .nf-art .a-grid{stroke:var(--a-grid);stroke-width:1;}
+    .nf-art .a-seam{stroke:var(--a-grid);stroke-width:1;}
+    .nf-art .a-edge{fill:none;stroke:var(--a-line);stroke-width:1.8;stroke-linejoin:round;}
+    .nf-art .a-trace{fill:none;stroke:var(--a-line);stroke-width:2.2;stroke-linejoin:round;stroke-linecap:round;}
+    .nf-art .a-missing{fill:none;stroke:var(--a-line);stroke-width:1.8;stroke-dasharray:6 5;stroke-linejoin:round;}
+    .nf-art .a-node{fill:var(--a-node);stroke:var(--a-line);stroke-width:2;}
+    .nf-art .a-node-t{fill:var(--a-teal);stroke:var(--a-line);stroke-width:1.6;}
+    .nf-art .a-glow{fill:var(--a-glow);}
+    .nf-art .a-lens{fill:var(--a-lens);stroke:var(--a-line);stroke-width:4;}
+    .nf-art .a-handle{stroke:var(--a-line);stroke-width:9;stroke-linecap:round;}
+    .nf-art .a-shine{fill:none;stroke:var(--a-line);stroke-width:2.2;stroke-linecap:round;opacity:.55;}
+    .nf-art .a-focus{stroke:var(--a-line);stroke-width:1.4;stroke-dasharray:3 5;opacity:.6;}
+    @media(max-width:820px){ .nf-grid{grid-template-columns:1fr;} .nf-fig{order:-1;} .nf{padding-top:6.5rem;} }
   </style>
 </head>
 <body class="topic-page">
@@ -42,7 +66,8 @@
   </header>
 
   <main id="main" class="nf">
-    <div class="wrap">
+    <div class="wrap nf-grid">
+      <div>
       <p class="eyebrow">404 · Page not found</p>
       <h1>找不到這個頁面</h1>
       <p class="nf-lead">網址可能打錯了，或這個頁面已經移動。可以從下面的入口繼續瀏覽。</p>
@@ -52,6 +77,8 @@
         <a href="/#work" class="btn btn-ghost">看精選案例 <span class="arr">→</span></a>
         <a href="/#contact" class="btn btn-ghost">聯絡我們 <span class="arr">→</span></a>
       </div>
+      </div>
+      <figure class="nf-fig"><svg class="nf-art" viewBox="-32.0 10.5 571.6 381.1" role="img" aria-label="電路格子上一條線路延伸到缺掉的方塊，放大鏡正在尋找它" xmlns="http://www.w3.org/2000/svg"><polygon class="a-side-l" points="23.3,194.0 200.0,296.0 200.0,310.0 23.3,208.0"/><polygon class="a-side-r" points="376.7,194.0 200.0,296.0 200.0,310.0 376.7,208.0"/><polygon class="a-top" points="200.0,92.0 376.7,194.0 200.0,296.0 23.3,194.0"/><polygon class="a-tile" points="200.0,228.0 229.4,245.0 200.0,262.0 170.6,245.0"/><polygon class="a-tile" points="111.7,143.0 141.1,160.0 111.7,177.0 82.2,160.0"/><polygon class="a-tile" points="111.7,177.0 141.1,194.0 111.7,211.0 82.2,194.0"/><polygon class="a-tile" points="229.4,109.0 258.9,126.0 229.4,143.0 200.0,126.0"/><polygon class="a-tile" points="200.0,160.0 229.4,177.0 200.0,194.0 170.6,177.0"/><polygon class="a-tile" points="258.9,228.0 288.3,245.0 258.9,262.0 229.4,245.0"/><polygon class="a-tile" points="288.3,177.0 317.8,194.0 288.3,211.0 258.9,194.0"/><polygon class="a-tile" points="141.1,228.0 170.6,245.0 141.1,262.0 111.7,245.0"/><line class="a-grid" x1="229.4" y1="109.0" x2="52.8" y2="211.0"/><line class="a-grid" x1="170.6" y1="109.0" x2="347.2" y2="211.0"/><line class="a-grid" x1="258.9" y1="126.0" x2="82.2" y2="228.0"/><line class="a-grid" x1="141.1" y1="126.0" x2="317.8" y2="228.0"/><line class="a-grid" x1="288.3" y1="143.0" x2="111.7" y2="245.0"/><line class="a-grid" x1="111.7" y1="143.0" x2="288.3" y2="245.0"/><line class="a-grid" x1="317.8" y1="160.0" x2="141.1" y2="262.0"/><line class="a-grid" x1="82.2" y1="160.0" x2="258.9" y2="262.0"/><line class="a-grid" x1="347.2" y1="177.0" x2="170.6" y2="279.0"/><line class="a-grid" x1="52.8" y1="177.0" x2="229.4" y2="279.0"/><line class="a-seam" x1="52.8" y1="211.0" x2="52.8" y2="225.0"/><line class="a-seam" x1="347.2" y1="211.0" x2="347.2" y2="225.0"/><line class="a-seam" x1="82.2" y1="228.0" x2="82.2" y2="242.0"/><line class="a-seam" x1="317.8" y1="228.0" x2="317.8" y2="242.0"/><line class="a-seam" x1="111.7" y1="245.0" x2="111.7" y2="259.0"/><line class="a-seam" x1="288.3" y1="245.0" x2="288.3" y2="259.0"/><line class="a-seam" x1="141.1" y1="262.0" x2="141.1" y2="276.0"/><line class="a-seam" x1="258.9" y1="262.0" x2="258.9" y2="276.0"/><line class="a-seam" x1="170.6" y1="279.0" x2="170.6" y2="293.0"/><line class="a-seam" x1="229.4" y1="279.0" x2="229.4" y2="293.0"/><polygon class="a-edge" points="200.0,92.0 376.7,194.0 200.0,296.0 23.3,194.0"/><polyline class="a-edge" points="23.3,194.0 23.3,208.0 200.0,310.0 376.7,208.0 376.7,194.0"/><line class="a-edge" x1="200.0" y1="296.0" x2="200.0" y2="310.0"/><polyline class="a-trace" points="82.2,177.0 141.1,211.0 200.0,177.0 229.4,194.0"/><polyline class="a-trace" points="229.4,126.0 200.0,143.0 258.9,177.0"/><polyline class="a-trace" points="229.4,194.0 170.6,228.0 200.0,245.0"/><polyline class="a-trace" points="258.9,211.0 229.4,228.0 258.9,245.0"/><polyline class="a-trace" points="170.6,126.0 141.1,143.0 170.6,160.0"/><polyline class="a-trace" points="288.3,194.0 332.5,219.5 372.3,242.4"/><polygon class="a-missing" points="387.0,233.9 416.4,250.9 387.0,267.9 357.5,250.9"/><circle class="a-glow" cx="82.2" cy="177.0" r="11"/><circle class="a-node-t" cx="82.2" cy="177.0" r="5.6"/><circle class="a-glow" cx="229.4" cy="194.0" r="11"/><circle class="a-node-t" cx="229.4" cy="194.0" r="5.6"/><circle class="a-glow" cx="258.9" cy="245.0" r="11"/><circle class="a-node-t" cx="258.9" cy="245.0" r="5.6"/><circle class="a-node" cx="200.0" cy="177.0" r="5"/><circle class="a-node" cx="229.4" cy="126.0" r="5"/><circle class="a-node" cx="258.9" cy="177.0" r="5"/><circle class="a-node" cx="200.0" cy="245.0" r="5"/><circle class="a-node" cx="258.9" cy="211.0" r="5"/><circle class="a-node" cx="170.6" cy="126.0" r="5"/><circle class="a-node" cx="170.6" cy="160.0" r="5"/><circle class="a-node" cx="288.3" cy="194.0" r="5"/><line class="a-handle" x1="461.1" y1="181.0" x2="479.3" y2="199.3"/><circle class="a-lens" cx="439.0" cy="158.9" r="27"/><path class="a-shine" d="M424.0,152.9 A16,16 0 0 1 435.0,142.9"/><line class="a-focus" x1="424.1" y1="181.9" x2="393.0" y2="242.9"/></svg></figure>
     </div>
   </main>
 
