@@ -153,12 +153,207 @@
     return [(scale - interference) / 4, (scale + interference) / 4];
   }
 
+  function initializePhotonicFlow() {
+    const canvas = element('photon-flow');
+    const context = canvas.getContext('2d');
+    if (!context) {
+      element('photon-flow-panel').hidden = true;
+      return;
+    }
+
+    const play = element('photon-play');
+    const speed = element('photon-speed');
+    const motion = matchMedia('(prefers-reduced-motion: reduce)');
+    const pulseSpacing = 26;
+    const guides = [
+      [[.06, .50], [.22, .50]],
+      [[.22, .50], [.34, .28], [.50, .28]],
+      [[.50, .28], [.62, .28], [.74, .50]],
+      [[.22, .50], [.34, .72], [.62, .72], [.74, .50]],
+      [[.74, .50], [.84, .31], [.94, .31]],
+      [[.74, .50], [.84, .69], [.94, .69]],
+    ];
+    let width = 0;
+    let height = 0;
+    let guidesInPixels = [];
+    let offsets = [];
+    let state;
+    let colors;
+    let playing = !motion.matches;
+    let visible = false;
+    let frameId = 0;
+    let lastFrame = 0;
+    let travel = 0;
+
+    const px = (x, y) => [x * width, y * height];
+
+    function readPalette() {
+      const style = getComputedStyle(canvas);
+      const tokens = ['--accent', '--fg-dim', '--bg-2', '--flow-grid', '--flow-guide', '--flow-fault'];
+      colors = Object.fromEntries(tokens.map(token => [token, style.getPropertyValue(token).trim()]));
+    }
+
+    function draw() {
+      if (!width || !height || !state) return;
+      const {phase, loss, outputs, fault} = state;
+      const accent = colors['--accent'];
+      const warning = colors['--flow-fault'];
+      const powers = [1, .5, (1 - loss) / 2, .5, ...outputs];
+
+      context.clearRect(0, 0, width, height);
+      context.fillStyle = colors['--bg-2'];
+      context.fillRect(...px(.16, .12), width * .68, height * .76);
+      context.strokeStyle = colors['--flow-grid'];
+      context.lineWidth = 1;
+      context.strokeRect(...px(.16, .12), width * .68, height * .76);
+      for (let x = width * .16 + 21; x < width * .84; x += 21) {
+        context.beginPath();
+        context.moveTo(x, height * .12);
+        context.lineTo(x, height * .88);
+        context.stroke();
+      }
+
+      context.lineCap = 'round';
+      context.lineJoin = 'round';
+      guidesInPixels.forEach(({points, segments, length}, index) => {
+        const power = powers[index];
+        context.beginPath();
+        context.moveTo(...points[0]);
+        points.slice(1).forEach(point => context.lineTo(...point));
+        context.strokeStyle = colors['--flow-guide'];
+        context.lineWidth = 2;
+        context.stroke();
+        if (power < .0001) return;
+
+        context.strokeStyle = accent;
+        context.lineWidth = 1 + power * 3;
+        context.globalAlpha = .22 + power * .53;
+        context.stroke();
+        context.globalAlpha = .24 + Math.sqrt(power) * .76;
+        context.fillStyle = accent;
+        const first = ((travel - offsets[index]) % pulseSpacing + pulseSpacing) % pulseSpacing;
+        for (let distance = first; distance < length; distance += pulseSpacing) {
+          let remaining = distance;
+          for (const {start, dx, dy, length: segmentLength} of segments) {
+            if (remaining <= segmentLength) {
+              const fraction = remaining / segmentLength;
+              context.beginPath();
+              context.arc(start[0] + dx * fraction, start[1] + dy * fraction, 1.8 + power * 1.6, 0, Math.PI * 2);
+              context.fill();
+              break;
+            }
+            remaining -= segmentLength;
+          }
+        }
+        context.globalAlpha = 1;
+      });
+
+      for (const x of [.22, .74]) {
+        const [left, top] = px(x, .50);
+        context.fillStyle = colors['--bg-2'];
+        context.strokeStyle = accent;
+        context.lineWidth = 2;
+        context.fillRect(left - 5, top - 5, 10, 10);
+        context.strokeRect(left - 5, top - 5, 10, 10);
+      }
+      context.beginPath();
+      context.arc(...px(.50, .28), fault ? 7 : 5, 0, 2 * Math.PI);
+      context.fillStyle = colors['--bg-2'];
+      context.fill();
+      context.strokeStyle = fault ? warning : accent;
+      context.stroke();
+
+      context.font = '500 12px system-ui, sans-serif';
+      context.fillStyle = colors['--fg-dim'];
+      context.textAlign = 'left';
+      context.fillText(translate('輸入', 'Input'), ...px(.06, .41));
+      context.textAlign = 'right';
+      context.fillText(translate('埠 1', 'Port 1'), ...px(.94, .23));
+      context.fillText(translate('埠 2', 'Port 2'), ...px(.94, .84));
+      context.textAlign = 'center';
+      context.fillStyle = fault ? warning : colors['--fg-dim'];
+      context.fillText(translate('上臂', 'Upper arm') + ' · ' + phase + '°', ...px(.50, .18));
+    }
+
+    function resize() {
+      width = canvas.clientWidth;
+      height = canvas.clientHeight;
+      if (!width || !height) return;
+      const ratio = Math.min(devicePixelRatio || 1, 2);
+      canvas.width = Math.round(width * ratio);
+      canvas.height = Math.round(height * ratio);
+      context.setTransform(ratio, 0, 0, ratio, 0, 0);
+      guidesInPixels = guides.map(guide => {
+        const points = guide.map(point => px(...point));
+        const segments = points.slice(1).map((point, index) => {
+          const start = points[index];
+          const dx = point[0] - start[0];
+          const dy = point[1] - start[1];
+          return {start, dx, dy, length: Math.hypot(dx, dy)};
+        });
+        return {points, segments, length: segments.reduce((sum, segment) => sum + segment.length, 0)};
+      });
+      // A shared travel offset carries each pulse across the splitter and combiner.
+      const [input, upperStart, , lower] = guidesInPixels.map(guide => guide.length);
+      const couplingDistance = input + lower;
+      offsets = [0, input, input + upperStart, input, couplingDistance, couplingDistance];
+      draw();
+    }
+
+    function syncPlayback() {
+      play.textContent = playing ? translate('暫停動畫', 'Pause animation') : translate('播放動畫', 'Play animation');
+      if (playing && visible && !document.hidden) {
+        if (!frameId) frameId = requestAnimationFrame(animate);
+      } else {
+        cancelAnimationFrame(frameId);
+        frameId = 0;
+        lastFrame = 0;
+      }
+    }
+
+    function animate(now) {
+      if (lastFrame) travel = (travel + Math.min(now - lastFrame, 64) * Number(speed.value) * .075) % pulseSpacing;
+      lastFrame = now;
+      draw();
+      frameId = requestAnimationFrame(animate);
+    }
+
+    readPalette();
+    new ResizeObserver(resize).observe(canvas);
+    new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      syncPlayback();
+    }).observe(canvas);
+    document.addEventListener('visibilitychange', syncPlayback);
+    document.addEventListener('quantquer:themechange', () => {
+      readPalette();
+      draw();
+    });
+    play.addEventListener('click', () => {
+      playing = !playing;
+      syncPlayback();
+    });
+    motion.addEventListener('change', event => {
+      if (event.matches) {
+        playing = false;
+        syncPlayback();
+      }
+    });
+
+    return next => {
+      state = next;
+      draw();
+      syncPlayback();
+    };
+  }
+
   function initializePhotonics() {
     const designPhase = element('photon-phase');
     const phaseDrift = element('photon-drift');
     const powerLoss = element('photon-loss');
     const enabled = element('photon-fault-enabled');
     const result = element('photon-result');
+    const updateFlow = initializePhotonicFlow();
 
     function render() {
       const reference = outputPowers(Number(designPhase.value), 0);
@@ -166,6 +361,7 @@
       const loss = enabled.checked ? Number(powerLoss.value) / 100 : 0;
       const phase = (Number(designPhase.value) + drift + 360) % 360;
       const current = outputPowers(phase, loss);
+      updateFlow?.({phase, loss, outputs: current, fault: drift !== 0 || loss !== 0});
       phaseDrift.disabled = !enabled.checked;
       powerLoss.disabled = !enabled.checked;
       element('photon-phase-value').value = designPhase.value + '°';

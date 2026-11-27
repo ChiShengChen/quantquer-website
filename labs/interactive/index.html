@@ -132,16 +132,26 @@
           軟體模擬。觀察一個理想馬赫－曾德爾（MZI）單元，並用上臂故障比較兩個輸出埠的功率變化。
         </p>
         <div class="showcase-panel" data-showcase-widget hidden>
-          <ol class="optical-path" aria-label="光路順序" data-en-aria="Optical path">
-            <li><strong data-en="Input">輸入</strong><span data-en="Unit optical power">單位光功率</span></li>
-            <li><strong data-en="Splitter">分光器</strong><span>50:50</span></li>
-            <li class="optical-arms">
-              <strong data-en="Interferometer arms">干涉雙臂</strong>
-              <div class="optical-lane"><span data-en="Upper">上臂</span><output id="photon-arm-upper"></output></div>
-              <div class="optical-lane"><span data-en="Lower">下臂</span><output>50% · 0°</output></div>
-            </li>
-            <li><strong data-en="Combiner">合束器</strong><span>50:50</span></li>
-          </ol>
+          <figure class="photon-flow" id="photon-flow-panel">
+            <canvas id="photon-flow" width="960" height="260" aria-hidden="true"></canvas>
+            <figcaption class="photon-flow-caption">
+              <p data-en="Light-dot brightness indicates relative optical power. Movement and playback speed are illustrative.">光點亮度反映相對光功率。移動與播放速度為示意。</p>
+              <div class="photon-playback">
+                <button class="text-link" type="button" id="photon-play" aria-controls="photon-flow">播放動畫</button>
+                <label for="photon-speed"><span data-en="Speed">速度</span>
+                  <select id="photon-speed">
+                    <option value="1">1×</option>
+                    <option value="2">2×</option>
+                    <option value="4">4×</option>
+                  </select>
+                </label>
+              </div>
+            </figcaption>
+          </figure>
+          <dl class="optical-readings">
+            <div><dt data-en="Upper arm">上臂</dt><dd><output id="photon-arm-upper"></output></dd></div>
+            <div><dt data-en="Lower arm">下臂</dt><dd><output>50% · 0°</output></dd></div>
+          </dl>
           <div class="showcase-controls photon-controls">
             <label class="showcase-control" for="photon-phase">
               <span class="showcase-control-name"><span data-en="Design phase">設計相位</span><output for="photon-phase" id="photon-phase-value">55°</output></span>

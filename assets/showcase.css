@@ -187,44 +187,73 @@
   font-weight: 400;
 }
 
-.optical-path {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.65fr) minmax(0, 1fr);
-  gap: .5rem;
-  list-style: none;
-}
-
-.optical-path li {
-  padding: .6rem .7rem;
-  background: var(--bg);
+.photon-flow {
+  --flow-grid: rgba(127, 158, 187, .12);
+  --flow-guide: #49647d;
+  --flow-fault: #ffbd65;
+  margin: 0 0 .85rem;
   border: 1px solid var(--line);
-  font-size: .86rem;
-  overflow-wrap: anywhere;
+  background: var(--bg);
 }
 
-.optical-path strong {
+html[data-theme="light"] .photon-flow {
+  --flow-grid: rgba(16, 69, 120, .09);
+  --flow-guide: #738da7;
+  --flow-fault: #905b13;
+}
+
+#photon-flow {
   display: block;
-  font-weight: 500;
+  width: 100%;
+  height: clamp(160px, 26vw, 280px);
 }
 
-.optical-path span {
+.photon-flow-caption {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: .35rem .8rem;
+  padding: .45rem .7rem;
+  border-top: 1px solid var(--line);
   color: var(--fg-dim);
+  font-size: .82rem;
+  font-weight: 400;
 }
 
-.optical-path .optical-arms {
-  border-color: var(--accent-dim);
+.photon-playback,
+.photon-playback label {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .5rem .7rem;
 }
 
-.optical-lane {
+.photon-playback select {
+  min-height: 44px;
+  padding: .25rem .4rem;
+  border: 1px solid var(--line);
+  background: var(--bg-2);
+  color: var(--fg);
+  font: inherit;
+  font-size: 1rem;
+}
+
+.optical-readings,
+.optical-readings > div {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
-  justify-content: space-between;
   gap: .2rem .45rem;
-  padding-top: .15rem;
 }
 
-.optical-lane output {
+.optical-readings {
+  gap: .2rem 1rem;
+  color: var(--fg-dim);
+  font-size: .86rem;
+}
+
+.optical-readings output {
   color: var(--accent);
   font-family: var(--mono);
   font-variant-numeric: tabular-nums;
@@ -305,7 +334,6 @@
 
 @media (max-width: 500px) {
   .showcase-page .navlinks { gap: .5rem; }
-  .optical-path { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .showcase-controls { gap: .75rem; }
   .vision-controls { grid-template-columns: 1fr; }
   .showcase-table th,
