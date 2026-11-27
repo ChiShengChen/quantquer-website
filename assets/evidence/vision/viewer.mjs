@@ -131,7 +131,10 @@ import { track } from '../../analytics.mjs';
       stage = lastView.stage;
       status.textContent = tr('影像載入失敗。請重試或查看案例頁。', 'The image could not load. Try again or view the case study.');
     } finally {
-      if (version === viewVersion) figure.setAttribute('aria-busy', 'false');
+      if (version === viewVersion) {
+        figure.setAttribute('aria-busy', 'false');
+        document.body.removeAttribute('data-vision-loading');
+      }
     }
   }
 

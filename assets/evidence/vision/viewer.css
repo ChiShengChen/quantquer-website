@@ -1,5 +1,11 @@
 .vision-evidence [hidden] { display: none !important; }
 .vision-evidence #comparison { padding-block: clamp(2.2rem, 5vw, 4.2rem); }
+.vision-evidence #vision-language { min-inline-size: 5.25rem; }
+
+.vision-evidence[data-vision-loading] :is([data-vision-control], #vision-language, #vision-evidence-slider)[hidden] {
+  display: grid !important;
+  visibility: hidden;
+}
 
 .vision-evidence-panel {
   max-width: 930px;
