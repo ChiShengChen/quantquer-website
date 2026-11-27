@@ -502,6 +502,140 @@
       "visibility": "anonymized"
     },
     {
+      "slug": "surgical-gauze-detection",
+      "domain": [
+        "health"
+      ],
+      "tech": [
+        "vision"
+      ],
+      "origin": "anonymous-engineering",
+      "stage": "development",
+      "media": "cases/surgical-gauze",
+      "inquiry": "edge-ai",
+      "related": [
+        "fall-detection",
+        "on-device-generative-vision"
+      ],
+      "references": [
+        {
+          "href": "https://cdn.who.int/media/docs/default-source/patient-safety/9789241598590-eng-checklist.pdf",
+          "zh": "紗布盤點流程背景 · WHO 手術安全查核表",
+          "en": "Counting workflow context · WHO Surgical Safety Checklist"
+        }
+      ],
+      "zh": {
+        "title": "手術中紗布即時辨識",
+        "summary": "在連續手術影像中辨識可見紗布，提供定位標記供醫護盤點時人工覆核。",
+        "metaDescription": "手術中紗布即時辨識工程案例。以 YOLOv6 與 YOLOv7 規劃單類別物件偵測，定位畫面中的可見紗布，並設計遮擋、誤報及端到端影像延遲的驗證方式。",
+        "problem": "紗布在手術畫面中可能被手部、器械或布巾遮擋。定位標記能讓醫護人員在覆核時回到特定影格。",
+        "challenge": "紗布摺疊或部分遮擋時，外觀和可見面積會改變。相似材質、反光與畫面模糊也會影響辨識。",
+        "approach": [
+          "依可見紗布標註單一物件類別，區分訓練、驗證與測試影像。",
+          "準備 YOLOv6 與 YOLOv7 的紗布訓練設定，作為比較候選。",
+          "規劃將定位框與影格時間戳一起顯示，供人工覆核及延遲測試。"
+        ],
+        "implementation": "已有 YOLOv6 與 YOLOv7 的紗布單類別設定及訓練入口。串流方案需核對取像、模型推論和定位疊圖三段所花的時間。",
+        "result": "已備妥單類別訓練資料切分設定與兩組候選模型的訓練入口。",
+        "deliverables": [
+          "紗布單類別偵測訓練設定",
+          "影像疊圖與人工覆核流程規劃",
+          "工況與端到端延遲驗證計畫"
+        ],
+        "validation": "後續以獨立影像片段測試漏檢、誤報及從取像到疊圖的延遲，按遮擋、摺疊、反光和模糊等工況分開記錄。臨床使用與實際效能待驗證。",
+        "disclosure": "匿名研發案例。本文呈現可核對的訓練設定及工程驗證範圍。配圖為概念示意，辨識框供人工覆核。",
+        "mediaAlt": "俯視攝影機辨識器械盤上紗布的概念圖",
+        "service": "討論手術影像辨識技術"
+      },
+      "en": {
+        "title": "Real-Time Surgical Gauze Detection",
+        "summary": "Locate visible gauze in a surgical video stream and present frame-level detections for staff to review during counts.",
+        "problem": "Hands, instruments and drapes can obscure gauze in surgical video. A frame-level detection marker gives staff a point to revisit during review.",
+        "challenge": "Folding and occlusion change the visible shape and area of gauze. Similar material, reflections and motion blur can affect recognition.",
+        "approach": [
+          "Annotate visible gauze as a single object class and separate training, validation and test images.",
+          "Prepare gauze training configurations for YOLOv6 and YOLOv7 as comparison candidates.",
+          "Plan timestamped detection boxes for human review and latency testing."
+        ],
+        "implementation": "Single-class gauze configurations and training entry points exist for YOLOv6 and YOLOv7. A streaming evaluation should time capture, inference and the overlay separately.",
+        "result": "The existing work includes dataset split definitions and entry points for training both detector candidates.",
+        "deliverables": [
+          "Single-class gauze detection training configuration",
+          "Planned video overlay and human review workflow",
+          "Test plan for operating conditions and end-to-end latency"
+        ],
+        "validation": "Use separate clips to measure misses, false detections and capture-to-overlay latency. Report occlusion, folding, glare and blur separately. Clinical use and performance await validation.",
+        "disclosure": "An anonymized development case covering the documented training setup and planned validation. The illustration is conceptual. Detection boxes support human review.",
+        "mediaAlt": "Concept illustration of an overhead camera detecting gauze on a surgical tray",
+        "service": "Discuss surgical video recognition"
+      },
+      "visibility": "anonymized"
+    },
+    {
+      "slug": "pig-behavior-tracking",
+      "domain": [
+        "industrial"
+      ],
+      "tech": [
+        "vision",
+        "time-series"
+      ],
+      "origin": "anonymous-engineering",
+      "stage": "evaluation",
+      "media": "cases/pig-tracking",
+      "inquiry": "edge-ai",
+      "related": [
+        "fall-detection",
+        "on-device-generative-vision"
+      ],
+      "zh": {
+        "title": "養豬場豬隻動作即時辨識與追蹤",
+        "summary": "以豬舍影像定位多隻豬、串接個體軌跡，規劃即時辨識站立、行走與躺臥等動作。",
+        "metaDescription": "養豬場豬隻動作即時辨識與追蹤案例。以固定攝影機畫面串接多目標偵測、個體軌跡與動作辨識，規劃獨立評估交會遮擋、ID 切換和串流延遲。",
+        "problem": "同一欄內有多隻豬同時活動。監測需要把連續影格中的位置和行為變化對應到各自的追蹤軌跡。",
+        "challenge": "豬隻彼此遮擋、交會或外觀相近時，容易造成軌跡中斷或身分切換。照明變化也會影響畫面品質。",
+        "approach": [
+          "從固定攝影機影像定位畫面中的多隻豬。",
+          "跨影格串接同一個體的定位，記錄單鏡頭內的追蹤 ID 和移動軌跡。",
+          "以連續片段評估站立、行走與躺臥等動作，記錄動作起迄時間。"
+        ],
+        "implementation": "工程評估分成單幀偵測、跨影格追蹤與片段動作分類，便於找出漏檢、換號或動作混淆各自出現在哪個階段。",
+        "result": "目前公開範圍為豬舍影像的動作分類、個體追蹤及串流效能評估規劃。",
+        "deliverables": [
+          "多豬隻定位與追蹤 ID 的輸出規格",
+          "動作類別與起迄時間的標註規格",
+          "畫面遮擋、ID 切換與端到端延遲驗證計畫"
+        ],
+        "validation": "依欄位或錄影時段切分測試片段，分別評估追蹤 ID 切換、動作辨識錯誤和端到端延遲。設計交會、遮擋和不同照明條件的測試情境。",
+        "disclosure": "匿名工程評估案例。配圖為概念示意，場域部署和量測結果待確認。",
+        "mediaAlt": "豬舍攝影機定位多隻豬並追蹤個體動作的概念圖",
+        "service": "討論畜牧場域影像分析"
+      },
+      "en": {
+        "title": "Real-Time Pig Behavior Recognition and Tracking",
+        "summary": "Locate multiple pigs in barn video, link their trajectories and scope real-time recognition of standing, walking and lying.",
+        "problem": "Several pigs can occupy the same pen at once. Monitoring requires matching changes in position and behavior to each animal’s track.",
+        "challenge": "Overlap, crossing paths and similar appearances can break tracks or switch IDs. Lighting changes can also affect the video quality.",
+        "approach": [
+          "Locate multiple pigs in video from a fixed camera.",
+          "Link detections across consecutive frames to assign within-camera track IDs and trajectories.",
+          "Evaluate actions such as standing, walking and lying over clips and record their start and end times."
+        ],
+        "implementation": "The engineering evaluation separates frame-level detection, tracking and clip-level action classification so reviewers can isolate misses, ID switches and action errors.",
+        "result": "The public scope covers a planned evaluation of behavior classification, individual tracking and streaming performance.",
+        "deliverables": [
+          "Output specification for multi-pig detections and track IDs",
+          "Annotation specification for action labels and their timing",
+          "Test plan for occlusion, ID switches and end-to-end latency"
+        ],
+        "validation": "Hold out clips by pen or recording period. Evaluate ID switches, action classification errors and end-to-end latency across crossings, occlusion and lighting conditions.",
+        "disclosure": "An anonymized engineering evaluation case. The illustration is conceptual. Field deployment and measured results await confirmation.",
+        "mediaAlt": "Concept illustration of an overhead camera detecting and tracking pigs in a pen",
+        "service": "Discuss video analytics for livestock"
+      },
+      "visibility": "anonymized"
+    },
+    {
       "slug": "adaptive-physics-tutor",
       "domain": [
         "agent"

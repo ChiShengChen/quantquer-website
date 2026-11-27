@@ -720,6 +720,50 @@
         </div>
       </article>
 
+      <article class="case reveal" id="surgical-gauze-detection" data-tags="health" data-tech="vision" data-origin="anonymous-engineering" data-stage="development" data-visibility="anonymized" data-case-kind="case" data-featured="false">
+        <figure class="cfig"><img src="assets/cases/surgical-gauze.webp" srcset="assets/cases/surgical-gauze-768.webp 768w, assets/cases/surgical-gauze.webp 1536w, assets/cases/surgical-gauze-3072.webp 3072w" sizes="(max-width: 400px) calc(100vw - 40px), (max-width: 760px) 90vw, (max-width: 1180px) 45vw, 530px" alt="俯視攝影機辨識器械盤上紗布的概念圖" width="1536" height="1024" loading="lazy"></figure>
+        <div class="cbody">
+          <div class="ctag">精選案例 · 醫療與神經科技</div>
+          <h3>手術中紗布即時辨識</h3>
+          <p class="en" lang="en">Real-Time Surgical Gauze Detection</p>
+          <p class="entry-meta">匿名工程案例 · 研發經歷</p>
+          <p class="cprob">紗布在手術畫面中可能被手部、器械或布巾遮擋。定位標記能讓醫護人員在覆核時回到特定影格。</p>
+          <ul class="chk">
+            <li>依可見紗布標註單一物件類別，區分訓練、驗證與測試影像。</li>
+            <li>準備 YOLOv6 與 YOLOv7 的紗布訓練設定，作為比較候選。</li>
+            <li>規劃將定位框與影格時間戳一起顯示，供人工覆核及延遲測試。</li>
+          </ul>
+          <div class="cres"><p class="rdesc">已備妥單類別訓練資料切分設定與兩組候選模型的訓練入口。</p></div>
+          <p class="entry-meta">電腦視覺</p>
+          <div class="entry-links">
+            <a class="text-link" href="/work/surgical-gauze-detection/">查看技術細節</a>
+            <a class="text-link" href="#contact" data-inquiry="edge-ai">討論手術影像辨識技術</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="case reveal" id="pig-behavior-tracking" data-tags="industrial" data-tech="vision time-series" data-origin="anonymous-engineering" data-stage="evaluation" data-visibility="anonymized" data-case-kind="case" data-featured="false">
+        <figure class="cfig"><img src="assets/cases/pig-tracking.webp" srcset="assets/cases/pig-tracking-768.webp 768w, assets/cases/pig-tracking.webp 1536w, assets/cases/pig-tracking-3072.webp 3072w" sizes="(max-width: 400px) calc(100vw - 40px), (max-width: 760px) 90vw, (max-width: 1180px) 45vw, 530px" alt="豬舍攝影機定位多隻豬並追蹤個體動作的概念圖" width="1536" height="1024" loading="lazy"></figure>
+        <div class="cbody">
+          <div class="ctag">精選案例 · 工業智慧</div>
+          <h3>養豬場豬隻動作即時辨識與追蹤</h3>
+          <p class="en" lang="en">Real-Time Pig Behavior Recognition and Tracking</p>
+          <p class="entry-meta">匿名工程案例 · 工程評估</p>
+          <p class="cprob">同一欄內有多隻豬同時活動。監測需要把連續影格中的位置和行為變化對應到各自的追蹤軌跡。</p>
+          <ul class="chk">
+            <li>從固定攝影機影像定位畫面中的多隻豬。</li>
+            <li>跨影格串接同一個體的定位，記錄單鏡頭內的追蹤 ID 和移動軌跡。</li>
+            <li>以連續片段評估站立、行走與躺臥等動作，記錄動作起迄時間。</li>
+          </ul>
+          <div class="cres"><p class="rdesc">目前公開範圍為豬舍影像的動作分類、個體追蹤及串流效能評估規劃。</p></div>
+          <p class="entry-meta">電腦視覺 · 時序分析</p>
+          <div class="entry-links">
+            <a class="text-link" href="/work/pig-behavior-tracking/">查看技術細節</a>
+            <a class="text-link" href="#contact" data-inquiry="edge-ai">討論畜牧場域影像分析</a>
+          </div>
+        </div>
+      </article>
+
       <article class="case reveal" id="adaptive-physics-tutor" data-tags="agent" data-tech="agent knowledge" data-origin="education" data-stage="application" data-visibility="public" data-case-kind="case" data-featured="false">
         <figure class="cfig"><img src="assets/cases/tutor.webp" srcset="assets/cases/tutor-768.webp 768w, assets/cases/tutor.webp 1536w, assets/cases/tutor-3072.webp 3072w" sizes="(max-width: 400px) calc(100vw - 40px), (max-width: 760px) 90vw, (max-width: 1180px) 45vw, 530px" alt="個人化物理家教與教學路徑的概念圖" width="1536" height="1024" loading="lazy"></figure>
         <div class="cbody">
