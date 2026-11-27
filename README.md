@@ -29,7 +29,8 @@
 │   ├── logo-full-light.png     # 完整 logo（淺色字，深色底用）— 深色版頁尾
 │   ├── logo-full-onlight.png   # 完整 logo（深色字，淺色底用）— 亮色版頁尾、JSON-LD
 │   ├── partners/*              # §08 夥伴 logo（取自築邦科技夥伴頁 buildpolis.com/partners）
-│   ├── og-image.png            # 社群分享圖 1200×630（實心淺底，LINE／FB／X 預覽用）
+│   ├── og-image-2-1.png        # 2.1 社群分享圖 1200×630（Open Graph 與 X 卡片）
+│   ├── og-image.png            # 2.0 社群分享圖的原網址
 │   ├── caps/*.webp             # §01 能力示意圖
 │   ├── svcs/*.webp             # §02 服務方案示意圖
 │   ├── labs/*.webp             # §06 Labs 示意圖
