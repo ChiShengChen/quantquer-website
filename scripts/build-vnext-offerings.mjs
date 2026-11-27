@@ -147,11 +147,19 @@ function renderLanguage(locale) {
       [['學術研究', 'Academic research'], founder.research],
       [['開源工程', 'Open-source engineering'], founder.openSource],
     ];
+    const deliveryTerms = [
+      [['保密與 NDA', 'Confidentiality and NDAs'], ['若需要交換機密資料，先確認保密協議、參與人員及核准的交流管道。', 'Before sharing confidential materials, agree on confidentiality terms, participants and approved channels.']],
+      [['原始碼與智慧財產權', 'Source code and IP'], ['提案列明哪些原始碼、模型和文件納入交付。既有工具與第三方元件的授權條款按案確認。', 'The proposal specifies the source code, models and documentation to hand over. Licensing for pre-existing tools and third-party components is scoped per engagement.']],
+      [['資料處理及私有部署', 'Data handling and private deployment'], ['針對目標環境先確認資料存取、可否離開內網及保留期限。私有部署以實際硬體、網路及權限為評估條件。', 'Agree on access, data movement and retention for the target environment. Scope private deployment against available hardware, network and permissions.']],
+      [['驗收與移交', 'Acceptance and handoff'], ['先約定代表性測試輸入、通過條件及應交付的操作文件。驗收以核定的場景與量測範圍為準。', 'Agree on representative test inputs, pass criteria and operating documentation. Acceptance follows the agreed scenarios and measurement scope.']],
+      [['維護與變更', 'Maintenance and change requests'], ['交付前確認支援期間、維護責任及新增需求的處理方式。', 'Agree on support duration, maintenance ownership and how to handle new requirements before handoff.']],
+    ];
     const actions = `<p class="topic-lead" lang="en">${escape(studioBrand.technicalTagline)}</p>${buttons(local('/capabilities/'), labels.capabilities, local('/contact/'), labels.contact)}`;
     return page('/company/', name, intro, hero([studioBrand.slogan, studioBrand.slogan], name, intro, actions, 'en') +
       section('studio', ['工程、研究與工具', 'Engineering, research, and tools'], grid(brands.map(([brand, desc, route, label]) => `<article class="topic-panel offering-card"><h3>${t(brand)}</h3><p>${t(desc)}</p>${a(local(route), label)}</article>`).join(''))) +
       section('founder', ['創辦人', 'Founder'], `<p class="offering-founder">${t(founder.name)}</p>${grid(credentials.map(([label, copy]) => `<article class="topic-panel offering-card"><h3>${t(label)}</h3><p>${t(copy)}</p></article>`).join(''))}${profileLinks()}<p class="offering-link-row">${t(founder.award)} ${a(founder.awardSource, ['查看主辦方結果', 'See the organizer’s results'])}</p>`) +
-      section('engineering-delivery', ['量維工程案例', 'Quantquer engineering cases'], `<p class="topic-lead">${t(['公司案例依項目標明已交付的軟體、匿名工程、研究經歷或技術展示。研究及競賽的署名和範圍以原始資料為準。', 'Each case identifies whether it covers software delivery, anonymized work, research experience, or a technical demonstration. Original sources establish attribution and scope for research and competitions.'])}</p>${grid(['industrial-robotics', 'enterprise-knowledge-arbitration'].map(renderCase).join(''))}${a(local('/work/'), labels.work)}`), null, { '@type': 'AboutPage' });
+      section('engineering-delivery', ['量維工程案例', 'Quantquer engineering cases'], `<p class="topic-lead">${t(['公司案例依項目標明已交付的軟體、匿名工程、研究經歷或技術展示。研究及競賽的署名和範圍以原始資料為準。', 'Each case identifies whether it covers software delivery, anonymized work, research experience, or a technical demonstration. Original sources establish attribution and scope for research and competitions.'])}</p>${grid(['industrial-robotics', 'enterprise-knowledge-arbitration'].map(renderCase).join(''))}${a(local('/work/'), labels.work)}`) +
+      section('engagement-terms', ['合作條件與交付方式', 'Engagement and delivery practices'], `<p class="topic-lead">${t(['以下是專案開始前共同確認的範圍。正式條件以雙方書面約定為準。', 'These are the topics we review before work begins. The written project agreement governs the engagement.'])}</p><dl class="topic-benchmark">${deliveryTerms.map(([title, copy]) => `<div><dt>${t(title)}</dt><dd>${t(copy)}</dd></div>`).join('')}</dl>`), null, { '@type': 'AboutPage' });
   }
 
   function research() {

@@ -49,9 +49,11 @@ export function createInquiryHandler({ origin, deliver, clock = Date.now }) {
     if (!input || typeof input !== 'object' || input.website !== '' || !['en', 'zh'].includes(input.locale) || !/^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i.test(input.requestId ?? '') || !input.values || typeof input.values !== 'object' || Array.isArray(input.values)) {
       return reply(400, { ok: false });
     }
-    const { values, errors } = validateContact(input.values);
+    const mode = input.mode ?? 'full';
+    if (!['full', 'quick'].includes(mode)) return reply(400, { ok: false });
+    const { values, errors } = validateContact(input.values, mode);
     if (Object.keys(errors).length) return reply(422, { ok: false, errors });
-    const fingerprint = createHash('sha256').update(JSON.stringify({ values, locale: input.locale })).digest('hex');
+    const fingerprint = createHash('sha256').update(JSON.stringify({ values, locale: input.locale, mode })).digest('hex');
     let saved = receipts.get(input.requestId);
     if (saved?.until <= now) saved = undefined;
     if (saved && saved.fingerprint !== fingerprint) return reply(409, { ok: false });

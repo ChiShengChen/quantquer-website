@@ -1,6 +1,8 @@
 .studio-contact-grid { display: grid; grid-template-columns: minmax(0, 2.25fr) minmax(0, 1fr); gap: clamp(24px, 5vw, 64px); align-items: start; }
 .studio-contact-aside .text-link { display: block; margin-block: 12px; }
 .studio-contact-aside .studio-email { overflow-wrap: anywhere; }
+.studio-quick-panel { margin-top: 1.5rem; max-width: 44rem; }
+.studio-quick-panel h2 { font-family: var(--serif); }
 .studio-inquiry { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 20px; margin-top: 24px; }
 .studio-inquiry .full { grid-column: 1 / -1; }
 .studio-inquiry label { display: block; margin-bottom: 6px; font-weight: 500; }

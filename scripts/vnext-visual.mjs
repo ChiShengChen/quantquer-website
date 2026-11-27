@@ -49,7 +49,7 @@ async function fixedCapture(path, page) {
       motif: style('#spectrum', ['opacity', 'width', 'height']),
       titleLines,
       caption: document.querySelector('.fig-cap').textContent.trim(),
-      articleBelowFold: document.querySelector('#showreel').getBoundingClientRect().top >= innerHeight,
+      articleBelowFold: document.querySelector('#featured').getBoundingClientRect().top >= innerHeight,
       buttonBottom,
     };
   });
@@ -101,6 +101,16 @@ try {
     await page.waitForFunction(previous => document.getElementById('spectrum').toDataURL() !== previous, first);
     await page.evaluate(() => window.scrollTo({ top: 90, behavior: 'instant' }));
     await page.waitForFunction(() => scrollY >= 80 && document.getElementById('hdr').classList.contains('scrolled'));
+    if (path === host) {
+      await page.evaluate(() => window.scrollTo({ top: innerHeight + 120, behavior: 'instant' }));
+      await page.waitForFunction(() => document.querySelector('#spectrum').getBoundingClientRect().bottom < 0);
+      await page.waitForTimeout(130);
+      const stopped = await waveform.evaluate(canvas => canvas.toDataURL());
+      await page.waitForTimeout(130);
+      assert.equal(await waveform.evaluate(canvas => canvas.toDataURL()), stopped);
+      await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
+      await page.waitForFunction(previous => document.getElementById('spectrum').toDataURL() !== previous, stopped);
+    }
     await context.close();
   }
   await writeFile(resolve(out, 'comparisons', 'waveform-checks.json'), JSON.stringify(report, null, 2) + '\n');

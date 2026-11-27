@@ -1,9 +1,11 @@
 {
   "featured": [
-    "on-device-generative-vision",
     "industrial-robotics",
+    "on-device-generative-vision",
     "enterprise-knowledge-arbitration",
-    "gpu-orchestration"
+    "gpu-orchestration",
+    "eeg-treatment-response",
+    "photonic-computing"
   ],
   "siteUpdated": "2026-11-27",
   "projects": [

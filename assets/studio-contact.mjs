@@ -1,5 +1,5 @@
 import { track } from './analytics.mjs';
-import { contactBrief, fields, projectTypes, validateContact } from './contact-model.mjs';
+import { contactBrief, fields, projectTypes, quickFields, validateContact } from './contact-model.mjs';
 import { inquiryEndpoint } from './inquiry.mjs';
 import { bookingUrl, inquiryPath } from './studio-integrations.mjs';
 
@@ -20,8 +20,6 @@ const labels = {
   email: l('請輸入有效的信箱。', 'Enter a valid email address.'),
   invalid: l('請確認這個欄位的內容。', 'Check this field.'),
 };
-let pending;
-
 if (Object.hasOwn(projectTypes, projectType)) form.elements.projectType.value = projectType;
 submit.hidden = !endpoint;
 delivery.textContent = endpoint
@@ -34,8 +32,8 @@ if (bookingUrl && URL.canParse(bookingUrl) && new URL(bookingUrl).protocol === '
   template.replaceWith(booking);
 }
 
-function updateError(field, error) {
-  const control = form.elements[field.name];
+function updateError(activeForm, field, error) {
+  const control = activeForm.elements[field.name];
   const line = document.getElementById(`${control.id}-error`);
   line.hidden = !error;
   line.textContent = error ? labels[error] : '';
@@ -47,7 +45,7 @@ function readForm() {
   manual.hidden = true;
   status.textContent = '';
   const { values, errors } = validateContact(Object.fromEntries(new FormData(form)));
-  for (const field of fields) updateError(field, errors[field.name]);
+  for (const field of fields) updateError(form, field, errors[field.name]);
   const first = Object.keys(errors)[0];
   summary.hidden = !first;
   summary.textContent = first ? l('請檢查標示的欄位。', 'Review the highlighted fields.') : '';
@@ -60,38 +58,65 @@ function readForm() {
 
 form.addEventListener('input', event => {
   const field = fields.find(item => item.name === event.target.name);
-  if (field) updateError(field);
+  if (field) updateError(form, field);
   if (!form.querySelector('[aria-invalid="true"]')) summary.hidden = true;
 });
 form.addEventListener('focusin', () => track('inquiry_started', { channel: endpoint ? 'web' : 'email' }), { once: true });
-form.addEventListener('submit', async event => {
-  event.preventDefault();
-  if (!endpoint || submit.disabled) return;
-  const values = readForm();
-  if (!values) return;
-  const fingerprint = JSON.stringify(values);
-  if (pending?.fingerprint !== fingerprint) pending = { requestId: crypto.randomUUID(), fingerprint };
-  submit.disabled = true;
-  status.textContent = l('正在送出需求…', 'Sending your inquiry…');
-  try {
-    const response = await fetch(endpoint, {
-      method: 'POST', credentials: 'same-origin', redirect: 'error', signal: AbortSignal.timeout(12000),
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ values, requestId: pending.requestId, locale, website: form.elements.website.value }),
-    });
-    const result = await response.json();
-    if (!response.ok || result.ok !== true || !/^[\w-]{1,64}$/.test(result.receipt ?? '')) throw new Error('Unconfirmed inquiry');
-    status.textContent = l(`已送達詢價服務。收件編號 ${result.receipt}。`, `Accepted by the inquiry service. Receipt ${result.receipt}.`);
-    track('inquiry_submitted');
-    form.reset();
-    pending = null;
-  } catch {
-    status.textContent = l('無法確認送達。你可以重試，或改用郵件草稿。', 'Delivery could not be confirmed. Retry or use the email draft.');
-    track('inquiry_submission_failed');
-  } finally {
-    submit.disabled = false;
-  }
-});
+function wireSubmission(activeForm, button, notice, readValues, mode) {
+  let pending;
+  activeForm.addEventListener('submit', async event => {
+    event.preventDefault();
+    if (!endpoint || button.disabled) return;
+    const values = readValues();
+    if (!values) return;
+    const fingerprint = JSON.stringify(values);
+    if (pending?.fingerprint !== fingerprint) pending = { requestId: crypto.randomUUID(), fingerprint };
+    button.disabled = true;
+    notice.textContent = l('正在送出需求…', 'Sending your inquiry…');
+    try {
+      const response = await fetch(endpoint, {
+        method: 'POST', credentials: 'same-origin', redirect: 'error', signal: AbortSignal.timeout(12000),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ values, requestId: pending.requestId, locale, mode, website: activeForm.elements.website.value }),
+      });
+      const result = await response.json();
+      if (!response.ok || result.ok !== true || !/^[\w-]{1,64}$/.test(result.receipt ?? '')) throw new Error('Unconfirmed inquiry');
+      notice.textContent = l(`已送達詢價服務。收件編號 ${result.receipt}。`, `Accepted by the inquiry service. Receipt ${result.receipt}.`);
+      track('inquiry_submitted');
+      activeForm.reset();
+      pending = null;
+    } catch {
+      notice.textContent = l('無法確認送達。你可以重試，或直接 Email。', 'Delivery could not be confirmed. Retry or email us directly.');
+      track('inquiry_submission_failed');
+    } finally {
+      button.disabled = false;
+    }
+  });
+}
+
+wireSubmission(form, submit, status, readForm, 'full');
+
+if (endpoint) {
+  const quick = document.getElementById('quick-inquiry');
+  const quickStatus = document.getElementById('quick-status');
+  const readQuick = () => {
+    quickStatus.textContent = '';
+    const { values, errors } = validateContact(Object.fromEntries(new FormData(quick)), 'quick');
+    for (const field of quickFields) updateError(quick, field, errors[field.name]);
+    const first = Object.keys(errors)[0];
+    if (!first) return values;
+    quickStatus.textContent = l('請檢查標示的欄位。', 'Review the highlighted fields.');
+    quick.elements[first].focus();
+    return null;
+  };
+  quick.addEventListener('input', event => {
+    const field = quickFields.find(item => item.name === event.target.name);
+    if (field) updateError(quick, field);
+  });
+  quick.addEventListener('focusin', () => track('inquiry_started', { channel: 'web' }), { once: true });
+  wireSubmission(quick, document.getElementById('quick-submit'), quickStatus, readQuick, 'quick');
+  document.getElementById('contact-quick').hidden = false;
+}
 
 document.getElementById('contact-draft').addEventListener('click', () => {
   const values = readForm();

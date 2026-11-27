@@ -79,10 +79,29 @@
 </header>
   <main id="content" tabindex="-1">
   <nav class="wrap studio-breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="/en/">Home</a></li><li aria-current="page">Discuss your project</li></ol></nav>
-  <section class="topic-hero"><div class="wrap"><p class="eyebrow">Quantquer Engineering</p><h1>Discuss your project</h1><p class="topic-intro">Share your technical challenge, deployment constraints and deliverables to discuss an assessment, prototype or custom engineering engagement.</p></div></section>
-  <section class="topic-section"><div class="wrap studio-contact-grid">
+  <section class="topic-hero"><div class="wrap"><p class="eyebrow">Quantquer Engineering</p><h1>Discuss your project</h1><p class="topic-intro">Share your technical challenge, deployment constraints and deliverables to discuss an assessment, prototype or custom engineering engagement.</p>
+    <div class="entry-links">
+      <a class="btn btn-primary" id="contact-direct-email" data-analytics="contact_cta_clicked" href="mailto:chisheng.m.chen@gmail.com?subject=Quantquer%20engineering%20inquiry">Email us directly</a>
+      <a class="btn btn-ghost" href="#rfp">Prepare a detailed project brief</a>
+      <template id="contact-booking"><a class="btn btn-ghost" data-analytics="contact_cta_clicked">Book a technical meeting</a></template>
+    </div>
+    <p class="topic-audience">Start with your technical problem and the outcome you need. <a class="text-link" href="mailto:chisheng.m.chen@gmail.com">chisheng.m.chen@gmail.com</a></p>
+    <div id="contact-quick" class="topic-panel studio-quick-panel" hidden>
+      <h2>Quick inquiry</h2>
+      <form id="quick-inquiry" class="studio-inquiry" novalidate aria-describedby="quick-privacy">
+        <div class="studio-contact-field"><label for="quick-name">Name <span aria-hidden="true">*</span></label><input id="quick-name" name="name" aria-describedby="quick-name-error" required type="text" maxlength="100" autocomplete="name"><p id="quick-name-error" class="studio-contact-error" hidden></p></div>
+<div class="studio-contact-field"><label for="quick-email">Work email <span aria-hidden="true">*</span></label><input id="quick-email" name="email" aria-describedby="quick-email-error" required type="email" maxlength="180" autocomplete="email"><p id="quick-email-error" class="studio-contact-error" hidden></p></div>
+<div class="studio-contact-field full"><label for="quick-challenge">Technical challenge <span aria-hidden="true">*</span></label><textarea id="quick-challenge" name="challenge" aria-describedby="quick-challenge-error" required rows="4" maxlength="2400"></textarea><p id="quick-challenge-error" class="studio-contact-error" hidden></p></div>
+        <div class="studio-inquiry-trap" aria-hidden="true"><label>Leave empty <input name="website" type="text" tabindex="-1" autocomplete="off"></label></div>
+        <p id="quick-privacy" class="full">Briefly describe your problem without including confidential data.</p>
+        <div class="entry-links full"><button type="submit" class="btn btn-primary" id="quick-submit">Send a quick inquiry</button></div>
+        <p id="quick-status" class="full" role="status"></p>
+      </form>
+    </div>
+  </div></section>
+  <section class="topic-section" id="rfp"><div class="wrap studio-contact-grid">
     <div>
-      <h2>Project inquiry</h2>
+      <h2>Detailed project brief (RFP)</h2>
       <p>Fields marked with an asterisk are required. Describe the challenge without including patient, customer or confidential data.</p>
       <p id="contact-delivery" aria-live="polite">Prepare an email draft or copy your inquiry into your preferred email service.</p>
       <form id="studio-inquiry" class="studio-inquiry" novalidate aria-describedby="contact-privacy contact-delivery">
@@ -95,6 +114,8 @@
 <div class="studio-contact-field"><label for="inquiry-deliverables">Expected deliverables</label><input id="inquiry-deliverables" name="deliverables" aria-describedby="inquiry-deliverables-error" type="text" maxlength="300"><p id="inquiry-deliverables-error" class="studio-contact-error" hidden></p></div>
 <div class="studio-contact-field"><label for="inquiry-timeline">Target timeline</label><input id="inquiry-timeline" name="timeline" aria-describedby="inquiry-timeline-error" type="text" maxlength="100"><p id="inquiry-timeline-error" class="studio-contact-error" hidden></p></div>
 <div class="studio-contact-field"><label for="inquiry-budget">Budget range (optional)</label><input id="inquiry-budget" name="budget" aria-describedby="inquiry-budget-error" type="text" maxlength="120"><p id="inquiry-budget-error" class="studio-contact-error" hidden></p></div>
+<div class="studio-contact-field"><label for="inquiry-hardware">Target hardware or deployment environment</label><input id="inquiry-hardware" name="hardware" aria-describedby="inquiry-hardware-error" type="text" maxlength="200"><p id="inquiry-hardware-error" class="studio-contact-error" hidden></p></div>
+<div class="studio-contact-field"><label for="inquiry-nda">NDA or data access requirements</label><input id="inquiry-nda" name="nda" aria-describedby="inquiry-nda-error" type="text" maxlength="120"><p id="inquiry-nda-error" class="studio-contact-error" hidden></p></div>
 <div class="studio-contact-field full"><label for="inquiry-notes">Additional notes</label><textarea id="inquiry-notes" name="notes" aria-describedby="inquiry-notes-error" rows="4" maxlength="1800"></textarea><p id="inquiry-notes-error" class="studio-contact-error" hidden></p></div>
         <div class="studio-inquiry-trap" aria-hidden="true"><label>Leave empty <input name="website" type="text" tabindex="-1" autocomplete="off"></label></div>
         <p id="contact-summary" class="studio-contact-error full" role="alert" hidden></p>
@@ -113,7 +134,7 @@
       <a class="text-link studio-email" href="mailto:chisheng.m.chen@gmail.com">chisheng.m.chen@gmail.com</a>
       <a class="text-link" href="/project-planner/?lang=en">Use the project planner</a>
       <a class="text-link" href="/en/services/technical-consulting/">Explore technical assessment</a>
-      <template id="contact-booking"><a class="text-link">Book a discovery call</a></template>
+      <a class="text-link" href="/en/company/#engagement-terms">NDA, IP, data and delivery practices</a>
     </aside>
   </div></section>
   </main>

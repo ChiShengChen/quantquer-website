@@ -7,76 +7,88 @@ const content = {
   zh: {
     headline: '從晶片到智慧系統，<br class="hero-copy-break"><span class="hero-verb">解決</span><br class="hero-mobile-break"><span class="hl">高難度 AI 工程問題</span>。',
     intro: '我們為半導體、工業、醫療與科技企業提供客製化 AI 演算法、模型部署、智慧代理系統及高效能運算基礎設施研發。',
-    primary: '討論你的專案', secondary: '查看工程成果', diagram: '從晶片到系統的工程流程',
-    credentialsTitle: '把研究方法帶進工程交付',
-    credentials: [
-      ['公司工程交付', '匿名工程案例記錄工作站設計、資料與模型整合，以及交付或測試範圍。', '/work/', '查看工程案例'],
-      ['創辦人研發背景', '由 IC 設計、應用 AI 與生醫資訊研究，延伸至科學與量子機器學習。', '/company/', '查看公司與創辦人背景'],
-      ['研究發表與開源', '從研究論文、開源工具到可重跑實驗，公開方法及適用條件。', '/research/', '查看公開研究'],
+    primary: '討論你的專案', secondary: '查看工程成果',
+    trust: ['已交付工程', '研究發表', '開源工具'],
+    solutions: '四大工程解決方案',
+    firstOffer: '從 AI 架構評估開始（典型約 1–2 週）',
+    evidence: 'Quantquer Labs 與工程證據',
+    methods: '查看量測條件、操作展示或下載可重跑的原始資料。',
+    evidenceLinks: ['Benchmark', '互動展示', '原始資料與方法', '開源工具'],
+    engagements: '開始合作',
+    engagementRows: [
+      ['AI 架構評估', '典型約 1–2 週', '交付瓶頸分析、風險清單與驗證路線。', 'technical-consulting#architecture-assessment'],
+      ['邊緣 AI 可行性研究', '典型約 3–6 週', '交付算子相容性、資源分析及裝置驗證計畫。', 'feasibility-study#edge-feasibility'],
+      ['客製研發與交付', '依需求評估', '共同定義原型、驗收、文件與移交範圍。', 'custom-rd'],
     ],
-    solutionTitle: '核心解決方案', solutionLink: '查看解決方案', solutionAll: '所有解決方案',
-    solutions: [
-      ['Silicon Intelligence', '晶片端與嵌入式 AI', '模型要進晶片，受限於算子、記憶體或延遲預算。', '檢查部署相容性，衡量模型最佳化前後差異。', '交付算子與部署清單、原型及測試報告。', 'semiconductor-edge-ai', '/labs/evidence/vision/', '影像修復 CPU 實測'],
-      ['Agentic Intelligence', '企業代理與 AI 可靠性', '文件版本衝突、代理失敗，讓團隊無法追溯結論。', '設計資料權威、工具權限、失敗回復與評估。', '交付可稽核的流程、評估集及回歸規則。', 'ai-reliability', '/labs/demos/knowledge-arbitration/', '文件仲裁互動示例'],
-      ['Compute Intelligence', 'GPU 運算基礎設施', '共用 GPU 任務互相阻塞，資源和等待時間難以預估。', '依工作特性驗證佇列、VRAM 管控及觀測。', '交付排程 PoC、執行紀錄與容量建議。', 'gpu-infrastructure', '/labs/evidence/gpu/', '單卡控制環境實跑紀錄'],
-      ['Scientific Intelligence', '科學運算與研究工程', '模擬、演算法或資料分析缺少可重現的驗證程序。', '設計可重跑實驗、資料流程與誤差檢查。', '交付可重現程式、測試資料與方法報告。', 'scientific-ai', '/labs/evidence/research/', '引文稽核重跑紀錄'],
-    ],
-    evidenceTitle: '工程證據', evidenceText: '每項成果附上測試條件與限制。可直接核對量測方法、原始紀錄與模擬設定。',
-    evidence: [
-      ['實測與可重現實驗', '比較 CPU 影像修復結果、GPU 單卡排程及引文檢查。', '/labs/benchmarks/', '查看基準測試'],
-      ['互動技術展示', '操作光子故障、GPU 工作佇列、知識仲裁、代理驗證和工作站規劃。', '/labs/demos/', '開啟展示'],
-      ['開源實作與技術紀錄', '查看程式、對照原始輸出及下載可公開結果。', '/labs/evidence/', '瀏覽證據中心'],
-    ],
-    engageTitle: '開始合作', engageLink: '查看合作範圍',
-    engagements: [
-      ['技術評估', '提供問題、現況與限制。先對齊目標，再依可取得資料和系統條件交付風險與驗證計畫。', 'technical-consulting'],
-      ['可行性研究與 PoC', '提供代表資料或測試環境。時程依資料與硬體到位狀態確認，以事先約定的測試門檻驗收。', 'feasibility-study'],
-      ['客製工程與研發', '共同定義介面、里程碑及交付。依範圍安排驗收、文件及移交。', 'custom-rd'],
-    ],
-    layersTitle: 'Quantquer 的工作範圍',
-    layers: [
-      ['Quantquer Engineering', '企業工程顧問、可行性驗證與客製交付。', '/services/'],
-      ['Quantquer Labs', '公開實驗、基準測試與可操作的技術展示。', '/labs/'],
-      ['Quantquer Products', '自主研發項目與各自的公開狀態。', '/labs/projects/'],
-    ],
+    finder: '依問題找合作方式',
+    finderPrompt: '你的團隊現在要解決什麼？',
+    finderDefault: '選擇技術問題',
+    finderAction: '查看建議的解決方案',
+    finderContact: '討論這項需求',
+    unspecific: ['我還在評估技術方向', 'AI 架構評估', '交付架構瓶頸、風險與下一步驗證計畫。'],
+    cto: '兼任技術長與長期合作', terms: 'NDA、IP 與交付方式',
+    company: '研究、公司與合作夥伴',
+    companyLinks: ['研究成果', '公司與創辦人', '合作夥伴', '能力簡介 PDF'],
+    closing: '從工程問題開始',
+    closingText: '有目標裝置、現有系統或一個需要驗證的想法，就可以開始討論。',
+    email: '直接 Email', rfp: '準備完整專案需求',
   },
   en: {
     headline: 'Engineering Intelligence, from Silicon to Systems.',
     intro: 'Quantquer develops research-driven AI algorithms, embedded intelligence, reliable agent systems, and high-performance computing infrastructure for technically demanding applications.',
-    primary: 'Discuss your project', secondary: 'Explore engineering work', diagram: 'Engineering flow from silicon to systems',
-    credentialsTitle: 'From research methods to engineering delivery',
-    credentials: [
-      ['Company engineering delivery', 'Anonymized work documents industrial workcells, data and model integration, and the scope of handoff or validation.', '/work/', 'Explore engineering work'],
-      ['Founder’s engineering and research', 'Experience spans IC design, applied AI, biomedical informatics, scientific machine learning and quantum machine learning.', '/company/', 'See company and founder background'],
-      ['Public research and open source', 'Read publications, inspect open-source tools, and review reproducible experiments and their conditions.', '/research/', 'Explore public research'],
+    primary: 'Discuss your project', secondary: 'Explore engineering work',
+    trust: ['Engineering delivery', 'Publications', 'Open-source tools'],
+    solutions: 'Four engineering solutions',
+    firstOffer: 'Start with an AI architecture assessment (typically 1–2 weeks)',
+    evidence: 'Quantquer Labs and engineering evidence',
+    methods: 'Read the test methods, run a demo or download the data to reproduce a result.',
+    evidenceLinks: ['Benchmarks', 'Interactive demos', 'Data and methods', 'Open-source tools'],
+    engagements: 'Start an engagement',
+    engagementRows: [
+      ['AI architecture assessment', 'Typically 1–2 weeks', 'Receive a bottleneck analysis, a risk register and a validation roadmap.', 'technical-consulting#architecture-assessment'],
+      ['Edge AI feasibility study', 'Typically 3–6 weeks', 'Receive an operator compatibility review, resource analysis and a device test plan.', 'feasibility-study#edge-feasibility'],
+      ['Custom engineering and R&D', 'Scoped to the project', 'Agree on the prototype, acceptance criteria, documentation and handoff.', 'custom-rd'],
     ],
-    solutionTitle: 'Core solutions', solutionLink: 'Explore the solution', solutionAll: 'All solutions',
-    solutions: [
-      ['Silicon Intelligence', 'On-device and embedded AI', 'Hardware operators, memory and latency budgets constrain on-device models.', 'Check deployment compatibility and measure optimization trade-offs.', 'Deliver operator and deployment inventories, prototypes and test reports.', 'semiconductor-edge-ai', '/labs/evidence/vision/', 'Measured CPU image restoration'],
-      ['Agentic Intelligence', 'Enterprise agents and AI reliability', 'Conflicting documents and agent failures make decisions hard to trace.', 'Design source authority, tool permissions, failure recovery and evaluation.', 'Deliver auditable workflows, evaluation sets and regression rules.', 'ai-reliability', '/labs/demos/knowledge-arbitration/', 'Interactive knowledge arbitration'],
-      ['Compute Intelligence', 'GPU infrastructure', 'Shared GPU workloads block one another, with unpredictable resource demand and waiting times.', 'Test workload queues, VRAM budgets and observability against representative jobs.', 'Deliver a scheduling PoC, execution traces and capacity guidance.', 'gpu-infrastructure', '/labs/evidence/gpu/', 'Controlled single-GPU execution trace'],
-      ['Scientific Intelligence', 'Scientific computing and research engineering', 'Simulations, algorithms and analyses need repeatable validation.', 'Design repeatable experiments, data pipelines and error checks.', 'Deliver runnable code, experimental inputs and methods reports.', 'scientific-ai', '/labs/evidence/research/', 'Reproduced citation checks'],
-    ],
-    evidenceTitle: 'Engineering evidence', evidenceText: 'Check the methods, raw outputs and simulation settings. Each result specifies its conditions and limits.',
-    evidence: [
-      ['Measured and reproducible results', 'Compare CPU image restoration, controlled GPU scheduling and citation checks.', '/labs/benchmarks/', 'View benchmarks'],
-      ['Interactive technical demos', 'Explore photonic faults, GPU queues, knowledge arbitration, agent checks and workcell planning.', '/labs/demos/', 'Open demos'],
-      ['Open implementations and reports', 'Inspect source code, download results and read the underlying evidence.', '/labs/evidence/', 'Browse the evidence center'],
-    ],
-    engageTitle: 'Start an engagement', engageLink: 'View engagement scope',
-    engagements: [
-      ['Technical assessment', 'Share your problem and constraints. We agree on a goal, then deliver a risk assessment and validation plan based on accessible systems and data.', 'technical-consulting'],
-      ['Feasibility study and PoC', 'Provide representative inputs or a test environment. We confirm timing when hardware and data are ready and agree on acceptance thresholds.', 'feasibility-study'],
-      ['Custom engineering and R&D', 'Define interfaces, milestones and deliverables together. The scope determines acceptance checks, documentation and handoff.', 'custom-rd'],
-    ],
-    layersTitle: 'How Quantquer works',
-    layers: [
-      ['Quantquer Engineering', 'Engineering consulting, feasibility studies and custom delivery.', '/services/'],
-      ['Quantquer Labs', 'Public experiments, benchmarks and interactive engineering demos.', '/labs/'],
-      ['Quantquer Products', 'Independent R&D projects and their current public status.', '/labs/projects/'],
-    ],
+    finder: 'Find a solution for your project',
+    finderPrompt: 'What does your team need to solve?',
+    finderDefault: 'Choose a technical problem',
+    finderAction: 'View the suggested solution',
+    finderContact: 'Discuss this project',
+    unspecific: ['I’m still evaluating the technical direction', 'AI architecture assessment', 'Receive a review of architecture bottlenecks, risks and next validation steps.'],
+    cto: 'Fractional CTO and long-term partnership', terms: 'NDA, IP and delivery practices',
+    company: 'Research, company and partners',
+    companyLinks: ['Publications', 'Company and founder', 'Partners', 'Capabilities PDF'],
+    closing: 'Start with the engineering problem',
+    closingText: 'A target device, an existing system or an idea to validate is enough to start a discussion.',
+    email: 'Email us directly', rfp: 'Prepare a detailed project brief',
   },
 };
+const pillars = [
+  {
+    name: 'Silicon Intelligence', slug: 'semiconductor-edge-ai', service: 'edge-ai',
+    short: ['晶片端與嵌入式 AI', 'On-device and embedded AI'],
+    question: ['把模型部署到晶片或邊緣裝置', 'Deploy a model to a chip or edge device'],
+    output: ['算子相容性、資源評估與部署驗證計畫。', 'Operator compatibility, resource estimates and a deployment validation plan.'],
+  },
+  {
+    name: 'Agentic Intelligence', slug: 'ai-reliability', service: 'agent',
+    short: ['企業 Agent 可靠性', 'Enterprise agents and AI reliability'],
+    question: ['建立可靠、可稽核的企業 AI Agent', 'Build reliable, auditable enterprise AI agents'],
+    output: ['可稽核的工具流程、評估集與失敗回復規則。', 'An auditable tool workflow, an evaluation set and rules for recovering from failures.'],
+  },
+  {
+    name: 'Compute Intelligence', slug: 'gpu-infrastructure', service: 'gpu-infrastructure',
+    short: ['GPU 運算基礎設施', 'GPU infrastructure'],
+    question: ['管理 GPU 任務或降低推論成本', 'Manage GPU workloads or reduce inference costs'],
+    output: ['排程 PoC、執行紀錄與容量建議。', 'A scheduling proof of concept, execution traces and capacity recommendations.'],
+  },
+  {
+    name: 'Scientific Intelligence', slug: 'scientific-ai', service: 'research',
+    short: ['科學運算與研究工程', 'Scientific computing and research engineering'],
+    question: ['驗證科研、模擬或演算法問題', 'Validate a research, simulation or algorithm problem'],
+    output: ['可重跑實驗、驗證資料與方法紀錄。', 'Repeatable experiments, validation inputs and documented methods.'],
+  },
+];
 
 const waveformNavigation = `<header id="hdr">
   <div class="wrap nav">
@@ -153,39 +165,47 @@ function homeBlocks(locale) {
   </div>
   <div class="fig-cap"><span class="dot"></span> fig.01 — power spectral density · live signal trace</div>
 </section>`;
-  const brand = `<section class="studio-home-section axis-divider" id="brand" aria-labelledby="brand-slogan">
-  <div class="wrap">
-    <p class="eyebrow" lang="en">Quantquer</p>
-    <h2 id="brand-slogan" lang="en">${studioBrand.slogan}</h2>
-    <p class="topic-lead" lang="en">${studioBrand.technicalTagline}</p>
-    <p class="topic-lead">${studioBrand.positioning[Number(en)]}</p>
+  const t = pair => pair[Number(en)];
+  const links = (urls, labels) => urls.map((href, index) => `<a class="text-link" href="${href}">${labels[index]}</a>`).join('');
+  const section = (id, title, body) => `<section class="studio-home-section axis-divider" id="${id}"><div class="wrap"><h2>${title}</h2>${body}</div></section>`;
+  const brand = `<section class="home-brand axis-divider" id="brand" aria-labelledby="brand-slogan">
+  <div class="wrap home-brand-inner">
+    <div>
+      <p class="eyebrow" lang="en">Quantquer</p>
+      <h2 id="brand-slogan" lang="en">${studioBrand.slogan}</h2>
+      <p class="topic-lead" lang="en">${studioBrand.technicalTagline}</p>
+      <p class="topic-lead">${t(studioBrand.positioning)}</p>
+    </div>
+    <nav class="entry-links anchor-target" id="engineering-credentials" aria-label="${en ? 'Engineering credentials' : '工程實績與研究'}">${links([local('/work/industrial-robotics/'), local('/research/'), local('/labs/projects/')], copy.trust)}</nav>
   </div>
 </section>`;
-  const pipeline = `<ol class="studio-pipeline" aria-label="${copy.diagram}" lang="en">
-      ${[
-        ['Silicon', 'NPU · GPU', '<rect x="12" y="12" width="24" height="24" rx="3"/><path d="M18 18h12v12H18zM18 7v5m12-5v5M18 36v5m12-5v5M7 18h5m-5 12h5m24-12h5m-5 12h5"/>'],
-        ['Models', 'Quantization · Runtime', '<path d="M9 28l15-8 15 8-15 8-15-8zm0-8l15-8 15 8-15 8-15-8zm0 16l15 8 15-8"/>'],
-        ['Agents', 'Tools · Evaluation', '<path d="M24 13v8m0 0L12 31m12-10l12 10"/><circle cx="24" cy="11" r="5"/><circle cx="11" cy="34" r="5"/><circle cx="37" cy="34" r="5"/>'],
-        ['Systems', 'Deploy · Observe', '<rect x="6" y="11" width="36" height="26" rx="4"/><path d="M11 26h7l4-9 5 14 3-5h6"/>'],
-      ].map(([label, caption, svg]) => `<li><svg viewBox="0 0 48 48" aria-hidden="true">${svg}</svg><b>${label}</b><small>${caption}</small></li>`).join('')}
-    </ol>`;
-
-  const cluster = (id, title, cards, intro = '') => `<section class="studio-home-section axis-divider" id="${id}"><div class="wrap"><h2>${title}</h2>${intro ? `<p class="topic-lead">${intro}</p>` : ''}<div class="studio-home-cards">${cards}</div></div></section>`;
-  const smallCard = (title, text, href, action) => `<article class="topic-panel"><h3>${title}</h3><p>${text}</p><a class="text-link" href="${href}">${action}</a></article>`;
-  const cards = copy.solutions.map(([pillar, title, problem, approach, deliverable, slug, evidence, evidenceLabel]) => `<article class="topic-panel">
-      <p class="eyebrow" lang="en">${pillar}</p><h3>${title}</h3>
-      <p>${problem}</p><p>${approach} ${deliverable}</p>
-      <div class="entry-links"><a class="text-link" href="${local(`/solutions/${slug}/`)}" aria-label="${copy.solutionLink} — ${title}">${copy.solutionLink}</a><a class="text-link" href="${evidence.includes('/labs/evidence/') ? (en ? evidence + '?lang=en' : evidence) : local(evidence)}">${evidenceLabel}</a></div>
-    </article>`).join('');
-  const solutionSection = `<section class="studio-home-section axis-divider" id="core-solutions"><div class="wrap"><h2>${copy.solutionTitle}</h2>${pipeline}<div class="studio-home-cards studio-solution-grid">${cards}</div><div class="entry-links"><a class="text-link" href="${local('/solutions/')}">${copy.solutionAll}</a></div></div></section>`;
+  const solutionCards = pillars.map(pillar => `<li><a href="${local(`/solutions/${pillar.slug}/`)}"><span class="eyebrow" lang="en">${pillar.name}</span><span>${t(pillar.short)}</span></a></li>`).join('');
+  const core = section('core-solutions', copy.solutions, `<ul class="home-solution-grid">${solutionCards}</ul><p class="home-first-offer"><a class="text-link" href="${local('/services/technical-consulting/')}#architecture-assessment">${copy.firstOffer}</a></p>`);
+  const evidence = section('engineering-evidence', copy.evidence, `<p class="topic-lead">${copy.methods}</p><div class="entry-links">${links(['/labs/benchmarks/', '/labs/demos/', '/labs/evidence/', '/labs/projects/'].map(local), copy.evidenceLinks)}</div>`);
+  const choices = [...pillars.map(pillar => ({
+    service: pillar.service, label: t(pillar.question), title: pillar.name, output: t(pillar.output), url: local(`/solutions/${pillar.slug}/`),
+  })), { service: 'assessment', label: copy.unspecific[0], title: copy.unspecific[1], output: copy.unspecific[2], url: local('/services/technical-consulting/') }];
+  const finder = `<div class="topic-panel home-finder" data-solution-finder hidden>
+    <h3>${copy.finder}</h3>
+    <label for="home-solution-choice">${copy.finderPrompt}</label>
+    <select id="home-solution-choice"><option value="">${copy.finderDefault}</option>${choices.map(choice => `<option value="${choice.service}">${choice.label}</option>`).join('')}</select>
+    <div aria-live="polite">${choices.map(choice => `<div class="home-finder-result" data-solution-result="${choice.service}" hidden>
+      <strong>${choice.title}</strong><p>${choice.output}</p>
+      <div class="entry-links"><a class="text-link" href="${choice.url}">${copy.finderAction}</a><a class="text-link" href="${local('/contact/')}?service=${choice.service}#rfp" data-analytics="service_cta_clicked" data-service="${choice.service}">${copy.finderContact}</a></div>
+    </div>`).join('')}</div>
+  </div>`;
+  const packages = copy.engagementRows.map(([title, duration, description, destination]) => {
+    const [path, anchor] = destination.split('#');
+    const url = local(`/services/${path}/`) + (anchor ? `#${anchor}` : '');
+    return `<li><a class="text-link" href="${url}">${title}</a><span class="home-duration">${duration}</span><p>${description}</p></li>`;
+  }).join('');
+  const engagements = section('engagements', copy.engagements, `<div class="home-engagement-grid"><div><ul class="home-rows">${packages}</ul><div class="entry-links">${links([local('/services/fractional-cto/'), local('/company/') + '#engagement-terms'], [copy.cto, copy.terms])}</div></div>${finder}</div>`);
+  const company = section('studio-architecture', copy.company, `<div class="entry-links">${links([local('/research/'), local('/company/'), '/#partners', `/downloads/quantquer-capabilities-${locale}.pdf`], copy.companyLinks)}</div>`);
+  const contact = section('project-contact', copy.closing, `<p class="topic-lead">${copy.closingText}</p><div class="entry-links"><a class="btn btn-primary" data-analytics="contact_cta_clicked" href="mailto:chisheng.m.chen@gmail.com?subject=Quantquer%20project%20inquiry">${copy.email}</a><a class="btn btn-ghost" href="${local('/contact/')}#rfp">${copy.rfp}</a></div>`);
   return {
     navigation: en ? studioHeader(locale, '/') : waveformNavigation,
-    hero: [en ? englishHero : waveformHero, brand, cluster('engineering-credentials', copy.credentialsTitle, copy.credentials.map(([title, text, url, action]) => smallCard(title, text, local(url), action)).join('')), solutionSection].join('\n'),
-    conversion: [
-      cluster('engineering-evidence', copy.evidenceTitle, copy.evidence.map(([title, text, url, action]) => smallCard(title, text, local(url), action)).join(''), copy.evidenceText),
-      cluster('engagements', copy.engageTitle, copy.engagements.map(([title, text, service]) => smallCard(title, text, local(`/services/${service}/`), copy.engageLink)).join('')),
-      cluster('studio-architecture', copy.layersTitle, copy.layers.map(([title, text, url]) => smallCard(title, text, local(url), en ? 'Explore' : '查看')).join('')),
-    ].join('\n'),
+    hero: [en ? englishHero : waveformHero, brand, core].join('\n'),
+    conversion: [evidence, engagements, company, contact].join('\n'),
   };
 }
 

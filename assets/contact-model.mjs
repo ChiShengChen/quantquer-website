@@ -24,14 +24,17 @@ export const fields = [
   { name: 'deliverables', type: 'text', limit: 300, labels: ['預期交付物', 'Expected deliverables'] },
   { name: 'timeline', type: 'text', limit: 100, labels: ['目標時程', 'Target timeline'] },
   { name: 'budget', type: 'text', limit: 120, labels: ['預算範圍（選填）', 'Budget range (optional)'] },
+  { name: 'hardware', type: 'text', limit: 200, labels: ['目標硬體或部署環境', 'Target hardware or deployment environment'] },
+  { name: 'nda', type: 'text', limit: 120, labels: ['NDA 或資料存取要求', 'NDA or data access requirements'] },
   { name: 'notes', type: 'textarea', limit: 1800, labels: ['補充說明', 'Additional notes'] },
 ];
 
+export const quickFields = fields.filter(({ name }) => ['name', 'email', 'challenge'].includes(name));
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-export function validateContact(input = {}) {
+export function validateContact(input = {}, mode = 'full') {
   const values = {};
   const errors = {};
-  for (const { name, type, limit, required } of fields) {
+  for (const { name, type, limit, required } of mode === 'quick' ? quickFields : fields) {
     const raw = Object.hasOwn(input, name) ? input[name] : '';
     const value = typeof raw === 'string' ? raw.trim() : '';
     values[name] = value;

@@ -2,6 +2,7 @@ import { analyticsPath } from './studio-integrations.mjs';
 
 const events = {
   solution_viewed: ['solution'],
+  solution_finder_used: ['service'],
   contact_cta_clicked: [],
   case_study_viewed: ['project'],
   case_filter_used: [],
@@ -22,7 +23,7 @@ const events = {
 
 const services = new Set([
   'robotics', 'domain-rd', 'knowledge-base', 'edge-ai', 'agent',
-  'generative-vision', 'photonic-simulation', 'gpu-infrastructure', 'research',
+  'generative-vision', 'photonic-simulation', 'gpu-infrastructure', 'research', 'assessment',
 ]);
 const values = {
   service: value => services.has(value),

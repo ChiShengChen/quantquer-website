@@ -52,6 +52,20 @@ test('deduplicates concurrent retries, rejects changed payloads and enforces rat
   assert.equal(calls, 2);
 });
 
+test('accepts an explicit quick inquiry without weakening full brief validation', async () => {
+  let delivery;
+  const handler = createInquiryHandler({ origin, deliver: input => { delivery = input; return 'quick-receipt'; } });
+  const { name, email, challenge } = values;
+  const minimal = { ...payload, values: { name, email, challenge } };
+  assert.equal((await handler(request(minimal), 'client')).status, 422);
+  assert.equal((await handler(request({ ...minimal, mode: 'unexpected' }), 'client')).status, 400);
+  const response = await handler(request({ ...minimal, mode: 'quick' }), 'client');
+  assert.deepEqual(await response.json(), { ok: true, receipt: 'quick-receipt' });
+  assert.equal(delivery.replyTo, email);
+  assert.match(delivery.brief, /Technical challenge: Characterize runtime support/);
+  assert.equal((await handler(request({ ...minimal, mode: 'quick', values: { ...minimal.values, email: 'bad' } }), 'client')).status, 422);
+});
+
 test('a failed delivery can be retried and never returns a fake receipt', async () => {
   let calls = 0;
   const handler = createInquiryHandler({ origin, deliver: () => ++calls === 1 ? null : 'test-retry' });
@@ -70,4 +84,5 @@ test('analytics event IDs are allowlisted and the contact event excludes form co
   assert.deepEqual(makeEvent('solution_viewed', { solution: 'ai-reliability', name: 'Private' }, 'en'), { event: 'solution_viewed', locale: 'en', solution: 'ai-reliability' });
   assert.deepEqual(makeEvent('demo_interacted', { demo: 'robot-workcell' }, 'en'), { event: 'demo_interacted', locale: 'en', demo: 'robot-workcell' });
   assert.deepEqual(makeEvent('inquiry_submitted', { email: values.email, brief: values.challenge }), { event: 'inquiry_submitted', locale: 'zh-Hant' });
+  assert.deepEqual(makeEvent('solution_finder_used', { service: 'assessment', email: values.email }), { event: 'solution_finder_used', locale: 'zh-Hant', service: 'assessment' });
 });

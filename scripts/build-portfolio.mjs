@@ -3,6 +3,7 @@ import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { caseDiagramIcons } from './case-diagram-icons.mjs';
 import { caseEvidence, evidenceTypes } from '../data/studio-case-evidence.mjs';
+import { featuredEvidence } from '../data/studio-featured.mjs';
 import { renderStudioPage, studioPath } from './vnext-layout.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
@@ -202,43 +203,40 @@ const demoPath = (path, language) => {
   url.searchParams.set('lang', 'en');
   return url.pathname + url.search + url.hash;
 };
-const assetSizes = {
-  wide: '(max-width: 400px) calc(100vw - 40px), (max-width: 760px) 90vw, (max-width: 1180px) 45vw, 530px',
-  featured: '(max-width: 400px) calc(100vw - 40px), (max-width: 760px) 90vw, (max-width: 1180px) 30vw, 355px',
-};
+const caseImageSizes = '(max-width: 400px) calc(100vw - 40px), (max-width: 760px) 90vw, (max-width: 1180px) 45vw, 530px';
 
-function projectImage(project, naturalSize, { online = false, priority = false, language = 'zh' } = {}) {
+function projectImage(project, { online = false, priority = false, language = 'zh' } = {}) {
   const path = `${online ? '/' : ''}assets/${project.media}`;
   const loading = priority ? ' fetchpriority="high"' : ' loading="lazy"';
-  return `<figure class="cfig${online ? ' topic-figure' : ''}"><img src="${path}.webp" srcset="${path}-768.webp 768w, ${path}.webp 1536w, ${path}-3072.webp 3072w" sizes="${assetSizes[naturalSize]}" alt="${escapeHtml(project[language].mediaAlt)}" width="1536" height="1024"${loading}></figure>`;
+  return `<figure class="cfig${online ? ' topic-figure' : ''}"><img src="${path}.webp" srcset="${path}-768.webp 768w, ${path}.webp 1536w, ${path}-3072.webp 3072w" sizes="${caseImageSizes}" alt="${escapeHtml(project[language].mediaAlt)}" width="1536" height="1024"${loading}></figure>`;
 }
 
 function evidenceStatus(project, language) {
   return caseEvidence[project.slug].types.map(type => label(evidenceTypes, type, language)).join(' · ');
 }
 
-function featuredCard(project, isLead, language = 'zh') {
+function featuredCard(project, language = 'zh') {
   const en = language === 'en';
-  const copy = project[language];
-  return `      <a class="feat${isLead ? ' flag' : ''}" href="${detailPath(project, language)}">
-        ${projectImage(project, isLead ? 'wide' : 'featured', { online: true, language })}
-        <div class="fbd">
-          <div class="ctag">${projectType(project, language)} · ${escapeHtml(label(domains, project.domain[0], language))}</div>
-          <h3>${escapeHtml(copy.title)}</h3>
-          <p class="fdeliv">${escapeHtml(copy.problem)}</p>
-          <p class="fdeliv">${escapeHtml(copy.approach[0])}</p>
-          <p class="fdeliv">${escapeHtml(copy.deliverables[0])}</p>
-          <div class="cres"><p class="rdesc">${escapeHtml(evidenceStatus(project, language))}</p></div>
-          <span class="text-link">${en ? 'View case study' : '查看案例'}</span>
-        </div>
-      </a>`;
+  const proof = featuredEvidence[project.slug];
+  assert(proof, `Missing featured evidence for ${project.slug}`);
+  const t = key => escapeHtml(label(proof, key, language));
+  const example = project.evidence?.find(item => item.type === 'model-output' && item.image);
+  return `      <article class="home-case topic-panel">
+        <p class="eyebrow">${escapeHtml(label(domains, project.domain[0], language))}</p>
+        <h3><a href="${detailPath(project, language)}">${t('title')}</a></h3>
+        <p>${t('problem')}</p>
+        <p class="home-case-output">${t('output')}</p>
+        ${example ? `<figure class="home-case-image"><img src="${escapeHtml(example.image.path)}" width="${example.image.width}" height="${example.image.height}" alt="${escapeHtml(example[language].alt)}" loading="lazy" decoding="async"><figcaption>${en ? 'Recorded MI-GAN CPU output' : 'MI-GAN CPU 修補實際輸出'}</figcaption></figure>` : ''}
+        <p class="home-case-proof">${t('evidence')}</p>
+        <a class="text-link" href="${t('source')}">${t('sourceLabel')}</a>
+      </article>`.replace(/[ \t]+$/gm, '');
 }
 
 function caseCard(project) {
   const anchor = project.anchor ?? project.slug;
   const techNames = project.tech.map(tech => label(technologies, tech, 'zh')).join(' · ');
   return `      <article class="case reveal" id="${anchor}" data-tags="${project.domain.join(' ')}" data-tech="${project.tech.join(' ')}" data-origin="${project.origin}" data-stage="${project.stage}" data-visibility="${project.visibility}" data-case-kind="${project.kind ?? 'case'}" data-featured="${featured.has(project.slug)}">
-        ${projectImage(project, 'wide')}
+        ${projectImage(project)}
         <div class="cbody">
           <div class="ctag">${projectType(project, 'zh')} · ${escapeHtml(label(domains, project.domain[0], 'zh'))}</div>
           <h3>${escapeHtml(project.zh.title)}</h3>
@@ -347,6 +345,8 @@ function detailSections(project, language) {
   const copy = project[language];
   const { refs, related } = publicLinks(project, language);
   const { solution, demo } = caseEvidence[project.slug];
+  const proof = featuredEvidence[project.slug];
+  const evidenceAnchor = proof ? ` id="case-evidence${language === 'en' ? '-en' : ''}"` : '';
   if (demo) refs.unshift({ href: studioPath(`/labs/demos/${demo}/`, language), name: t.demo });
   related.unshift({ href: studioPath(`/solutions/${solution}/`, language), name: t.solution });
   const deliverables = copy.deliverables.map(item => `<li>${escapeHtml(item)}</li>`).join('');
@@ -381,10 +381,10 @@ function detailSections(project, language) {
         </div>
       </div>
     </section>
-    <section class="topic-section axis-divider">
+    <section class="topic-section axis-divider"${evidenceAnchor}>
       <div class="wrap">
         <h2>${t.validation}</h2>
-        <p class="topic-lead">${escapeHtml(copy.validation)}</p>
+        <p class="topic-lead">${escapeHtml(copy.validation)}</p>${proof ? `\n        <p class="topic-lead">${escapeHtml(label(proof, 'evidence', language))}</p>` : ''}
         <p class="entry-meta">${t.evidenceType} · ${escapeHtml(evidenceStatus(project, language))}</p>
         ${evidenceGallery(project, language)}
         ${metrics ? `<dl class="topic-benchmark">${metrics}</dl>` : ''}
@@ -446,7 +446,7 @@ function detailPage(project, language) {
             <a class="text-link" href="#${diagramAnchor(language)}">${sectionLabels[language].diagram}</a>
           </div>
         </div>
-        ${projectImage(project, 'wide', { online: true, priority: true, language })}
+        ${projectImage(project, { online: true, priority: true, language })}
       </div>
     </section>${detailSections(project, language)}${translated}`;
   return renderStudioPage({
@@ -553,13 +553,13 @@ for (const language of languages) {
 const indexFile = resolve(root, 'index.html');
 const home = await readFile(indexFile, 'utf8');
 const sections = generatedBlock(
-  generatedBlock(home, 'featured', portfolio.featured.map((slug, index) => featuredCard(slugs.get(slug), index === 0)).join('\n')),
+  generatedBlock(home, 'featured', portfolio.featured.map(slug => featuredCard(slugs.get(slug))).join('\n')),
   'cases',
   portfolio.projects.map(caseCard).join('\n\n'),
 );
 await writeOutput(indexFile, sections, home);
 const englishFile = resolve(root, 'en/index.html');
 const englishHome = await readFile(englishFile, 'utf8');
-const englishSection = generatedBlock(englishHome, 'featured', portfolio.featured.map((slug, index) => featuredCard(slugs.get(slug), index === 0, 'en')).join('\n'));
+const englishSection = generatedBlock(englishHome, 'featured', portfolio.featured.map(slug => featuredCard(slugs.get(slug), 'en')).join('\n'));
 await writeOutput(englishFile, englishSection, englishHome);
 console.log(`${checking ? 'Verified' : 'Generated'} ${portfolio.projects.length} case studies in two languages, case indexes and homepage cards.`);

@@ -147,10 +147,11 @@
         </div>
       </div>
     </section>
-    <section class="topic-section axis-divider">
+    <section class="topic-section axis-divider" id="case-evidence">
       <div class="wrap">
         <h2>驗證與證據</h2>
         <p class="topic-lead">兩組測試各暖機 5 次、量測 30 次。ONNX Runtime CPU 使用 4 執行緒、批次 1；計時納入前後處理。以已知乾淨背景計算遮罩內 PSNR。</p>
+        <p class="topic-lead">兩組場景的桌面 CPU 實測。晶片端部署屬驗證規劃。</p>
         <p class="entry-meta">公開證據分類 · 實測基準 · 可重現實驗</p>
         <div class="public-evidence-gallery"><article class="public-evidence-card topic-panel">
       <img src="/assets/evidence/vision/hallway-migan.webp" width="768" height="512" loading="lazy" decoding="async" alt="MI-GAN 在室內測試影像上重建走廊背景的實際輸出">
@@ -244,10 +245,11 @@
         </div>
       </div>
     </section>
-    <section class="topic-section axis-divider">
+    <section class="topic-section axis-divider" id="case-evidence-en">
       <div class="wrap">
         <h2>Validation and evidence</h2>
         <p class="topic-lead">Each measured condition uses five warm-ups and 30 runs. ONNX Runtime CPU uses four threads and batch size one. Timings include preprocessing and postprocessing. Masked PSNR uses the clean background.</p>
+        <p class="topic-lead">Desktop CPU measurements on two scenes. Device deployment is a validation plan.</p>
         <p class="entry-meta">Public evidence classification · Measured benchmark · Reproducible experiment</p>
         <div class="public-evidence-gallery"><article class="public-evidence-card topic-panel">
       <img src="/assets/evidence/vision/hallway-migan.webp" width="768" height="512" loading="lazy" decoding="async" alt="Actual MI-GAN output reconstructing the hallway in a controlled test image">

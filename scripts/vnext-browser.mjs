@@ -97,6 +97,16 @@ try {
       : '研究驅動的深科技工程工作室');
     assert.match(await page.locator('meta[property="og:title"]').getAttribute('content'), /Quantify to Conquer\.$/);
     assert.ok(await brand.evaluate(section => section.offsetTop >= document.querySelector('#top').offsetHeight));
+    assert.equal(await page.locator('#core-solutions li a').count(), 4);
+    assert.equal(await page.locator('#featured .home-case').count(), 6);
+    assert.equal(await page.locator('[data-home-archive][open]').count(), 0);
+    const finder = page.locator('[data-solution-finder]');
+    for (const service of ['edge-ai', 'agent', 'gpu-infrastructure', 'research', 'assessment']) {
+      await finder.locator('select').selectOption(service);
+      const visible = finder.locator('[data-solution-result]:visible');
+      assert.equal(await visible.getAttribute('data-solution-result'), service);
+      assert.match(await visible.getByRole('link').last().getAttribute('href'), new RegExp(`service=${service}#rfp$`));
+    }
   }
 
   // Desktop and keyboard-driven mobile navigation plus equivalent locales.
@@ -226,6 +236,10 @@ try {
   await open('/en/contact/?service=gpu-infrastructure');
   assert.equal(await page.locator('#inquiry-projectType').inputValue(), 'gpu-infrastructure');
   assert.equal(await page.locator('#contact-submit').isVisible(), false);
+  assert.equal(await page.locator('#contact-quick').isVisible(), false);
+  assert.match(await page.locator('#contact-direct-email').getAttribute('href'), /^mailto:/);
+  assert.ok(await page.locator('#inquiry-hardware').isVisible());
+  assert.ok(await page.locator('#inquiry-nda').isVisible());
   await page.locator('#contact-copy').click();
   assert.equal(await page.locator('#inquiry-name').getAttribute('aria-invalid'), 'true');
   assert.match(await page.locator('#contact-summary').textContent(), /highlighted/);
@@ -243,7 +257,7 @@ try {
   // Simulate enabling a same-origin adapter in this context only.
   await page.route('**/assets/studio-integrations.mjs', route => route.fulfill({
     contentType: 'text/javascript',
-    body: 'export const inquiryPath = "/api/inquiry"; export const analyticsPath = ""; export const bookingUrl = "";',
+    body: 'export const inquiryPath = "/api/inquiry"; export const analyticsPath = ""; export const bookingUrl = "https://example.invalid/appointment";',
   }));
   let attempts = 0;
   let previousId;
@@ -251,6 +265,11 @@ try {
     const payload = route.request().postDataJSON();
     assert.equal(payload.values.email, 'tester@example.com');
     assert.equal(payload.website, '');
+    if (payload.mode === 'quick') {
+      assert.deepEqual(Object.keys(payload.values), ['name', 'email', 'challenge']);
+      return route.fulfill({ status: 200, json: { ok: true, receipt: 'quick-test-receipt' } });
+    }
+    assert.equal(payload.mode, 'full');
     if (previousId) assert.equal(payload.requestId, previousId);
     previousId = payload.requestId;
     attempts++;
@@ -266,6 +285,14 @@ try {
   await page.waitForFunction(() => /playwright-receipt/.test(document.querySelector('#contact-status').textContent));
   assert.equal(attempts, 2);
   assert.equal(await page.locator('#inquiry-email').inputValue(), '');
+  assert.ok(await page.locator('a[href="https://example.invalid/appointment"]').isVisible());
+  await page.locator('#quick-submit').click();
+  assert.equal(await page.locator('#quick-name').getAttribute('aria-invalid'), 'true');
+  for (const [name, value] of Object.entries({
+    name: 'Synthetic Tester', email: 'tester@example.com', challenge: 'A short technical question.',
+  })) await page.locator(`#quick-${name}`).fill(value);
+  await page.locator('#quick-submit').click();
+  await page.waitForFunction(() => /quick-test-receipt/.test(document.getElementById('quick-status').textContent));
 
   const preserved = [
     '/#capabilities', '/#contact', '/#partners', '/#showreel', '/semiconductor-ai/#english',
@@ -276,6 +303,24 @@ try {
     await open(path);
     const anchor = new URL(path, base).hash.slice(1);
     if (anchor) assert.equal(await page.locator(`[id="${anchor}"]`).count(), 1, path);
+    if (path.startsWith('/#')) assert.ok(await page.locator(`#${anchor}`).isVisible(), path);
+  }
+  await open('/#research-quantum');
+  assert.ok(await page.locator('#research-quantum').isVisible());
+  await open('/#edge-ai-deployment');
+  assert.ok(await page.locator('#edge-ai-deployment').isVisible());
+  const staticContext = await browser.newContext({ javaScriptEnabled: false });
+  try {
+    const staticHome = await staticContext.newPage();
+    await staticHome.goto(base + '/');
+    assert.equal(await staticHome.locator('#featured .home-case:visible').count(), 6);
+    assert.equal(await staticHome.locator('[data-solution-finder]').isVisible(), false);
+    await staticHome.locator('details[data-home-archive]').filter({ has: staticHome.locator('#work') }).locator('summary').click();
+    assert.equal(await staticHome.locator('#case-list article:visible').count(), 16);
+    await staticHome.goto(base + '/contact/');
+    assert.ok(await staticHome.locator('#contact-direct-email').isVisible());
+  } finally {
+    await staticContext.close();
   }
   const missing = await page.goto(base + '/this-route-should-not-exist/');
   assert.equal(missing.status(), 404);

@@ -120,4 +120,6 @@ GitHub Pages（來源：`main` 分支根目錄）。推送到 `main` 即自動�
 
 ## vNext 驗收與維護
 
+精簡後的雙語首頁依序呈現波形、核心方案、代表工程案例、Labs、合作入口與聯絡。原有首頁詳情可在技術與公司索引展開，既有錨點仍可直達。詳見 [首頁導流與驗證](docs/HOMEPAGE_FOCUS.md)。
+
 使用 [部署手冊](docs/DEPLOYMENT.md) 重建、預覽和執行 Playwright。既有波形、配色、導覽和響應規則見 [保護元件](docs/PROTECTED_DESIGN_COMPONENTS.md)。公開工程主張的核對方式見 [證據政策](docs/EVIDENCE_POLICY.md) 及 [Benchmark 指南](docs/BENCHMARK_GUIDE.md)。
