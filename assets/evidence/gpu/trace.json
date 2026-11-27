@@ -1,0 +1,92 @@
+{
+  "kind": "recorded-replay",
+  "date": "2026-11-27",
+  "deviceMemoryMiB": 24576,
+  "gpuSlots": 1,
+  "executionSlots": 2,
+  "allocationMiB": 32,
+  "jobs": [
+    {
+      "id": "GPU A",
+      "group": "GPU",
+      "submitted": 0.0,
+      "started": 0.713,
+      "finished": 9.102,
+      "requestedMiB": 512,
+      "peakMiB": 286,
+      "exitCode": 0
+    },
+    {
+      "id": "GPU B",
+      "group": "GPU",
+      "submitted": 0.064,
+      "started": 9.163,
+      "finished": 14.524,
+      "requestedMiB": 512,
+      "peakMiB": 286,
+      "exitCode": 0
+    },
+    {
+      "id": "CPU C",
+      "group": "CPU",
+      "submitted": 0.128,
+      "started": 0.76,
+      "finished": 6.077,
+      "requestedMiB": 0,
+      "peakMiB": 0,
+      "exitCode": 0
+    }
+  ],
+  "samples": [
+    {
+      "time": 0.015,
+      "usedMiB": 0,
+      "reservedMiB": 0
+    },
+    {
+      "time": 1.581,
+      "usedMiB": 286,
+      "reservedMiB": 512
+    },
+    {
+      "time": 3.123,
+      "usedMiB": 286,
+      "reservedMiB": 512
+    },
+    {
+      "time": 4.672,
+      "usedMiB": 286,
+      "reservedMiB": 512
+    },
+    {
+      "time": 6.165,
+      "usedMiB": 286,
+      "reservedMiB": 512
+    },
+    {
+      "time": 7.698,
+      "usedMiB": 286,
+      "reservedMiB": 512
+    },
+    {
+      "time": 9.269,
+      "usedMiB": 286,
+      "reservedMiB": 512
+    },
+    {
+      "time": 10.774,
+      "usedMiB": 286,
+      "reservedMiB": 512
+    },
+    {
+      "time": 12.305,
+      "usedMiB": 286,
+      "reservedMiB": 512
+    },
+    {
+      "time": 13.872,
+      "usedMiB": 0,
+      "reservedMiB": 512
+    }
+  ]
+}

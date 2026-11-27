@@ -1,0 +1,76 @@
+.research-select {
+  display: grid;
+  font-weight: 500;
+  gap: .45rem;
+  margin-block: 1rem;
+  max-width: 28rem;
+}
+
+.research-select select {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: .3rem;
+  color: var(--fg);
+  font: inherit;
+  min-height: 44px;
+  padding: .6rem .75rem;
+}
+
+.research-compare {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  margin-block: 1rem;
+}
+
+.research-panel {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: .5rem;
+  padding: clamp(1rem, 3vw, 1.75rem);
+}
+
+.research-source, .research-quote {
+  color: var(--fg-dim);
+  margin-block: 1rem;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+.research-quote {
+  border-inline-start: 2px solid var(--accent);
+  color: var(--fg);
+  padding-inline-start: .7rem;
+}
+
+.research-fields {
+  display: grid;
+  gap: .6rem;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.research-fields dt {
+  color: var(--fg-dim);
+  font-size: .875rem;
+}
+
+.research-fields dd { margin: 0; }
+
+#research-result {
+  color: var(--fg);
+  font-weight: 500;
+  margin-top: 1rem;
+}
+
+.research-command {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: .5rem;
+  padding: 1rem;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+@media (max-width: 760px) {
+  .research-compare { grid-template-columns: minmax(0, 1fr); }
+}

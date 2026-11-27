@@ -1,0 +1,115 @@
+.mesh-page {
+  --mesh-fault: #FFC27A;
+}
+
+html[data-theme="light"] .mesh-page {
+  --mesh-fault: #A33803;
+}
+
+.mesh-controls {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.mesh-controls fieldset {
+  display: grid;
+  min-width: 0;
+  align-content: start;
+  gap: .65rem;
+  border: 1px solid var(--line);
+  padding: .7rem 1rem 1rem;
+}
+
+.mesh-controls legend {
+  padding: 0 .35rem;
+  color: var(--fg);
+  font-weight: 500;
+}
+
+.mesh-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: .5rem 1rem;
+}
+
+.mesh-actions .btn {
+  color: var(--fg);
+  background: var(--bg);
+  min-height: 44px;
+  padding-block: .45rem;
+  font-weight: 500;
+}
+
+.mesh-actions .btn:hover {
+  border-color: var(--accent-dim);
+  color: var(--accent);
+}
+
+.mesh-figure {
+  min-width: 0;
+}
+
+#mesh-canvas {
+  display: block;
+  width: 100%;
+  height: clamp(178px, 30vw, 258px);
+  background: var(--bg);
+  border: 1px solid var(--line);
+}
+
+.mesh-figure figcaption {
+  margin-top: .4rem;
+  color: var(--fg-dim);
+  font-size: .88rem;
+  font-weight: 400;
+}
+
+.mesh-output .showcase-track {
+  margin-bottom: .35rem;
+}
+
+.mesh-output .mesh-ideal span {
+  background: var(--fg-dim);
+}
+
+.mesh-trace {
+  max-width: none;
+  margin: 0;
+}
+
+.mesh-trace .showcase-table {
+  margin-top: .5rem;
+}
+
+.mesh-trace .showcase-table td {
+  font-family: var(--mono);
+  font-size: .77rem;
+  line-height: 1.5;
+}
+
+.mesh-trace .showcase-table td span {
+  display: block;
+}
+
+.mesh-trace-current {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.mesh-page .topic-panel p {
+  color: var(--fg-dim);
+  font-weight: 400;
+}
+
+.mesh-page .topic-panel p + p {
+  margin-top: .75rem;
+}
+
+@media (max-width: 610px) {
+  .mesh-controls { grid-template-columns: 1fr; }
+  .mesh-controls fieldset { padding-inline: .7rem; }
+}

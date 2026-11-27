@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="/assets/theme.js"></script>
+  <title>引文與數字查核實跑｜量維資科 Quantquer</title>
+  <meta name="description" content="以四組合成引文重現公開 Paper Evidence 的查核。比較逐字引用、格式正規化、數字脫離上下文與找不到的引文。">
+  <link rel="canonical" href="https://quantquer.com/labs/evidence/research/">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="引文與數字查核實跑｜量維資科 Quantquer">
+  <meta property="og:description" content="查看 Paper Evidence 在四組可重現的合成引文上的實際查核輸出。">
+  <meta property="og:url" content="https://quantquer.com/labs/evidence/research/">
+  <meta property="og:image" content="https://quantquer.com/assets/og-image-2-1.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="引文與數字查核實跑｜量維資科 Quantquer">
+  <meta name="twitter:description" content="查看 Paper Evidence 在四組可重現的合成引文上的實際查核輸出。">
+  <meta name="twitter:image" content="https://quantquer.com/assets/og-image-2-1.png">
+  <link rel="stylesheet" href="/assets/site.css">
+  <link rel="stylesheet" href="/assets/evidence/research/replay.css">
+  <script type="module" src="/assets/evidence/research/replay.mjs"></script>
+</head>
+<body class="topic-page">
+  <a href="#content" class="skip-link" data-en="Skip to content">跳到主要內容</a>
+  <header>
+    <div class="wrap nav">
+      <a href="/" class="brand"><img src="/assets/logo-mark.png" class="logo-mark" alt="Quantquer" width="34" height="34"><span class="brand-txt" aria-hidden="true"><span class="mark">量維資科</span><span class="lat">Quantquer</span></span></a>
+      <nav class="navlinks" aria-label="Quantquer">
+        <a href="/labs/interactive/" data-en="Demo Lab">互動展示</a>
+        <button id="research-language" type="button" class="btn btn-ghost" lang="en" hidden>English</button>
+        <button id="themeToggle" class="theme-toggle" type="button" aria-label="切換深色模式">☾︎</button>
+      </nav>
+    </div>
+  </header>
+  <main id="content" tabindex="-1">
+    <section class="topic-hero" aria-labelledby="research-hero">
+      <div class="wrap">
+        <p class="eyebrow" data-en="Recorded execution · Synthetic text">實跑紀錄 · 合成文字</p>
+        <h1 id="research-hero" data-en="Quote and number verification">引文與數字查核</h1>
+        <p class="topic-intro" data-en="Four synthetic examples exercise the public Paper Evidence quote gate. Compare how it handles an exact match, formatting differences, a statistic from the wrong section and an invented quotation.">用四個合成範例實跑公開的 Paper Evidence 引文查核。比較逐字吻合、排版差異、挪用其他段落的數字，以及原文找不到的引文。</p>
+      </div>
+    </section>
+    <section class="topic-section axis-divider" aria-labelledby="research-record-title">
+      <div class="wrap">
+        <h2 id="research-record-title" data-en="Inspect a recorded result">查看一次查核結果</h2>
+        <p id="research-load" role="status" data-en="Loading the recorded results…">正在載入實跑紀錄…</p>
+        <div id="research-player" hidden>
+          <label class="research-select"><span data-en="Example">範例</span>
+            <select id="research-case">
+              <option value="exact" data-en="Exact citation">逐字引文</option>
+              <option value="normalized" data-en="Formatting differences">排版不同</option>
+              <option value="out-of-context" data-en="Number from a different section">引用其他段落的數字</option>
+              <option value="unlocated" data-en="Invented quotation">找不到的引文</option>
+            </select>
+          </label>
+          <div class="research-compare">
+            <section class="research-panel" aria-labelledby="research-source-title">
+              <h3 id="research-source-title" data-en="Synthetic source passage">合成來源段落</h3>
+              <p id="research-source" class="research-source" lang="en"></p>
+            </section>
+            <section class="research-panel" aria-labelledby="research-quote-title">
+              <h3 id="research-quote-title" data-en="Submitted quotation">送查引文</h3>
+              <p id="research-quote" class="research-quote" lang="en"></p>
+              <dl class="research-fields">
+                <div><dt data-en="Number to check">指定查核數字</dt><dd id="research-numbers"></dd></div>
+                <div><dt data-en="Recorded status">紀錄狀態</dt><dd><code id="research-status"></code></dd></div>
+              </dl>
+              <p id="research-result" role="status" aria-live="polite"></p>
+            </section>
+          </div>
+        </div>
+        <noscript><p>請下載查核紀錄以檢視結果。<span lang="en"> Download the recorded results to inspect them without JavaScript.</span></p></noscript>
+        <div class="entry-links">
+          <a class="text-link" href="/assets/evidence/research/quote-gate.json" download data-en="Download recorded output (JSON)">下載實跑紀錄（JSON）</a>
+          <a class="text-link" href="https://github.com/ChiShengChen/paper-evidence/blob/ac6e83c63252049bbccbf19bbf7f3dbc334ac0b7/src/paper_evidence/quote_gate.py" target="_blank" rel="noopener" data-en="View the pinned public quote gate">查看指定版本的公開查核程式</a>
+        </div>
+      </div>
+    </section>
+    <section class="topic-section axis-divider" aria-labelledby="research-run">
+      <div class="wrap">
+        <h2 id="research-run" data-en="Reproduce the result">重現方法</h2>
+        <p class="topic-lead" data-en="The Python script reruns the four fixtures with fuzzy matching disabled and checks numbers within a 200-character window around the quotation. The source text and numbers are synthetic. This exercise checks location and numeric context. It does not run an LLM faithfulness judge or measure answer quality.">Python 腳本停用模糊比對，重跑四組範例並核對引文前後各 200 字元內的數字。段落與數字均為合成資料。這組測試只驗證引文位置與數字上下文，未呼叫 LLM 語意判斷，也未量測問答品質。</p>
+        <pre class="research-command"><code>git clone https://github.com/ChiShengChen/paper-evidence.git
+git -C paper-evidence checkout ac6e83c63252049bbccbf19bbf7f3dbc334ac0b7
+python scripts/reproduce-research-evidence.py paper-evidence --check</code></pre>
+        <div class="entry-links">
+          <a class="btn btn-primary" href="/?inquiry=research#contact" data-en="Discuss a research workflow">討論科研工作流程</a>
+          <a class="text-link" href="/work/research-automation/" data-en="Research verification case">科研查核案例</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer><div class="wrap foot"><p>Quantquer · From Silicon to Intelligence</p></div></footer>
+</body>
+</html>

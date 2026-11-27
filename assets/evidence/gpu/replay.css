@@ -1,0 +1,77 @@
+.gpu-record-section { padding-top: 2rem; }
+.gpu-record-player[hidden] { display: none; }
+.gpu-record-player {
+  display: grid;
+  gap: 1rem;
+  margin-block: 1rem;
+  padding: clamp(.85rem, 3vw, 1.75rem);
+  border: 1px solid var(--line);
+  background: var(--panel);
+}
+.gpu-record-controls { display: flex; align-items: center; flex-wrap: wrap; gap: .5rem .8rem; }
+.gpu-record-controls .btn { min-height: 44px; }
+.gpu-record-controls label {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: .35rem;
+  font-size: .86rem;
+}
+.gpu-record-controls select, #gpu-record-language {
+  min-height: 44px;
+  padding: .35rem .48rem;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--fg);
+  font: inherit;
+  font-size: .85rem;
+}
+.gpu-record-seek {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: .2rem .7rem;
+  color: var(--fg-dim);
+  font-size: .86rem;
+}
+.gpu-record-seek input {
+  grid-column: 1 / -1;
+  width: 100%;
+  min-height: 44px;
+  accent-color: var(--accent);
+}
+.gpu-record-player output { color: var(--accent); font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.gpu-record-jobs { display: grid; gap: .45rem; }
+.gpu-record-jobs details {
+  padding: .55rem .75rem;
+  border: 1px solid var(--line);
+  background: var(--bg);
+}
+.gpu-record-jobs details[data-state="running"] { border-left: 2px solid var(--accent); }
+.gpu-record-jobs summary { cursor: pointer; font-weight: 500; }
+.gpu-record-jobs summary span { margin-inline-start: .6rem; color: var(--fg-dim); font-size: .82rem; }
+.gpu-record-jobs p { margin-top: .4rem; color: var(--fg-dim); font-size: .82rem; }
+.gpu-record-rail { position: relative; height: .45rem; margin-block: .25rem; background: var(--line); }
+.gpu-record-interval, .gpu-record-rail::after { position: absolute; inset-block: 0; }
+.gpu-record-interval { border: 1px solid var(--accent); }
+.gpu-record-rail::after {
+  content: '';
+  inset-block: -.13rem;
+  inset-inline-start: clamp(0px, var(--record-cursor), calc(100% - 2px));
+  width: 2px;
+  background: var(--fg);
+}
+.gpu-record-memory h3 { margin: 0; font-size: .94rem; }
+.gpu-record-memory svg {
+  display: block;
+  width: 100%;
+  height: 115px;
+  margin-block: .3rem;
+  border: 1px solid var(--line);
+  background: var(--bg);
+}
+.gpu-record-memory path { fill: none; stroke-width: 2; vector-effect: non-scaling-stroke; }
+.gpu-record-observed { stroke: var(--accent); }
+.gpu-record-reserved { stroke: var(--fg-faint); stroke-dasharray: 4 4; }
+.gpu-record-cursor { stroke: var(--fg); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.gpu-record-note, .gpu-record-event { color: var(--fg-dim); font-size: .83rem; }
+.gpu-record-event { min-height: 1.6em; }

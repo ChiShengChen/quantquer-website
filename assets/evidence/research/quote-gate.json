@@ -1,0 +1,44 @@
+{
+  "repository": "https://github.com/ChiShengChen/paper-evidence",
+  "commit": "ac6e83c63252049bbccbf19bbf7f3dbc334ac0b7",
+  "fixtureType": "synthetic",
+  "source": "The synthetic baseline recorded 3.2 ms median latency. The first section then describes its test fixture, its input format, its sampling protocol, the summary used for reporting, and the verification notes. The next section presents a separate experiment with a different input and testing procedure. A separate synthetic experiment recorded 8.4 ms for a different workload. That number belongs to the second experiment.",
+  "numberWindow": 200,
+  "fuzzyAllowed": false,
+  "cases": [
+    {
+      "id": "exact",
+      "quote": "The synthetic baseline recorded 3.2 ms median latency.",
+      "numbers": [
+        "3.2 ms"
+      ],
+      "status": "EXACT",
+      "passed": true
+    },
+    {
+      "id": "normalized",
+      "quote": "The synthetic baseline recorded\n３.２ ms median latency.",
+      "numbers": [
+        "3.2 ms"
+      ],
+      "status": "NORMALIZED",
+      "passed": true
+    },
+    {
+      "id": "out-of-context",
+      "quote": "The synthetic baseline recorded 3.2 ms median latency.",
+      "numbers": [
+        "8.4 ms"
+      ],
+      "status": "NUM_FAIL",
+      "passed": false
+    },
+    {
+      "id": "unlocated",
+      "quote": "The hardware doubled throughput across all test runs.",
+      "numbers": [],
+      "status": "FAIL",
+      "passed": false
+    }
+  ]
+}
