@@ -1,0 +1,33 @@
+/* New page shells share the homepage navigation, theme control and menu treatment. */
+.topic-page .studio-header { position: relative; }
+.studio-header-inner { gap: clamp(12px, 2vw, 26px); }
+.studio-header .brand { flex-shrink: 0; margin-inline-end: auto; min-width: 32px; }
+.studio-header-controls { gap: 12px; }
+.studio-header a[aria-current] { color: var(--accent); }
+.studio-mobile-nav { display: none; }
+.studio-mobile-nav summary { list-style: none; }
+.studio-mobile-nav summary::-webkit-details-marker { display: none; }
+.studio-mobile-nav[open] summary span:nth-child(1) { top: 18px; transform: rotate(45deg); }
+.studio-mobile-nav[open] summary span:nth-child(2) { opacity: 0; }
+.studio-mobile-nav[open] summary span:nth-child(3) { top: 18px; transform: rotate(-45deg); }
+.studio-mobile-nav nav { position: absolute; inset: 100% 0 auto; border-top: 1px solid var(--line-soft); max-height: calc(100svh - 74px); overflow-y: auto; background: var(--bg); box-shadow: 0 18px 40px -24px rgba(7,10,17,.35); }
+.studio-header .studio-mobile-nav nav a { display: block; padding: .85rem 0; margin-inline: var(--pad); border-bottom: 1px solid var(--line-soft); font: 500 1.12rem var(--serif); color: var(--fg); }
+.studio-header .studio-mobile-nav nav a:is(:hover, :focus-visible) { color: var(--accent); }
+.studio-breadcrumbs { padding-block-start: 26px; color: var(--fg-dim); font-size: .84rem; }
+.studio-breadcrumbs ol { display: flex; flex-wrap: wrap; gap: 0; padding: 0; margin: 0; list-style: none; }
+.studio-breadcrumbs li + li::before { content: '/'; padding-inline: .65em; color: var(--fg-faint); }
+.studio-breadcrumbs a { text-decoration: underline; text-underline-offset: .18em; }
+.studio-footer nav { display: flex; flex-wrap: wrap; gap: 12px 22px; }
+.studio-footer nav a { color: var(--fg-dim); text-decoration: underline; text-underline-offset: .2em; }
+.studio-header :focus-visible, .studio-footer :focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; }
+@media (max-width: 1000px) {
+  .studio-desktop-nav { display: none; }
+  .studio-mobile-nav, .studio-mobile-nav summary { display: block; }
+}
+@media (max-width: 520px) {
+  .studio-header-language, .studio-header-controls .studio-contact-link { display: none; }
+  .studio-footer nav { width: 100%; }
+}
+.work-index-grid { margin-top: 22px; gap: 16px; }
+.work-index-grid h2 { font-size: clamp(1.2rem, 3vw, 1.65rem); }
+.work-index-grid[hidden], .work-index-grid [hidden] { display: none; }

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <pattern id="grid" width="38" height="38" patternUnits="userSpaceOnUse"><path d="M38 0H0V38" fill="none" stroke="#1d3550" stroke-width="1"/></pattern>
+    <linearGradient id="shade" x2="100%" y2="40%"><stop stop-color="#0a1423"/><stop offset="1" stop-color="#102b41"/></linearGradient>
+  </defs>
+  <path d="M0 0h1200v630H0z" fill="url(#shade)"/>
+  <path d="M0 0h1200v630H0z" fill="url(#grid)"/>
+  <path d="M82 83h1036M82 551h1036" fill="none" stroke="#2d566b"/>
+  <g fill="#f4f8fd" font-family="DejaVu Sans, sans-serif">
+    <text x="83" y="157" font-size="34" font-weight="bold">Quantquer</text>
+    <text x="79" y="276" font-size="64" font-weight="bold">From Silicon</text>
+    <text x="79" y="353" font-size="64" font-weight="bold">to Intelligence</text>
+    <text x="83" y="439" font-size="24" fill="#aebfce">Research-driven deep-tech engineering</text>
+  </g>
+  <g fill="#102a3c" stroke="#52ddcb" stroke-width="2">
+    <rect x="693" y="171" width="171" height="118" rx="7"/><rect x="928" y="171" width="171" height="118" rx="7"/>
+    <rect x="928" y="340" width="171" height="118" rx="7"/><rect x="693" y="340" width="171" height="118" rx="7"/>
+    <path d="M876 230h40m-9-5 9 5-9 5m106 66v26m-5-8 5 8 5-8m-102 80h-40m8-5-8 5 8 5" fill="none"/>
+  </g>
+  <g fill="none" stroke="#52ddcb" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M764 200h29v28h-29zm8 8h13v12h-13zm0-15v7m13-7v7m-13 28v7m13-7v7m-29-28h8m-8 12h8m29-12h8m-8 12h8"/>
+    <path d="m994 206 20-10 19 10-19 10zm0 11 20 10 19-10m-39 11 20 10 19-10"/>
+    <circle cx="1014" cy="366" r="6"/><circle cx="997" cy="392" r="6"/><circle cx="1031" cy="392" r="6"/><path d="m1011 371-10 16m16-16 10 16"/>
+    <rect x="757" y="359" width="44" height="36" rx="4"/><path d="M763 380h8l6-11 6 16 5-8h8"/>
+  </g>
+  <g fill="#f4f8fd" text-anchor="middle" font-family="DejaVu Sans, sans-serif" font-size="20">
+    <text x="779" y="261">Silicon</text><text x="1014" y="261">Models</text><text x="1014" y="430">Agents</text><text x="779" y="430">Systems</text>
+  </g>
+</svg>
