@@ -115,10 +115,26 @@ try {
       assert.ok(await picture.evaluate(img => img.alt.trim() && img.naturalWidth > 0 && img.naturalHeight > 0));
       assert.equal(await card.locator('h3 a').getAttribute('href'), `${path === '/en/' ? '/en' : ''}/work/${project}/`);
     }
+    const sectionArtwork = page.locator('.home-section-art img');
+    for (const [selector, count] of [
+      ['#engineering-evidence', 2], ['#engagements', 4], ['#studio-architecture', 1],
+      ['#project-contact', 1], ['.home-directory-head', 1],
+    ]) assert.equal(await page.locator(`${selector} .home-section-art img:visible`).count(), count);
+    for (const picture of await sectionArtwork.all()) {
+      assert.equal(await picture.getAttribute('alt'), '');
+      await picture.scrollIntoViewIfNeeded();
+      await picture.evaluate(img => img.decode());
+      assert.match(await picture.evaluate(img => img.currentSrc), /\/assets\/(labs|svcs|caps)\/[^/]+\.webp$/);
+    }
     await page.locator('#themeToggle').click();
     for (const [index, card] of (await cards.all()).entries()) {
       const picture = card.locator('figure.home-case-image img');
       assert.equal(await picture.getAttribute('src'), `/assets/${projectMedia.get(portfolio.featured[index])}-dark.webp`);
+      await picture.scrollIntoViewIfNeeded();
+      await picture.evaluate(img => img.decode());
+      assert.ok(await picture.evaluate(img => img.currentSrc.endsWith('-dark.webp')));
+    }
+    for (const picture of await sectionArtwork.all()) {
       await picture.scrollIntoViewIfNeeded();
       await picture.evaluate(img => img.decode());
       assert.ok(await picture.evaluate(img => img.currentSrc.endsWith('-dark.webp')));
@@ -446,7 +462,7 @@ try {
   assert.equal(await page.locator('.nf-art').count(), 1);
   assert.deepEqual([...defects], []);
   await writeFile(resolve(out, 'layout.json'), JSON.stringify(snapshots, null, 2));
-  console.log('PASS brand copy, illustrated homepage in both themes, case evidence visuals, navigation, language, AND case filters, Labs filters, 3 new demos, 5 GPU strategies, vision controls, DXF, benchmark and PDF downloads, video controls, form fallback and mocked retry, 10 preserved URLs, custom 404 and browser errors');
+  console.log('PASS brand copy, homepage section and case illustrations in both themes, case evidence visuals, navigation, language, AND case filters, Labs filters, 3 new demos, 5 GPU strategies, vision controls, DXF, benchmark and PDF downloads, video controls, form fallback and mocked retry, 10 preserved URLs, custom 404 and browser errors');
 } finally {
   await browser.close();
 }

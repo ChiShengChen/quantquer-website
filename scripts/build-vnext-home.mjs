@@ -35,6 +35,7 @@ const content = {
     companyLinks: ['研究成果', '公司與創辦人', '合作夥伴', '能力簡介 PDF'],
     closing: '從工程問題開始',
     rfp: '準備完整專案需求',
+    directory: '技術與公司索引',
   },
   en: {
     headline: 'From Silicon to <span class="hl">Intelligence</span>.',
@@ -67,6 +68,7 @@ const content = {
     companyLinks: ['Publications', 'Company and founder', 'Partners', 'Capabilities PDF'],
     closing: 'Start with the engineering problem',
     rfp: 'Prepare a detailed project brief',
+    directory: 'Technical and company directory',
   },
 };
 const pillars = [
@@ -103,6 +105,18 @@ const pillars = [
     output: ['建立數值模型與可重跑實驗，交付資料及方法。', 'Numerical models and repeatable experiments with data and methods.'],
   },
 ];
+
+const engagementArtwork = {
+  'technical-consulting': 'svcs/assess',
+  'feasibility-study': 'caps/edge',
+  'custom-rd': 'svcs/domain',
+  'fractional-cto': 'svcs/agent',
+};
+
+function homeIllustration(asset, sizes) {
+  const path = `/assets/${asset}`;
+  return `<figure class="cfig home-section-art"><img src="${path}-768.webp" srcset="${path}-768.webp 768w, ${path}.webp 1536w, ${path}-3072.webp 3072w" sizes="${sizes}" width="768" height="512" alt="" loading="lazy" decoding="async"></figure>`;
+}
 
 function waveformNavigation(locale) {
   const en = locale === 'en';
@@ -182,7 +196,26 @@ function homeBlocks(locale) {
     local('/labs/projects/') + '#project-paper-evidence',
     '/labs/evidence/photonics/' + (en ? '?lang=en' : ''),
   ];
-  const evidence = section('engineering-evidence', copy.evidence, `<div class="home-proof-grid"><div><p class="topic-lead">${copy.methods}</p><div class="entry-links">${links(['/labs/benchmarks/', '/labs/evidence/'].map(local), copy.evidenceLinks)}</div></div><div><h3><a href="${local('/labs/')}">${copy.labTitle}</a></h3><div class="entry-links">${links(labExamples, copy.labLinks)}</div></div></div>`);
+  const proofArtSizes = '(max-width: 680px) 90vw, (max-width: 1180px) 45vw, 520px';
+  const evidence = `<section class="studio-home-section axis-divider" id="engineering-evidence" aria-labelledby="home-evidence-title">
+    <div class="wrap home-proof-grid">
+      <div class="home-proof-card">
+        ${homeIllustration('labs/evidence', proofArtSizes)}
+        <div class="home-proof-copy">
+          <h2 id="home-evidence-title">${copy.evidence}</h2>
+          <p class="topic-lead">${copy.methods}</p>
+          <div class="entry-links">${links(['/labs/benchmarks/', '/labs/evidence/'].map(local), copy.evidenceLinks)}</div>
+        </div>
+      </div>
+      <div class="home-proof-card">
+        ${homeIllustration('labs/autoresearch', proofArtSizes)}
+        <div class="home-proof-copy">
+          <h2><a href="${local('/labs/')}">${copy.labTitle}</a></h2>
+          <div class="entry-links">${links(labExamples, copy.labLinks)}</div>
+        </div>
+      </div>
+    </div>
+  </section>`;
   const choices = [...pillars.map(pillar => ({
     service: pillar.service, label: t(pillar.question), title: pillar.name, output: t(pillar.output), url: local(`/solutions/${pillar.slug}/`),
   })), { service: 'assessment', label: copy.unspecific[0], title: copy.unspecific[1], output: copy.unspecific[2], url: local('/services/technical-consulting/') }];
@@ -198,15 +231,27 @@ function homeBlocks(locale) {
   const packages = copy.engagementRows.map(([title, duration, description, destination]) => {
     const [path, anchor] = destination.split('#');
     const url = local(`/services/${path}/`) + (anchor ? `#${anchor}` : '');
-    return `<li><a class="text-link" href="${url}">${title}</a><span class="home-duration">${duration}</span><p>${description}</p></li>`;
+    return `<li>
+      ${homeIllustration(engagementArtwork[path], '(max-width: 738px) 96px, (max-width: 1108px) 13vw, 144px')}
+      <div class="home-engagement-copy">
+        <h3><a class="text-link" href="${url}">${title}</a></h3>
+        <span class="home-duration">${duration}</span>
+        <p>${description}</p>
+      </div>
+    </li>`;
   }).join('');
-  const engagements = section('engagements', copy.engagements, `<div class="home-engagement-grid"><div><ul class="home-rows">${packages}</ul><div class="entry-links">${links([local('/company/') + '#engagement-terms'], [copy.terms])}</div></div>${finder}</div>`);
-  const company = section('studio-architecture', copy.company, `<div class="entry-links">${links([local('/research/'), local('/company/'), '/#partners', `/downloads/quantquer-capabilities-${locale}.pdf`], copy.companyLinks)}</div>`);
-  const contact = section('project-contact', copy.closing, `<div class="entry-links"><a class="btn btn-primary" data-analytics="contact_cta_clicked" href="${local('/contact/')}">${copy.primary}</a><a class="btn btn-ghost" href="${local('/contact/')}#rfp">${copy.rfp}</a></div>`);
+  const engagements = section('engagements', copy.engagements, `<ul class="home-rows">${packages}</ul>
+    <div class="home-engagement-actions">${links([local('/company/') + '#engagement-terms'], [copy.terms])}${finder}</div>`);
+  const company = section('studio-architecture', copy.company, `<div class="entry-links">${links([local('/research/'), local('/company/'), '/#partners', `/downloads/quantquer-capabilities-${locale}.pdf`], copy.companyLinks)}</div>${homeIllustration('svcs/research', '(max-width: 680px) 90vw, 370px')}`);
+  const contact = section('project-contact', copy.closing, `<div class="entry-links"><a class="btn btn-primary" data-analytics="contact_cta_clicked" href="${local('/contact/')}">${copy.primary}</a><a class="btn btn-ghost" href="${local('/contact/')}#rfp">${copy.rfp}</a></div>${homeIllustration('svcs/kb', '(max-width: 680px) 90vw, 370px')}`);
   return {
     navigation: waveformNavigation(locale),
     hero: [waveformHero, brand].join('\n'),
     conversion: [core, evidence, engagements, company, contact].join('\n'),
+    directory: `<div class="wrap home-directory-head">
+      <h2 id="home-archive-heading">${copy.directory}</h2>
+      ${homeIllustration('labs/tokenbench', '(max-width: 440px) 100px, 200px')}
+    </div>`,
     resources: `<nav class="home-footer-links" aria-label="${en ? 'More site links' : '網站資源'}">${links(
       [local('/work/'), local('/services/'), local('/research/'), local('/labs/'), local('/contact/')],
       en ? ['Engineering Work', 'Services', 'Publications', 'Labs', 'Contact'] : ['工程案例', '服務', '研究成果', 'Labs', '聯絡'],
