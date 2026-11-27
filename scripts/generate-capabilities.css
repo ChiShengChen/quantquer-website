@@ -109,8 +109,13 @@ h1, h2, h3 { font-family: var(--serif); line-height: 1.2; }
   background: var(--panel);
 }
 .engagement h3 { color: var(--blue); font-size: 14pt; margin-bottom: 2mm; }
+.founder-info { margin-top: 6mm; }
+.founder-info h3 { font-size: 13pt; margin-bottom: 2mm; }
+.founder-info p { font-size: 9pt; }
+.founder-name { display: block; margin-bottom: 1mm; }
+.founder-info p + p { margin-top: 2mm; }
 .contact-panel {
-  margin-top: 12mm;
+  margin-top: 7mm;
   padding: 9mm;
   background: var(--dark);
   color: #eaedf2;

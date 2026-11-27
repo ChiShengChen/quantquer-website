@@ -22,6 +22,7 @@
   <link rel="stylesheet" href="/assets/site.css">
   <link rel="stylesheet" href="/assets/showcase.css">
   <link rel="stylesheet" href="/assets/evidence/vision/viewer.css">
+  <link rel="stylesheet" href="/assets/evidence/vision/deployment.css">
   <noscript><style>.vision-evidence[data-vision-loading] :is([data-vision-control], #vision-language, #vision-evidence-slider)[hidden] { display: none !important; }</style></noscript>
   <script src="/assets/evidence/vision/viewer.mjs" type="module"></script>
 </head>
@@ -49,6 +50,7 @@
         <nav class="topic-jump" aria-label="本頁內容" data-en-aria="On this page">
           <a href="#comparison" data-en="Compare output">比較輸出</a>
           <a href="#benchmark" data-en="CPU benchmark">CPU 量測</a>
+          <a href="#deployment" data-en="Deployment validation">部署驗證</a>
           <a href="/work/on-device-generative-vision/" data-en-href="/work/on-device-generative-vision/#english" data-en="Engineering case study">工程案例</a>
         </nav>
       </div>
@@ -130,6 +132,7 @@
           <div class="vision-evidence-downloads">
             <a class="text-link" href="/assets/evidence/vision/benchmark.json" download data-en="Download per-run measurements (JSON)">下載逐次量測（JSON）</a>
             <a class="text-link" href="/scripts/reproduce-vision.py" download data-en="Download reproduction script (Python)">下載重跑腳本（Python）</a>
+            <a class="text-link" href="/labs/benchmarks/#vision-cpu" data-en-href="/en/labs/benchmarks/#vision-cpu" data-en="Read the static benchmark table">閱讀靜態量測表</a>
           </div>
           <p id="vision-bench-error" role="status"></p>
         </div>
@@ -137,6 +140,40 @@
           <summary data-en="Method and scope">量測方法與範圍</summary>
           <p data-en="Five warm-up runs and 30 timed runs per method and scene. MI-GAN uses the public 512 × 512 ONNX pipeline with cropping, resizing, inference and exact-mask compositing. Telea uses OpenCV 4.11 with a three-pixel radius. Timings exclude file I/O, fixture creation and web image encoding.">每種方法、每個場景先暖機 5 次，再量測 30 次。MI-GAN 使用公開的 512 × 512 ONNX 流程，包含裁切、縮放、模型運算和精確遮罩合成。Telea 由 OpenCV 4.11 以 3 像素半徑執行。計時範圍不含檔案讀寫、測試影像製作及網頁影像編碼。</p>
           <p data-en="PSNR uses only masked pixels in the uncompressed output, with the unoccluded photograph as ground truth. These controlled still-image results characterize only the two fixtures. Automatic detection, video consistency, and NPU runtime remain outside this measurement.">PSNR 僅在未壓縮輸出的遮罩內計算，以沒有前景遮擋的原照片作為真值。結果只適用於這兩個可控靜態場景。自動偵測、跨幀一致性及 NPU 推論尚待個別驗證。</p>
+        </details>
+        <details class="showcase-method" open>
+          <summary data-en="Quality versus latency on the measured CPU">CPU 實測的品質與延遲取捨</summary>
+          <p data-en="MI-GAN took longer in both fixtures. Its masked PSNR was higher in the hallway and lower on the forest path. Masked PSNR measures pixel fidelity inside the supplied mask.">兩個場景的 MI-GAN 延遲均較高。其遮罩內 PSNR 在走廊較高，在林徑較低。遮罩內 PSNR 衡量修補區域與原圖的像素差異。</p>
+          <table class="showcase-table vision-bench-table vision-deployment-table" aria-describedby="vision-tradeoff-note">
+            <caption data-en="Measured difference, MI-GAN minus Telea">實測差值，MI-GAN 減 Telea</caption>
+            <thead><tr>
+              <th scope="col" data-en="Scene">場景</th>
+              <th scope="col" data-en="Median latency (ms)">延遲中位數 (ms)</th>
+              <th scope="col" data-en="Masked PSNR (dB)">遮罩內 PSNR (dB)</th>
+            </tr></thead>
+            <tbody>
+              <tr><th scope="row" data-en="Indoor hallway">室內走廊</th><td>+523.25</td><td>+0.62</td></tr>
+              <tr><th scope="row" data-en="Forest path">戶外林徑</th><td>+518.14</td><td>−0.85</td></tr>
+            </tbody>
+          </table>
+          <p id="vision-tradeoff-note" data-en="Differences use the unrounded archived measurements and are shown to two decimal places. The crops below illustrate structural and texture errors that a single PSNR value cannot describe.">差值以歸檔數值相減，四捨五入至小數點後兩位。下方局部影像可查看 PSNR 單一分數難以描述的結構與紋理偏差。</p>
+        </details>
+        <details class="showcase-method vision-deployment-failures">
+          <summary data-en="Inspect two failure cases">檢視兩個場景的修補偏差</summary>
+          <h3 data-en="Indoor hallway · cabinet edge">室內走廊 · 櫃角</h3>
+          <div class="vision-deployment-crops" data-crop="hallway">
+            <figure><div><img src="/assets/evidence/vision/hallway-migan.webp" width="768" height="512" loading="lazy" decoding="async" alt="MI-GAN 重建的木櫃右側輪廓向外延伸" aria-label="MI-GAN 重建的木櫃右側輪廓向外延伸" data-en-aria="MI-GAN reconstruction extends the right edge of the cabinet"></div><figcaption>MI-GAN</figcaption></figure>
+            <figure><div><img src="/assets/evidence/vision/hallway-telea.webp" width="768" height="512" loading="lazy" decoding="async" alt="Telea 修補結果的櫃角及地板邊緣模糊" aria-label="Telea 修補結果的櫃角及地板邊緣模糊" data-en-aria="Telea softens the cabinet and floor edges"></div><figcaption>Telea</figcaption></figure>
+            <figure><div><img src="/assets/evidence/vision/hallway-reference.webp" width="768" height="512" loading="lazy" decoding="async" alt="未遮擋原圖，木櫃右側與地板的邊界清楚" aria-label="未遮擋原圖，木櫃右側與地板的邊界清楚" data-en-aria="Unoccluded reference with clearly defined cabinet and floor edges"></div><figcaption data-en="Reference">參考原圖</figcaption></figure>
+          </div>
+          <p data-en="MI-GAN extends the cabinet edge. Telea softens the boundaries between the cabinet, wall and floor.">MI-GAN 把右側櫃角往外延伸。Telea 讓櫃子、牆面和地板的交界變模糊。</p>
+          <h3 data-en="Forest path · hanging branch">戶外林徑 · 懸垂枝條</h3>
+          <div class="vision-deployment-crops" data-crop="forest">
+            <figure><div><img src="/assets/evidence/vision/forest-migan.webp" width="768" height="512" loading="lazy" decoding="async" alt="MI-GAN 輸出中枝條中段形狀偏離參考原圖" aria-label="MI-GAN 輸出中枝條中段形狀偏離參考原圖" data-en-aria="MI-GAN changes the shape of the hanging branch"></div><figcaption>MI-GAN</figcaption></figure>
+            <figure><div><img src="/assets/evidence/vision/forest-telea.webp" width="768" height="512" loading="lazy" decoding="async" alt="Telea 輸出在遮罩範圍形成模糊色塊" aria-label="Telea 輸出在遮罩範圍形成模糊色塊" data-en-aria="Telea leaves blurred patches in the formerly masked area"></div><figcaption>Telea</figcaption></figure>
+            <figure><div><img src="/assets/evidence/vision/forest-reference.webp" width="768" height="512" loading="lazy" decoding="async" alt="未遮擋原圖，枝條有連續的轉折，周圍為樹葉紋理" aria-label="未遮擋原圖，枝條有連續的轉折，周圍為樹葉紋理" data-en-aria="Unoccluded reference with a continuous bent branch and fine foliage"></div><figcaption data-en="Reference">參考原圖</figcaption></figure>
+          </div>
+          <p data-en="MI-GAN changes the shape of the hanging branch. Telea smooths the masked texture into broad color patches and scores higher on masked PSNR in this fixture.">MI-GAN 改變懸垂枝條的形狀。Telea 把遮罩區的細節抹成大片色塊，在這張圖取得較高的遮罩內 PSNR。</p>
         </details>
         <details class="showcase-method">
           <summary data-en="Model and image sources">模型與影像來源</summary>
@@ -150,6 +187,46 @@
         <div class="entry-links">
           <a class="btn btn-primary" href="/project-planner/?service=generative-vision" data-en-href="/project-planner/?service=generative-vision&amp;lang=en" data-en="Discuss an edge AI deployment" data-analytics="service_cta_clicked" data-service="generative-vision" data-project="on-device-generative-vision">討論晶片端 AI 部署</a>
         </div>
+      </div>
+    </section>
+
+    <section id="deployment" class="topic-section axis-divider vision-deployment" aria-labelledby="vision-deployment-title">
+      <div class="wrap">
+        <h2 id="vision-deployment-title" data-en="Target-device deployment and validation">目標裝置部署與驗證</h2>
+        <p class="topic-lead" data-en="The current measurement covers still-image inpainting from prepared RGB and a binary mask. The full deployment sequence is illustrative and identifies the stages that still need measurement.">目前量測涵蓋從備妥 RGB 影像和二值遮罩開始的單張修補。下方是完整部署的示意流程，逐步標出驗證範圍。</p>
+        <figure class="topic-flow vision-deployment-flow" aria-labelledby="vision-deployment-flow-title">
+          <figcaption id="vision-deployment-flow-title" data-en="Illustrative image and video deployment sequence">影像與影片部署流程（示意）</figcaption>
+          <ol>
+            <li><strong data-en="Input image or video">輸入影像或影片</strong><span data-en="Two prepared 768 × 512 RGB stills measured.">已量測兩張 768 × 512 RGB 靜態影像。</span></li>
+            <li><strong data-en="Human segmentation">人物分割</strong><span data-en="Automatic segmentation pending. Controlled fixtures used known silhouettes.">目前使用已知輪廓，待驗證自動分割。</span></li>
+            <li><strong data-en="Mask refinement">遮罩細化</strong><span data-en="Fixtures use a prepared binary boundary. Video mask refinement is illustrative.">測試使用預先備妥的二值邊界，影片遮罩細化為示意。</span></li>
+            <li><strong data-en="Inpainting model">修補模型</strong><span data-en="MI-GAN and Telea measured on desktop CPU.">MI-GAN 與 Telea 已在桌面 CPU 量測。</span></li>
+            <li><strong data-en="Temporal consistency">跨幀一致性</strong><span data-en="Pending testing on video sequences.">待用連續影片驗證。</span></li>
+            <li><strong data-en="Postprocessing">後處理</strong><span data-en="Exact-mask compositing is included in MI-GAN CPU timing.">遮罩內合成已計入 MI-GAN 的 CPU 時間。</span></li>
+            <li><strong data-en="Target device runtime">目標裝置 Runtime</strong><span data-en="NPU or GPU execution, placement, memory and power pending.">待測 NPU／GPU 執行、算子配置、記憶體及功耗。</span></li>
+          </ol>
+        </figure>
+        <figure class="topic-flow vision-deployment-flow" aria-labelledby="vision-model-architecture-title">
+          <figcaption id="vision-model-architecture-title" data-en="Recorded MI-GAN ONNX path">本次執行的 MI-GAN ONNX 架構</figcaption>
+          <ol>
+            <li><strong data-en="Prepare image and mask">準備影像與遮罩</strong><span data-en="The ONNX pipeline crops the mask region and resizes to 512 × 512.">ONNX 流程裁切遮罩周圍並縮放至 512 × 512。</span></li>
+            <li><strong data-en="Encode features">編碼特徵</strong><span data-en="The generator encoder reads RGB plus mask and produces multiscale features.">生成器的編碼器接收 RGB 與遮罩並產生多尺度特徵。</span></li>
+            <li><strong data-en="Synthesize RGB">合成 RGB</strong><span data-en="Synthesis reuses corresponding encoder features while raising spatial resolution.">合成階段提高空間解析度，同時使用對應尺度的編碼特徵。</span></li>
+            <li><strong data-en="Restore original size">還原原尺寸</strong><span data-en="Resize, blend and composite only inside the supplied binary mask.">縮放、混合，並僅在指定的二值遮罩內合成。</span></li>
+          </ol>
+          <a class="text-link" href="https://github.com/Picsart-AI-Research/MI-GAN/blob/main/lib/model_zoo/migan_inference.py" data-en="MI-GAN inference source">MI-GAN 推論原始碼</a>
+        </figure>
+        <table class="showcase-table vision-bench-table vision-deployment-table">
+          <caption data-en="Precision coverage and next validation">精度與驗證項目</caption>
+          <thead><tr><th scope="col" data-en="Model precision">模型精度</th><th scope="col" data-en="Available evidence">可核對的證據</th></tr></thead>
+          <tbody>
+            <tr><th scope="row" data-en="Original FP32 ONNX">原版 FP32 ONNX</th><td data-en="Measured on desktop CPU. Input and composited output are uint8 RGB.">已在桌面 CPU 量測。輸入和合成後輸出皆為 uint8 RGB。</td></tr>
+            <tr><th scope="row">FP16</th><td data-en="Pending measurement with an identified converted model and target runtime.">待確認轉換後模型與目標 Runtime，再量測比較。</td></tr>
+            <tr><th scope="row">INT8</th><td data-en="Pending calibration data, operator placement and matched output checks.">待完成校正資料、確認算子配置及同條件輸出檢查。</td></tr>
+          </tbody>
+        </table>
+        <p class="vision-deployment-note" data-en="For a future NPU report, record the device, SoC, OS, runtime, model digest and precision, fixture digest, warm-ups, sample latency, peak memory and masked PSNR. Include a runtime placement report to identify CPU or GPU fallback. This validator has not been run against an NPU.">未來 NPU 量測須記錄裝置、SoC、作業系統、Runtime、模型指紋與精度、測試資料指紋、暖機、逐次延遲、記憶體峰值及遮罩內 PSNR，並附上 Runtime 算子配置以辨識 CPU／GPU 回退。此驗證工具尚未用於 NPU 實測。</p>
+        <a class="text-link" href="/benchmarks/scripts/vision-npu.mjs" download data-en="Download the NPU report validator (Node.js)">下載 NPU 量測報告驗證工具（Node.js）</a>
       </div>
     </section>
   </main>

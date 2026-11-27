@@ -72,7 +72,26 @@ const facetLabels = {
   },
 };
 
+const englishFacets = {
+  technology: {
+    agent: 'AI Agents', vision: 'Computer vision', optimization: 'Optimization', signal: 'Signal processing',
+    'gen-ai': 'Generative AI', gpu: 'GPU scheduling', simulation: 'Simulation', knowledge: 'Knowledge engineering',
+    'time-series': 'Time series', cad: 'CAD', evaluation: 'Evaluation', research: 'Research automation',
+  },
+  status: {
+    delivered: 'Delivered', 'clinical-use': 'Outpatient use', evaluation: 'Evaluation', development: 'Development',
+    deployment: 'Deployment', application: 'In educational use', demonstration: 'Demonstration', published: 'Published',
+    prototype: 'Prototype', research: 'Research', production: 'In production', pilot: 'Pilot',
+  },
+  type: {
+    'anonymous-engineering': 'Anonymized engineering', 'founder-experience': 'Founder experience', academic: 'Research collaboration',
+    education: 'Education', 'internal-rnd': 'Independent R&D', 'open-source': 'Open source',
+    'technical-note': 'Technical note', case: 'Engineering and research case',
+  },
+};
+
 function setupWorkFilter(filter) {
+  const english = document.documentElement.lang === 'en';
   const list = document.getElementById(filter.getAttribute('aria-controls'));
   const form = filter.querySelector('form');
   const {q, technology, status, type, featured} = form.elements;
@@ -95,7 +114,7 @@ function setupWorkFilter(filter) {
 
   for (const [key, control] of Object.entries(facets)) {
     const options = new Set(cards.flatMap(card => card[key]));
-    for (const [value, label] of Object.entries(facetLabels[key])) {
+    for (const [value, label] of Object.entries((english ? englishFacets : facetLabels)[key])) {
       if (options.has(value)) control.add(new Option(label, value));
     }
   }
@@ -116,7 +135,7 @@ function setupWorkFilter(filter) {
     }
     all.setAttribute('aria-pressed', String(selected.length === 0));
     industries.forEach(button => button.setAttribute('aria-pressed', String(activeIndustries.has(button.dataset.filter))));
-    count.textContent = `顯示 ${visible} 項，共 ${cards.length} 項`;
+    count.textContent = english ? `Showing ${visible} of ${cards.length} cases` : `顯示 ${visible} 項，共 ${cards.length} 項`;
     empty.hidden = visible !== 0;
     list.hidden = visible === 0;
     list.classList.toggle('single-result', visible === 1);

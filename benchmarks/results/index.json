@@ -1,0 +1,415 @@
+[
+  {
+    "id": "vision-cpu-inpainting",
+    "project": "on-device-generative-vision",
+    "experimentType": "masked-image-inpainting",
+    "evidenceType": "measured",
+    "hardware": {
+      "processor": "12th Gen Intel(R) Core(TM) i9-12900KS",
+      "accelerator": "CPU only"
+    },
+    "software": {
+      "runtime": "ONNX Runtime 1.19.2",
+      "provider": "CPUExecutionProvider",
+      "baseline": "OpenCV 4.11.0 Telea"
+    },
+    "dataset": "Two public-domain photographs with an illustrated foreground mask and unoccluded ground truth.",
+    "config": {
+      "resolution": [
+        768,
+        512
+      ],
+      "modelTensorSize": [
+        512,
+        512
+      ],
+      "model": "MI-GAN-512 Places2 Pipeline v2",
+      "modelBytes": 28079181,
+      "modelSha256": "6f1f3530a1a2324b19752018ce756088b07973cda8d7d890034ace5c8a48c40b",
+      "modelSource": "https://huggingface.co/andraniksargsyan/migan/blob/406830d0fa60666da0071c342ad2fbc8f30c5c64/migan_pipeline_v2.onnx",
+      "inputAndOutputDtype": "uint8 RGB",
+      "precisionScope": "Pinned published ONNX graph with its original operators; precision variants were not evaluated.",
+      "batchSize": 1,
+      "threads": 4,
+      "warmupsPerSceneAndMethod": 5,
+      "measuredRunsPerSceneAndMethod": 30,
+      "timing": "Prepared image and mask to restored RGB. MI-GAN includes ONNX preprocessing and postprocessing plus exact-mask compositing. Excludes loading, fixture construction and encoding."
+    },
+    "metrics": [
+      {
+        "id": "latency-p50",
+        "value": 529.85,
+        "unit": "ms",
+        "group": [
+          "hallway",
+          "migan"
+        ]
+      },
+      {
+        "id": "latency-p95",
+        "value": 572.856,
+        "unit": "ms",
+        "group": [
+          "hallway",
+          "migan"
+        ]
+      },
+      {
+        "id": "masked-psnr",
+        "value": 23.37,
+        "unit": "dB",
+        "group": [
+          "hallway",
+          "migan"
+        ]
+      },
+      {
+        "id": "latency-p50",
+        "value": 6.6,
+        "unit": "ms",
+        "group": [
+          "hallway",
+          "telea"
+        ]
+      },
+      {
+        "id": "latency-p95",
+        "value": 6.744,
+        "unit": "ms",
+        "group": [
+          "hallway",
+          "telea"
+        ]
+      },
+      {
+        "id": "masked-psnr",
+        "value": 22.75,
+        "unit": "dB",
+        "group": [
+          "hallway",
+          "telea"
+        ]
+      },
+      {
+        "id": "latency-p50",
+        "value": 524.292,
+        "unit": "ms",
+        "group": [
+          "forest",
+          "migan"
+        ]
+      },
+      {
+        "id": "latency-p95",
+        "value": 649.692,
+        "unit": "ms",
+        "group": [
+          "forest",
+          "migan"
+        ]
+      },
+      {
+        "id": "masked-psnr",
+        "value": 13.19,
+        "unit": "dB",
+        "group": [
+          "forest",
+          "migan"
+        ]
+      },
+      {
+        "id": "latency-p50",
+        "value": 6.15,
+        "unit": "ms",
+        "group": [
+          "forest",
+          "telea"
+        ]
+      },
+      {
+        "id": "latency-p95",
+        "value": 6.354,
+        "unit": "ms",
+        "group": [
+          "forest",
+          "telea"
+        ]
+      },
+      {
+        "id": "masked-psnr",
+        "value": 14.04,
+        "unit": "dB",
+        "group": [
+          "forest",
+          "telea"
+        ]
+      }
+    ],
+    "rawArtifactPath": "/assets/evidence/vision/benchmark.json",
+    "reproducibilityCommand": "python scripts/reproduce-vision.py --cache /tmp/quantquer-models --output /tmp/quantquer-vision",
+    "limitations": [
+      "Two still images with prepared masks. No automatic person segmentation, Diffusion, scene generation, or video evaluation.",
+      "Device NPU/GPU inference, peak memory, power and OS version were not recorded in this benchmark.",
+      "PSNR is evaluated within the mask and can favor different methods across these two fixtures."
+    ],
+    "timestamp": "2026-11-27",
+    "timestampMeaning": "recorded run date"
+  },
+  {
+    "id": "gpu-controlled-three-jobs",
+    "project": "gpu-orchestration",
+    "experimentType": "job-admission-and-process-memory",
+    "evidenceType": "replayed",
+    "hardware": {
+      "accelerator": "Single 24 GiB GPU workstation"
+    },
+    "software": {
+      "instrumentation": "Scheduler events and sampled process VRAM"
+    },
+    "dataset": "Two synthetic CUDA jobs and one CPU-only job.",
+    "config": {
+      "gpuSlots": 1,
+      "executionSlots": 2,
+      "allocationMiBPerCudaFixture": 32
+    },
+    "metrics": [
+      {
+        "id": "queue-wait",
+        "value": 0.713,
+        "unit": "s",
+        "group": [
+          "GPU A"
+        ]
+      },
+      {
+        "id": "run-duration",
+        "value": 8.389,
+        "unit": "s",
+        "group": [
+          "GPU A"
+        ]
+      },
+      {
+        "id": "requested-vram",
+        "value": 512,
+        "unit": "MiB",
+        "group": [
+          "GPU A"
+        ]
+      },
+      {
+        "id": "sampled-peak-process-vram",
+        "value": 286,
+        "unit": "MiB",
+        "group": [
+          "GPU A"
+        ]
+      },
+      {
+        "id": "exit-code",
+        "value": 0,
+        "unit": "code",
+        "group": [
+          "GPU A"
+        ]
+      },
+      {
+        "id": "queue-wait",
+        "value": 9.099,
+        "unit": "s",
+        "group": [
+          "GPU B"
+        ]
+      },
+      {
+        "id": "run-duration",
+        "value": 5.361,
+        "unit": "s",
+        "group": [
+          "GPU B"
+        ]
+      },
+      {
+        "id": "requested-vram",
+        "value": 512,
+        "unit": "MiB",
+        "group": [
+          "GPU B"
+        ]
+      },
+      {
+        "id": "sampled-peak-process-vram",
+        "value": 286,
+        "unit": "MiB",
+        "group": [
+          "GPU B"
+        ]
+      },
+      {
+        "id": "exit-code",
+        "value": 0,
+        "unit": "code",
+        "group": [
+          "GPU B"
+        ]
+      },
+      {
+        "id": "queue-wait",
+        "value": 0.632,
+        "unit": "s",
+        "group": [
+          "CPU C"
+        ]
+      },
+      {
+        "id": "run-duration",
+        "value": 5.317,
+        "unit": "s",
+        "group": [
+          "CPU C"
+        ]
+      },
+      {
+        "id": "requested-vram",
+        "value": 0,
+        "unit": "MiB",
+        "group": [
+          "CPU C"
+        ]
+      },
+      {
+        "id": "sampled-peak-process-vram",
+        "value": 0,
+        "unit": "MiB",
+        "group": [
+          "CPU C"
+        ]
+      },
+      {
+        "id": "exit-code",
+        "value": 0,
+        "unit": "code",
+        "group": [
+          "CPU C"
+        ]
+      }
+    ],
+    "rawArtifactPath": "/assets/evidence/gpu/trace.json",
+    "reproducibilityCommand": "node --test scripts/test-vnext-labs.mjs",
+    "limitations": [
+      "The public trace replays a prior controlled hardware run. The original scheduler runtime is outside the public replay package.",
+      "VRAM samples cover test processes and include CUDA context. They do not establish device-wide utilization or continuous peaks.",
+      "The run checks job order and overlap. Production throughput, multi-GPU scaling and cross-machine timing were not measured."
+    ],
+    "timestamp": "2026-11-27",
+    "timestampMeaning": "recorded run date"
+  },
+  {
+    "id": "photonics-four-mode-fault",
+    "project": "photonic-computing-simulation",
+    "experimentType": "four-mode-reference-mesh",
+    "evidenceType": "simulated",
+    "software": {
+      "model": "/assets/evidence/photonics/model.mjs",
+      "execution": "JavaScript complex-amplitude propagation"
+    },
+    "dataset": "A normalized reference mesh fixture with one configured MZI fault.",
+    "config": {
+      "mode": "1",
+      "inputPowerPercent": 100,
+      "fault": {
+        "cell": "2-23",
+        "phaseDelta": 35,
+        "powerLoss": 20
+      }
+    },
+    "metrics": [
+      {
+        "id": "relative-power-loss",
+        "value": 7.867882,
+        "unit": "%"
+      },
+      {
+        "id": "relative-output-error",
+        "value": 22.384838,
+        "unit": "%"
+      },
+      {
+        "id": "faulted-normalized-port-power",
+        "value": 0.331349925,
+        "unit": "ratio",
+        "group": [
+          "port 1"
+        ]
+      },
+      {
+        "id": "faulted-normalized-port-power",
+        "value": 0.031395395,
+        "unit": "ratio",
+        "group": [
+          "port 2"
+        ]
+      },
+      {
+        "id": "faulted-normalized-port-power",
+        "value": 0.542469222,
+        "unit": "ratio",
+        "group": [
+          "port 3"
+        ]
+      },
+      {
+        "id": "faulted-normalized-port-power",
+        "value": 0.016106636,
+        "unit": "ratio",
+        "group": [
+          "port 4"
+        ]
+      }
+    ],
+    "rawArtifactPath": "/benchmarks/results/photonic-fixture.json",
+    "reproducibilityCommand": "node --test scripts/test-photonic-mesh.mjs && node scripts/build-vnext-labs.mjs",
+    "limitations": [
+      "Ideal 50:50 couplers, fixed phases and a modeled single-cell fault.",
+      "No calibrated chip measurements, fabrication process parameters, drift or detector noise."
+    ],
+    "timestamp": "2026-11-27",
+    "timestampMeaning": "fixture report date"
+  },
+  {
+    "id": "research-quote-gate-four-fixtures",
+    "project": "paper-evidence",
+    "experimentType": "deterministic-quote-and-number-verification",
+    "evidenceType": "replayed",
+    "gitCommit": "ac6e83c63252049bbccbf19bbf7f3dbc334ac0b7",
+    "software": {
+      "repository": "https://github.com/ChiShengChen/paper-evidence",
+      "core": "Pinned public Python quote gate"
+    },
+    "dataset": "Four synthetic quote and number test cases.",
+    "config": {
+      "numberWindowCharacters": 200,
+      "fuzzyAllowed": false
+    },
+    "metrics": [
+      {
+        "id": "fixtures-passed",
+        "value": 2,
+        "unit": "cases"
+      },
+      {
+        "id": "fixtures-blocked",
+        "value": 2,
+        "unit": "cases"
+      }
+    ],
+    "rawArtifactPath": "/assets/evidence/research/quote-gate.json",
+    "reproducibilityCommand": "python scripts/reproduce-research-evidence.py /path/to/paper-evidence --check",
+    "limitations": [
+      "Deterministic synthetic fixture outcomes, not overall research accuracy or an LLM performance benchmark.",
+      "The replay does not score claim truth or whether a publication supports an interpretation."
+    ],
+    "timestamp": "2026-11-27",
+    "timestampMeaning": "fixture report date"
+  }
+]

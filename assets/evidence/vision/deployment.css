@@ -1,0 +1,50 @@
+.vision-deployment-table { margin-block: .65rem; }
+
+.vision-deployment-failures { max-width: 930px; }
+.vision-deployment-failures h3 { margin: 1.2rem 0 .45rem; }
+.vision-deployment-crops {
+  --crop-x: 47%;
+  --crop-y: 64%;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .45rem;
+  margin-block: .6rem;
+}
+.vision-deployment-crops[data-crop="forest"] { --crop-x: 59%; --crop-y: 61%; }
+.vision-deployment-crops figure { min-width: 0; margin: 0; }
+.vision-deployment-crops figure > div {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1.2;
+  background: var(--panel);
+  border: 1px solid var(--line);
+}
+.vision-deployment-crops img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 190%;
+  height: auto;
+  max-width: none;
+  transform: translate(calc(-1 * var(--crop-x)), calc(-1 * var(--crop-y)));
+}
+.vision-deployment-crops figcaption { margin-top: .22rem; font-size: .85rem; color: var(--fg-dim); }
+
+.vision-deployment-flow + .vision-deployment-flow { margin-block-start: 1.6rem; }
+.vision-deployment-flow > .text-link { display: inline-block; margin-top: .45rem; }
+#vision-deployment-flow-title + ol li:last-child { grid-column: 1 / -1; }
+.vision-deployment .vision-deployment-table { max-width: 930px; margin-top: 1.6rem; }
+.vision-deployment .vision-deployment-table th:first-child { width: 30%; }
+.vision-deployment-note { max-width: 73ch; margin-block: 1rem .5rem; color: var(--fg-dim); }
+
+@media (min-width: 761px) {
+  #vision-model-architecture-title + ol { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (min-width: 1040px) {
+  #vision-model-architecture-title + ol { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+@media (max-width: 460px) {
+  .vision-deployment-crops figcaption { font-size: .75rem; }
+}

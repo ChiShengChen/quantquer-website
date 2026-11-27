@@ -2,10 +2,11 @@ import { readFile, writeFile, mkdir, access, rename, rm, readdir } from 'node:fs
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { caseDiagramIcons } from './case-diagram-icons.mjs';
+import { caseEvidence, evidenceTypes } from '../data/studio-case-evidence.mjs';
+import { renderStudioPage, studioPath } from './vnext-layout.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const site = 'https://quantquer.com';
-const shareImage = `${site}/assets/og-image-2-1.png`;
 const checking = process.argv.slice(2).includes('--check');
 const portfolio = JSON.parse(await readFile(resolve(root, 'data/projects.json'), 'utf8'));
 const caseDiagrams = JSON.parse(await readFile(resolve(root, 'data/case-diagrams.json'), 'utf8'));
@@ -93,6 +94,8 @@ for (const slug of featured) assert(slugs.has(slug), `Unknown featured project: 
 for (const slug of Object.keys(caseDiagrams)) assert(slugs.has(slug), `Unknown case diagram: ${slug}`);
 
 for (const project of portfolio.projects) {
+  const classification = caseEvidence[project.slug];
+  assert(classification?.types.every(type => Object.hasOwn(evidenceTypes, type)) && classification.types.length && /^[a-z-]+$/.test(classification.solution), `Missing evidence classification or solution: ${project.slug}`);
   const anchor = project.anchor ?? project.slug;
   for (const id of [anchor, project.slug]) {
     assert(/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(id), `Invalid project id: ${id}`);
@@ -189,8 +192,8 @@ function classification(project, language) {
   return `${label(origins, project.origin, language)} · ${label(stages, project.stage, language)}`;
 }
 
-const detailPath = project => `/work/${project.slug}/`;
-const contactPath = project => `/?inquiry=${project.inquiry}#contact`;
+const detailPath = (project, language = 'zh') => studioPath(`/work/${project.slug}/`, language);
+const contactPath = (project, language) => `${studioPath('/contact/', language)}?service=${project.inquiry}`;
 const plannerPath = (project, language = 'zh') => `/project-planner/?service=${project.inquiry}${language === 'en' ? '&amp;lang=en' : ''}`;
 const demoPath = (path, language) => {
   if (language !== 'en') return path;
@@ -204,20 +207,29 @@ const assetSizes = {
   featured: '(max-width: 400px) calc(100vw - 40px), (max-width: 760px) 90vw, (max-width: 1180px) 30vw, 355px',
 };
 
-function projectImage(project, naturalSize, { online = false, priority = false } = {}) {
+function projectImage(project, naturalSize, { online = false, priority = false, language = 'zh' } = {}) {
   const path = `${online ? '/' : ''}assets/${project.media}`;
   const loading = priority ? ' fetchpriority="high"' : ' loading="lazy"';
-  return `<figure class="cfig${online ? ' topic-figure' : ''}"><img src="${path}.webp" srcset="${path}-768.webp 768w, ${path}.webp 1536w, ${path}-3072.webp 3072w" sizes="${assetSizes[naturalSize]}" alt="${escapeHtml(project.zh.mediaAlt)}" width="1536" height="1024"${loading}></figure>`;
+  return `<figure class="cfig${online ? ' topic-figure' : ''}"><img src="${path}.webp" srcset="${path}-768.webp 768w, ${path}.webp 1536w, ${path}-3072.webp 3072w" sizes="${assetSizes[naturalSize]}" alt="${escapeHtml(project[language].mediaAlt)}" width="1536" height="1024"${loading}></figure>`;
 }
 
-function featuredCard(project, isLead) {
-  return `      <a class="feat${isLead ? ' flag' : ''}" href="${detailPath(project)}">
-        ${projectImage(project, isLead ? 'wide' : 'featured')}
+function evidenceStatus(project, language) {
+  return caseEvidence[project.slug].types.map(type => label(evidenceTypes, type, language)).join(' · ');
+}
+
+function featuredCard(project, isLead, language = 'zh') {
+  const en = language === 'en';
+  const copy = project[language];
+  return `      <a class="feat${isLead ? ' flag' : ''}" href="${detailPath(project, language)}">
+        ${projectImage(project, isLead ? 'wide' : 'featured', { online: true, language })}
         <div class="fbd">
-          <div class="ctag">${projectType(project, 'zh')} · ${escapeHtml(label(domains, project.domain[0], 'zh'))}</div>
-          <h3>${escapeHtml(project.zh.title)}</h3>
-          <p class="fdeliv">${escapeHtml(project.zh.summary)}</p>
-          <div class="cres"><p class="rdesc">${escapeHtml(classification(project, 'zh'))}</p></div>
+          <div class="ctag">${projectType(project, language)} · ${escapeHtml(label(domains, project.domain[0], language))}</div>
+          <h3>${escapeHtml(copy.title)}</h3>
+          <p class="fdeliv">${escapeHtml(copy.problem)}</p>
+          <p class="fdeliv">${escapeHtml(copy.approach[0])}</p>
+          <p class="fdeliv">${escapeHtml(copy.deliverables[0])}</p>
+          <div class="cres"><p class="rdesc">${escapeHtml(evidenceStatus(project, language))}</p></div>
+          <span class="text-link">${en ? 'View case study' : '查看案例'}</span>
         </div>
       </a>`;
 }
@@ -247,9 +259,9 @@ function caseCard(project) {
 }
 
 function publicLinks(project, language) {
-  const refs = (project.references ?? []).map(reference => ({ href: reference.href, name: reference[language] }));
+  const refs = (project.references ?? []).map(reference => ({ href: demoPath(reference.href, language), name: reference[language] }));
   const related = (project.related ?? []).map(slug => ({
-    href: detailPath(slugs.get(slug)), name: slugs.get(slug)[language].title,
+    href: detailPath(slugs.get(slug), language), name: slugs.get(slug)[language].title,
   }));
   return { refs, related };
 }
@@ -264,14 +276,14 @@ const sectionLabels = {
     problem: '產業問題與工程挑戰', approach: '技術方法與架構', diagram: '技術圖解', diagramSources: '圖解來源',
     implementation: '實作與交付', result: '成果', validation: '驗證與證據',
     disclosure: '公開範圍及專案狀態', refs: '公開來源與展示', related: '相關工程與服務',
-    ownership: '歸屬與階段', benchmark: '量測範圍',
+    ownership: '歸屬與階段', benchmark: '量測範圍', solution: '相關解決方案', demo: '操作合成情境展示', evidenceType: '公開證據分類',
   },
   en: {
     problem: 'Industry problem and engineering challenge', approach: 'Technical approach and architecture',
     diagram: 'Technical diagram', diagramSources: 'Diagram sources',
     implementation: 'Implementation and deliverables', result: 'Outcome', validation: 'Validation and evidence',
     disclosure: 'Project status and disclosure', refs: 'Public sources and demonstrations', related: 'Related work and services',
-    ownership: 'Ownership and status', benchmark: 'Measurement scope',
+    ownership: 'Ownership and status', benchmark: 'Measurement scope', solution: 'Related solution', demo: 'Open the synthetic scenario', evidenceType: 'Public evidence classification',
   },
 };
 
@@ -334,6 +346,9 @@ function detailSections(project, language) {
   const t = sectionLabels[language];
   const copy = project[language];
   const { refs, related } = publicLinks(project, language);
+  const { solution, demo } = caseEvidence[project.slug];
+  if (demo) refs.unshift({ href: studioPath(`/labs/demos/${demo}/`, language), name: t.demo });
+  related.unshift({ href: studioPath(`/solutions/${solution}/`, language), name: t.solution });
   const deliverables = copy.deliverables.map(item => `<li>${escapeHtml(item)}</li>`).join('');
   const metrics = (project.metrics ?? []).map(metric => `
         <div id="${metric.evidenceId}${language === 'en' ? '-en' : ''}">
@@ -370,6 +385,7 @@ function detailSections(project, language) {
       <div class="wrap">
         <h2>${t.validation}</h2>
         <p class="topic-lead">${escapeHtml(copy.validation)}</p>
+        <p class="entry-meta">${t.evidenceType} · ${escapeHtml(evidenceStatus(project, language))}</p>
         ${evidenceGallery(project, language)}
         ${metrics ? `<dl class="topic-benchmark">${metrics}</dl>` : ''}
         ${refs.length ? `<nav class="entry-links" aria-label="${t.refs}">${linkList(refs)}</nav>` : ''}
@@ -384,103 +400,23 @@ function detailSections(project, language) {
         </div>
         <div class="topic-panel">
           <h3>${t.related}</h3>
-          ${linkList([...related, { href: contactPath(project), name: copy.service }])}
+          ${linkList([...related, { href: contactPath(project, language), name: copy.service }])}
         </div>
       </div>
     </section>`;
 }
 
-function detailPage(project) {
-  const name = `${project.zh.title}｜量維資科 Quantquer`;
-  const title = escapeHtml(name);
-  const description = escapeHtml(project.zh.summary);
-  // Search snippet: a fuller sentence built from the page's own facts; the visible intro stays `summary`.
-  const metaDescription = escapeHtml(project.zh.metaDescription ?? project.zh.summary);
-  const url = `${site}${detailPath(project)}`;
+function detailPage(project, language) {
+  const en = language === 'en';
+  const copy = project[language];
+  const route = detailPath(project);
   const demo = project.references?.find(reference => reference.href.startsWith('/labs/evidence/'))
     ?? project.references?.find(reference => reference.href.startsWith('/labs/interactive/#'));
-  const shareAlt = '量維資科，從晶片到智慧系統。下方是模型部署至晶片的技術示意。';
-  const schema = {
-    '@context': 'https://schema.org', '@type': 'WebPage', name, url,
-    description: project.zh.metaDescription ?? project.zh.summary,
-    inLanguage: ['zh-Hant', 'en'],
-    isPartOf: { '@id': `${site}/#website` },
-    publisher: { '@id': `${site}/#organization` },
-  };
-  return `<!DOCTYPE html>
-<!-- Generated by scripts/build-portfolio.mjs from data/projects.json. -->
-<html lang="zh-Hant" data-theme="light">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="/assets/theme.js"></script>
-  <title>${title}</title>
-  <meta name="description" content="${metaDescription}">
-  <meta name="theme-color" content="#F6F8FB">
-  <link rel="canonical" href="${url}">
-  <link rel="icon" href="/favicon.ico" sizes="48x48">
-  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/icon-192.png">
-  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/icon-96.png">
-  <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png">
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="量維資科 Quantquer">
-  <meta property="og:locale" content="zh_TW">
-  <meta property="og:title" content="${title}">
-  <meta property="og:description" content="${metaDescription}">
-  <meta property="og:url" content="${url}">
-  <meta property="og:image" content="${shareImage}">
-  <meta property="og:image:type" content="image/png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="${shareAlt}">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="${title}">
-  <meta name="twitter:description" content="${metaDescription}">
-  <meta name="twitter:image" content="${shareImage}">
-  <meta name="twitter:image:alt" content="${shareAlt}">
-  <script type="application/ld+json">
-${JSON.stringify(schema, null, 2).replaceAll('<', '\\u003c')}
-  </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700&amp;family=Noto+Sans+TC:wght@300;400;500&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/site.css">
-  <link rel="stylesheet" href="/assets/case-diagram.css">
-  <script type="module" src="/assets/analytics.mjs"></script>
-</head>
-<body class="topic-page" data-project="${project.slug}">
-  <a href="#content" class="skip-link">跳到主要內容</a>
-  <header>
-    <div class="wrap nav">
-      <a href="/" class="brand">
-        <img src="/assets/logo-mark.png" class="logo-mark" alt="量維資科 Quantquer 首頁" width="34" height="34">
-        <span class="brand-txt" aria-hidden="true"><span class="mark">量維資科</span><span class="lat">Quantquer</span></span>
-      </a>
-      <nav class="navlinks" aria-label="網站導覽">
-        <a href="/#work" class="topic-home">案例</a>
-        <a href="#english" lang="en">English</a>
-        <button id="themeToggle" class="theme-toggle" type="button" aria-label="切換深色模式"><svg class="ti ti-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 14.6A8.3 8.3 0 0 1 9.4 3.8a8.3 8.3 0 1 0 10.8 10.8Z"/></svg><svg class="ti ti-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.35 5.35l1.55 1.55M17.1 17.1l1.55 1.55M5.35 18.65l1.55-1.55M17.1 6.9l1.55-1.55"/></svg></button>
-      </nav>
-    </div>
-  </header>
-  <main id="content" tabindex="-1">
-    <section class="topic-hero" aria-labelledby="project-title">
-      <div class="wrap topic-hero-grid">
-        <div>
-          <p class="eyebrow">${projectType(project, 'zh')} / ${projectType(project, 'en')}</p>
-          <h1 id="project-title">${escapeHtml(project.zh.title)}</h1>
-          <p class="en" lang="en">${escapeHtml(project.en.title)}</p>
-          <p class="topic-audience">${escapeHtml(classification(project, 'zh'))}</p>
-          <p class="topic-intro">${description}</p>
-          <div class="entry-links">
-            <a class="btn btn-primary" href="${plannerPath(project)}" data-analytics="service_cta_clicked" data-project="${project.slug}" data-service="${project.inquiry}">建立專案需求</a>
-            ${demo ? `<a class="btn btn-ghost" href="${escapeHtml(demo.href)}">${escapeHtml(demo.zh)}</a>` : ''}
-            <a class="text-link" href="#${diagramAnchor('zh')}">${sectionLabels.zh.diagram}</a>
-          </div>
-        </div>
-        ${projectImage(project, 'wide', { online: true, priority: true })}
-      </div>
-    </section>${detailSections(project, 'zh')}
+  const demoSlug = caseEvidence[project.slug].demo;
+  const evidenceAction = demoSlug
+    ? `<a class="btn btn-ghost" href="${studioPath(`/labs/demos/${demoSlug}/`, language)}">${sectionLabels[language].demo}</a>`
+    : demo ? `<a class="btn btn-ghost" href="${escapeHtml(demoPath(demo.href, language))}">${escapeHtml(demo[language])}</a>` : '';
+  const translated = en ? '' : `
     <section id="english" aria-labelledby="english-title" lang="en">
       <div class="wrap topic-hero">
         <p class="eyebrow">${projectType(project, 'en')}</p>
@@ -488,26 +424,41 @@ ${JSON.stringify(schema, null, 2).replaceAll('<', '\\u003c')}
         <p class="topic-audience">${escapeHtml(classification(project, 'en'))}</p>
         <p class="topic-intro">${escapeHtml(project.en.summary)}</p>
         <div class="entry-links">
+          <a class="text-link" href="${detailPath(project, 'en')}">Open full English page</a>
           <a class="text-link" href="#project-title" lang="zh-Hant">繁體中文</a>
           <a class="text-link" href="${plannerPath(project, 'en')}" data-analytics="service_cta_clicked" data-project="${project.slug}" data-service="${project.inquiry}">Plan a project</a>
           ${demo ? `<a class="text-link" href="${escapeHtml(demoPath(demo.href, 'en'))}">${escapeHtml(demo.en)}</a>` : ''}
           <a class="text-link" href="#${diagramAnchor('en')}">${sectionLabels.en.diagram}</a>
         </div>
       </div>${detailSections(project, 'en')}
-    </section>
-  </main>
-  <footer>
-    <div class="wrap foot">
-      <a href="/" aria-label="量維資科 Quantquer 首頁">
-        <img class="foot-logo on-light" src="/assets/logo-full-onlight.png" alt="" loading="lazy">
-        <img class="foot-logo on-dark" src="/assets/logo-full-light.png" alt="" loading="lazy">
-      </a>
-      <a class="text-link" href="/#work">所有案例及技術專題</a>
-    </div>
-  </footer>
-</body>
-</html>
-`;
+    </section>`;
+  const content = `<section class="topic-hero" aria-labelledby="project-title">
+      <div class="wrap topic-hero-grid">
+        <div>
+          <p class="eyebrow">${projectType(project, language)}</p>
+          <h1 id="project-title">${escapeHtml(copy.title)}</h1>
+          ${en ? '' : `<p class="en" lang="en">${escapeHtml(project.en.title)}</p>`}
+          <p class="topic-audience">${escapeHtml(classification(project, language))} · ${escapeHtml(evidenceStatus(project, language))}</p>
+          <p class="topic-intro">${escapeHtml(copy.summary)}</p>
+          <div class="entry-links">
+            <a class="btn btn-primary" href="${contactPath(project, language)}" data-analytics="service_cta_clicked" data-project="${project.slug}" data-service="${project.inquiry}">${en ? 'Discuss a similar project' : '討論類似專案'}</a>
+            ${evidenceAction}
+            <a class="text-link" href="#${diagramAnchor(language)}">${sectionLabels[language].diagram}</a>
+          </div>
+        </div>
+        ${projectImage(project, 'wide', { online: true, priority: true, language })}
+      </div>
+    </section>${detailSections(project, language)}${translated}`;
+  return renderStudioPage({
+    route, locale: language, title: copy.title, description: copy.metaDescription ?? copy.summary, content,
+    breadcrumbs: [
+      { href: studioPath('/', language), label: en ? 'Home' : '首頁' },
+      { href: studioPath('/work/', language), label: en ? 'Work' : '案例' },
+    ],
+    structuredData: { '@type': 'Article', headline: copy.title, inLanguage: en ? 'en' : 'zh-Hant', description: copy.summary, mainEntityOfPage: site + detailPath(project, language), publisher: { '@id': `${site}/#organization` } },
+    styles: ['/assets/case-diagram.css'],
+    bodyAttributes: `data-project="${project.slug}"`,
+  }).replace('<!-- Generated by the Quantquer vNext page builders. -->','<!-- Generated by scripts/build-portfolio.mjs from data/projects.json. -->');
 }
 
 function generatedBlock(html, name, content) {
@@ -555,25 +506,45 @@ for (const entry of existingRoutes) {
 }
 
 for (const project of portfolio.projects) {
-  const directory = resolve(workDirectory, project.slug);
-  if (!checking) await mkdir(directory, { recursive: true });
-  await writeOutput(resolve(directory, 'index.html'), detailPage(project).replace(/[ \t]+$/gm, ''));
+  for (const language of languages) {
+    const directory = resolve(root, detailPath(project, language).slice(1));
+    if (!checking) await mkdir(directory, { recursive: true });
+    await writeOutput(resolve(directory, 'index.html'), detailPage(project, language));
+  }
 }
-// <lastmod>: data/projects.json `siteUpdated` (YYYY-MM-DD), or a project's own `updated`. Bump it when content changes.
-assert(/^\d{4}-\d{2}-\d{2}$/.test(portfolio.siteUpdated ?? ''), 'data/projects.json needs siteUpdated as YYYY-MM-DD');
-const routes = [
-  ...[
-    '/', '/en/', '/semiconductor-ai/', '/financial-intelligence/', '/labs/interactive/',
-    '/project-planner/', '/labs/evidence/vision/', '/labs/evidence/photonics/', '/labs/evidence/gpu/', '/labs/evidence/research/',
-  ].map(path => [path, portfolio.siteUpdated]),
-  ...portfolio.projects.map(project => [detailPath(project), project.updated ?? portfolio.siteUpdated]),
-];
-const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${routes.map(([route, lastmod]) => `  <url><loc>${site}${route}</loc><lastmod>${lastmod}</lastmod></url>`).join('\n')}
-</urlset>
-`;
-await writeOutput(resolve(root, 'sitemap.xml'), sitemap);
+
+for (const language of languages) {
+  const en = language === 'en';
+  const allTitle = en ? 'Engineering cases and technical notes' : '工程案例與技術專題';
+  const description = en ? 'Browse engineering outcomes, evidence, limitations and technical diagrams across AI, robotics and compute.' : '查看工程交付、公開證據、適用限制及 AI、機器人、運算等領域的技術圖解。';
+  const t = (zh, english) => en ? english : zh;
+  const industry = Object.keys(domains).map((id) => `<button type="button" data-filter="${id}" aria-pressed="false">${label(domains, id, language)}</button>`).join('');
+  const filters = `<div class="portfolio-filter" data-work-filter aria-controls="case-list" hidden>
+      <form class="work-controls">
+        <label class="work-search">${t('搜尋案例', 'Search cases')} <input name="q" type="search" maxlength="100"></label>
+        <label>${t('技術', 'Technology')} <select name="technology"><option value="">${t('全部技術', 'All technologies')}</option></select></label>
+        <label>${t('階段', 'Status')} <select name="status"><option value="">${t('全部階段', 'All statuses')}</option></select></label>
+        <label>${t('類型', 'Type')} <select name="type"><option value="">${t('全部類型', 'All types')}</option></select></label>
+        <label class="featured-only"><input name="featured" type="checkbox"> ${t('只看代表案例', 'Featured cases only')}</label>
+      </form>
+      <div class="filter-options" role="group" aria-label="${t('依領域篩選', 'Filter by domain')}"><button type="button" data-filter="" aria-pressed="true">${t('所有領域', 'All domains')}</button>${industry}</div>
+      <p class="filter-count" role="status"></p><p class="filter-empty" hidden>${t('沒有符合條件的案例。', 'No cases match your filters.')} <button type="button" data-reset-work>${t('清除篩選', 'Clear filters')}</button></p>
+    </div>`;
+  const list = portfolio.projects.map(project => `<article class="topic-panel" data-tags="${project.domain.join(' ')}" data-tech="${project.tech.join(' ')}" data-origin="${project.origin}" data-stage="${project.stage}" data-case-kind="${project.kind ?? 'case'}" data-featured="${featured.has(project.slug)}"><p class="eyebrow">${escapeHtml(evidenceStatus(project, language))}</p><h2><a class="text-link" href="${detailPath(project, language)}">${escapeHtml(project[language].title)}</a></h2><p>${escapeHtml(project[language].summary)}</p></article>`).join('');
+  const directory = resolve(root, studioPath('/work/', language).slice(1));
+  if (!checking) await mkdir(directory, { recursive: true });
+  await writeOutput(resolve(directory, 'index.html'), renderStudioPage({
+    route: '/work/', locale: language, title: allTitle, description,
+    breadcrumbs: [{ href: studioPath('/', language), label: en ? 'Home' : '首頁' }], structuredData: { '@type': 'CollectionPage' },
+    extraHead: '<script defer src="/assets/portfolio.js"></script>',
+    content: `<section class="topic-hero"><div class="wrap"><h1>${allTitle}</h1><p class="topic-intro">${description}</p></div></section>
+    <section class="topic-section axis-divider" id="work"><div class="wrap">
+      <div class="entry-links"><a class="text-link" href="${studioPath('/labs/evidence/', language)}">${en ? 'Evidence center' : '工程證據中心'}</a></div>
+      ${filters}
+      <div class="topic-detail-grid work-index-grid" id="case-list">${list}</div>
+    </div></section>`,
+  }));
+}
 const indexFile = resolve(root, 'index.html');
 const home = await readFile(indexFile, 'utf8');
 const sections = generatedBlock(
@@ -582,4 +553,8 @@ const sections = generatedBlock(
   portfolio.projects.map(caseCard).join('\n\n'),
 );
 await writeOutput(indexFile, sections, home);
-console.log(`${checking ? 'Verified' : 'Generated'} ${portfolio.projects.length} project pages, two homepage sections and sitemap.`);
+const englishFile = resolve(root, 'en/index.html');
+const englishHome = await readFile(englishFile, 'utf8');
+const englishSection = generatedBlock(englishHome, 'featured', portfolio.featured.map((slug, index) => featuredCard(slugs.get(slug), index === 0, 'en')).join('\n'));
+await writeOutput(englishFile, englishSection, englishHome);
+console.log(`${checking ? 'Verified' : 'Generated'} ${portfolio.projects.length} case studies in two languages, case indexes and homepage cards.`);

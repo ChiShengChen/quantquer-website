@@ -10,6 +10,7 @@ const speed = get('speed');
 const language = get('language');
 const chart = get('chart');
 const translatable = [...document.querySelectorAll('[data-en]')].map(node => [node, node.textContent.trim()]);
+const localizedLinks = [...document.querySelectorAll('[data-en-href]')].map(node => [node, node.getAttribute('href')]);
 const params = new URLSearchParams(location.search);
 let isEnglish = params.get('lang') === 'en';
 const tr = (zh, en) => isEnglish ? en : zh;
@@ -134,6 +135,7 @@ function applyLanguage() {
     ? tr('切換亮色模式', 'Switch to light mode')
     : tr('切換深色模式', 'Switch to dark mode'));
   for (const [node, zh] of translatable) node.textContent = tr(zh, node.dataset.en);
+  for (const [node, zh] of localizedLinks) node.setAttribute('href', tr(zh, node.dataset.enHref));
   for (const { detail, job } of rows) rowDetails(detail, job);
   language.textContent = tr('English', '繁體中文');
   language.lang = tr('en', 'zh-Hant');

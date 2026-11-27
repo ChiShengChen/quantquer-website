@@ -1,0 +1,111 @@
+.gpu-policy-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
+  min-width: 0;
+  margin-block: 1rem;
+}
+
+.gpu-policy-panel[hidden] {
+  display: none;
+}
+
+.gpu-policy-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .45rem .85rem;
+}
+
+.gpu-policy-controls label,
+.gpu-policy-inputs summary {
+  font-weight: 650;
+}
+
+.gpu-policy-controls select {
+  min-width: 0;
+  max-width: 100%;
+  min-height: 44px;
+  padding: .42rem .6rem;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--fg);
+  font: inherit;
+}
+
+.gpu-policy-rule,
+.gpu-policy-inputs p {
+  margin: 0;
+  color: var(--fg-dim);
+  font-size: .89rem;
+}
+
+.gpu-policy-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 9.4rem), 1fr));
+  gap: .65rem;
+  margin: 0;
+}
+
+.gpu-policy-summary > div {
+  min-width: 0;
+  padding: .62rem;
+  border: 1px solid var(--line);
+  background: var(--bg);
+}
+
+.gpu-policy-summary dt {
+  color: var(--fg-dim);
+  font-size: .83rem;
+}
+
+.gpu-policy-summary dd {
+  margin: .32rem 0 0;
+  color: var(--fg);
+  font-variant-numeric: tabular-nums;
+  font-weight: 650;
+}
+
+.gpu-policy-table-wrap {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.gpu-policy-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: clamp(.74rem, 2.7vw, .94rem);
+  font-variant-numeric: tabular-nums;
+}
+
+.gpu-policy-table caption {
+  margin-bottom: .4rem;
+  text-align: left;
+  color: var(--fg);
+  font-weight: 650;
+}
+
+.gpu-policy-table th,
+.gpu-policy-table td {
+  border-bottom: 1px solid var(--line);
+  padding: .42rem clamp(.24rem, 1.5vw, .7rem);
+  vertical-align: top;
+}
+
+.gpu-policy-table td {
+  white-space: nowrap;
+}
+
+.gpu-policy-table thead {
+  background: var(--bg);
+}
+
+.gpu-policy-inputs summary {
+  cursor: pointer;
+}
+
+.gpu-policy-inputs p,
+.gpu-policy-inputs .gpu-policy-table-wrap {
+  margin-top: .6rem;
+}

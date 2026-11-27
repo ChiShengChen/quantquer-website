@@ -1,0 +1,31 @@
+{
+  "experimentType": "four-mode-reference-mesh",
+  "evidenceType": "simulated",
+  "config": {
+    "mode": "1",
+    "inputPowerPercent": 100,
+    "fault": {
+      "cell": "2-23",
+      "phaseDelta": 35,
+      "powerLoss": 20
+    }
+  },
+  "result": {
+    "idealPortPowers": [
+      0.2386909507486005,
+      0.05431810567580864,
+      0.6683183566072572,
+      0.0386725869683343
+    ],
+    "faultedPortPowers": [
+      0.3313499249660724,
+      0.031395394954066284,
+      0.5424692224625007,
+      0.016106635799808904
+    ],
+    "inputPower": 1,
+    "faultedOutputPower": 0.9213211781824483,
+    "relativeOutputError": 0.22384838434681067,
+    "relativePowerLoss": 0.0786788218175517
+  }
+}

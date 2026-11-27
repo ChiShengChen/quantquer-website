@@ -4,6 +4,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { parseArgs } from 'node:util';
 import { fileURLToPath, pathToFileURL } from 'node:url';
+import { founder } from '../data/studio-offerings.mjs';
 import { capabilityCopy } from './generate-capabilities-copy.mjs';
 
 const { values } = parseArgs({ options: { browser: { type: 'string', default: 'google-chrome' } } });
@@ -17,6 +18,8 @@ const asset = path => pathToFileURL(join(repo, 'assets', path)).href;
 const link = (url, text) => `<a href="${escape(url)}">${escape(text)}</a>`;
 
 function render(copy) {
+  const english = copy.language === 'en';
+  const localeIndex = Number(english);
   const footer = page => `<footer class="page-footer"><span>${escape(copy.company)}</span>${link(copy.homeUrl, 'quantquer.com')}<span>${page} / 4</span></footer>`;
   const heading = (title, intro) => `<header class="page-heading"><p class="eyebrow">Quantquer</p><h2>${escape(title)}</h2><p>${escape(intro)}</p></header>`;
   const contacts = `<li>${link(copy.contactUrl, copy.contactLabel)}</li><li>${link(`mailto:${copy.email}`, copy.email)}</li>`;
@@ -65,6 +68,9 @@ function render(copy) {
   <section class="page">
     ${heading(copy.engagementTitle, copy.engagementIntro)}
     <ul class="engagement-grid">${copy.engagements.map(([title, description]) => `<li class="engagement"><h3>${escape(title)}</h3><p>${escape(description)}</p></li>`).join('\n')}</ul>
+    <section class="founder-info"><h3>${escape(english ? 'Founder credentials' : '創辦人經歷')}</h3>
+    <p><strong class="founder-name">${escape(founder.name[localeIndex])}</strong>${escape(founder.professional[localeIndex])} ${escape(founder.research[localeIndex])}</p>
+    <p>${link(founder.profiles[0].href, founder.profiles[0].label[localeIndex])}</p></section>
     <section class="contact-panel"><h3>${escape(copy.ctaTitle)}</h3><p>${escape(copy.ctaText)}</p><ul>${contacts}</ul></section>
     ${footer(4)}
   </section>
