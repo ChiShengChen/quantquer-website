@@ -82,8 +82,8 @@ html[lang="en"] .studio-home .hero-title { max-width: 15ch; }
 @media (max-width: 620px) {
   .home-featured-grid { grid-template-columns: 1fr; }
 }
-.home-section-art { width: 100%; min-width: 0; background: var(--edge-art-bg); }
-.home-section-art img { object-fit: contain; }
+.home-section-art { width: 100%; min-width: 0; aspect-ratio: 15 / 8; background: var(--edge-art-bg); }
+.home-section-art img { width: 80%; margin-inline: auto; object-fit: contain; }
 .home-proof-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(12px, 2.2vw, 24px); }
 .home-proof-card { border: 1px solid var(--line); background: var(--panel); }
 .home-proof-copy { padding: clamp(.85rem, 2vw, 1.45rem); }

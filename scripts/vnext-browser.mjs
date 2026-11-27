@@ -126,7 +126,9 @@ try {
       await picture.evaluate(img => img.decode());
       assert.match(await picture.evaluate(img => img.currentSrc), /\/assets\/(labs|svcs|caps)\/[^/]+\.webp$/);
       const frame = await picture.locator('..').boundingBox();
-      assert.ok(frame && Math.abs(frame.width - frame.height * 1.5) <= 2, 'Homepage illustrations show the full 3:2 frame');
+      const artwork = await picture.boundingBox();
+      assert.ok(frame && artwork && Math.abs(artwork.width - frame.width * .8) <= 2, 'Homepage illustrations occupy 80% of their frames');
+      assert.equal(await picture.evaluate(img => getComputedStyle(img).objectFit), 'contain');
     }
     const engagementImages = page.locator('#engagements .home-section-art');
     for (const figure of await engagementImages.all()) {

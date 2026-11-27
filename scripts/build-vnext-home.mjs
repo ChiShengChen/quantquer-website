@@ -196,8 +196,8 @@ function homeBlocks(locale) {
     local('/labs/projects/') + '#project-paper-evidence',
     '/labs/evidence/photonics/' + (en ? '?lang=en' : ''),
   ];
-  const cardArtSizes = '(max-width: 760px) 90vw, (max-width: 1180px) 44vw, 520px';
-  const companionArtSizes = '(max-width: 680px) 90vw, (max-width: 1180px) 38vw, 442px';
+  const cardArtSizes = '(max-width: 760px) 72vw, (max-width: 1180px) 35vw, 416px';
+  const companionArtSizes = '(max-width: 680px) 72vw, (max-width: 1180px) 30vw, 354px';
   const evidence = `<section class="studio-home-section axis-divider" id="engineering-evidence" aria-labelledby="home-evidence-title">
     <div class="wrap home-proof-grid">
       <div class="home-proof-card">
