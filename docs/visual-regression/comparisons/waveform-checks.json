@@ -1,0 +1,62 @@
+[
+  {
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "theme": "light",
+    "canvasSha256": "df49aa86f01c0e677f9fe71cb45ee7fa0f4c5312eaab4df0386b58a426bf3b88",
+    "titleLines": 2,
+    "primaryActionBottomPx": 731.046875
+  },
+  {
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "theme": "dark",
+    "canvasSha256": "a978d93e9f70f2e53a96296422041e599ef73832269497b3ff2723adfeede242",
+    "titleLines": 2,
+    "primaryActionBottomPx": 731.046875
+  },
+  {
+    "viewport": {
+      "width": 1280,
+      "height": 800
+    },
+    "theme": "light",
+    "canvasSha256": "fca9a2c5085589547cd259d2150400771c72c07df5b1fbf02e9e641b328c41c9",
+    "titleLines": 2,
+    "primaryActionBottomPx": 678.609375
+  },
+  {
+    "viewport": {
+      "width": 768,
+      "height": 1024
+    },
+    "theme": "light",
+    "canvasSha256": "654de98eb03742beeb232b724d756e77556161cf31164d936196f4629532a578",
+    "titleLines": 2,
+    "primaryActionBottomPx": 748.09375
+  },
+  {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "theme": "light",
+    "canvasSha256": "ecbad016f0fab5fb72c14b63d804c43d6117c04fae32f4d497ef85dc13c78cd7",
+    "titleLines": 2,
+    "primaryActionBottomPx": 622.078125
+  },
+  {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "theme": "dark",
+    "canvasSha256": "3cad2f07cb70764e8a8fff7e060dba002d6fab1df112e5ef3515e8d4e125c6c7",
+    "titleLines": 2,
+    "primaryActionBottomPx": 622.078125
+  }
+]

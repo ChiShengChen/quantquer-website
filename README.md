@@ -1,6 +1,6 @@
 # 量維資科 Quantquer Inc. — 官方網站
 
-研究驅動的 AI 與深科技工程公司官網。以專題、可分享的案例詳頁與瀏覽器互動展示呈現從硬體、演算法到系統與應用的工程能力。
+研究驅動的深科技工程工作室官網。Quantquer vNext 保留原版波形介面，擴充解決方案、雙語案例、工程證據、Labs 和詢價流程。
 
 🌐 **線上網址**：<https://quantquer.com>
 
@@ -8,7 +8,7 @@
 
 ## 技術概覽
 
-- **純靜態**。頁面共用 CSS 與原生 JavaScript。Node 只用於生成或檢查案例頁、首頁卡片與 sitemap，部署不需安裝套件。
+- **純靜態**。頁面共用 CSS 與原生 JavaScript。Node 只用於生成或檢查頁面、內容資料及 sitemap，部署不需安裝套件。
 - **字型**：Google Fonts（Noto Serif TC / Noto Sans TC / IBM Plex Mono）。
 - **Hero 動畫**：`<canvas>` 即時繪製訊號頻譜（PSD 包絡 + live signal trace），支援 `prefers-reduced-motion`。
 - **雙主題**：亮色（預設，品牌藍 `#004EA1`）／深色（teal `#2DD4BF`），右上角切換，偏好存於 `localStorage`，於繪製前套用以避免閃爍。
@@ -26,9 +26,14 @@
 ├── labs/evidence/              # 模型輸出、光子模擬、GPU 實跑及引文查核
 ├── project-planner/            # 中英文專案需求評估
 ├── downloads/                  # 中英文公司技術能力 PDF
+├── solutions/                  # 解決方案與交付範圍
+├── services/                   # 工程合作及採購入口
+├── contact/                    # 雙語詢價流程，靜態版支援郵件草稿與複製
 ├── work/                       # 已生成的案例及技術專題詳頁
 ├── data/projects.json          # 可公開案例資料
-├── scripts/build-portfolio.mjs # 生成首頁卡片、案例頁及 sitemap
+├── scripts/build-portfolio.mjs # 生成案例索引、詳頁和首頁卡片
+├── scripts/build-vnext.mjs     # 生成雙語站點、Labs 與 sitemap
+├── docs/                       # 工程交接、公開證據與波形視覺回歸
 ├── sitemap.xml / robots.txt    # 搜尋引擎索引
 ├── 404.html / favicon.ico      # 自訂找不到頁面（noindex）、根目錄網站圖示
 ├── assets/
@@ -39,7 +44,7 @@
 │   ├── logo-full-light.png     # 完整 logo（淺色字，深色底用）— 深色版頁尾
 │   ├── logo-full-onlight.png   # 完整 logo（深色字，淺色底用）— 亮色版頁尾、JSON-LD
 │   ├── partners/*              # §08 夥伴 logo（取自築邦科技夥伴頁 buildpolis.com/partners）
-│   ├── og-image-2-1.png        # 2.1 社群分享圖 1200×630（Open Graph 與 X 卡片）
+│   ├── og-image-2-1.png        # 2.1 舊社群分享圖 1200×630（保留原網址）
 │   ├── og-image.png            # 2.0 社群分享圖的原網址
 │   ├── caps/*.webp             # §01 能力示意圖
 │   ├── svcs/*.webp             # §02 服務方案示意圖
@@ -72,7 +77,7 @@ python3 -m http.server 8000 --bind 127.0.0.1
 | 區段 | id | 說明 |
 |------|------|------|
 | Hero | `#top` | 主標、一句服務描述、兩個入口按鈕與 canvas 動畫 |
-| 代表案例 | `#featured` | 晶片端生成式影像、機器人工作站、知識庫與光子模擬 |
+| 代表案例 | `#featured` | 晶片端生成式影像、機器人工作站、知識仲裁與 GPU 排程 |
 | §01 能力 | `#capabilities` | 十項技術能力與專題入口 |
 | §02 服務與合作模式 | `#services` | 八個服務方案與五種合作方式 |
 | §03 精選案例 | `#work` | 案例與技術專題詳頁。產業、技術、狀態、類型、代表項目及搜尋可組合 |
@@ -85,7 +90,7 @@ python3 -m http.server 8000 --bind 127.0.0.1
 
 ## 編輯指南
 
-- 案例的雙語內容、歸屬、階段、來源和服務連結由 `data/projects.json` 維護，只收錄公開資料。變更後執行 `node scripts/build-portfolio.mjs`，最後用 `node scripts/build-portfolio.mjs --check` 檢查首頁區塊、案例詳頁和 sitemap 同步。
+- 案例的雙語內容、歸屬、階段、來源和服務連結由 `data/projects.json` 維護，只收錄公開資料。變更後執行 `node scripts/build-vnext.mjs`，最後用 `node scripts/build-vnext.mjs --check` 檢查所有生成頁面及 sitemap 同步。
 - 案例技術圖解的雙語標題、對應流程和來源位於 `data/case-diagrams.json`。圖解的步驟說明由案例資料帶入，論文連結標明與案例的關係。
 - 案例頁的搜尋摘要用 `zh.metaDescription`（約 70–95 字，只用頁面上已有的事實），沒有填時沿用 `zh.summary`；頁面上的開頭介紹仍是 `summary`。sitemap 的 `<lastmod>` 取 `siteUpdated`（YYYY-MM-DD），單一案例可用 `updated` 覆寫，內容有變動時記得更新日期。
 - 案例與 Labs 卡片的 `id` 作為穩定錨點。首頁從生成後的卡片讀取篩選條件，案例篩選狀態保存在可分享的網址中。
@@ -112,3 +117,7 @@ GitHub Pages（來源：`main` 分支根目錄）。推送到 `main` 即自動�
 ---
 
 © 2026 量維資科有限公司 Quantquer Inc.（統一編號 93573761）— 用量化方法解決硬問題。
+
+## vNext 驗收與維護
+
+使用 [部署手冊](docs/DEPLOYMENT.md) 重建、預覽和執行 Playwright。既有波形、配色、導覽和響應規則見 [保護元件](docs/PROTECTED_DESIGN_COMPONENTS.md)。公開工程主張的核對方式見 [證據政策](docs/EVIDENCE_POLICY.md) 及 [Benchmark 指南](docs/BENCHMARK_GUIDE.md)。
