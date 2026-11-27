@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="zh-Hant" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>/* default to light; honor a saved 'dark' choice. set before paint to avoid flash */(function(){try{if(localStorage.getItem('theme')!=='dark')document.documentElement.setAttribute('data-theme','light');}catch(e){document.documentElement.setAttribute('data-theme','light');}})();</script>
+<script src="assets/theme.js"></script>
 <title>量維資科 Quantquer Inc. — 研究驅動的 AI 與深科技工程</title>
 <link rel="icon" type="image/png" href="assets/logo-mark.png">
 
 <!-- ===== SEO ===== -->
-<meta name="description" content="量維資科 Quantquer Inc.｜研究驅動的 AI 與深科技工程。客製化 AI Agent、AI 評估與成本最佳化、研究即服務，以及醫療、訊號、金融與工業 AI 的演算法研發與系統交付。">
-<meta name="keywords" content="AI Agent,多代理系統,AI顧問,企業AI,知識庫,RAG,LLM評估,研究即服務,機器學習,訊號處理,時頻分析,臨床AI,醫療AI,金融AI,量化策略,工業AI,量子機器學習,EEG,BCI,Quantquer,量維資科">
+<meta name="description" content="量維資科 Quantquer Inc.｜From Silicon to Intelligence。晶片端生成式 AI、模型最佳化、GPU 運算基礎設施、客製化 AI Agent、科學計算與深科技工程。">
+<meta name="keywords" content="邊緣AI,Edge AI,晶片端AI,NPU,模型量化,生成式AI,GPU排程,AI基礎設施,光子模擬,AI Agent,多代理系統,AI顧問,企業AI,知識庫,RAG,LLM評估,研究即服務,機器學習,訊號處理,時頻分析,臨床AI,醫療AI,金融AI,量化策略,工業AI,量子機器學習,EEG,BCI,Quantquer,量維資科">
 <meta name="author" content="量維資科 Quantquer Inc.">
 <meta name="theme-color" content="#F6F8FB">
 <link rel="canonical" href="https://quantquer.com/">
@@ -18,7 +18,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="量維資科 Quantquer Inc.">
 <meta property="og:title" content="量維資科 Quantquer Inc. — 研究驅動的 AI 與深科技工程">
-<meta property="og:description" content="把困難的量化問題，做成可交付的系統。客製化 AI Agent、AI 評估與最佳化、研究即服務與深科技研發。">
+<meta property="og:description" content="把困難的量化問題，做成可交付的系統。晶片端生成式 AI、GPU 運算基礎設施、AI Agent 與科學計算。">
 <meta property="og:url" content="https://quantquer.com/">
 <meta property="og:image" content="https://quantquer.com/assets/og-image.png">
 <meta property="og:image:width" content="1200">
@@ -28,7 +28,7 @@
 <!-- ===== Twitter ===== -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="量維資科 Quantquer Inc. — 研究驅動的 AI 與深科技工程">
-<meta name="twitter:description" content="把困難的量化問題，做成可交付的系統。客製化 AI Agent、AI 評估與最佳化、研究即服務與深科技研發。">
+<meta name="twitter:description" content="把困難的量化問題，做成可交付的系統。晶片端生成式 AI、GPU 運算基礎設施、AI Agent 與科學計算。">
 <meta name="twitter:image" content="https://quantquer.com/assets/og-image.png">
 
 <!-- ===== Organization schema ===== -->
@@ -36,12 +36,13 @@
 {
   "@context":"https://schema.org",
   "@type":"Organization",
+  "@id":"https://quantquer.com/#organization",
   "name":"量維資科 Quantquer Inc.",
   "alternateName":"Quantquer",
   "url":"https://quantquer.com/",
   "logo":"https://quantquer.com/assets/logo-full-onlight.png",
-  "description":"研究驅動的 AI 與深科技工程公司。以研究級的嚴謹方法，為企業打造客製化 AI Agent、智慧決策系統、訊號處理演算法與深科技產品，並交付可上線的系統。",
-  "knowsAbout":["AI agents","Multi-agent systems","LLM evaluation","Retrieval-augmented generation","Signal processing","Time-series modeling","Clinical AI","EEG","Brain-computer interfaces","Quantitative finance","Quantum machine learning","Computer vision","Industrial AI"],
+  "description":"研究驅動的 AI 與深科技工程公司，從晶片、演算法到智慧系統。以研究級的嚴謹方法，為企業打造晶片端生成式 AI、客製化 AI Agent、智慧決策系統、訊號處理演算法與深科技產品，並交付可上線的系統。",
+  "knowsAbout":["Edge AI","On-device generative AI","Model quantization","GPU workload scheduling","Scientific computing","AI agents","Multi-agent systems","LLM evaluation","Retrieval-augmented generation","Signal processing","Time-series modeling","Clinical AI","EEG","Brain-computer interfaces","Quantitative finance","Quantum machine learning","Computer vision","Industrial AI"],
   "email":"chisheng.m.chen@gmail.com",
   "sameAs":["https://www.linkedin.com/company/104143648/"],
   "founder":{"@type":"Person","name":"陳麒升","sameAs":["https://scholar.google.com/citations?user=5XHD7nkAAAAJ"]}
@@ -51,486 +52,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700&family=Noto+Sans+TC:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg:#070A11;
-    --bg-2:#0A0F18;
-    --panel:#0C121C;
-    --fg:#EAEEF2;
-    --fg-dim:#9AA6B4;
-    --fg-faint:#7A8796;
-    --accent:#2DD4BF;
-    --accent-dim:rgba(45,212,191,.55);
-    --line:rgba(255,255,255,.08);
-    --line-soft:rgba(255,255,255,.045);
-    --header-bg:rgba(7,10,17,.78);
-    --hero-vignette:radial-gradient(120% 90% at 18% 42%, rgba(7,10,17,.55) 0%, rgba(7,10,17,.2) 45%, rgba(7,10,17,.75) 100%);
-    --canvas-grid:rgba(255,255,255,0.035);
-    --canvas-axis:rgba(255,255,255,0.06);
-    --serif:'Noto Serif TC',serif;
-    --sans:'Noto Sans TC',system-ui,sans-serif;
-    --mono:'IBM Plex Mono',ui-monospace,monospace;
-    --maxw:1180px;
-    --pad:clamp(20px,5vw,64px);
-  }
-  /* ---------- light theme ---------- */
-  html[data-theme="light"]{
-    --bg:#F6F8FB;
-    --bg-2:#FFFFFF;
-    --panel:#FFFFFF;
-    --fg:#101A24;
-    --fg-dim:#4B5765;
-    --fg-faint:#5F6B79;
-    --accent:#004EA1;
-    --accent-dim:rgba(0,78,161,.5);
-    --line:rgba(16,26,36,.12);
-    --line-soft:rgba(16,26,36,.07);
-    --header-bg:rgba(246,248,251,.82);
-    --hero-vignette:radial-gradient(120% 90% at 18% 42%, rgba(246,248,251,.4) 0%, rgba(246,248,251,.05) 45%, rgba(246,248,251,.72) 100%);
-    --canvas-grid:rgba(16,26,36,0.05);
-    --canvas-axis:rgba(16,26,36,0.09);
-    color-scheme:light;
-  }
-  *{box-sizing:border-box;margin:0;padding:0;}
-  html{scroll-behavior:smooth;color-scheme:dark;}
-  body{transition:background .4s ease, color .4s ease;}
-  body{
-    background:var(--bg);
-    color:var(--fg);
-    font-family:var(--sans);
-    font-weight:300;
-    line-height:1.7;
-    -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
-  }
-  ::selection{background:rgba(45,212,191,.25);color:#fff;}
-  html[data-theme="light"] ::selection{background:rgba(0,78,161,.16);color:var(--fg);}
-  a{color:inherit;text-decoration:none;}
-
-  .mono{font-family:var(--mono);}
-  .eyebrow{
-    font-family:var(--mono);
-    font-size:.72rem;
-    letter-spacing:.22em;
-    text-transform:uppercase;
-    color:var(--accent);
-    font-weight:400;
-  }
-  .en{
-    font-family:var(--mono);
-    color:var(--fg-faint);
-    font-size:.8rem;
-    letter-spacing:.04em;
-    font-weight:400;
-  }
-
-  /* ---------- shell ---------- */
-  .wrap{max-width:var(--maxw);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad);}
-
-  /* ---------- nav ---------- */
-  header{
-    position:fixed;top:0;left:0;right:0;z-index:50;
-    transition:background .4s ease, border-color .4s ease, backdrop-filter .4s ease;
-    border-bottom:1px solid transparent;
-  }
-  header.scrolled{
-    background:var(--header-bg);
-    backdrop-filter:blur(14px);
-    border-bottom:1px solid var(--line-soft);
-  }
-  .nav{
-    display:flex;align-items:center;justify-content:space-between;
-    height:74px;
-  }
-  .brand{display:flex;align-items:center;gap:.7rem;}
-  .brand .logo-mark{height:34px;width:auto;display:block;}
-  .brand .brand-txt{display:flex;align-items:baseline;gap:.55rem;}
-  .brand .mark{font-family:var(--serif);font-weight:600;font-size:1.2rem;letter-spacing:.02em;}
-  @media(max-width:480px){ .brand .brand-txt{display:none;} .brand .logo-mark{height:30px;} }
-  .brand .lat{font-family:var(--mono);font-size:.72rem;letter-spacing:.18em;color:var(--fg-faint);text-transform:uppercase;}
-  .navlinks{display:flex;align-items:center;gap:1.7rem;}
-  .navlinks a{
-    font-family:var(--mono);font-size:.78rem;letter-spacing:.05em;color:var(--fg-dim);
-    transition:color .25s;
-  }
-  .navlinks a:hover{color:var(--fg);}
-  .nav-cta{
-    font-family:var(--mono);font-size:.78rem;letter-spacing:.04em;
-    color:var(--accent);border:1px solid var(--accent-dim);white-space:nowrap;
-    padding:.5rem 1rem;border-radius:2px;transition:background .25s,color .25s;
-  }
-  .nav-cta:hover{background:var(--accent);color:#04201d;}
-  .theme-toggle{
-    font-family:var(--mono);font-size:.95rem;line-height:1;
-    width:38px;height:38px;flex-shrink:0;
-    display:inline-flex;align-items:center;justify-content:center;
-    border:1px solid var(--line);border-radius:2px;background:transparent;
-    color:var(--fg-dim);cursor:pointer;
-    transition:color .25s,border-color .25s,background .25s;
-  }
-  .theme-toggle:hover{color:var(--accent);border-color:var(--accent-dim);}
-  @media(max-width:940px){ .navlinks .lk{display:none;} }
-
-  /* ---------- mobile menu ---------- */
-  .burger{display:none;position:relative;width:38px;height:38px;flex-shrink:0;border:1px solid var(--line);border-radius:2px;background:transparent;cursor:pointer;transition:border-color .25s;}
-  .burger:hover{border-color:var(--accent-dim);}
-  .burger span{position:absolute;left:11px;right:11px;height:1.5px;background:var(--fg-dim);transition:top .3s ease,transform .3s ease,opacity .2s ease,background .25s;}
-  .burger span:nth-child(1){top:13px;}
-  .burger span:nth-child(2){top:18px;}
-  .burger span:nth-child(3){top:23px;}
-  .burger:hover span{background:var(--accent);}
-  header.menu-open .burger span:nth-child(1){top:18px;transform:rotate(45deg);}
-  header.menu-open .burger span:nth-child(2){opacity:0;}
-  header.menu-open .burger span:nth-child(3){top:18px;transform:rotate(-45deg);}
-  header.menu-open{background:var(--bg);border-bottom:1px solid var(--line);box-shadow:0 18px 40px -24px rgba(7,10,17,.35);}
-  .mnav{display:none;border-top:1px solid var(--line-soft);max-height:calc(100svh - 74px);overflow-y:auto;}
-  header.menu-open .mnav{display:block;animation:mnavIn .28s cubic-bezier(.2,.7,.2,1);}
-  @keyframes mnavIn{from{opacity:0;transform:translateY(-8px);}to{opacity:1;transform:none;}}
-  .mnav .wrap{display:grid;padding-top:.4rem;padding-bottom:1.2rem;}
-  .mnav a{display:flex;align-items:baseline;gap:1rem;padding:.85rem 0;border-bottom:1px solid var(--line-soft);font-family:var(--serif);font-size:1.12rem;font-weight:500;color:var(--fg);transition:color .2s;}
-  .mnav a:last-child{border-bottom:none;}
-  .mnav a span{font-family:var(--mono);font-size:.72rem;font-weight:400;color:var(--accent);letter-spacing:.1em;width:2rem;flex-shrink:0;}
-  .mnav a:hover,.mnav a:focus-visible{color:var(--accent);}
-  @media(max-width:940px){ .burger{display:inline-block;} }
-  @media(min-width:941px){ header.menu-open .mnav{display:none;} }
-  @media(max-width:480px){ .navlinks{gap:.7rem;} .nav-cta{padding:.5rem .75rem;} }
-  @media(prefers-reduced-motion:reduce){ header.menu-open .mnav{animation:none;} .burger span{transition:none;} }
-
-  /* ---------- hero ---------- */
-  .hero{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden;}
-  #spectrum{position:absolute;inset:0;width:100%;height:100%;z-index:0;}
-  .hero::after{ /* vignette to settle text */
-    content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
-    background:var(--hero-vignette);
-  }
-  .hero .wrap{position:relative;z-index:2;width:100%;padding-top:96px;padding-bottom:64px;}
-  .hero-eyebrow{display:flex;align-items:center;gap:.85rem;margin-bottom:2rem;}
-  .hero-eyebrow .tick{width:34px;height:1px;background:var(--accent-dim);}
-  h1.hero-title{
-    font-family:var(--serif);font-weight:600;
-    font-size:clamp(2.1rem,6.4vw,5.1rem);
-    line-height:1.16;letter-spacing:.01em;
-    max-width:16ch;
-    text-wrap:balance;
-  }
-  h1.hero-title .hl{color:var(--accent);}
-  .hero-sub{
-    margin-top:1.8rem;max-width:46ch;
-    font-size:clamp(1rem,1.4vw,1.18rem);color:var(--fg-dim);font-weight:300;
-  }
-  .hero-sub .en{display:block;margin-top:.7rem;}
-  .domains{
-    display:flex;flex-wrap:wrap;gap:.5rem .65rem;margin-top:2.1rem;
-  }
-  .domains span{
-    font-family:var(--mono);font-size:.72rem;letter-spacing:.04em;color:var(--fg-dim);
-    border:1px solid var(--line);padding:.34rem .66rem;border-radius:2px;
-  }
-  .cta-row{display:flex;flex-wrap:wrap;gap:1rem;margin-top:2.4rem;}
-  .cap-domains{margin:calc(-1 * clamp(1.2rem,3vw,2.2rem)) 0 clamp(1.8rem,3.5vw,2.6rem);}
-  .btn{
-    font-family:var(--mono);font-size:.84rem;letter-spacing:.03em;
-    display:inline-flex;align-items:center;gap:.6rem;
-    padding:.85rem 1.5rem;border-radius:2px;transition:.25s;cursor:pointer;border:1px solid transparent;white-space:nowrap;
-  }
-  .btn .arr{transition:transform .25s;}
-  .btn:hover .arr{transform:translateX(4px);}
-  .btn-primary{background:var(--accent);color:#04201d;font-weight:500;}
-  .btn-primary:hover{background:#5fe6d6;}
-  .btn-ghost{border-color:var(--line);color:var(--fg);}
-  .btn-ghost:hover{border-color:var(--accent-dim);color:var(--accent);}
-  .fig-cap{
-    position:absolute;left:var(--pad);bottom:24px;z-index:2;
-    font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;color:var(--fg-faint);
-    display:flex;align-items:center;gap:.6rem;
-  }
-  .fig-cap .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 0 var(--accent-dim);animation:pulse 2.6s infinite;}
-  @keyframes pulse{0%{box-shadow:0 0 0 0 var(--accent-dim);}70%{box-shadow:0 0 0 7px transparent;}100%{box-shadow:0 0 0 0 transparent;}}
-
-  /* ---------- section frame ---------- */
-  section.block{padding:clamp(72px,11vh,150px) 0;position:relative;}
-  .axis-divider{
-    border-top:1px solid var(--line);
-    position:relative;
-  }
-  .axis-divider::before{
-    content:"";position:absolute;top:-1px;left:0;width:60px;height:1px;background:var(--accent);
-  }
-  .sec-head{display:flex;align-items:baseline;gap:1rem;margin-bottom:clamp(2.5rem,5vw,4rem);flex-wrap:wrap;}
-  .sec-head .idx{font-family:var(--mono);font-size:.78rem;color:var(--accent);letter-spacing:.12em;}
-  .sec-head h2{font-family:var(--serif);font-weight:500;font-size:clamp(1.7rem,3.4vw,2.6rem);letter-spacing:.01em;}
-  .sec-head .en{margin-left:.2rem;}
-  .sec-lead{max-width:54ch;color:var(--fg-dim);font-size:1.05rem;margin-top:-1.8rem;margin-bottom:3.4rem;}
-
-  /* ---------- featured work (right after the hero) ---------- */
-  .featured{padding:clamp(48px,7vh,88px) 0 clamp(56px,8vh,96px);position:relative;}
-  .feat-head{display:flex;justify-content:space-between;align-items:baseline;gap:.6rem 1rem;flex-wrap:wrap;margin-bottom:1.4rem;}
-  .feat-head h2.eyebrow{font-size:.78rem;}
-  .feat-all{font-family:var(--mono);font-size:.8rem;color:var(--accent);letter-spacing:.02em;}
-  .feat-all:hover{text-decoration:underline;}
-  .feats{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
-  .feat{background:var(--bg);display:flex;flex-direction:column;transition:background .35s;}
-  .feat:hover{background:var(--bg-2);}
-  .feat:hover .cfig img{transform:scale(1.025);}
-  .feat .fbd{padding:clamp(1.5rem,2.6vw,2.1rem);display:flex;flex-direction:column;flex:1;}
-  .feat .ctag{font-family:var(--mono);font-size:.72rem;color:var(--accent);letter-spacing:.1em;}
-  .feat h3{font-family:var(--serif);font-weight:500;font-size:1.4rem;line-height:1.3;margin:.6rem 0 .7rem;}
-  .feat .fdeliv{color:var(--fg);font-size:1rem;line-height:1.7;flex:1;}
-  @media(max-width:760px){ .feats{grid-template-columns:1fr;} }
-  .feat.flag,.case.flag{grid-column:1/-1;}
-  @media(min-width:761px){
-    .feat.flag,.case.flag{flex-direction:row;}
-    .feat.flag .cfig,.case.flag .cfig{flex:0 0 50%;border-bottom:0;border-right:1px solid var(--line);}
-    .feat.flag .cfig img,.case.flag .cfig img{object-fit:contain;}
-  }
-  .feat.flag .cfig,.case.flag .cfig,.cap.lead .cfig{background:#EFF4F9;}
-  html:not([data-theme="light"]) .feat.flag .cfig,html:not([data-theme="light"]) .case.flag .cfig,html:not([data-theme="light"]) .cap.lead .cfig{background:#0A111C;}
-  .fspecs{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:1.5rem;}
-  .fspecs div{background:var(--bg);padding:.85rem .95rem;transition:background .35s;}
-  .feat:hover .fspecs div{background:var(--bg-2);}
-  .fspecs dt{font-family:var(--mono);font-weight:500;font-size:clamp(1.2rem,2vw,1.55rem);color:var(--accent);line-height:1.1;letter-spacing:-.01em;}
-  .fspecs dd{margin:.4rem 0 0;font-size:.8rem;color:var(--fg-dim);line-height:1.45;}
-  @media(max-width:480px){ .fspecs div{padding:.7rem .6rem;} .fspecs dt{font-size:1.05rem;white-space:nowrap;} .fspecs dd{font-size:.74rem;} }
-
-  /* ---------- capabilities ---------- */
-  .cap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
-  .cap{background:var(--bg);position:relative;transition:background .35s;display:flex;flex-direction:column;}
-  .cap .cbd{padding:clamp(1.5rem,2.2vw,2rem);display:flex;flex-direction:column;flex:1;}
-  .cap:hover{background:var(--bg-2);}
-  .cap .num{font-family:var(--mono);font-size:.78rem;color:var(--accent);letter-spacing:.1em;}
-  .cap h3{font-family:var(--serif);font-weight:500;font-size:1.25rem;line-height:1.35;margin:1rem 0 .3rem;}
-  .cap .lat{font-family:var(--mono);font-size:.7rem;color:var(--fg-faint);letter-spacing:.05em;line-height:1.5;}
-  .cap p{color:var(--fg-dim);font-size:.93rem;margin-top:.9rem;flex:1;}
-  .cap .ev{font-family:var(--mono);font-size:.68rem;color:var(--fg-faint);letter-spacing:.02em;line-height:1.6;margin-top:1.3rem;padding-top:.9rem;border-top:1px solid var(--line-soft);}
-  @media(max-width:1080px){ .cap-grid{grid-template-columns:repeat(2,1fr);} .cap.lead{grid-column:1/-1;flex-direction:row;} .cap.lead .cfig{flex:0 0 50%;border-bottom:0;border-right:1px solid var(--line);} .cap.lead .cfig img{object-fit:contain;} }
-  @media(max-width:620px){ .cap-grid{grid-template-columns:1fr;} .cap.lead{flex-direction:column;} .cap.lead .cfig{flex:none;aspect-ratio:3/2;border-right:0;border-bottom:1px solid var(--line);} .cap.lead .cfig img{object-fit:cover;} }
-
-  /* ---------- shared check list ---------- */
-  ul.chk{list-style:none;display:grid;gap:.6rem;}
-  ul.chk li{position:relative;padding-left:1.5rem;color:var(--fg-dim);font-size:.92rem;line-height:1.55;}
-  ul.chk li::before{content:"";position:absolute;left:2px;top:.42em;width:8px;height:5px;border-left:1.6px solid var(--accent);border-bottom:1.6px solid var(--accent);transform:rotate(-45deg);}
-
-  /* ---------- cases ---------- */
-  .cases{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
-  .case{background:var(--bg);display:flex;flex-direction:column;transition:background .35s;}
-  .case:hover{background:var(--bg-2);}
-  .cfig{position:relative;aspect-ratio:3/2;overflow:hidden;border-bottom:1px solid var(--line);background:#F3F6FA;}
-  .cfig img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.2,.7,.2,1);}
-  .case:hover .cfig img,.cap:hover .cfig img,.offer:hover .cfig img,.lab:hover .cfig img{transform:scale(1.025);}
-  html:not([data-theme="light"]) .cfig{background:#0C121C;}
-  .case .cbody{padding:clamp(1.6rem,2.8vw,2.3rem);display:flex;flex-direction:column;flex:1;}
-  .case .ctag{font-family:var(--mono);font-size:.72rem;color:var(--accent);letter-spacing:.1em;}
-  .case h3{font-family:var(--serif);font-weight:500;font-size:1.4rem;line-height:1.3;margin:.7rem 0 .8rem;}
-  .case .cprob{color:var(--fg-dim);font-size:.95rem;}
-  .case ul.chk{margin-top:1.1rem;flex:1;}
-  .cres{display:flex;align-items:baseline;gap:1.1rem;margin-top:1.6rem;padding-top:1.3rem;border-top:1px solid var(--line);}
-  .cres .big{font-family:var(--mono);font-weight:500;font-size:clamp(2rem,3.4vw,2.6rem);color:var(--accent);line-height:1;letter-spacing:-.01em;flex-shrink:0;}
-  .cres .big small{font-size:.5em;}
-  .cres .big.word{font-family:var(--serif);font-size:1.3rem;font-weight:600;letter-spacing:.02em;}
-  .cres .rdesc{color:var(--fg-dim);font-size:.86rem;line-height:1.55;}
-  @media(max-width:760px){ .cases{grid-template-columns:1fr;} }
-  @media(max-width:420px){ .cres{flex-direction:column;gap:.6rem;} }
-
-  /* ---------- research ---------- */
-  .pubs{border-top:1px solid var(--line);}
-  .pub{display:grid;grid-template-columns:225px 1fr 140px;gap:clamp(.8rem,2.5vw,2rem);align-items:baseline;padding:1.15rem 0;border-bottom:1px solid var(--line);}
-  .pub .go{justify-content:flex-end;}
-  .pub .venue{font-family:var(--mono);font-size:.74rem;color:var(--accent);letter-spacing:.03em;line-height:1.5;}
-  .pub .ptitle{font-family:var(--serif);font-size:1.02rem;line-height:1.45;}
-  .pub .ptopic{display:block;font-family:var(--sans);font-size:.86rem;color:var(--fg-dim);margin-top:.25rem;}
-  .pub .go{display:flex;gap:1rem;font-family:var(--mono);font-size:.74rem;white-space:nowrap;}
-  .pub .go a{color:var(--fg-faint);transition:color .25s;}
-  .pub .go a:hover{color:var(--accent);}
-  .pubs-more{margin-top:1.6rem;font-family:var(--mono);font-size:.78rem;color:var(--fg-faint);}
-  .pubs-more a{color:var(--accent);}
-  .pubs-more a:hover{text-decoration:underline;}
-  @media(max-width:860px){ .pub{grid-template-columns:1fr auto;} .pub .venue{grid-column:1/-1;} }
-  @media(max-width:480px){ .pub{grid-template-columns:1fr;} .pub .go{justify-content:flex-start;} }
-
-  /* ---------- labs ---------- */
-  .labs{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
-  .lab{background:var(--bg);display:flex;flex-direction:column;transition:background .35s;}
-  .lab .cbd{padding:clamp(1.6rem,2.6vw,2.1rem);display:flex;flex-direction:column;flex:1;}
-  a.lab:hover{background:var(--bg-2);}
-  .lab .ltop{display:flex;justify-content:space-between;align-items:center;gap:.8rem;}
-  .lab .lname{font-family:var(--mono);font-size:.98rem;font-weight:500;color:var(--fg);}
-  .status{font-family:var(--mono);font-size:.62rem;letter-spacing:.08em;padding:.15rem .5rem;border-radius:2px;border:1px solid var(--line);color:var(--fg-faint);white-space:nowrap;}
-  .status.open{color:var(--accent);border-color:var(--accent-dim);}
-  .lab h3{font-family:var(--serif);font-weight:500;font-size:1.15rem;line-height:1.35;margin-top:.9rem;}
-  .lab p{color:var(--fg-dim);font-size:.9rem;margin-top:.7rem;flex:1;}
-  .lab .lfor{font-family:var(--mono);font-size:.68rem;color:var(--fg-faint);letter-spacing:.02em;margin-top:1.2rem;}
-  .lab .lfor b{color:var(--fg-dim);font-weight:400;}
-  a.lab:hover .lname{color:var(--accent);}
-  @media(max-width:1000px){ .labs{grid-template-columns:repeat(2,1fr);} }
-  @media(max-width:640px){ .labs{grid-template-columns:1fr;} }
-
-  /* ---------- method ---------- */
-  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
-  .step{background:var(--bg);padding:clamp(1.6rem,3vw,2.4rem) clamp(1.3rem,2.4vw,1.9rem);}
-  .step .sn{font-family:var(--mono);font-size:.78rem;color:var(--accent);letter-spacing:.1em;}
-  .step h4{font-family:var(--serif);font-weight:500;font-size:1.25rem;margin:1.4rem 0 .25rem;}
-  .step .lat{font-family:var(--mono);font-size:.7rem;color:var(--fg-faint);letter-spacing:.08em;}
-  .step p{color:var(--fg-dim);font-size:.92rem;margin-top:.9rem;}
-  .method-fig{border-top:1px solid var(--line);background:#F3F6FA;overflow:hidden;}
-  .method-fig img{display:block;width:100%;height:auto;}
-  html:not([data-theme="light"]) .method-fig{background:#0C121C;}
-  @media(max-width:860px){ .steps{grid-template-columns:repeat(2,1fr);} }
-  @media(max-width:480px){ .steps{grid-template-columns:1fr;} }
-
-  /* ---------- about ---------- */
-  .about{display:grid;grid-template-columns:1.25fr .75fr;gap:clamp(2rem,5vw,4.5rem);align-items:start;}
-  .about h3{font-family:var(--serif);font-weight:600;font-size:1.7rem;}
-  .about .role{font-family:var(--mono);font-size:.76rem;color:var(--accent);letter-spacing:.1em;margin-top:.4rem;}
-  .about .bio{color:var(--fg-dim);font-size:1.02rem;margin-top:1.6rem;max-width:52ch;}
-  .about .bio + .bio{margin-top:1rem;}
-  .affil{display:flex;flex-wrap:wrap;gap:.45rem .55rem;margin-top:1.7rem;}
-  .affil span{font-family:var(--mono);font-size:.7rem;color:var(--fg-dim);border:1px solid var(--line);padding:.3rem .6rem;border-radius:2px;}
-  .badges{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
-  .badge.wide{grid-column:1/-1;}
-  .badge{background:var(--bg);padding:1.4rem 1.4rem;}
-  .badge .bn{font-family:var(--mono);font-weight:500;font-size:1.6rem;color:var(--accent);line-height:1.1;word-break:break-word;}
-  .badge .bl{font-size:.86rem;color:var(--fg-dim);margin-top:.6rem;}
-  .badge .ble{font-family:var(--mono);font-size:.64rem;color:var(--fg-faint);letter-spacing:.06em;margin-top:.2rem;}
-  a.badge{display:block;transition:background .3s;}
-  a.badge:hover{background:var(--bg-2);}
-  .badge .blink{font-family:var(--mono);font-size:.64rem;color:var(--accent);letter-spacing:.05em;margin-top:.55rem;}
-  a.badge:hover .blink{text-decoration:underline;}
-  @media(max-width:860px){ .about{grid-template-columns:1fr;} }
-  @media(max-width:400px){ .badges{grid-template-columns:1fr;} }
-
-  /* ---------- partners ---------- */
-  .partners{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
-  .partner{background:var(--bg);display:flex;flex-direction:column;transition:background .35s;}
-  .partner .pbd{padding:clamp(1.5rem,2.2vw,1.9rem);display:flex;flex-direction:column;flex:1;}
-  /* logo tile keeps its own background in both themes so brand colours stay legible */
-  .plogo{height:clamp(104px,10vw,128px);display:flex;align-items:center;justify-content:center;background:#F3F6FA;border-bottom:1px solid var(--line);}
-  .plogo.scito{background:#36558E;}
-  .plogo.scito img{height:100%;max-height:100%;width:auto;max-width:none;}
-  .plogo img{max-width:72%;max-height:54%;width:auto;height:auto;display:block;transition:transform .5s cubic-bezier(.2,.7,.2,1);}
-  .partner:hover .plogo img{transform:scale(1.04);}
-  .partner:hover{background:var(--bg-2);}
-  .partner .ptop{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;}
-  .partner h3{font-family:var(--serif);font-weight:500;font-size:1.4rem;line-height:1.2;}
-  .partner .ext{font-family:var(--mono);font-size:.95rem;color:var(--fg-faint);flex-shrink:0;transition:color .25s,transform .25s;}
-  .partner:hover .ext{color:var(--accent);transform:translate(2px,-2px);}
-  .partner .plat{font-family:var(--mono);font-size:.7rem;color:var(--fg-faint);letter-spacing:.05em;margin-top:.35rem;}
-  .partner .ptag{font-family:var(--mono);font-size:.8rem;color:var(--accent);letter-spacing:.01em;margin-top:1.1rem;line-height:1.4;}
-  .partner ul{list-style:none;margin-top:1.25rem;display:grid;gap:.7rem;flex:1;}
-  .partner li{position:relative;padding-left:1.5rem;color:var(--fg-dim);font-size:.92rem;line-height:1.55;}
-  .partner li::before{content:"";position:absolute;left:2px;top:.42em;width:8px;height:5px;border-left:1.6px solid var(--accent);border-bottom:1.6px solid var(--accent);transform:rotate(-45deg);}
-  .partner .psite{font-family:var(--mono);font-size:.74rem;color:var(--fg-faint);letter-spacing:.03em;margin-top:1.7rem;transition:color .25s;}
-  .partner:hover .psite{color:var(--accent-dim);}
-  @media(max-width:1080px){ .partners{grid-template-columns:repeat(2,1fr);} }
-  @media(max-width:640px){ .partners{grid-template-columns:1fr;} }
-
-  /* ---------- services ---------- */
-  .sec-lead strong{color:var(--accent);font-weight:500;font-family:var(--mono);font-size:.95em;}
-  .svc-list{border-top:1px solid var(--line);}
-  .svc{
-    display:grid;grid-template-columns:auto minmax(170px,.85fr) 1.7fr;
-    gap:clamp(1rem,3vw,2.6rem);align-items:baseline;
-    padding:clamp(1.5rem,3vw,2.1rem) 0;border-bottom:1px solid var(--line);
-    transition:background .35s;
-  }
-  .svc:hover{background:var(--bg-2);}
-  .svc-n{font-family:var(--mono);font-size:.8rem;color:var(--accent);letter-spacing:.1em;}
-  .svc-name h3{font-family:var(--serif);font-weight:500;font-size:1.35rem;line-height:1.2;}
-  .svc-lat{font-family:var(--mono);font-size:.72rem;color:var(--fg-faint);letter-spacing:.06em;margin-top:.3rem;}
-  .svc-desc{color:var(--fg-dim);font-size:.96rem;}
-  @media(max-width:720px){
-    .svc{grid-template-columns:1fr;gap:.55rem;padding:1.6rem 0;}
-    .svc-name{display:flex;align-items:baseline;gap:.7rem;}
-    .svc-lat{margin-top:0;}
-  }
-  .offers{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
-  .offer{background:var(--bg);display:flex;flex-direction:column;transition:background .35s;}
-  .offer .cbd{padding:clamp(1.6rem,2.6vw,2.2rem);display:flex;flex-direction:column;flex:1;}
-  .offer:hover{background:var(--bg-2);}
-  .offer .on{font-family:var(--mono);font-size:.78rem;color:var(--accent);letter-spacing:.1em;display:flex;justify-content:space-between;align-items:center;gap:.8rem;}
-  .offer .pick{font-size:.62rem;letter-spacing:.08em;border:1px solid var(--accent-dim);padding:.12rem .45rem;border-radius:2px;white-space:nowrap;}
-  .offer h3{font-family:var(--serif);font-weight:500;font-size:1.28rem;line-height:1.3;margin:1rem 0 .25rem;}
-  .offer .olat{font-family:var(--mono);font-size:.7rem;color:var(--fg-faint);letter-spacing:.05em;}
-  .offer p{color:var(--fg-dim);font-size:.93rem;margin-top:.9rem;}
-  .offer .dl{font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--fg-faint);margin:1.3rem 0 .6rem;}
-  .offer ul.chk{flex:1;}
-  .offer ul.chk li{font-size:.88rem;}
-  @media(max-width:1000px){ .offers{grid-template-columns:repeat(2,1fr);} }
-  @media(max-width:640px){ .offers{grid-template-columns:1fr;} }
-  .sub-head{display:flex;align-items:baseline;gap:.8rem;flex-wrap:wrap;margin:clamp(3.2rem,6vw,4.6rem) 0 1.2rem;}
-  .sub-head h3{font-family:var(--serif);font-weight:500;font-size:1.35rem;}
-  .sub-note{color:var(--fg-dim);font-size:.95rem;max-width:60ch;margin-bottom:1.6rem;}
-  .price-note{margin-top:1.4rem;font-family:var(--mono);font-size:.74rem;color:var(--fg-faint);letter-spacing:.02em;}
-
-  /* ---------- contact ---------- */
-  .contact-inner{display:grid;grid-template-columns:1.15fr .85fr;grid-template-areas:"intro card" "form card";column-gap:clamp(2rem,5vw,4rem);align-items:start;}
-  .c-intro{grid-area:intro;}
-  .contact-inner .qform{grid-area:form;}
-  .contact-inner .mailcard{grid-area:card;}
-  .qform{margin-top:2.4rem;display:grid;grid-template-columns:1fr 1fr;gap:1.1rem 1.1rem;}
-  .qform .full{grid-column:1/-1;}
-  .qform label{display:block;font-family:var(--sans);font-size:.84rem;font-weight:500;letter-spacing:.02em;color:var(--fg-dim);margin-bottom:.45rem;}
-  .qform label .req{color:var(--accent);}
-  .qform input,.qform select,.qform textarea{width:100%;font-family:var(--sans);font-size:.95rem;font-weight:400;color:var(--fg);background:var(--bg-2);border:1px solid var(--line);border-radius:2px;padding:.7rem .8rem;transition:border-color .25s;}
-  .qform textarea{min-height:140px;resize:vertical;line-height:1.6;}
-  .qform input:focus,.qform select:focus,.qform textarea:focus{outline:none;border-color:var(--accent);}
-  .qform .factions{display:flex;flex-wrap:wrap;align-items:center;gap:1rem 1.4rem;}
-  .qform .fnote{font-size:.84rem;color:var(--fg-faint);line-height:1.6;margin-top:-.2rem;}
-  .qform .fnote.ok{color:var(--accent);}
-  .qform textarea.qcopy-out{min-height:180px;font-size:.88rem;}
-  .qmore{border:1px solid var(--line);border-radius:2px;background:var(--bg-2);}
-  .qmore summary{cursor:pointer;list-style:none;padding:.85rem 1rem;font-size:.92rem;color:var(--fg);display:flex;align-items:baseline;flex-wrap:wrap;gap:.3rem .7rem;}
-  .qmore summary::-webkit-details-marker{display:none;}
-  .qmore summary::before{content:"+";font-family:var(--mono);color:var(--accent);width:.9rem;}
-  .qmore[open] summary::before{content:"−";}
-  .qmore summary span{color:var(--fg-faint);font-size:.82rem;}
-  .qmore summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
-  .qmore-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem 1.1rem;padding:.3rem 1rem 1.2rem;}
-  .qmore-grid input,.qmore-grid select{background:var(--bg);}
-  @media(max-width:560px){ .qmore-grid{grid-template-columns:1fr;} }
-  @media(max-width:560px){ .qform{grid-template-columns:1fr;} }
-  .mailcard{position:sticky;top:96px;}
-  .contact h2{font-family:var(--serif);font-weight:500;font-size:clamp(1.7rem,3.8vw,2.8rem);line-height:1.25;}
-  .contact h2 .hl{color:var(--accent);}
-  .contact .csub{color:var(--fg-dim);margin-top:1.4rem;max-width:40ch;}
-  .mailcard{border:1px solid var(--line);padding:clamp(1.6rem,3vw,2.2rem);background:var(--bg-2);}
-  .mailcard .ml{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--fg-faint);}
-  .mailcard a.email{font-family:var(--mono);font-size:clamp(.95rem,2vw,1.25rem);color:var(--fg);display:block;margin:.7rem 0 1.6rem;letter-spacing:.01em;word-break:break-all;transition:color .25s;}
-  .mailcard a.email:hover{color:var(--accent);}
-  @media(max-width:760px){ .contact-inner{grid-template-columns:1fr;grid-template-areas:"intro" "card" "form";row-gap:2rem;} .mailcard{position:static;} .contact-inner .qform{margin-top:0;} }
-
-  /* ---------- footer ---------- */
-  footer{border-top:1px solid var(--line);padding:2.8rem 0 2.2rem;}
-  .foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem 2rem;}
-  .foot .fbrand{display:flex;align-items:center;}
-  .foot .foot-logo{height:80px;width:auto;display:block;opacity:.92;}
-  @media(max-width:480px){ .foot .foot-logo{height:64px;} }
-  .fcompany{font-family:var(--mono);font-size:.74rem;color:var(--fg-faint);letter-spacing:.02em;line-height:1.95;text-align:right;}
-  .fcompany .fco-name{color:var(--fg-dim);font-size:.82rem;margin-bottom:.15rem;}
-  .foot-btm{display:flex;justify-content:flex-end;margin-top:1.8rem;padding-top:1.3rem;border-top:1px solid var(--line);}
-  .foot-btm .fmeta{font-family:var(--mono);font-size:.72rem;color:var(--fg-faint);letter-spacing:.05em;}
-  @media(max-width:560px){ .fcompany{text-align:left;} .foot-btm{justify-content:flex-start;} }
-  /* logo swaps with theme; light footer is a soft tint, no abrupt dark band */
-  .foot-logo.on-light{display:none;}
-  html[data-theme="light"] .foot-logo.on-dark{display:none;}
-  html[data-theme="light"] .foot-logo.on-light{display:block;}
-  html[data-theme="light"] footer{background:#EDF1F5;}
-  /* light theme: white text on the (mid-tone) accent buttons for contrast */
-  html[data-theme="light"] .btn-primary{color:#fff;}
-  html[data-theme="light"] .btn-primary:hover{background:#003D80;color:#fff;}
-  html[data-theme="light"] .nav-cta:hover{color:#fff;}
-
-  /* ---------- reveal ---------- */
-  .reveal{opacity:0;transform:translateY(22px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1);}
-  .reveal.in{opacity:1;transform:none;}
-  @media(prefers-reduced-motion:reduce){
-    .reveal{opacity:1;transform:none;transition:none;}
-    html{scroll-behavior:auto;}
-    .fig-cap .dot{animation:none;}
-  }
-</style>
+<link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
 
+<a href="#content" class="skip-link">跳到主要內容</a>
 <header id="hdr">
   <div class="wrap nav">
     <a href="#top" class="brand">
@@ -540,9 +66,10 @@
         <span class="lat">Quantquer</span>
       </span>
     </a>
-    <nav class="navlinks">
+    <nav class="navlinks" aria-label="主要導覽">
       <a href="#capabilities" class="lk">能力</a>
       <a href="#services" class="lk">服務</a>
+      <a href="semiconductor-ai/" class="lk">半導體與 Edge AI</a>
       <a href="#work" class="lk">案例</a>
       <a href="#research" class="lk">研究</a>
       <a href="#labs" class="lk">Labs</a>
@@ -556,6 +83,7 @@
     <div class="wrap">
       <a href="#capabilities"><span>01</span>能力</a>
       <a href="#services"><span>02</span>服務與合作模式</a>
+      <a href="semiconductor-ai/"><span aria-hidden="true">↗</span>半導體與 Edge AI</a>
       <a href="#work"><span>03</span>精選案例</a>
       <a href="#method"><span>04</span>工作方式</a>
       <a href="#research"><span>05</span>研究成果</a>
@@ -567,18 +95,24 @@
   </nav>
 </header>
 
+<main id="content" tabindex="-1">
 <!-- ===================== HERO ===================== -->
 <section class="hero" id="top">
-  <canvas id="spectrum"></canvas>
+  <canvas id="spectrum" aria-hidden="true"></canvas>
   <div class="wrap">
     <div class="hero-eyebrow">
       <span class="tick"></span>
-      <span class="eyebrow">Research-Driven AI &amp; Deep-Tech Engineering</span>
+      <span class="eyebrow">From Silicon to Intelligence</span>
     </div>
     <h1 class="hero-title">把困難的量化問題，<br>做成<span class="hl">可交付的系統</span>。</h1>
     <p class="hero-sub">
-      結合前沿 AI 研究、科學計算與軟體工程，為企業打造客製化 AI Agent、智慧決策系統、訊號處理演算法與深科技產品。
+      從晶片、演算法到智慧系統。我們結合 AI 研究、科學計算與軟體工程，為企業打造可上線的 AI 與深科技產品。
     </p>
+    <ul class="pillars" aria-label="三大技術支柱">
+      <li><b>Edge AI</b><span>晶片端生成式 AI</span></li>
+      <li><b>Agentic AI</b><span>AI Agent 與多代理系統</span></li>
+      <li><b>Scientific AI</b><span>科學、臨床與訊號 AI</span></li>
+    </ul>
     <div class="cta-row">
       <a href="#contact" class="btn btn-primary">談談你的問題 <span class="arr">→</span></a>
       <a href="#work" class="btn btn-ghost">看精選案例 <span class="arr">→</span></a>
@@ -591,25 +125,25 @@
 <section class="featured" id="featured" aria-labelledby="featured-title">
   <div class="wrap">
     <div class="feat-head reveal">
-      <h2 class="eyebrow" id="featured-title">代表案例 / Featured Work</h2>
-      <a href="#work" class="feat-all">看全部 9 個案例 →</a>
+      <h2 class="eyebrow" id="featured-title">代表案例與技術專題 / Featured Work</h2>
+      <a href="#work" class="feat-all" data-clear-case-list>全部案例</a>
     </div>
     <div class="feats reveal">
-      <a class="feat flag" href="#work">
-        <div class="cfig"><img src="assets/cases/edge.webp" srcset="assets/cases/edge-768.webp 768w, assets/cases/edge.webp 1536w" sizes="(max-width: 760px) 100vw, 530px" alt="手機晶片端即時人物消除與背景重建示意圖" loading="lazy" width="1536" height="1024"></div>
+      <a class="feat flag" href="semiconductor-ai/#on-device">
+        <figure class="cfig"><img src="assets/cases/edge.webp" srcset="assets/cases/edge-768.webp 768w, assets/cases/edge.webp 1536w, assets/cases/edge-3072.webp 3072w" sizes="(max-width: 400px) calc(100vw - 40px), (max-width: 760px) 90vw, (max-width: 1180px) 45vw, 530px" alt="手機晶片、人物遮罩與生成式影像流程" loading="lazy" width="1536" height="1024"><figcaption>技術示意</figcaption></figure>
         <div class="fbd">
-          <div class="ctag">邊緣 AI · 生成式影像</div>
-          <h3>晶片端即時生成式影像引擎</h3>
-          <p class="fdeliv">把人物偵測與 GAN／Diffusion 生成模型壓縮到手機 NPU 上，即時消除影片中的人物並重建背景，不必依賴雲端算力。</p>
+          <div class="ctag">技術專題 · Semiconductor &amp; Edge AI</div>
+          <h3>晶片端生成式 AI：人物消除與場景生成</h3>
+          <p class="fdeliv">從人物偵測與遮罩出發，評估 GAN 背景修復與 Diffusion 場景合成，再依目標裝置驗證模型相容性、影像品質與推論效能。</p>
           <dl class="fspecs">
-            <div><dt>INT8</dt><dd>量化感知訓練</dd></div>
-            <div><dt>NPU</dt><dd>手機端推論</dd></div>
-            <div><dt>20+ FPS</dt><dd>即時處理目標</dd></div>
+            <div><dt>GAN</dt><dd>背景修復</dd></div>
+            <div><dt>Diffusion</dt><dd>場景合成</dd></div>
+            <div><dt>NPU / GPU</dt><dd>目標平台評估</dd></div>
           </dl>
         </div>
       </a>
-      <a class="feat" href="#work">
-        <div class="cfig"><img src="assets/cases/robot.webp" srcset="assets/cases/robot-768.webp 768w, assets/cases/robot.webp 1536w" sizes="(max-width: 760px) 100vw, 530px" alt="機器人碼垛工作站佈局最佳化示意圖" loading="lazy" width="1536" height="1024"></div>
+      <a class="feat" href="#industrial-robot-workcell" data-clear-case-list>
+        <figure class="cfig"><img src="assets/cases/robot.webp" srcset="assets/cases/robot-768.webp 768w, assets/cases/robot.webp 1536w, assets/cases/robot-3072.webp 3072w" sizes="(max-width: 400px) calc(100vw - 40px), (max-width: 760px) 90vw, (max-width: 1180px) 30vw, 355px" alt="機器人碼垛工作站佈局最佳化示意圖" loading="lazy" width="1536" height="1024"><figcaption>技術示意</figcaption></figure>
         <div class="fbd">
           <div class="ctag">工業 AI · AI Agent</div>
           <h3>工業機器人工作站智慧設計平台</h3>
@@ -617,13 +151,22 @@
           <div class="cres"><div class="big">9</div><p class="rdesc">階段最佳化，涵蓋可達性搜尋、節拍估算與運動規劃驗證。</p></div>
         </div>
       </a>
-      <a class="feat" href="#work">
-        <div class="cfig"><img src="assets/cases/eeg.webp" srcset="assets/cases/eeg-768.webp 768w, assets/cases/eeg.webp 1536w" sizes="(max-width: 760px) 100vw, 530px" alt="腦波療效預測示意圖" loading="lazy" width="1536" height="1024"></div>
+      <a class="feat" href="#eeg-treatment-response" data-clear-case-list>
+        <figure class="cfig"><img src="assets/cases/eeg.webp" srcset="assets/cases/eeg-768.webp 768w, assets/cases/eeg.webp 1536w, assets/cases/eeg-3072.webp 3072w" sizes="(max-width: 400px) calc(100vw - 40px), (max-width: 760px) 90vw, (max-width: 1180px) 30vw, 355px" alt="腦波療效預測示意圖" loading="lazy" width="1536" height="1024"><figcaption>技術示意</figcaption></figure>
         <div class="fbd">
           <div class="ctag">臨床 AI · 腦波</div>
           <h3>腦波憂鬱症療效預測</h3>
           <p class="fdeliv">以前額葉腦波在治療前預估療效，與臨床團隊合作導入門診流程。</p>
           <div class="cres"><div class="big word">門診使用中</div><p class="rdesc">模型已於醫學中心門診常規使用。</p></div>
+        </div>
+      </a>
+      <a class="feat" href="#enterprise-knowledge-arbitration" data-clear-case-list>
+        <figure class="cfig"><img src="assets/cases/kb.webp" srcset="assets/cases/kb-768.webp 768w, assets/cases/kb.webp 1536w, assets/cases/kb-3072.webp 3072w" sizes="(max-width: 400px) calc(100vw - 40px), (max-width: 760px) 90vw, (max-width: 1180px) 30vw, 355px" alt="企業文件、知識卡與引用查核流程" loading="lazy" width="1536" height="1024"><figcaption>技術示意</figcaption></figure>
+        <div class="fbd">
+          <div class="ctag">企業 AI · 知識管理</div>
+          <h3>設備廠商技術知識庫問答系統</h3>
+          <p class="fdeliv">回答前先處理文件間的矛盾，讓使用者能查閱引用來源與版本選擇的依據。</p>
+          <div class="cres"><div class="big">100<small>%</small></div><p class="rdesc">28 題評測的版本正確率，引用正確率 85%。</p></div>
         </div>
       </a>
     </div>
@@ -639,7 +182,8 @@
       <span class="en">/ Capabilities</span>
     </div>
     <div class="domains cap-domains reveal">
-      <span>邊緣 AI Edge AI</span>
+      <a href="semiconductor-ai/">半導體與邊緣 AI</a>
+      <a href="#gpu-infrastructure">AI 運算基礎設施</a>
       <span>AI Agent</span>
       <span>AI for Science</span>
       <span>臨床 AI Clinical</span>
@@ -649,17 +193,17 @@
     </div>
     <div class="cap-grid reveal">
       <div class="cap lead">
-        <div class="cfig"><img src="assets/caps/edge.webp" srcset="assets/caps/edge-768.webp 768w, assets/caps/edge.webp 1536w" sizes="(max-width: 620px) 100vw, (max-width: 1080px) 50vw, 370px" alt="生成式模型壓縮並部署到晶片示意圖" loading="lazy" width="1536" height="1024"></div>
+        <figure class="cfig"><img src="assets/caps/edge.webp" srcset="assets/caps/edge-768.webp 768w, assets/caps/edge.webp 1536w, assets/caps/edge-3072.webp 3072w" sizes="(max-width: 400px) calc(100vw - 40px), (max-width: 620px) 90vw, (max-width: 1080px) 45vw, (max-width: 1180px) 30vw, 355px" alt="生成式模型壓縮並部署到晶片示意圖" loading="lazy" width="1536" height="1024"><figcaption>技術示意</figcaption></figure>
         <div class="cbd">
           <div class="num">01</div>
           <h3>邊緣 AI 與晶片端生成式 AI</h3>
           <div class="lat">Edge AI &amp; On-device Generative AI</div>
-          <p>把 Diffusion、GAN 等生成式模型壓縮並部署到 NPU、GPU 與嵌入式硬體：INT8 量化、量化感知訓練（QAT）與 NPU 模型轉換，在有限算力、記憶體與延遲下即時推論。</p>
-          <div class="ev">前聯發科 IC 設計 · 手機 NPU 即時人物消除</div>
+          <p>為 Diffusion、GAN 與辨識模型規劃裝置端部署。依目標平台評估模型匯出、算子相容性、量化與推論品質。</p>
+          <a class="text-link" href="semiconductor-ai/#on-device">晶片端部署與評測</a>
         </div>
       </div>
       <div class="cap">
-        <div class="cfig"><img src="assets/caps/agent.webp" srcset="assets/caps/agent-768.webp 768w, assets/caps/agent.webp 1536w" sizes="(max-width: 620px) 100vw, (max-width: 1080px) 50vw, 370px" alt="AI Agent 與多代理系統示意圖" loading="lazy" width="1536" height="1024"></div>
+        <figure class="cfig"><img src="assets/caps/agent.webp" srcset="assets/caps/agent-768.webp 768w, assets/caps/agent.webp 1536w, assets/caps/agent-3072.webp 3072w" sizes="(max-width: 400px) calc(100vw - 40px), (max-width: 620px) 90vw, (max-width: 1080px) 45vw, (max-width: 1180px) 30vw, 355px" alt="AI Agent 與多代理系統示意圖" loading="lazy" width="1536" height="1024"><figcaption>技術示意</figcaption></figure>
         <div class="cbd">
           <div class="num">02</div>
           <h3>AI Agent 與多代理系統</h3>
@@ -669,7 +213,7 @@
         </div>
       </div>
       <div class="cap">
-        <div class="cfig"><img src="assets/caps/science.webp" srcset="assets/caps/science-768.webp 768w, assets/caps/science.webp 1536w" sizes="(max-width: 620px) 100vw, (max-width: 1080px) 50vw, 370px" alt="科學 AI 與研究自動化示意圖" loading="lazy" width="1536" height="1024"></div>
+        <figure class="cfig"><img src="assets/caps/science.webp" srcset="assets/caps/science-768.webp 768w, assets/caps/science.webp 1536w, assets/caps/science-3072.webp 3072w" sizes="(max-width: 400px) calc(100vw - 40px), (max-width: 620px) 90vw, (max-width: 1080px) 45vw, (max-width: 1180px) 30vw, 355px" alt="科學 AI 與研究自動化示意圖" loading="lazy" width="1536" height="1024"><figcaption>技術示意</figcaption></figure>
         <div class="cbd">
           <div class="num">03</div>
           <h3>科學 AI 與研究自動化</h3>
@@ -679,7 +223,7 @@
         </div>
       </div>
       <div class="cap">
-        <div class="cfig"><img src="assets/caps/clinical.webp" srcset="assets/caps/clinical-768.webp 768w, assets/caps/clinical.webp 1536w" sizes="(max-width: 620px) 100vw, (max-width: 1080px) 50vw, 370px" alt="臨床 AI 與腦機介面示意圖" loading="lazy" width="1536" height="1024"></div>
+        <figure class="cfig"><img src="assets/caps/clinical.webp" srcset="assets/caps/clinical-768.webp 768w, assets/caps/clinical.webp 1536w, assets/caps/clinical-3072.webp 3072w" sizes="(max-width: 400px) calc(100vw - 40px), (max-width: 620px) 90vw, (max-width: 1080px) 45vw, (max-width: 1180px) 30vw, 355px" alt="臨床 AI 與腦機介面示意圖" loading="lazy" width="1536" height="1024"><figcaption>技術示意</figcaption></figure>
         <div class="cbd">
           <div class="num">04</div>
           <h3>臨床 AI 與腦機介面</h3>
@@ -689,7 +233,7 @@
         </div>
       </div>
       <div class="cap">
-        <div class="cfig"><img src="assets/caps/signal.webp" srcset="assets/caps/signal-768.webp 768w, assets/caps/signal.webp 1536w" sizes="(max-width: 620px) 100vw, (max-width: 1080px) 50vw, 370px" alt="訊號處理與時序建模示意圖" loading="lazy" width="1536" height="1024"></div>
+        <figure class="cfig"><img src="assets/caps/signal.webp" srcset="assets/caps/signal-768.webp 768w, assets/caps/signal.webp 1536w, assets/caps/signal-3072.webp 3072w" sizes="(max-width: 400px) calc(100vw - 40px), (max-width: 620px) 90vw, (max-width: 1080px) 45vw, (max-width: 1180px) 30vw, 355px" alt="訊號處理與時序建模示意圖" loading="lazy" width="1536" height="1024"><figcaption>技術示意</figcaption></figure>
         <div class="cbd">
           <div class="num">05</div>
           <h3>訊號處理與時序建模</h3>
@@ -699,7 +243,7 @@
         </div>
       </div>
       <div class="cap">
-        <div class="cfig"><img src="assets/caps/finance.webp" srcset="assets/caps/finance-768.webp 768w, assets/caps/finance.webp 1536w" sizes="(max-width: 620px) 100vw, (max-width: 1080px) 50vw, 370px" alt="金融 AI 與決策智慧示意圖" loading="lazy" width="1536" height="1024"></div>
+        <figure class="cfig"><img src="assets/caps/finance.webp" srcset="assets/caps/finance-768.webp 768w, assets/caps/finance.webp 1536w, assets/caps/finance-3072.webp 3072w" sizes="(max-width: 400px) calc(100vw - 40px), (max-width: 620px) 90vw, (max-width: 1080px) 45vw, (max-width: 1180px) 30vw, 355px" alt="金融 AI 與決策智慧示意圖" loading="lazy" width="1536" height="1024"><figcaption>技術示意</figcaption></figure>
         <div class="cbd">
           <div class="num">06</div>
           <h3>金融 AI 與決策智慧</h3>
@@ -709,7 +253,7 @@
         </div>
       </div>
       <div class="cap">
-        <div class="cfig"><img src="assets/caps/quantum.webp" srcset="assets/caps/quantum-768.webp 768w, assets/caps/quantum.webp 1536w" sizes="(max-width: 620px) 100vw, (max-width: 1080px) 50vw, 370px" alt="量子與混合機器學習示意圖" loading="lazy" width="1536" height="1024"></div>
+        <figure class="cfig"><img src="assets/caps/quantum.webp" srcset="assets/caps/quantum-768.webp 768w, assets/caps/quantum.webp 1536w, assets/caps/quantum-3072.webp 3072w" sizes="(max-width: 400px) calc(100vw - 40px), (max-width: 620px) 90vw, (max-width: 1080px) 45vw, (max-width: 1180px) 30vw, 355px" alt="量子與混合機器學習示意圖" loading="lazy" width="1536" height="1024"><figcaption>技術示意</figcaption></figure>
         <div class="cbd">
           <div class="num">07</div>
           <h3>量子與混合機器學習</h3>
@@ -719,7 +263,7 @@
         </div>
       </div>
       <div class="cap">
-        <div class="cfig"><img src="assets/caps/industrial.webp" srcset="assets/caps/industrial-768.webp 768w, assets/caps/industrial.webp 1536w" sizes="(max-width: 620px) 100vw, (max-width: 1080px) 50vw, 370px" alt="工業 AI 與電腦視覺示意圖" loading="lazy" width="1536" height="1024"></div>
+        <figure class="cfig"><img src="assets/caps/industrial.webp" srcset="assets/caps/industrial-768.webp 768w, assets/caps/industrial.webp 1536w, assets/caps/industrial-3072.webp 3072w" sizes="(max-width: 400px) calc(100vw - 40px), (max-width: 620px) 90vw, (max-width: 1080px) 45vw, (max-width: 1180px) 30vw, 355px" alt="工業 AI 與電腦視覺示意圖" loading="lazy" width="1536" height="1024"><figcaption>技術示意</figcaption></figure>
         <div class="cbd">
           <div class="num">08</div>
           <h3>工業 AI 與電腦視覺</h3>
@@ -729,13 +273,21 @@
         </div>
       </div>
       <div class="cap">
-        <div class="cfig"><img src="assets/caps/product.webp" srcset="assets/caps/product-768.webp 768w, assets/caps/product.webp 1536w" sizes="(max-width: 620px) 100vw, (max-width: 1080px) 50vw, 370px" alt="AI 產品工程與評估示意圖" loading="lazy" width="1536" height="1024"></div>
+        <figure class="cfig"><img src="assets/caps/product.webp" srcset="assets/caps/product-768.webp 768w, assets/caps/product.webp 1536w, assets/caps/product-3072.webp 3072w" sizes="(max-width: 400px) calc(100vw - 40px), (max-width: 620px) 90vw, (max-width: 1080px) 45vw, (max-width: 1180px) 30vw, 355px" alt="AI 產品工程與評估示意圖" loading="lazy" width="1536" height="1024"><figcaption>技術示意</figcaption></figure>
         <div class="cbd">
           <div class="num">09</div>
           <h3>AI 產品工程與評估</h3>
           <div class="lat">AI Product Engineering &amp; Evaluation</div>
           <p>知識庫與 RAG、LLM 整合、全端產品、雲端部署與自動化測試，並量測 AI 是否有效、可靠、划算。</p>
           <div class="ev">tokenbench · sevencheck 開源</div>
+        </div>
+      </div>
+      <div class="cap cap-wide">
+        <div class="cbd">
+          <h3>AI 運算基礎設施與模型效能工程</h3>
+          <div class="lat">AI Infrastructure &amp; Performance Engineering</div>
+          <p>針對企業私有運算與研究環境，設計 GPU／CPU 工作佇列、資源分配和監控，並用同一組工作負載比較延遲、吞吐量與資源用量。</p>
+          <a class="text-link" href="#gpu-infrastructure">GPU 運算與效能工程服務</a>
         </div>
       </div>
     </div>
@@ -751,9 +303,45 @@
       <span class="en">/ Services</span>
     </div>
     <p class="sec-lead reveal">從你要解決的問題出發。每個方案在開始前，都會先一起把範圍與交付物定義清楚。</p>
+    <div class="offers offers-specialized reveal">
+      <article class="offer" id="edge-ai-deployment">
+        <div class="cbd">
+          <h3>晶片端 AI 與生成式模型最佳化</h3>
+          <div class="olat">Edge AI &amp; Generative Model Deployment</div>
+          <p>針對 NPU、GPU 或嵌入式目標平台，評估人物消除、背景修復、場景合成與辨識模型的裝置端可行性。</p>
+          <div class="dl">可約定交付物</div>
+          <ul class="chk">
+            <li>目標硬體、Runtime 與模型算子相容性評估</li>
+            <li>依平台支援的模型匯出、轉換、量化與推論原型</li>
+            <li>依測試條件記錄延遲、記憶體與影像品質，附部署限制與交接文件</li>
+          </ul>
+          <div class="entry-links">
+            <a class="text-link" href="semiconductor-ai/#on-device">看部署與評測方法</a>
+            <a class="text-link" href="#contact" data-inquiry="edge-ai">洽談晶片端部署</a>
+          </div>
+        </div>
+      </article>
+      <article class="offer" id="gpu-infrastructure">
+        <div class="cbd">
+          <h3>AI 運算基礎設施與效能工程</h3>
+          <div class="olat">AI Infrastructure &amp; Performance Engineering</div>
+          <p>為企業與研究團隊規劃 GPU 工作負載、資源共享、任務監控及效能量測。可先在目標環境驗證排程與部署流程，再據結果規劃擴展。</p>
+          <div class="dl">可約定交付物</div>
+          <ul class="chk">
+            <li>GPU／CPU 工作排程、資源配額及利用率評估</li>
+            <li>任務狀態、錯誤追蹤、監控與部署原型</li>
+            <li>用可重現的工作負載測試模型品質、延遲、成本與資源耗用</li>
+          </ul>
+          <div class="entry-links">
+            <a class="text-link" href="semiconductor-ai/#compute">看運算基礎設施</a>
+            <a class="text-link" href="#contact" data-inquiry="gpu-infrastructure">洽談 GPU 資源管理</a>
+          </div>
+        </div>
+      </article>
+    </div>
     <div class="offers reveal">
       <div class="offer">
-        <div class="cfig"><img src="assets/svcs/agent.webp" srcset="assets/svcs/agent-768.webp 768w, assets/svcs/agent.webp 1536w" sizes="(max-width: 640px) 100vw, (max-width: 1000px) 50vw, 360px" alt="客製化 AI Agent 系統示意圖" loading="lazy" width="1536" height="1024"></div>
+        <figure class="cfig"><img src="assets/svcs/agent.webp" srcset="assets/svcs/agent-768.webp 768w, assets/svcs/agent.webp 1536w, assets/svcs/agent-3072.webp 3072w" sizes="(max-width: 400px) calc(100vw - 40px), (max-width: 640px) 90vw, (max-width: 1000px) 45vw, (max-width: 1180px) 30vw, 355px" alt="客製化 AI Agent 系統示意圖" loading="lazy" width="1536" height="1024"><figcaption>技術示意</figcaption></figure>
         <div class="cbd">
           <div class="on"><span>01</span><span class="pick">重點服務</span></div>
           <h3>客製化 AI Agent 系統</h3>
@@ -768,7 +356,7 @@
         </div>
       </div>
       <div class="offer">
-        <div class="cfig"><img src="assets/svcs/eval.webp" srcset="assets/svcs/eval-768.webp 768w, assets/svcs/eval.webp 1536w" sizes="(max-width: 640px) 100vw, (max-width: 1000px) 50vw, 360px" alt="AI 評估與成本最佳化示意圖" loading="lazy" width="1536" height="1024"></div>
+        <figure class="cfig"><img src="assets/svcs/eval.webp" srcset="assets/svcs/eval-768.webp 768w, assets/svcs/eval.webp 1536w, assets/svcs/eval-3072.webp 3072w" sizes="(max-width: 400px) calc(100vw - 40px), (max-width: 640px) 90vw, (max-width: 1000px) 45vw, (max-width: 1180px) 30vw, 355px" alt="AI 評估與成本最佳化示意圖" loading="lazy" width="1536" height="1024"><figcaption>技術示意</figcaption></figure>
         <div class="cbd">
           <div class="on"><span>02</span><span class="pick">重點服務</span></div>
           <h3>AI 評估與成本最佳化</h3>
@@ -783,7 +371,7 @@
         </div>
       </div>
       <div class="offer">
-        <div class="cfig"><img src="assets/svcs/research.webp" srcset="assets/svcs/research-768.webp 768w, assets/svcs/research.webp 1536w" sizes="(max-width: 640px) 100vw, (max-width: 1000px) 50vw, 360px" alt="研究即服務示意圖" loading="lazy" width="1536" height="1024"></div>
+        <figure class="cfig"><img src="assets/svcs/research.webp" srcset="assets/svcs/research-768.webp 768w, assets/svcs/research.webp 1536w, assets/svcs/research-3072.webp 3072w" sizes="(max-width: 400px) calc(100vw - 40px), (max-width: 640px) 90vw, (max-width: 1000px) 45vw, (max-width: 1180px) 30vw, 355px" alt="研究即服務示意圖" loading="lazy" width="1536" height="1024"><figcaption>技術示意</figcaption></figure>
         <div class="cbd">
           <div class="on"><span>03</span><span class="pick">重點服務</span></div>
           <h3>研究即服務</h3>
@@ -798,7 +386,7 @@
         </div>
       </div>
       <div class="offer">
-        <div class="cfig"><img src="assets/svcs/kb.webp" srcset="assets/svcs/kb-768.webp 768w, assets/svcs/kb.webp 1536w" sizes="(max-width: 640px) 100vw, (max-width: 1000px) 50vw, 360px" alt="企業知識庫與智慧問答示意圖" loading="lazy" width="1536" height="1024"></div>
+        <figure class="cfig"><img src="assets/svcs/kb.webp" srcset="assets/svcs/kb-768.webp 768w, assets/svcs/kb.webp 1536w, assets/svcs/kb-3072.webp 3072w" sizes="(max-width: 400px) calc(100vw - 40px), (max-width: 640px) 90vw, (max-width: 1000px) 45vw, (max-width: 1180px) 30vw, 355px" alt="企業知識庫與智慧問答示意圖" loading="lazy" width="1536" height="1024"><figcaption>技術示意</figcaption></figure>
         <div class="cbd">
           <div class="on"><span>04</span></div>
           <h3>企業知識庫與智慧問答</h3>
@@ -813,7 +401,7 @@
         </div>
       </div>
       <div class="offer">
-        <div class="cfig"><img src="assets/svcs/domain.webp" srcset="assets/svcs/domain-768.webp 768w, assets/svcs/domain.webp 1536w" sizes="(max-width: 640px) 100vw, (max-width: 1000px) 50vw, 360px" alt="領域 AI 演算法研發示意圖" loading="lazy" width="1536" height="1024"></div>
+        <figure class="cfig"><img src="assets/svcs/domain.webp" srcset="assets/svcs/domain-768.webp 768w, assets/svcs/domain.webp 1536w, assets/svcs/domain-3072.webp 3072w" sizes="(max-width: 400px) calc(100vw - 40px), (max-width: 640px) 90vw, (max-width: 1000px) 45vw, (max-width: 1180px) 30vw, 355px" alt="領域 AI 演算法研發示意圖" loading="lazy" width="1536" height="1024"><figcaption>技術示意</figcaption></figure>
         <div class="cbd">
           <div class="on"><span>05</span></div>
           <h3>領域 AI 演算法研發</h3>
@@ -828,7 +416,7 @@
         </div>
       </div>
       <div class="offer">
-        <div class="cfig"><img src="assets/svcs/assess.webp" srcset="assets/svcs/assess-768.webp 768w, assets/svcs/assess.webp 1536w" sizes="(max-width: 640px) 100vw, (max-width: 1000px) 50vw, 360px" alt="AI 技術診斷與架構規劃示意圖" loading="lazy" width="1536" height="1024"></div>
+        <figure class="cfig"><img src="assets/svcs/assess.webp" srcset="assets/svcs/assess-768.webp 768w, assets/svcs/assess.webp 1536w, assets/svcs/assess-3072.webp 3072w" sizes="(max-width: 400px) calc(100vw - 40px), (max-width: 640px) 90vw, (max-width: 1000px) 45vw, (max-width: 1180px) 30vw, 355px" alt="AI 技術診斷與架構規劃示意圖" loading="lazy" width="1536" height="1024"><figcaption>技術示意</figcaption></figure>
         <div class="cbd">
           <div class="on"><span>06</span></div>
           <h3>AI 技術診斷與架構規劃</h3>
@@ -888,30 +476,33 @@
       <h2>精選案例</h2>
       <span class="en">/ Selected Work</span>
     </div>
-    <p class="sec-lead reveal">從晶片端、工業、企業到醫療與金融，挑出能代表不同能力的案例。為保護客戶，專案名稱與客戶資訊已匿名化。</p>
+    <p class="sec-lead reveal">從產業及技術領域找相近的工程案例與研究合作。客戶案以匿名方式展示。</p>
 
-    <div class="cases reveal">
-      <article class="case flag">
-        <div class="cfig"><img src="assets/cases/edge.webp" srcset="assets/cases/edge-768.webp 768w, assets/cases/edge.webp 1536w" sizes="(max-width: 760px) 100vw, 530px" alt="手機晶片端即時人物消除與背景重建示意圖" loading="lazy" width="1536" height="1024"></div>
-        <div class="cbody">
-          <div class="ctag">案例 01 · 邊緣 AI · 生成式影像</div>
-          <h3>晶片端即時生成式影像引擎</h3>
-          <p class="cprob">影片人物消除要靠生成式模型重建被遮住的背景，這類模型通常只能在雲端 GPU 上跑。要在手機上即時處理，模型得重新壓縮，並配合晶片的運算格式。</p>
-          <ul class="chk">
-            <li>人物偵測模型（YOLO）以量化感知訓練（QAT）做到 INT8，符合 NPU 的運算格式</li>
-            <li>MI-GAN、LaMa 修補模型輕量化並轉換到手機 NPU，逐幀消除人物、重建背景</li>
-            <li>延伸到晶片端的 Diffusion 場景生成</li>
-            <li>同一合作也處理影音多模態：結合臉部影像的說話者分段與音源分離</li>
-          </ul>
-          <div class="cres"><div class="big word">手機 NPU</div><p class="rdesc">生成式模型直接在手機晶片上執行，影像不必上傳雲端；效能目標為每秒 20 幀以上。</p></div>
-        </div>
-      </article>
-
-      <article class="case">
-        <div class="cfig"><img src="assets/cases/robot.webp" srcset="assets/cases/robot-768.webp 768w, assets/cases/robot.webp 1536w" sizes="(max-width: 760px) 100vw, 530px" alt="機器人碼垛工作站佈局最佳化示意圖" loading="lazy" width="1536" height="1024"></div>
+    <div class="portfolio-filter" id="work-filter" data-portfolio-filter aria-controls="case-list" hidden>
+      <p class="filter-help" id="work-filter-help">可複選，只顯示符合所有所選領域的案例。</p>
+      <div class="filter-options" role="group" aria-label="案例技術領域" aria-describedby="work-filter-help">
+        <button type="button" data-filter="" aria-pressed="true">全部</button>
+        <button type="button" data-filter="semiconductor" aria-pressed="false">半導體與邊緣 AI</button>
+        <button type="button" data-filter="agent" aria-pressed="false">AI Agent 與企業智慧</button>
+        <button type="button" data-filter="health" aria-pressed="false">醫療與神經科技</button>
+        <button type="button" data-filter="industrial" aria-pressed="false">工業智慧</button>
+        <button type="button" data-filter="finance" aria-pressed="false">金融與決策智慧</button>
+        <button type="button" data-filter="science" aria-pressed="false">科學與量子運算</button>
+        <button type="button" data-filter="infrastructure" aria-pressed="false">AI 基礎設施與產品工程</button>
+      </div>
+      <p class="filter-count" role="status" data-count-label="個案例"></p>
+      <div class="filter-empty" hidden>
+        <p>沒有符合所有所選領域的案例。</p>
+        <button type="button" class="text-link" data-reset>清除篩選</button>
+      </div>
+    </div>
+    <div class="cases" id="case-list">
+      <article class="case reveal" id="industrial-robot-workcell" data-tags="industrial agent" data-origin="anonymous-engineering" data-stage="delivered">
+        <figure class="cfig"><img src="assets/cases/robot.webp" srcset="assets/cases/robot-768.webp 768w, assets/cases/robot.webp 1536w, assets/cases/robot-3072.webp 3072w" sizes="(max-width: 400px) calc(100vw - 40px), (max-width: 760px) 90vw, (max-width: 1180px) 45vw, 530px" alt="機器人碼垛工作站佈局最佳化示意圖" loading="lazy" width="1536" height="1024"><figcaption>技術示意</figcaption></figure>
         <div class="cbody">
           <div class="ctag">案例 02 · 工業 AI · AI Agent</div>
           <h3>工業機器人工作站智慧設計平台</h3>
+          <p class="entry-meta">匿名工程案例 · 平台已交付</p>
           <p class="cprob">碼垛工作站的機器人選型、佈局與報價，需要在可達性、節拍時間與成本之間反覆權衡。</p>
           <ul class="chk">
             <li>多代理對話擷取需求，匯入實際廠房 CAD 平面圖</li>
@@ -919,14 +510,16 @@
             <li>自動配置視覺相機與安全圍欄，輸出物料清單與技術設計報告</li>
           </ul>
           <div class="cres"><div class="big">9</div><p class="rdesc">階段最佳化流程，從一段對話需求，到可建置的 2D／3D 工作站佈局。</p></div>
+          <a class="text-link" href="#contact" data-inquiry="robotics">機器人選型與工作站設計</a>
         </div>
       </article>
 
-      <article class="case">
-        <div class="cfig"><img src="assets/cases/eeg.webp" srcset="assets/cases/eeg-768.webp 768w, assets/cases/eeg.webp 1536w" sizes="(max-width: 760px) 100vw, 530px" alt="腦波療效預測示意圖" loading="lazy" width="1536" height="1024"></div>
+      <article class="case reveal" id="eeg-treatment-response" data-tags="health science" data-origin="academic" data-stage="clinical-use">
+        <figure class="cfig"><img src="assets/cases/eeg.webp" srcset="assets/cases/eeg-768.webp 768w, assets/cases/eeg.webp 1536w, assets/cases/eeg-3072.webp 3072w" sizes="(max-width: 400px) calc(100vw - 40px), (max-width: 760px) 90vw, (max-width: 1180px) 45vw, 530px" alt="腦波療效預測示意圖" loading="lazy" width="1536" height="1024"><figcaption>技術示意</figcaption></figure>
         <div class="cbody">
           <div class="ctag">案例 03 · 臨床 AI · 腦波</div>
           <h3>腦波憂鬱症療效預測</h3>
+          <p class="entry-meta">學術研究合作 · 門診使用</p>
           <p class="cprob">非侵入式腦刺激治療的反應因人而異，臨床需要在治療前預估療效。</p>
           <ul class="chk">
             <li>以前額葉腦波（EEG）建立療效預測模型</li>
@@ -934,28 +527,32 @@
             <li>與臨床團隊合作，導入門診流程</li>
           </ul>
           <div class="cres"><div class="big word">門診使用中</div><p class="rdesc">模型已於醫學中心門診常規使用。</p></div>
+          <a class="text-link" href="#contact" data-inquiry="domain-rd">訊號與臨床 AI 研發</a>
         </div>
       </article>
 
-      <article class="case">
-        <div class="cfig"><img src="assets/cases/ngs.webp" srcset="assets/cases/ngs-768.webp 768w, assets/cases/ngs.webp 1536w" sizes="(max-width: 760px) 100vw, 530px" alt="次世代定序影像降噪示意圖" loading="lazy" width="1536" height="1024"></div>
+      <article class="case reveal" id="ngs-denoising" data-tags="health science" data-origin="anonymous-engineering" data-stage="evaluation">
+        <figure class="cfig"><img src="assets/cases/ngs.webp" srcset="assets/cases/ngs-768.webp 768w, assets/cases/ngs.webp 1536w, assets/cases/ngs-3072.webp 3072w" sizes="(max-width: 400px) calc(100vw - 40px), (max-width: 760px) 90vw, (max-width: 1180px) 45vw, 530px" alt="次世代定序影像降噪示意圖" loading="lazy" width="1536" height="1024"><figcaption>技術示意</figcaption></figure>
         <div class="cbody">
           <div class="ctag">案例 04 · 生醫影像</div>
           <h3>次世代定序影像降噪</h3>
+          <p class="entry-meta">匿名工程案例 · 訊號品質評估</p>
           <p class="cprob">次世代定序（NGS）影像背景雜訊高、目標訊號微弱，傳統方法難以穩定分離。</p>
           <ul class="chk">
             <li>依訊號特性設計客製化降噪演算法</li>
             <li>結合針對該訊號最佳化的 AI 模型</li>
           </ul>
           <div class="cres"><div class="big">+12<small>%</small></div><p class="rdesc">相較既有傳統方法基準的訊號品質提升。</p></div>
+          <a class="text-link" href="#contact" data-inquiry="domain-rd">影像與訊號處理</a>
         </div>
       </article>
 
-      <article class="case">
-        <div class="cfig"><img src="assets/cases/finance.webp" srcset="assets/cases/finance-768.webp 768w, assets/cases/finance.webp 1536w" sizes="(max-width: 760px) 100vw, 530px" alt="AI 投資研究平台示意圖" loading="lazy" width="1536" height="1024"></div>
+      <article class="case reveal" id="investment-research" data-tags="finance agent infrastructure" data-origin="founder-experience" data-stage="development">
+        <figure class="cfig"><img src="assets/cases/finance.webp" srcset="assets/cases/finance-768.webp 768w, assets/cases/finance.webp 1536w, assets/cases/finance-3072.webp 3072w" sizes="(max-width: 400px) calc(100vw - 40px), (max-width: 760px) 90vw, (max-width: 1180px) 45vw, 530px" alt="AI 投資研究平台示意圖" loading="lazy" width="1536" height="1024"><figcaption>技術示意</figcaption></figure>
         <div class="cbody">
           <div class="ctag">案例 05 · 金融科技 · AI Agent</div>
           <h3>AI 投資研究平台</h3>
+          <p class="entry-meta">創辦人參與 · 研發經歷</p>
           <p class="cprob">投資研究需要大量查證；AI 生成的結論若無法回溯來源，就無法被信任。</p>
           <ul class="chk">
             <li>對話式研究工作區：提問、收錄、整理成可回看版本的研究報告</li>
@@ -963,14 +560,16 @@
             <li>公司與供應鏈關係資料庫，每一條關係都附年報原句</li>
           </ul>
           <div class="cres"><div class="big word">可回溯</div><p class="rdesc">報告裡的每個關係與數字，都能點回原始出處。</p></div>
+          <a class="text-link" href="#contact" data-inquiry="domain-rd">金融資料與 AI 研發</a>
         </div>
       </article>
 
-      <article class="case">
-        <div class="cfig"><img src="assets/cases/kb.webp" srcset="assets/cases/kb-768.webp 768w, assets/cases/kb.webp 1536w" sizes="(max-width: 760px) 100vw, 530px" alt="企業知識庫衝突仲裁問答系統示意圖" loading="lazy" width="1536" height="1024"></div>
+      <article class="case reveal" id="enterprise-knowledge-arbitration" data-tags="agent infrastructure" data-origin="anonymous-engineering" data-stage="evaluation">
+        <figure class="cfig"><img src="assets/cases/kb.webp" srcset="assets/cases/kb-768.webp 768w, assets/cases/kb.webp 1536w, assets/cases/kb-3072.webp 3072w" sizes="(max-width: 400px) calc(100vw - 40px), (max-width: 760px) 90vw, (max-width: 1180px) 45vw, 530px" alt="企業知識庫衝突仲裁問答系統示意圖" loading="lazy" width="1536" height="1024"><figcaption>技術示意</figcaption></figure>
         <div class="cbody">
           <div class="ctag">案例 06 · 企業 AI · 知識管理</div>
           <h3>設備廠商技術知識庫問答系統</h3>
+          <p class="entry-meta">匿名工程案例 · 問答評測</p>
           <p class="cprob">同一件事在不同文件、不同專家口中說法互相矛盾，一般 RAG 會把矛盾一起丟給模型猜。</p>
           <ul class="chk">
             <li>把文件抽成標明「誰主張」的結構化知識卡</li>
@@ -978,14 +577,16 @@
             <li>專家審查介面，人工裁決回寫知識庫，並以評測集守住品質</li>
           </ul>
           <div class="cres"><div class="big">100<small>%</small></div><p class="rdesc">28 題評測的版本正確率；引用正確率 85%。知識庫由 14 份文件抽出 628 張知識卡。</p></div>
+          <a class="text-link" href="#contact" data-inquiry="knowledge-base">企業知識庫服務</a>
         </div>
       </article>
 
-      <article class="case">
-        <div class="cfig"><img src="assets/cases/floorplan.webp" srcset="assets/cases/floorplan-768.webp 768w, assets/cases/floorplan.webp 1536w" sizes="(max-width: 760px) 100vw, 530px" alt="建築平面圖自動上色示意圖" loading="lazy" width="1536" height="1024"></div>
+      <article class="case reveal" id="floorplan-automation" data-tags="industrial infrastructure" data-origin="anonymous-engineering" data-stage="deployment">
+        <figure class="cfig"><img src="assets/cases/floorplan.webp" srcset="assets/cases/floorplan-768.webp 768w, assets/cases/floorplan.webp 1536w, assets/cases/floorplan-3072.webp 3072w" sizes="(max-width: 400px) calc(100vw - 40px), (max-width: 760px) 90vw, (max-width: 1180px) 45vw, 530px" alt="建築平面圖自動上色示意圖" loading="lazy" width="1536" height="1024"><figcaption>技術示意</figcaption></figure>
         <div class="cbody">
           <div class="ctag">案例 07 · 電腦視覺 · 建築設計</div>
           <h3>建築平面圖自動上色系統</h3>
+          <p class="entry-meta">匿名工程案例 · 地端運行</p>
           <p class="cprob">建案平面圖的分區上色、材質貼圖與坪數標註，長期依賴人工繪圖。</p>
           <ul class="chk">
             <li>幾何演算法處理標準圖面，學習式模型定位基地圖中的建築</li>
@@ -993,34 +594,39 @@
             <li>一次設定、整棟多樓層批次輸出 300 dpi 成品</li>
           </ul>
           <div class="cres"><div class="big">0.4<small>s</small></div><p class="rdesc">互動換色的反應時間；全程地端運行，圖面不離開客戶電腦。</p></div>
+          <a class="text-link" href="#contact" data-inquiry="domain-rd">工業與影像 AI 研發</a>
         </div>
       </article>
 
-      <article class="case">
-        <div class="cfig"><img src="assets/cases/fall.webp" srcset="assets/cases/fall-768.webp 768w, assets/cases/fall.webp 1536w" sizes="(max-width: 760px) 100vw, 530px" alt="長照場域即時跌倒監測示意圖" loading="lazy" width="1536" height="1024"></div>
+      <article class="case reveal" id="fall-detection" data-tags="health semiconductor" data-origin="anonymous-engineering" data-stage="deployment">
+        <figure class="cfig"><img src="assets/cases/fall.webp" srcset="assets/cases/fall-768.webp 768w, assets/cases/fall.webp 1536w, assets/cases/fall-3072.webp 3072w" sizes="(max-width: 400px) calc(100vw - 40px), (max-width: 760px) 90vw, (max-width: 1180px) 45vw, 530px" alt="長照場域即時跌倒監測示意圖" loading="lazy" width="1536" height="1024"><figcaption>技術示意</figcaption></figure>
         <div class="cbody">
           <div class="ctag">案例 08 · 長照 · 邊緣 AI</div>
           <h3>養老院即時跌倒監測</h3>
+          <p class="entry-meta">匿名工程案例 · 邊緣裝置運行</p>
           <p class="cprob">長照場域需要即時、低誤報的跌倒偵測，並能在邊緣裝置上穩定運行。</p>
           <ul class="chk">
             <li>建構從感測、辨識到告警的完整即時處理鏈</li>
             <li>針對邊緣裝置最佳化，在現場穩定運行</li>
           </ul>
           <div class="cres"><div class="big">98<small>%</small></div><p class="rdesc">邊緣裝置即時運行下的跌倒事件偵測準確率。</p></div>
+          <a class="text-link" href="#contact" data-inquiry="edge-ai">邊緣 AI 部署</a>
         </div>
       </article>
 
-      <article class="case">
-        <div class="cfig"><img src="assets/cases/tutor.webp" srcset="assets/cases/tutor-768.webp 768w, assets/cases/tutor.webp 1536w" sizes="(max-width: 760px) 100vw, 530px" alt="大學普物個人化 AI 家教示意圖" loading="lazy" width="1536" height="1024"></div>
+      <article class="case reveal" id="adaptive-physics-tutor" data-tags="agent" data-origin="education" data-stage="application">
+        <figure class="cfig"><img src="assets/cases/tutor.webp" srcset="assets/cases/tutor-768.webp 768w, assets/cases/tutor.webp 1536w, assets/cases/tutor-3072.webp 3072w" sizes="(max-width: 400px) calc(100vw - 40px), (max-width: 760px) 90vw, (max-width: 1180px) 45vw, 530px" alt="大學普物個人化 AI 家教示意圖" loading="lazy" width="1536" height="1024"><figcaption>技術示意</figcaption></figure>
         <div class="cbody">
           <div class="ctag">案例 09 · 教育 AI</div>
           <h3>大學普物個人化 AI 家教</h3>
+          <p class="entry-meta">教育 AI · 教學應用</p>
           <p class="cprob">大班普通物理教學難以因材施教，學生之間的學習落差持續擴大。</p>
           <ul class="chk">
             <li>打造個人化 AI 家教系統</li>
             <li>依學生狀態動態調整教學路徑</li>
           </ul>
           <div class="cres"><div class="big">+30<small>%</small></div><p class="rdesc">導入個人化 AI 家教後，目標學生的期末成績提升。</p></div>
+          <a class="text-link" href="#contact" data-inquiry="agent">客製化 AI Agent</a>
         </div>
       </article>
     </div>
@@ -1036,7 +642,7 @@
       <span class="en">/ How We Work</span>
     </div>
     <p class="sec-lead reveal">我們最擅長的，是從零研究一個還沒有標準答案的問題：先定義清楚、設好基準與對照組，設計方法並以實驗驗證，再把它工程化成真正能用的產品。</p>
-    <div class="method-fig reveal"><img src="assets/method-flow.webp" srcset="assets/method-flow-768.webp 768w, assets/method-flow.webp 1536w" sizes="(max-width: 1180px) 100vw, 1060px" alt="問題定義、方法設計、原型驗證、系統交付四階段流程示意圖" loading="lazy" width="1536" height="512"></div>
+    <figure class="method-fig reveal"><img src="assets/method-flow.webp" srcset="assets/method-flow-768.webp 768w, assets/method-flow.webp 1536w, assets/method-flow-3072.webp 3072w" sizes="(max-width: 400px) calc(100vw - 40px), (max-width: 1180px) 90vw, 1060px" alt="問題定義、方法設計、原型驗證、系統交付四階段流程示意圖" loading="lazy" width="1536" height="512"><figcaption>技術示意</figcaption></figure>
     <div class="steps reveal">
       <div class="step">
         <div class="sn">01</div>
@@ -1074,9 +680,9 @@
       <h2>研究成果</h2>
       <span class="en">/ Research</span>
     </div>
-    <p class="sec-lead reveal">我們自己也做研究。這些論文不一定直接對應到案子，但證明了我們能設計新方法、做出誠實的實驗，並通過同儕審查。</p>
+    <p class="sec-lead reveal">創辦人與研究團隊的公開研究，涵蓋生成式模型、量子運算、腦波與時序訊號。各列標明期刊、會議或預印本來源。</p>
     <div class="pubs reveal">
-      <div class="pub">
+      <div class="pub" id="research-lindblad">
         <div class="venue">Physical Review A · 2025</div>
         <div class="ptitle">Unraveling quantum environments: Transformer-assisted learning in Lindblad dynamics<span class="ptopic">以 Transformer 學習開放量子系統的環境動力學</span></div>
         <div class="go"><a href="https://doi.org/10.1103/gsxk-45mk" target="_blank" rel="noopener">論文 ↗</a></div>
@@ -1086,10 +692,15 @@
         <div class="ptitle">Quantum Adaptive Self-Attention for Quantum Transformer Models<span class="ptopic">量子自適應自注意力機制（QASA）</span></div>
         <div class="go"><a href="https://doi.org/10.1088/2058-9565/ae8b21" target="_blank" rel="noopener">論文 ↗</a><a href="https://github.com/ChiShengChen/QASA" target="_blank" rel="noopener">程式碼 ↗</a></div>
       </div>
-      <div class="pub">
+      <div class="pub" id="research-quantum-diffusion">
         <div class="venue">IEEE ICASSP · 2026 · Oral</div>
         <div class="ptitle">Quantum Reinforcement Learning-Guided Diffusion Model for Image Synthesis via Hybrid Quantum-Classical Generative Model Architectures<span class="ptopic">量子強化學習引導的擴散生成模型</span></div>
         <div class="go"><a href="https://doi.org/10.1109/ICASSP55912.2026.11461991" target="_blank" rel="noopener">論文 ↗</a></div>
+      </div>
+      <div class="pub" id="research-eeg-diffusion">
+        <div class="venue">JMIR Med. Inform. · 2025</div>
+        <div class="ptitle">Exploring the Potential of Electroencephalography Signal–Based Image Generation Using Diffusion Models<span class="ptopic">以擴散模型探索腦波訊號到影像的生成方法</span></div>
+        <div class="go"><a href="https://medinform.jmir.org/2025/1/e72027" target="_blank" rel="noopener noreferrer">期刊論文</a></div>
       </div>
       <div class="pub">
         <div class="venue">IEEE ICASSP · 2026</div>
@@ -1104,7 +715,7 @@
       <div class="pub">
         <div class="venue">IEEE SiPS · 2024</div>
         <div class="ptitle">QEEGNet: Quantum Machine Learning for Enhanced Electroencephalography Encoding<span class="ptopic">量子機器學習腦波編碼；延伸版刊於 J. Signal Processing Systems（2026）</span></div>
-        <div class="go"><a href="https://arxiv.org/abs/2407.19214" target="_blank" rel="noopener">論文 ↗</a><a href="https://github.com/ChiShengChen/QuantumEEGNet" target="_blank" rel="noopener">程式碼 ↗</a></div>
+        <div class="go"><a href="https://arxiv.org/abs/2407.19214" target="_blank" rel="noopener">會議版</a><a href="https://link.springer.com/article/10.1007/s11265-025-01979-2" target="_blank" rel="noopener noreferrer">期刊版</a><a href="https://github.com/ChiShengChen/QuantumEEGNet" target="_blank" rel="noopener">程式碼</a></div>
       </div>
       <div class="pub">
         <div class="venue">PLoS ONE · 2025</div>
@@ -1114,7 +725,7 @@
       <div class="pub">
         <div class="venue">MICCAI DEMI · 2026 · Spotlight</div>
         <div class="ptitle">Measuring Browser Webcam Gaze Honestly: A Capture-Clock Methodology and Open Reference Implementation<span class="ptopic">瀏覽器端網路攝影機視線追蹤的量測方法</span></div>
-        <div class="go"><a href="https://arxiv.org/abs/2608.11566" target="_blank" rel="noopener">論文 ↗</a></div>
+        <div class="go"><a href="https://arxiv.org/abs/2608.11566" target="_blank" rel="noopener">論文 ↗</a><a href="https://github.com/ChiShengChen/webcam_gaze_webapp" target="_blank" rel="noopener noreferrer">程式碼</a></div>
       </div>
       <div class="pub">
         <div class="venue">arXiv · 2025</div>
@@ -1145,57 +756,80 @@
       <span class="en">/ 自主研發與開源</span>
     </div>
     <p class="sec-lead reveal">我們自己開發、自己使用的工具。每一項都標明目前狀態：已開源的可以直接看程式碼，其餘仍在內部使用或開發中。</p>
-    <div class="labs reveal">
-      <a class="lab" href="https://github.com/ChiShengChen/paper-evidence" target="_blank" rel="noopener">
-        <div class="cfig"><img src="assets/labs/evidence.webp" srcset="assets/labs/evidence-768.webp 768w, assets/labs/evidence.webp 1536w" sizes="(max-width: 640px) 100vw, (max-width: 1000px) 50vw, 360px" alt="證據導向文獻分析示意圖" loading="lazy" width="1536" height="1024"></div>
+    <div class="portfolio-filter" data-portfolio-filter aria-controls="lab-list" hidden>
+      <p class="filter-help" id="lab-filter-help">可複選，只顯示符合所有所選主題與狀態的工具。</p>
+      <div class="filter-options" role="group" aria-label="研發工具主題與狀態" aria-describedby="lab-filter-help">
+        <button type="button" data-filter="" aria-pressed="true">全部</button>
+        <button type="button" data-filter="research" aria-pressed="false">研究工作流</button>
+        <button type="button" data-filter="evaluation" aria-pressed="false">AI 評估與驗證</button>
+        <button type="button" data-filter="decision" aria-pressed="false">決策與產品</button>
+        <button type="button" data-filter="open-source" aria-pressed="false">開源</button>
+        <button type="button" data-filter="internal" aria-pressed="false">內部使用</button>
+        <button type="button" data-filter="in-development" aria-pressed="false">開發中</button>
+      </div>
+      <p class="filter-count" role="status" data-count-label="項研發工具"></p>
+      <div class="filter-empty" hidden>
+        <p>沒有符合所選主題與狀態的工具。</p>
+        <button type="button" class="text-link" data-reset>清除篩選</button>
+      </div>
+    </div>
+    <div class="labs" id="lab-list">
+      <a class="lab reveal" id="literature-evidence" data-tags="research open-source" data-origin="internal-lab" data-stage="open-source" href="https://github.com/ChiShengChen/paper-evidence" target="_blank" rel="noopener">
+        <figure class="cfig"><img src="assets/labs/evidence.webp" srcset="assets/labs/evidence-768.webp 768w, assets/labs/evidence.webp 1536w, assets/labs/evidence-3072.webp 3072w" sizes="(max-width: 400px) calc(100vw - 40px), (max-width: 640px) 90vw, (max-width: 1000px) 45vw, (max-width: 1180px) 30vw, 355px" alt="證據導向文獻分析示意圖" loading="lazy" width="1536" height="1024"><figcaption>技術示意</figcaption></figure>
         <div class="cbd">
           <div class="ltop"><span class="lname">paper-evidence</span><span class="status open">開源</span></div>
           <h3>證據導向的文獻分析</h3>
+          <p class="entry-meta">研究工作流</p>
           <p>從文獻抽出可驗證的證據；LLM 對來源的每個宣稱，都必須有原文與數字上下文支持才放行。</p>
           <div class="lfor">應用 <b>可追溯的研究報告</b></div>
         </div>
       </a>
-      <a class="lab" href="https://github.com/ChiShengChen/tokenbench" target="_blank" rel="noopener">
-        <div class="cfig"><img src="assets/labs/tokenbench.webp" srcset="assets/labs/tokenbench-768.webp 768w, assets/labs/tokenbench.webp 1536w" sizes="(max-width: 640px) 100vw, (max-width: 1000px) 50vw, 360px" alt="Token 效率基準示意圖" loading="lazy" width="1536" height="1024"></div>
+      <a class="lab reveal" id="token-efficiency" data-tags="evaluation open-source" data-origin="internal-lab" data-stage="open-source" href="https://github.com/ChiShengChen/tokenbench" target="_blank" rel="noopener">
+        <figure class="cfig"><img src="assets/labs/tokenbench.webp" srcset="assets/labs/tokenbench-768.webp 768w, assets/labs/tokenbench.webp 1536w, assets/labs/tokenbench-3072.webp 3072w" sizes="(max-width: 400px) calc(100vw - 40px), (max-width: 640px) 90vw, (max-width: 1000px) 45vw, (max-width: 1180px) 30vw, 355px" alt="Token 效率基準示意圖" loading="lazy" width="1536" height="1024"><figcaption>技術示意</figcaption></figure>
         <div class="cbd">
           <div class="ltop"><span class="lname">tokenbench</span><span class="status open">開源</span></div>
           <h3>LLM 應用的 Token 效率基準</h3>
+          <p class="entry-meta">AI 評估與驗證</p>
           <p>在本機可重現地量測 LLM 應用的模型呼叫、token 用量與答對率，比較不同策略的成本與品質。</p>
           <div class="lfor">應用 <b>企業 LLM 降本</b></div>
         </div>
       </a>
-      <a class="lab" href="https://github.com/ChiShengChen/sevencheck" target="_blank" rel="noopener">
-        <div class="cfig"><img src="assets/labs/sevencheck.webp" srcset="assets/labs/sevencheck-768.webp 768w, assets/labs/sevencheck.webp 1536w" sizes="(max-width: 640px) 100vw, (max-width: 1000px) 50vw, 360px" alt="LLM 輸出確定性檢查示意圖" loading="lazy" width="1536" height="1024"></div>
+      <a class="lab reveal" id="deterministic-checks" data-tags="evaluation open-source" data-origin="internal-lab" data-stage="open-source" href="https://github.com/ChiShengChen/sevencheck" target="_blank" rel="noopener">
+        <figure class="cfig"><img src="assets/labs/sevencheck.webp" srcset="assets/labs/sevencheck-768.webp 768w, assets/labs/sevencheck.webp 1536w, assets/labs/sevencheck-3072.webp 3072w" sizes="(max-width: 400px) calc(100vw - 40px), (max-width: 640px) 90vw, (max-width: 1000px) 45vw, (max-width: 1180px) 30vw, 355px" alt="LLM 輸出確定性檢查示意圖" loading="lazy" width="1536" height="1024"><figcaption>技術示意</figcaption></figure>
         <div class="cbd">
           <div class="ltop"><span class="lname">sevencheck</span><span class="status open">開源</span></div>
           <h3>LLM 輸出的確定性檢查</h3>
+          <p class="entry-meta">AI 評估與驗證</p>
           <p>七類不需第二個模型的驗證，專抓「看起來合理但其實錯了」的輸出：改寫過的引文、捏造的引用、被截斷的統計。</p>
           <div class="lfor">應用 <b>高可靠性 AI 工作流</b></div>
         </div>
       </a>
-      <div class="lab">
-        <div class="cfig"><img src="assets/labs/autoresearch.webp" srcset="assets/labs/autoresearch-768.webp 768w, assets/labs/autoresearch.webp 1536w" sizes="(max-width: 640px) 100vw, (max-width: 1000px) 50vw, 360px" alt="自動化研究多代理系統示意圖" loading="lazy" width="1536" height="1024"></div>
+      <div class="lab reveal" id="research-automation" data-tags="research internal" data-origin="internal-lab" data-stage="internal">
+        <figure class="cfig"><img src="assets/labs/autoresearch.webp" srcset="assets/labs/autoresearch-768.webp 768w, assets/labs/autoresearch.webp 1536w, assets/labs/autoresearch-3072.webp 3072w" sizes="(max-width: 400px) calc(100vw - 40px), (max-width: 640px) 90vw, (max-width: 1000px) 45vw, (max-width: 1180px) 30vw, 355px" alt="自動化研究多代理系統示意圖" loading="lazy" width="1536" height="1024"><figcaption>技術示意</figcaption></figure>
         <div class="cbd">
           <div class="ltop"><span class="lname">AutoResearch</span><span class="status">內部使用</span></div>
           <h3>自動化研究多代理系統</h3>
+          <p class="entry-meta">研究工作流</p>
           <p>文獻監控、構想辯論、預註冊閘門、實驗、撰稿、審稿模擬到數字稽核，關鍵節點保留人工把關。</p>
           <div class="lfor">應用 <b>企業研發自動化</b></div>
         </div>
       </div>
-      <div class="lab">
-        <div class="cfig"><img src="assets/labs/hypogen.webp" srcset="assets/labs/hypogen-768.webp 768w, assets/labs/hypogen.webp 1536w" sizes="(max-width: 640px) 100vw, (max-width: 1000px) 50vw, 360px" alt="投資假說產生器示意圖" loading="lazy" width="1536" height="1024"></div>
+      <div class="lab reveal" id="investment-hypotheses" data-tags="decision in-development" data-origin="internal-lab" data-stage="in-development">
+        <figure class="cfig"><img src="assets/labs/hypogen.webp" srcset="assets/labs/hypogen-768.webp 768w, assets/labs/hypogen.webp 1536w, assets/labs/hypogen-3072.webp 3072w" sizes="(max-width: 400px) calc(100vw - 40px), (max-width: 640px) 90vw, (max-width: 1000px) 45vw, (max-width: 1180px) 30vw, 355px" alt="投資假說產生器示意圖" loading="lazy" width="1536" height="1024"><figcaption>技術示意</figcaption></figure>
         <div class="cbd">
           <div class="ltop"><span class="lname">Hypogen</span><span class="status">開發中</span></div>
           <h3>投資假說產生器</h3>
+          <p class="entry-meta">決策與產品</p>
           <p>從一個問題展開多層供應鏈關係、排序瓶頸，產生附觸發與失效條件的假說，並逐句回查引用。</p>
           <div class="lfor">應用 <b>投資研究、產業分析</b></div>
         </div>
       </div>
-      <a class="lab" href="https://github.com/ChiShengChen/bazaar-of-fates" target="_blank" rel="noopener">
-        <div class="cfig"><img src="assets/labs/fates.webp" srcset="assets/labs/fates-768.webp 768w, assets/labs/fates.webp 1536w" sizes="(max-width: 640px) 100vw, (max-width: 1000px) 50vw, 360px" alt="確定性引擎與 LLM 產品架構示意圖" loading="lazy" width="1536" height="1024"></div>
+      <a class="lab reveal" id="deterministic-product" data-tags="decision open-source" data-origin="internal-lab" data-stage="open-source" href="https://github.com/ChiShengChen/bazaar-of-fates" target="_blank" rel="noopener">
+        <figure class="cfig"><img src="assets/labs/fates.webp" srcset="assets/labs/fates-768.webp 768w, assets/labs/fates.webp 1536w, assets/labs/fates-3072.webp 3072w" sizes="(max-width: 400px) calc(100vw - 40px), (max-width: 640px) 90vw, (max-width: 1000px) 45vw, (max-width: 1180px) 30vw, 355px" alt="確定性引擎與 LLM 產品架構示意圖" loading="lazy" width="1536" height="1024"><figcaption>技術示意</figcaption></figure>
         <div class="cbd">
           <div class="ltop"><span class="lname">Bazaar of Fates</span><span class="status open">開源</span></div>
           <h3>確定性引擎 × LLM 的產品架構</h3>
+          <p class="entry-meta">決策與產品</p>
           <p>十一套確定性計算引擎負責運算，LLM 只負責解讀：示範如何把複雜的領域規則做成可信的 AI 產品。</p>
           <div class="lfor">應用 <b>規則型 AI 產品</b></div>
         </div>
@@ -1310,11 +944,11 @@
             <span class="ext">↗</span>
           </div>
           <div class="plat">RGTK</div>
-          <div class="ptag">智慧 AIoT 畜牧管理解決方案</div>
+          <div class="ptag">遠紅外線熱敷與長照 AIoT 安全偵測</div>
           <ul>
-            <li>智慧無線耳標與生理數據監控</li>
-            <li>動物影像辨識、數量統計與活動力分析</li>
-            <li>畜牧環境數據整合與健康履歷</li>
+            <li>遠紅外線熱敷系列產品</li>
+            <li>長照 AIoT 安全偵測與跌倒風險提醒</li>
+            <li>熱影像與 AI 影像辨識延伸照護場域</li>
           </ul>
           <span class="psite">rengiantek.info</span>
         </div>
@@ -1357,7 +991,7 @@
         <a href="https://www.linkedin.com/company/104143648/" target="_blank" rel="noopener" class="btn btn-ghost" style="width:100%;justify-content:center;margin-top:.8rem;">追蹤 LinkedIn <span class="arr">↗</span></a>
         <div class="mono" style="font-size:.7rem;color:var(--fg-faint);letter-spacing:.04em;margin-top:1.1rem;">LINE ID：m50816hc（陳先生）</div>
       </div>
-      <form class="qform" id="qform" novalidate>
+      <form class="qform" id="qform" novalidate hidden>
         <div class="full">
           <label for="qf-name">稱呼 <span class="req">*</span></label>
           <input id="qf-name" name="name" type="text" autocomplete="name" required>
@@ -1377,13 +1011,18 @@
               <label for="qf-type">需求類型</label>
               <select id="qf-type" name="type">
                 <option value="">未指定</option>
-                <option>客製化 AI Agent 系統</option>
-                <option>AI 評估與成本最佳化</option>
-                <option>研究即服務</option>
-                <option>企業知識庫與智慧問答</option>
-                <option>領域 AI 演算法研發（醫療／訊號／金融／工業）</option>
-                <option>AI 技術診斷與架構規劃</option>
-                <option>其他</option>
+                <option value="edge-ai">晶片端／NPU 模型部署</option>
+                <option value="generative-vision">生成式影像</option>
+                <option value="photonic-simulation">科學計算／光子模擬</option>
+                <option value="gpu-infrastructure">GPU 資源管理與效能工程</option>
+                <option value="robotics">工業機器人與工作站設計</option>
+                <option value="agent">客製化 AI Agent 系統</option>
+                <option value="evaluation">AI 評估與成本最佳化</option>
+                <option value="research">研究即服務</option>
+                <option value="knowledge-base">企業知識庫與智慧問答</option>
+                <option value="domain-rd">領域 AI 演算法研發（醫療／訊號／金融／工業）</option>
+                <option value="architecture">AI 技術診斷與架構規劃</option>
+                <option value="other">其他</option>
               </select>
             </div>
             <div>
@@ -1417,6 +1056,7 @@
     </div>
   </div>
 </section>
+</main>
 
 <footer>
   <div class="wrap foot">
@@ -1435,6 +1075,7 @@
   </div>
 </footer>
 
+<script defer src="assets/portfolio.js"></script>
 <script>
   // ---- header scroll state ----
   const hdr = document.getElementById('hdr');
@@ -1443,10 +1084,13 @@
   onScroll();
 
   // ---- reveal on scroll ----
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-  }, {threshold:.12, rootMargin:'0px 0px -8% 0px'});
-  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    });
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+    document.documentElement.classList.add('reveal-ready');
+  }
 
   // ---- spectrum / signal motif ----
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1535,41 +1179,18 @@
 
   function frame(t){ draw(t); requestAnimationFrame(frame); }
 
-  window.addEventListener('resize', resize, {passive:true});
+  window.addEventListener('resize', ()=>{
+    resize();
+    if(reduce) draw(0);
+  }, {passive:true});
   window.addEventListener('scroll', ()=>{ scrollY = window.scrollY; }, {passive:true});
   resize();
   if(reduce){ draw(0); }
   else { requestAnimationFrame(frame); }
 
-  // ---- light / dark theme toggle ----
-  const themeToggle = document.getElementById('themeToggle');
-  const metaTheme = document.querySelector('meta[name="theme-color"]');
-  // theme-aware illustrations: dark theme swaps every figure to its *-dark.webp twin
-  const themedImgs = [...document.querySelectorAll('.cfig img, .method-fig img')];
-  themedImgs.forEach(img=>{ img.dataset.lsrc = img.getAttribute('src'); img.dataset.lset = img.getAttribute('srcset') || ''; });
-  const toDark = u => u.replace(/\.webp(?=[\s,]|$)/g, '-dark.webp');
-  function setThemedImages(mode){
-    const dark = mode !== 'light';
-    themedImgs.forEach(img=>{
-      if(img.dataset.lset) img.setAttribute('srcset', dark ? toDark(img.dataset.lset) : img.dataset.lset);
-      img.setAttribute('src', dark ? toDark(img.dataset.lsrc) : img.dataset.lsrc);
-    });
-  }
-  function applyTheme(mode){
-    if(mode==='light') document.documentElement.setAttribute('data-theme','light');
-    else document.documentElement.removeAttribute('data-theme');
-    themeToggle.textContent = (mode==='light') ? '☾︎' : '☀︎';  // moon / sun, text style
-    readColors();                                   // refresh canvas palette
-    setThemedImages(mode);
-    if(metaTheme) metaTheme.setAttribute('content', getComputedStyle(document.documentElement).getPropertyValue('--bg').trim());
-    if(reduce) draw(0);                             // repaint static frame
-  }
-  let curTheme = (document.documentElement.getAttribute('data-theme')==='light') ? 'light' : 'dark';
-  applyTheme(curTheme);
-  themeToggle.addEventListener('click', ()=>{
-    curTheme = (curTheme==='light') ? 'dark' : 'light';
-    try{ localStorage.setItem('theme', curTheme); }catch(e){}
-    applyTheme(curTheme);
+  document.addEventListener('quantquer:themechange', ()=>{
+    readColors();
+    if(reduce) draw(0);
   });
 
   // ---- mobile menu ----
@@ -1593,17 +1214,38 @@
     const MAILTO = 'chisheng.m.chen@gmail.com';
     const qstatus = document.getElementById('qstatus');
     const v = k => (qform.elements[k].value || '').trim();
+    const inquiryType = qform.elements.type;
+    const presetInquiry = (value) => {
+      if (!value || !Array.from(inquiryType.options).some(option => option.value === value)) return;
+      inquiryType.value = value;
+      inquiryType.closest('details').open = true;
+    };
+    presetInquiry(new URLSearchParams(location.search).get('inquiry'));
+    document.querySelectorAll('[data-inquiry]').forEach(link => {
+      link.addEventListener('click', () => presetInquiry(link.dataset.inquiry));
+    });
+    const requiredFields = [qform.elements.name, qform.elements.desc];
+    requiredFields.forEach(field => {
+      field.addEventListener('input', () => field.setCustomValidity(''));
+    });
     const valid = ()=>{
-      for(const el of [qform.elements.name, qform.elements.desc]){
-        if(!el.value.trim()){ el.focus(); el.reportValidity && el.reportValidity(); return false; }
+      for (const field of requiredFields) {
+        const error = field.value.trim() ? '' : '請填寫此欄位。';
+        field.setCustomValidity(error);
+        if (error) {
+          field.focus();
+          field.reportValidity();
+          return false;
+        }
       }
       return true;
     };
     const compose = ()=>{
-      const subject = `[Quantquer] ${v('type') || '合作洽詢'}｜${v('name')}`;
+      const type = inquiryType.value ? inquiryType.selectedOptions[0].text : '';
+      const subject = `[Quantquer] ${type || '合作洽詢'}｜${v('name')}`;
       const lines = [`稱呼：${v('name')}`];
       if(v('org')) lines.push(`公司／單位：${v('org')}`);
-      if(v('type')) lines.push(`需求類型：${v('type')}`);
+      if(type) lines.push(`需求類型：${type}`);
       if(v('stage')) lines.push(`目前階段：${v('stage')}`);
       if(v('timeline')) lines.push(`期望時程：${v('timeline')}`);
       lines.push('', '問題描述：', v('desc'));
@@ -1645,6 +1287,7 @@
       out.value = text; out.focus(); out.select();
       say(`瀏覽器不允許自動複製，內容已在下方選取，請按 Ctrl+C（手機長按）複製後寄到 ${MAILTO}。`);
     });
+    qform.hidden = false;
   }
 </script>
 </body>

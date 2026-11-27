@@ -1,6 +1,6 @@
 # 量維資科 Quantquer Inc. — 官方網站
 
-研究驅動的 AI 與深科技工程公司官網。單頁式靜態網站：客製化 AI Agent、AI 評估與最佳化、研究即服務，以及醫療、訊號、金融與工業 AI 的研發與系統交付。
+研究驅動的 AI 與深科技工程公司官網。以靜態首頁和半導體專題呈現晶片端 AI、GPU 運算基礎設施、客製化 AI Agent、研究即服務，以及醫療、訊號、金融與工業 AI。
 
 🌐 **線上網址**：<https://quantquer.com>
 
@@ -8,18 +8,23 @@
 
 ## 技術概覽
 
-- **純靜態**：單一 `index.html`，內嵌 CSS 與原生 JavaScript，**無建置流程、無相依套件**。
+- **純靜態**。首頁和 `/semiconductor-ai/` 共用 CSS 與原生 JavaScript，無建置流程或套件安裝。
 - **字型**：Google Fonts（Noto Serif TC / Noto Sans TC / IBM Plex Mono）。
 - **Hero 動畫**：`<canvas>` 即時繪製訊號頻譜（PSD 包絡 + live signal trace），支援 `prefers-reduced-motion`。
 - **雙主題**：亮色（預設，品牌藍 `#004EA1`）／深色（teal `#2DD4BF`），右上角切換，偏好存於 `localStorage`，於繪製前套用以避免閃爍。
-- **SEO**：Open Graph、Twitter Card、JSON-LD `Organization`（含 LinkedIn / Google Scholar `sameAs`）。
+- **SEO**。Open Graph、Twitter Card、JSON-LD、逐頁 canonical、`sitemap.xml` 和 `robots.txt`。
 
 ## 專案結構
 
 ```
 .
-├── index.html                  # 整個網站（內容 + 樣式 + 腳本）
+├── index.html                  # 官網首頁與公開案例資料
+├── semiconductor-ai/index.html # 半導體與邊緣 AI 專題
+├── sitemap.xml / robots.txt    # 搜尋引擎索引
 ├── assets/
+│   ├── site.css                # 共用排版、主題及響應式樣式
+│   ├── theme.js                # 明暗主題與相應插圖
+│   ├── portfolio.js            # 案例與 Labs 的篩選及計數
 │   ├── logo-mark.png           # 標誌（藍色 Q，深淺底皆適用）— favicon / nav
 │   ├── logo-full-light.png     # 完整 logo（淺色字，深色底用）— 深色版頁尾
 │   ├── logo-full-onlight.png   # 完整 logo（深色字，淺色底用）— 亮色版頁尾、JSON-LD
@@ -30,8 +35,8 @@
 │   ├── labs/*.webp             # §06 Labs 示意圖
 │   ├── method-flow.webp        # §04 工作方式流程圖（1536×512）
 │   └── cases/*.webp            # §03 案例配圖
-│                               #   插圖皆為 AI 生成：<name>.webp 1536×1024 + <name>-768.webp，以 srcset 供瀏覽器挑選
-│                               #   深色主題版：<name>-dark.webp、<name>-768-dark.webp，切換主題時由 JS 換圖
+│                               #   插圖提供 768w、1536w、3072w 三種寬度，由瀏覽器依版面與像素密度選擇
+│                               #   對應檔為 <name>-768.webp、<name>.webp、<name>-3072.webp，深色版在副檔名前加 -dark
 ├── CNAME                       # 自訂網域：quantquer.com
 ├── .nojekyll                   # 關閉 GitHub Pages 的 Jekyll 處理
 └── .gitignore
@@ -39,33 +44,36 @@
 
 ## 本地預覽
 
-直接用瀏覽器開啟 `index.html` 即可；或啟動簡易伺服器：
+從 repo 根目錄啟動本機 HTTP 伺服器，可測試目錄路徑、錨點與查詢參數。
 
 ```bash
-python3 -m http.server 8000
-# 開啟 http://localhost:8000
+python3 -m http.server 8000 --bind 127.0.0.1
 ```
 
-## 內容區塊（皆在 `index.html`）
+- 首頁 <http://127.0.0.1:8000/>
+- 半導體專題 <http://127.0.0.1:8000/semiconductor-ai/>
+
+## 首頁區塊
 
 | 區段 | id | 說明 |
 |------|------|------|
 | Hero | `#top` | 主標、一句服務描述、兩個入口按鈕與 canvas 動畫 |
-| 代表案例 | `#featured` | 首屏後的三個代表案例：晶片端生成式影像引擎（旗艦，橫跨兩欄）、工作站設計平台、腦波療效預測 |
-| §01 能力 | `#capabilities` | 領域標籤＋九大技術領域（3×3，第一排為邊緣 AI、AI Agent、科學 AI），每項附一行佐證 |
-| §02 服務與合作模式 | `#services` | 依需求的六個方案（附交付物，不公開價格）＋五種合作方式 |
-| §03 精選案例 | `#work` | 九個案例卡，第一張為旗艦案例（客戶資訊已匿名化，配示意圖） |
+| 代表案例 | `#featured` | 晶片端生成式 AI 技術專題與三個代表案例 |
+| §01 能力 | `#capabilities` | 十項技術能力與專題入口 |
+| §02 服務與合作模式 | `#services` | 八個服務方案與五種合作方式 |
+| §03 精選案例 | `#work` | 八個案例，七個技術分類，可複選 |
 | §04 工作方式 | `#method` | Define → Design → Validate → Deliver |
 | §05 研究成果 | `#research` | 代表論文（venue · 論文 · 程式碼連結） |
-| §06 Quantquer Labs | `#labs` | 自主研發工具，標明開源／內部使用／開發中 |
+| §06 Quantquer Labs | `#labs` | 自主研發工具，可依主題及開源／內部使用／開發中篩選 |
 | §07 關於 | `#about` | 創辦人與資歷 |
 | §08 夥伴服務 | `#partners` | 協作夥伴 |
 | §09 聯絡 | `#contact` | Email · LINE · LinkedIn，以及需求表單（開啟郵件草稿或複製需求內容，不經第三方） |
 
 ## 編輯指南
 
-- 所有文字、樣式、腳本都集中在 `index.html`，依上方區塊註解（`<!-- ===== ... ===== -->`）尋找對應段落即可修改。
-- 主題顏色定義在 `<style>` 開頭的 `:root`（深色）與 `html[data-theme="light"]`（亮色）兩組 CSS 變數。
+- 只把可公開的卡片寫入 HTML。案例與 Labs 各卡的 `id` 是穩定錨點，`data-tags` 對應篩選按鈕值，`data-origin` 和 `data-stage` 記錄卡片上對應的歸屬及階段。篩選與計數直接讀取靜態卡片。
+- 主題與共用樣式集中在 `assets/site.css`。主題變數位於 `:root`（深色）與 `html[data-theme="light"]`（亮色）。
+- 首頁表單依既有選項 ID 預填需求類型。同頁入口使用 `data-inquiry`，跨頁入口使用 `?inquiry=<選項 ID>#contact`。
 - 換 logo 時注意三個版本的用途（深底用淺色字版、淺底用深色字版）。
 
 ## 部署
