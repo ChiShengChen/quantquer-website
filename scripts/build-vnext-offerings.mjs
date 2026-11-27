@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { parseArgs } from 'node:util';
 import { solutions, procurement, engagements, pricing, founder, publicationGroups, insights, offeringRoutes } from '../data/studio-offerings.mjs';
+import { studioBrand } from '../data/studio-brand.mjs';
 import { capabilityCopy } from './generate-capabilities-copy.mjs';
 import { escapeHtml as escape, origin, studioPath, writeStudioPage } from './vnext-layout.mjs';
 
@@ -51,8 +52,8 @@ function renderLanguage(locale) {
   const plannerCta = service => buttons(plan(service), labels.planner, local('/contact/'), labels.contact);
   const contactCta = service => section('contact-team', labels.inquiry, `<p class="topic-lead">${t(['提供目標環境、代表性需求及希望驗收的條件，我們會與您確認範圍和下一步。', 'Share your target environment, representative needs, and acceptance criteria so we can scope the next step.'])}</p>${plannerCta(service)}`);
   const markupCta = (service, label) => a(plan(service), label, 'btn btn-primary');
-  const hero = (eyebrow, title, intro, actions = '') => `<section class="topic-hero offering-hero"><div class="wrap">
-<p class="eyebrow">${t(eyebrow)}</p><h1>${t(title)}</h1><p class="topic-intro">${t(intro)}</p>${actions}</div></section>`;
+  const hero = (eyebrow, title, intro, actions = '', eyebrowLanguage = '') => `<section class="topic-hero offering-hero"><div class="wrap">
+<p class="eyebrow"${eyebrowLanguage ? ` lang="${eyebrowLanguage}"` : ''}>${t(eyebrow)}</p><h1>${t(title)}</h1><p class="topic-intro">${t(intro)}</p>${actions}</div></section>`;
   function section(id, title, body) {
     return `<section class="topic-section axis-divider offering-section" id="${id}" aria-labelledby="${id}-heading"><div class="wrap">
 <h2 id="${id}-heading">${t(title)}</h2>${body}</div></section>`;
@@ -135,7 +136,7 @@ function renderLanguage(locale) {
 
   function company() {
     const name = ['關於量維資科', 'About Quantquer'];
-    const intro = ['量維資科是研究驅動的 AI 與深科技工程團隊，從裝置、模型與代理系統到應用，協助團隊建立可驗證、可維護的技術交付。', 'Quantquer is a research-driven AI and deep-tech engineering studio helping teams deliver verifiable, maintainable technology from devices and models through agent systems and applications.'];
+    const intro = [`量維資科是${studioBrand.positioning[0]}。我們從裝置、模型與代理系統到應用，協助團隊交付可驗證且易於維護的技術。`, 'Quantquer is a research-driven deep-tech engineering studio. We help teams deliver verifiable, maintainable technology from devices and models through agent systems and applications.'];
     const brands = [
       [['Quantquer Engineering', 'Quantquer Engineering'], ['技術顧問、可行性研究、客製開發與系統交付。', 'Technical consulting, feasibility studies, custom development, and engineering delivery.'], '/services/', labels.services],
       [['Quantquer Labs', 'Quantquer Labs'], ['公開研究程式、實驗、互動展示和基準量測，依各項狀態說明。', 'Research code, experiments, interactive demos, and benchmarks with project status shown.'], '/labs/', ['探索 Labs', 'Explore Labs']],
@@ -146,7 +147,8 @@ function renderLanguage(locale) {
       [['學術研究', 'Academic research'], founder.research],
       [['開源工程', 'Open-source engineering'], founder.openSource],
     ];
-    return page('/company/', name, intro, hero(['From Silicon to Intelligence', 'From Silicon to Intelligence'], name, intro, buttons(local('/capabilities/'), labels.capabilities, local('/contact/'), labels.contact)) +
+    const actions = `<p class="topic-lead" lang="en">${escape(studioBrand.technicalTagline)}</p>${buttons(local('/capabilities/'), labels.capabilities, local('/contact/'), labels.contact)}`;
+    return page('/company/', name, intro, hero([studioBrand.slogan, studioBrand.slogan], name, intro, actions, 'en') +
       section('studio', ['工程、研究與工具', 'Engineering, research, and tools'], grid(brands.map(([brand, desc, route, label]) => `<article class="topic-panel offering-card"><h3>${t(brand)}</h3><p>${t(desc)}</p>${a(local(route), label)}</article>`).join(''))) +
       section('founder', ['創辦人', 'Founder'], `<p class="offering-founder">${t(founder.name)}</p>${grid(credentials.map(([label, copy]) => `<article class="topic-panel offering-card"><h3>${t(label)}</h3><p>${t(copy)}</p></article>`).join(''))}${profileLinks()}<p class="offering-link-row">${t(founder.award)} ${a(founder.awardSource, ['查看主辦方結果', 'See the organizer’s results'])}</p>`) +
       section('engineering-delivery', ['量維工程案例', 'Quantquer engineering cases'], `<p class="topic-lead">${t(['公司案例依項目標明已交付的軟體、匿名工程、研究經歷或技術展示。研究及競賽的署名和範圍以原始資料為準。', 'Each case identifies whether it covers software delivery, anonymized work, research experience, or a technical demonstration. Original sources establish attribution and scope for research and competitions.'])}</p>${grid(['industrial-robotics', 'enterprise-knowledge-arbitration'].map(renderCase).join(''))}${a(local('/work/'), labels.work)}`), null, { '@type': 'AboutPage' });

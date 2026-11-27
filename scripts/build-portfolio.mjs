@@ -520,15 +520,20 @@ for (const language of languages) {
   const t = (zh, english) => en ? english : zh;
   const industry = Object.keys(domains).map((id) => `<button type="button" data-filter="${id}" aria-pressed="false">${label(domains, id, language)}</button>`).join('');
   const filters = `<div class="portfolio-filter" data-work-filter aria-controls="case-list" hidden>
-      <form class="work-controls">
+      <p id="work-filter-help" class="filter-help">${t('領域可複選，案例必須同時符合所有已選條件。可用網址分享搜尋與篩選結果。', 'Select multiple domains. Cases must match every selected criterion. Share the URL to keep your search and filters.')}</p>
+      <form class="work-controls" aria-label="${t('搜尋與篩選案例', 'Search and filter cases')}" aria-describedby="work-filter-help">
         <label class="work-search">${t('搜尋案例', 'Search cases')} <input name="q" type="search" maxlength="100"></label>
         <label>${t('技術', 'Technology')} <select name="technology"><option value="">${t('全部技術', 'All technologies')}</option></select></label>
         <label>${t('階段', 'Status')} <select name="status"><option value="">${t('全部階段', 'All statuses')}</option></select></label>
         <label>${t('類型', 'Type')} <select name="type"><option value="">${t('全部類型', 'All types')}</option></select></label>
         <label class="featured-only"><input name="featured" type="checkbox"> ${t('只看代表案例', 'Featured cases only')}</label>
       </form>
-      <div class="filter-options" role="group" aria-label="${t('依領域篩選', 'Filter by domain')}"><button type="button" data-filter="" aria-pressed="true">${t('所有領域', 'All domains')}</button>${industry}</div>
-      <p class="filter-count" role="status"></p><p class="filter-empty" hidden>${t('沒有符合條件的案例。', 'No cases match your filters.')} <button type="button" data-reset-work>${t('清除篩選', 'Clear filters')}</button></p>
+      <div class="filter-options" role="group" aria-label="${t('依領域篩選', 'Filter by domain')}" aria-describedby="work-filter-help"><button type="button" data-filter="" aria-pressed="true">${t('所有領域', 'All domains')}</button>${industry}</div>
+      <div class="work-filter-results">
+        <p class="filter-count" role="status"></p>
+        <button type="button" class="text-link" data-reset-work>${t('清除篩選', 'Clear filters')}</button>
+      </div>
+      <p class="filter-empty" hidden>${t('沒有同時符合所有條件的案例。', 'No cases match all selected criteria.')}</p>
     </div>`;
   const list = portfolio.projects.map(project => `<article class="topic-panel" data-tags="${project.domain.join(' ')}" data-tech="${project.tech.join(' ')}" data-origin="${project.origin}" data-stage="${project.stage}" data-case-kind="${project.kind ?? 'case'}" data-featured="${featured.has(project.slug)}"><p class="eyebrow">${escapeHtml(evidenceStatus(project, language))}</p><h2><a class="text-link" href="${detailPath(project, language)}">${escapeHtml(project[language].title)}</a></h2><p>${escapeHtml(project[language].summary)}</p></article>`).join('');
   const directory = resolve(root, studioPath('/work/', language).slice(1));

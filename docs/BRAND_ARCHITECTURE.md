@@ -1,6 +1,10 @@
 # 品牌與內容層級
 
-**From Silicon to Intelligence** 串聯晶片端部署、可靠代理、GPU 系統與科學工程。首頁以原版波形呈現訊號處理及科學運算的品牌風格。
+**Quantify to Conquer.** 是品牌標語，意為「以量化征服難題」。Quantquer 的名稱結合 Quantify 與 Conquer。
+
+**From Silicon to Intelligence.** 是技術標語，串聯晶片端部署、可靠代理、GPU 系統與科學工程。首頁以原版波形呈現訊號處理及科學運算的品牌風格。
+
+**Research-Driven Deep-Tech Engineering Studio** 是公司定位，中文為「研究驅動的深科技工程工作室」。
 
 | 層級 | 對外範圍 | 入口 |
 | --- | --- | --- |

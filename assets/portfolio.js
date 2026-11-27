@@ -108,7 +108,7 @@ function setupWorkFilter(filter) {
     technology: element.dataset.tech?.split(/\s+/).filter(Boolean) ?? [],
     status: [element.dataset.stage],
     type: [element.dataset.origin, element.dataset.caseKind],
-    featured: element.dataset.featured === 'true',
+    featured: [element.dataset.featured === 'true'],
     text: normalize(element.textContent),
   }));
 
@@ -122,18 +122,20 @@ function setupWorkFilter(filter) {
   let searchSession = false;
   function update() {
     const terms = normalize(q.value).split(/\s+/).filter(Boolean);
-    const selected = [...activeIndustries];
-    const activeFacets = Object.entries(facets).filter(([, control]) => control.value);
+    const required = [
+      ...terms.map(term => ['text', term]),
+      ...Array.from(activeIndustries, industry => ['industries', industry]),
+      ...Object.entries(facets).map(([field, control]) => [field, control.value]).filter(([, value]) => value),
+    ];
+    if (featured.checked) required.push(['featured', true]);
+
     let visible = 0;
     for (const card of cards) {
-      const matches = terms.every(term => card.text.includes(term))
-        && selected.every(tag => card.industries.includes(tag))
-        && activeFacets.every(([key, control]) => card[key].includes(control.value))
-        && (!featured.checked || card.featured);
+      const matches = required.every(([field, value]) => card[field].includes(value));
       card.element.hidden = !matches;
       if (matches) visible += 1;
     }
-    all.setAttribute('aria-pressed', String(selected.length === 0));
+    all.setAttribute('aria-pressed', String(activeIndustries.size === 0));
     industries.forEach(button => button.setAttribute('aria-pressed', String(activeIndustries.has(button.dataset.filter))));
     count.textContent = english ? `Showing ${visible} of ${cards.length} cases` : `顯示 ${visible} 項，共 ${cards.length} 項`;
     empty.hidden = visible !== 0;

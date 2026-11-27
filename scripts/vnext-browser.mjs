@@ -87,6 +87,18 @@ try {
   }
   console.log(`Responsive layout at ${widths.join(', ')} px: ${snapshots.length} checks`);
 
+  for (const path of ['/', '/en/']) {
+    await open(path);
+    const brand = page.locator('#brand');
+    assert.equal(await brand.getByRole('heading').textContent(), 'Quantify to Conquer.');
+    assert.equal(await brand.locator('p.topic-lead').first().textContent(), 'From Silicon to Intelligence.');
+    assert.equal(await brand.locator('p.topic-lead').last().textContent(), path === '/en/'
+      ? 'Research-Driven Deep-Tech Engineering Studio'
+      : '研究驅動的深科技工程工作室');
+    assert.match(await page.locator('meta[property="og:title"]').getAttribute('content'), /Quantify to Conquer\.$/);
+    assert.ok(await brand.evaluate(section => section.offsetTop >= document.querySelector('#top').offsetHeight));
+  }
+
   // Desktop and keyboard-driven mobile navigation plus equivalent locales.
   await open('/');
   await page.locator('#hdr .navlinks a[href="/solutions/"]').click();
@@ -116,6 +128,39 @@ try {
   assert.equal(await page.locator('#case-list article:visible').count(), 16);
   await page.locator('input[name=q]').fill('workcell');
   assert.ok(await page.locator('#case-list article:visible').count() < 16);
+
+  for (const path of ['/#work', '/work/', '/en/work/']) {
+    await open(path);
+    const filter = page.locator('[data-work-filter]');
+    const visibleCases = page.locator('#case-list article:visible');
+    await filter.locator('[data-filter="health"]').click();
+    assert.equal(await visibleCases.count(), 5);
+    await filter.locator('[data-filter="industrial"]').click();
+    assert.equal(await visibleCases.count(), 0);
+    assert.ok(await filter.locator('.filter-empty').isVisible());
+    assert.deepEqual(new URL(page.url()).searchParams.getAll('industry'), ['health', 'industrial']);
+
+    await filter.locator('[data-filter="industrial"]').click();
+    await filter.locator('[data-filter="science"]').click();
+    await filter.locator('select[name=technology]').selectOption('vision');
+    await filter.locator('select[name=status]').selectOption('evaluation');
+    await filter.locator('select[name=type]').selectOption('anonymous-engineering');
+    const en = path.startsWith('/en/');
+    await filter.locator('input[name=q]').fill(en ? 'sequencing denoising' : '影像 降噪');
+    await page.reload({ waitUntil: 'load' });
+    assert.deepEqual(new URL(page.url()).searchParams.getAll('industry'), ['health', 'science']);
+    assert.equal(await visibleCases.count(), 1);
+    assert.ok(await visibleCases.locator(`a[href="${en ? '/en' : ''}/work/ngs-denoising/"]`).isVisible());
+    await filter.locator('input[name=featured]').check();
+    assert.equal(await visibleCases.count(), 0);
+    await filter.locator('input[name=featured]').uncheck();
+    await filter.locator('select[name=status]').selectOption('delivered');
+    assert.equal(await visibleCases.count(), 0);
+    await filter.locator('[data-reset-work]').click();
+    assert.equal(await visibleCases.count(), 16);
+    assert.equal(new URL(page.url()).search, '');
+  }
+
   await open('/work/surgical-gauze-detection/#english');
   assert.equal(await page.locator('#english').count(), 1);
   assert.equal(await page.locator('#technical-diagram-en').count(), 1);
@@ -238,7 +283,7 @@ try {
   assert.equal(await page.locator('.nf-art').count(), 1);
   assert.deepEqual([...defects], []);
   await writeFile(resolve(out, 'layout.json'), JSON.stringify(snapshots, null, 2));
-  console.log('PASS navigation, language, theme, filters, 3 new demos, 5 GPU strategies, vision controls, DXF, benchmark and PDF downloads, form fallback and mocked retry, 10 preserved URLs, custom 404 and browser errors');
+  console.log('PASS brand copy, navigation, language, theme, AND case filters, Labs filters, 3 new demos, 5 GPU strategies, vision controls, DXF, benchmark and PDF downloads, form fallback and mocked retry, 10 preserved URLs, custom 404 and browser errors');
 } finally {
   await browser.close();
 }

@@ -1,5 +1,6 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { studioHeader, studioPath } from './vnext-layout.mjs';
+import { studioBrand } from '../data/studio-brand.mjs';
 
 const check = process.argv.includes('--check');
 const content = {
@@ -123,7 +124,7 @@ function homeBlocks(locale) {
   const en = locale === 'en';
   const englishHero = `<section class="topic-hero" id="top" aria-labelledby="english-home-title"><div class="wrap">
     <div>
-      <p class="eyebrow">From Silicon to Intelligence</p>
+      <p class="eyebrow">${studioBrand.technicalTagline}</p>
       <h1 id="english-home-title">${copy.headline}</h1>
       <p class="topic-intro">${copy.intro}</p>
       <div class="cta-row"><a class="btn btn-primary" href="${local('/contact/')}" data-analytics="contact_cta_clicked">${copy.primary}</a><a class="btn btn-ghost" href="#featured">${copy.secondary}</a></div>
@@ -134,7 +135,7 @@ function homeBlocks(locale) {
   <div class="wrap">
     <div class="hero-eyebrow">
       <span class="tick"></span>
-      <span class="eyebrow">From Silicon to Intelligence</span>
+      <span class="eyebrow" lang="en">${studioBrand.technicalTagline}</span>
     </div>
     <h1 class="hero-title">${copy.headline}</h1>
     <p class="hero-sub">
@@ -151,6 +152,14 @@ function homeBlocks(locale) {
     </div>
   </div>
   <div class="fig-cap"><span class="dot"></span> fig.01 — power spectral density · live signal trace</div>
+</section>`;
+  const brand = `<section class="studio-home-section axis-divider" id="brand" aria-labelledby="brand-slogan">
+  <div class="wrap">
+    <p class="eyebrow" lang="en">Quantquer</p>
+    <h2 id="brand-slogan" lang="en">${studioBrand.slogan}</h2>
+    <p class="topic-lead" lang="en">${studioBrand.technicalTagline}</p>
+    <p class="topic-lead">${studioBrand.positioning[Number(en)]}</p>
+  </div>
 </section>`;
   const pipeline = `<ol class="studio-pipeline" aria-label="${copy.diagram}" lang="en">
       ${[
@@ -171,7 +180,7 @@ function homeBlocks(locale) {
   const solutionSection = `<section class="studio-home-section axis-divider" id="core-solutions"><div class="wrap"><h2>${copy.solutionTitle}</h2>${pipeline}<div class="studio-home-cards studio-solution-grid">${cards}</div><div class="entry-links"><a class="text-link" href="${local('/solutions/')}">${copy.solutionAll}</a></div></div></section>`;
   return {
     navigation: en ? studioHeader(locale, '/') : waveformNavigation,
-    hero: [en ? englishHero : waveformHero, cluster('engineering-credentials', copy.credentialsTitle, copy.credentials.map(([title, text, url, action]) => smallCard(title, text, local(url), action)).join('')), solutionSection].join('\n'),
+    hero: [en ? englishHero : waveformHero, brand, cluster('engineering-credentials', copy.credentialsTitle, copy.credentials.map(([title, text, url, action]) => smallCard(title, text, local(url), action)).join('')), solutionSection].join('\n'),
     conversion: [
       cluster('engineering-evidence', copy.evidenceTitle, copy.evidence.map(([title, text, url, action]) => smallCard(title, text, local(url), action)).join(''), copy.evidenceText),
       cluster('engagements', copy.engageTitle, copy.engagements.map(([title, text, service]) => smallCard(title, text, local(`/services/${service}/`), copy.engageLink)).join('')),
