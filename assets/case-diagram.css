@@ -112,3 +112,8 @@
 .case-evidence-facts div { display: grid; grid-template-columns: minmax(6.5rem, .48fr) minmax(0, 1fr); gap: .45rem; border-top: 1px solid var(--line); padding-top: .4rem; }
 .case-evidence-facts dt { color: var(--fg-dim); font-size: .85rem; }
 .case-evidence-facts dd { margin: 0; overflow-wrap: anywhere; }
+
+.case-supporting-image { width: fit-content; max-width: 100%; margin-block: 1rem; }
+.case-supporting-image > a { display: block; border: 1px solid var(--line); cursor: zoom-in; }
+.case-supporting-image img { display: block; max-width: 100%; height: auto; }
+.case-supporting-image figcaption { margin-top: .4rem; font-size: .88rem; color: var(--fg-dim); }

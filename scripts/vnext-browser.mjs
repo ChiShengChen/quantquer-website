@@ -16,6 +16,8 @@ const context = await browser.newContext({ reducedMotion: 'reduce', acceptDownlo
 const page = await context.newPage();
 const defects = new Set();
 const snapshots = [];
+const portfolio = JSON.parse(await readFile(new URL('../data/projects.json', import.meta.url), 'utf8'));
+const projectMedia = new Map(portfolio.projects.map(project => [project.slug, project.media]));
 page.on('pageerror', error => defects.add(error.message));
 page.on('console', message => {
   if (message.type() === 'error' && !/Failed to load resource/.test(message.text())) defects.add(message.text());
@@ -91,26 +93,36 @@ try {
     await open(path);
     const brand = page.locator('#brand');
     assert.equal(await brand.getByRole('heading').textContent(), 'Quantify to Conquer.');
-      assert.equal(await brand.locator('p.topic-lead').last().textContent(), path === '/en/'
+    assert.equal(await brand.locator('p.topic-lead').last().textContent(), path === '/en/'
       ? 'Research-Driven Deep-Tech Engineering Studio'
       : '研究驅動的深科技工程工作室');
     assert.match(await page.locator('meta[property="og:title"]').getAttribute('content'), /Quantify to Conquer\.$/);
     assert.ok(await brand.evaluate(section => section.offsetTop >= document.querySelector('#top').offsetHeight));
     assert.equal(await page.locator('#core-solutions li h3 a').count(), 4);
     assert.equal(await page.locator('#core-solutions li .text-link').count(), 4);
-    assert.equal(await page.locator('#featured .home-case:visible').count(), 3);
-    await page.locator('.home-featured-more summary').press('Enter');
-    assert.equal(await page.locator('#featured .home-case:visible').count(), 6);
-    const caseImages = page.locator('#featured .home-case-image img');
-    assert.equal(await caseImages.count(), 6);
-    for (const picture of await caseImages.all()) {
+    assert.equal(await page.locator('#featured .home-case:visible').count(), portfolio.featured.length);
+    assert.ok(await page.locator('#featured').evaluate(section =>
+      section.compareDocumentPosition(document.getElementById('core-solutions')) & Node.DOCUMENT_POSITION_FOLLOWING));
+    const cards = page.locator('#featured .home-case');
+    for (const [index, card] of (await cards.all()).entries()) {
+      const project = portfolio.featured[index];
+      const picture = card.locator('figure.home-case-image img');
+      assert.equal(await picture.getAttribute('src'), `/assets/${projectMedia.get(project)}.webp`);
+      assert.equal(await picture.getAttribute('loading'), 'lazy');
       await picture.scrollIntoViewIfNeeded();
       await picture.evaluate(img => img.decode());
-      assert.ok(await picture.evaluate(img => img.alt.trim() && img.naturalWidth === Number(img.getAttribute('width')) && img.naturalHeight === Number(img.getAttribute('height'))));
-      assert.equal(await picture.locator('..').getAttribute('href'), await picture.getAttribute('src'));
+      assert.ok(await picture.evaluate(img => img.alt.trim() && img.naturalWidth > 0 && img.naturalHeight > 0));
+      assert.equal(await card.locator('h3 a').getAttribute('href'), `${path === '/en/' ? '/en' : ''}/work/${project}/`);
     }
-    assert.equal(await page.locator('#featured figcaption a[href="https://chishengchen.github.io/projects.html"]').count(), 1);
-    assert.equal(await page.locator('#featured figcaption a[href="https://chishengchen.github.io/teaser_jad.png"]').count(), 1);
+    await page.locator('#themeToggle').click();
+    for (const [index, card] of (await cards.all()).entries()) {
+      const picture = card.locator('figure.home-case-image img');
+      assert.equal(await picture.getAttribute('src'), `/assets/${projectMedia.get(portfolio.featured[index])}-dark.webp`);
+      await picture.scrollIntoViewIfNeeded();
+      await picture.evaluate(img => img.decode());
+      assert.ok(await picture.evaluate(img => img.currentSrc.endsWith('-dark.webp')));
+    }
+    await page.locator('#themeToggle').click();
     assert.equal(await page.locator('[data-home-archive][open]').count(), 0);
     const finder = page.locator('[data-solution-finder]');
     await finder.locator('summary').press('Enter');
@@ -201,6 +213,18 @@ try {
     await filter.locator('[data-reset-work]').click();
     assert.equal(await visibleCases.count(), 16);
     assert.equal(new URL(page.url()).search, '');
+  }
+
+  for (const [path, source] of [
+    ['/work/industrial-robotics/', 'https://chishengchen.github.io/projects.html'],
+    ['/en/work/eeg-treatment-response/', 'https://chishengchen.github.io/teaser_jad.png'],
+  ]) {
+    await open(path);
+    const evidence = page.locator(path.startsWith('/en/') ? '#case-evidence-en' : '#case-evidence');
+    assert.equal(await evidence.locator(`figcaption a[href="${source}"]`).count(), 1);
+    const picture = evidence.locator('.case-supporting-image img');
+    await picture.scrollIntoViewIfNeeded();
+    await picture.evaluate(img => img.decode());
   }
 
   await open('/work/surgical-gauze-detection/#english');
@@ -391,9 +415,7 @@ try {
   try {
     const staticHome = await staticContext.newPage();
     await staticHome.goto(base + '/');
-    assert.equal(await staticHome.locator('#featured .home-case:visible').count(), 3);
-    await staticHome.locator('.home-featured-more summary').click();
-    assert.equal(await staticHome.locator('#featured .home-case:visible').count(), 6);
+    assert.equal(await staticHome.locator('#featured .home-case:visible').count(), portfolio.featured.length);
     assert.equal(await staticHome.locator('[data-solution-finder]').isVisible(), false);
     await staticHome.locator('.home-archive-directory > summary').click();
     await staticHome.locator('.home-archive-item').filter({ has: staticHome.locator('#work') }).locator(':scope > summary').click();
@@ -410,7 +432,7 @@ try {
   assert.equal(await page.locator('.nf-art').count(), 1);
   assert.deepEqual([...defects], []);
   await writeFile(resolve(out, 'layout.json'), JSON.stringify(snapshots, null, 2));
-  console.log('PASS brand copy, navigation, language, theme, AND case filters, Labs filters, 3 new demos, 5 GPU strategies, vision controls, DXF, benchmark and PDF downloads, video controls, form fallback and mocked retry, 10 preserved URLs, custom 404 and browser errors');
+  console.log('PASS brand copy, illustrated cases in both themes, navigation, language, AND case filters, Labs filters, 3 new demos, 5 GPU strategies, vision controls, DXF, benchmark and PDF downloads, video controls, form fallback and mocked retry, 10 preserved URLs, custom 404 and browser errors');
 } finally {
   await browser.close();
 }

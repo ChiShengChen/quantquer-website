@@ -205,8 +205,8 @@ function homeBlocks(locale) {
   const contact = section('project-contact', copy.closing, `<div class="entry-links"><a class="btn btn-primary" data-analytics="contact_cta_clicked" href="${local('/contact/')}">${copy.primary}</a><a class="btn btn-ghost" href="${local('/contact/')}#rfp">${copy.rfp}</a></div>`);
   return {
     navigation: waveformNavigation(locale),
-    hero: [waveformHero, brand, core].join('\n'),
-    conversion: [evidence, engagements, company, contact].join('\n'),
+    hero: [waveformHero, brand].join('\n'),
+    conversion: [core, evidence, engagements, company, contact].join('\n'),
     resources: `<nav class="home-footer-links" aria-label="${en ? 'More site links' : '網站資源'}">${links(
       [local('/work/'), local('/services/'), local('/research/'), local('/labs/'), local('/contact/')],
       en ? ['Engineering Work', 'Services', 'Publications', 'Labs', 'Contact'] : ['工程案例', '服務', '研究成果', 'Labs', '聯絡'],

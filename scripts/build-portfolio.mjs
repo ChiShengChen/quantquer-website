@@ -220,39 +220,33 @@ const demoPath = (path, language) => {
 };
 const caseImageSizes = '(max-width: 400px) calc(100vw - 40px), (max-width: 760px) 90vw, (max-width: 1180px) 45vw, 530px';
 
-function projectImage(project, { online = false, priority = false, language = 'zh' } = {}) {
+function projectImage(project, { online = false, priority = false, language = 'zh', sizes = caseImageSizes, figureClass = online ? 'topic-figure' : '' } = {}) {
   const path = `${online ? '/' : ''}assets/${project.media}`;
   const loading = priority ? ' fetchpriority="high"' : ' loading="lazy"';
-  return `<figure class="cfig${online ? ' topic-figure' : ''}"><img src="${path}.webp" srcset="${path}-768.webp 768w, ${path}.webp 1536w, ${path}-3072.webp 3072w" sizes="${caseImageSizes}" alt="${escapeHtml(project[language].mediaAlt)}" width="1536" height="1024"${loading}></figure>`;
+  return `<figure class="cfig${figureClass ? ' ' + figureClass : ''}"><img src="${path}.webp" srcset="${path}-768.webp 768w, ${path}.webp 1536w, ${path}-3072.webp 3072w" sizes="${sizes}" alt="${escapeHtml(project[language].mediaAlt)}" width="1536" height="1024"${loading}></figure>`;
 }
 
 function evidenceStatus(project, language) {
   return caseEvidence[project.slug].types.map(type => label(evidenceTypes, type, language)).join(' · ');
 }
 
-function featuredCard(project, language = 'zh') {
-  const en = language === 'en';
+const featuredImageSizes = '(max-width: 620px) calc(100vw - max(40px, 10vw)), (max-width: 980px) 44vw, 344px';
+
+function featuredCard(project, language) {
   const proof = featuredEvidence[project.slug];
   assert(proof, `Missing featured evidence for ${project.slug}`);
   const t = key => escapeHtml(label(proof, key, language));
-  const example = project.evidence?.find(item => item.type === 'model-output' && item.image);
-  const visual = proof.visual;
-  const file = visual ? (visual.files[Number(en)] ?? visual.files[0]) : example?.image;
-  assert(file, `Missing public image for featured case ${project.slug}`);
-  const alt = escapeHtml(visual ? label(visual, 'alt', language) : example[language].alt);
-  const caption = escapeHtml(visual ? label(visual, 'caption', language) : en ? 'Recorded MI-GAN CPU output.' : 'MI-GAN CPU 修補實際輸出。');
-  const imageSource = visual?.source ? ` <a href="${escapeHtml(label(visual, 'source', language))}">${en ? 'Image source' : '圖片來源'}</a>` : '';
+  const illustration = projectImage(project, { online: true, language, sizes: featuredImageSizes, figureClass: 'home-case-image' });
   return `      <article class="home-case topic-panel">
-        <p class="eyebrow">${escapeHtml(label(domains, project.domain[0], language))}</p>
-        <h3><a href="${detailPath(project, language)}">${t('title')}</a></h3>
-        <p class="home-case-output">${t('output')}</p>
-        <figure class="home-case-image">
-          <a class="home-case-zoom" href="${escapeHtml(file.path)}" aria-label="${en ? 'Open full-size image' : '開啟完整圖片'} · ${t('title')}"><img src="${escapeHtml(file.path)}" width="${file.width}" height="${file.height}" alt="${alt}" loading="lazy" decoding="async"></a>
-          <figcaption>${caption}${imageSource}</figcaption>
-        </figure>
-        <p class="home-case-proof">${t('evidence')}</p>
-        <a class="text-link" href="${t('source')}">${t('sourceLabel')}</a>
-      </article>`.replace(/[ \t]+$/gm, '');
+        ${illustration}
+        <div class="home-case-body">
+          <p class="eyebrow">${escapeHtml(label(domains, project.domain[0], language))}</p>
+          <h3><a href="${detailPath(project, language)}">${t('title')}</a></h3>
+          <p class="home-case-output">${t('output')}</p>
+          <p class="home-case-proof">${t('evidence')}</p>
+          <a class="text-link" href="${t('source')}">${t('sourceLabel')}</a>
+        </div>
+      </article>`;
 }
 
 function caseCard(project) {
@@ -363,6 +357,19 @@ function evidenceGallery(project, language) {
   return `<div class="public-evidence-gallery">${items.join('')}</div>`;
 }
 
+function supportingImage(visual, language) {
+  if (!visual) return '';
+  const en = language === 'en';
+  const { path, width, height } = visual.files[Number(en)] ?? visual.files[0];
+  const source = visual.source
+    ? ` <a class="text-link" href="${escapeHtml(label(visual, 'source', language))}">${en ? 'Image source' : '圖片來源'}</a>`
+    : '';
+  return `<figure class="case-supporting-image">
+          <a href="${escapeHtml(path)}"><img src="${escapeHtml(path)}" width="${width}" height="${height}" alt="${escapeHtml(label(visual, 'alt', language))}" loading="lazy" decoding="async"></a>
+          <figcaption>${escapeHtml(label(visual, 'caption', language))}${source}</figcaption>
+        </figure>`;
+}
+
 function detailSections(project, language) {
   const t = sectionLabels[language];
   const copy = project[language];
@@ -412,6 +419,7 @@ function detailSections(project, language) {
         <p class="topic-lead">${escapeHtml(copy.validation)}</p>${proof ? `\n        <p class="topic-lead">${escapeHtml(label(proof, 'evidence', language))}</p>` : ''}
         <p class="entry-meta">${t.evidenceType} · ${escapeHtml(evidenceStatus(project, language))}</p>
         ${evidenceGallery(project, language)}
+        ${supportingImage(proof?.visual, language)}
         ${metrics ? `<dl class="topic-benchmark">${metrics}</dl>` : ''}
         ${refs.length ? `<nav class="entry-links" aria-label="${t.refs}">${linkList(refs)}</nav>` : ''}
       </div>
@@ -582,13 +590,7 @@ for (const language of languages) {
 }
 function featuredSection(locale) {
   const cards = portfolio.featured.map(slug => featuredCard(slugs.get(slug), locale));
-  const grid = items => `<div class="home-featured-grid">\n${items.join('\n')}\n    </div>`;
-  const more = locale === 'en' ? 'Show three more case studies' : '展開另外三個代表案例';
-  return `${grid(cards.slice(0, 3))}
-    <details class="home-featured-more">
-      <summary>${more}</summary>
-      ${grid(cards.slice(3))}
-    </details>`;
+  return `<div class="home-featured-grid">\n${cards.join('\n')}\n    </div>`;
 }
 
 const indexFile = resolve(root, 'index.html');
