@@ -525,48 +525,48 @@
         }
       ],
       "zh": {
-        "title": "手術中紗布即時辨識",
-        "summary": "在連續手術影像中辨識可見紗布，提供定位標記供醫護盤點時人工覆核。",
-        "metaDescription": "手術中紗布即時辨識工程案例。以 YOLOv6 與 YOLOv7 規劃單類別物件偵測，定位畫面中的可見紗布，並設計遮擋、誤報及端到端影像延遲的驗證方式。",
-        "problem": "紗布在手術畫面中可能被手部、器械或布巾遮擋。定位標記能讓醫護人員在覆核時回到特定影格。",
-        "challenge": "紗布摺疊或部分遮擋時，外觀和可見面積會改變。相似材質、反光與畫面模糊也會影響辨識。",
+        "title": "手術中體內紗布即時辨識",
+        "summary": "在術中影像中定位患者體內術野可見的紗布，提供影格標記供醫護人員覆核。",
+        "metaDescription": "手術中體內紗布即時辨識工程案例。以 YOLOv6 與 YOLOv7 的單類別偵測設定，規劃定位患者體內術野可見的紗布，以及遮擋、誤報和端到端延遲驗證。",
+        "problem": "紗布置於患者體內術野時，可見範圍會隨取像角度與遮擋變動。畫面上的位置與時間標記能協助醫護回看特定影格。",
+        "challenge": "紗布摺疊、變形或部分被組織與器械遮擋時，影像中的外觀可能改變。術野反光與畫面模糊也須納入測試。",
         "approach": [
-          "依可見紗布標註單一物件類別，區分訓練、驗證與測試影像。",
+          "在術中影像標註體內術野可見的紗布，區分訓練、驗證與測試片段。",
           "準備 YOLOv6 與 YOLOv7 的紗布訓練設定，作為比較候選。",
           "規劃將定位框與影格時間戳一起顯示，供人工覆核及延遲測試。"
         ],
-        "implementation": "已有 YOLOv6 與 YOLOv7 的紗布單類別設定及訓練入口。串流方案需核對取像、模型推論和定位疊圖三段所花的時間。",
+        "implementation": "已有 YOLOv6 與 YOLOv7 的紗布單類別設定及訓練入口。針對體內術野的串流方案，規劃分段量測取像、推論及疊圖時間。",
         "result": "已備妥單類別訓練資料切分設定與兩組候選模型的訓練入口。",
         "deliverables": [
           "紗布單類別偵測訓練設定",
           "影像疊圖與人工覆核流程規劃",
           "工況與端到端延遲驗證計畫"
         ],
-        "validation": "後續以獨立影像片段測試漏檢、誤報及從取像到疊圖的延遲，按遮擋、摺疊、反光和模糊等工況分開記錄。臨床使用與實際效能待驗證。",
-        "disclosure": "匿名研發案例。本文呈現可核對的訓練設定及工程驗證範圍。配圖為概念示意，辨識框供人工覆核。",
-        "mediaAlt": "俯視攝影機辨識器械盤上紗布的概念圖",
+        "validation": "後續以經授權的獨立術中影像評估可見紗布的漏檢、誤報和從取像到疊圖的延遲，並記錄遮擋程度。臨床使用與實際效能待驗證。",
+        "disclosure": "匿名研發案例。辨識範圍是術中影像裡可見的體內紗布，定位標記供人工覆核。配圖為剖面概念示意。",
+        "mediaAlt": "剖面示意圖，辨識框標出患者體內術野中的紗布",
         "service": "討論手術影像辨識技術"
       },
       "en": {
-        "title": "Real-Time Surgical Gauze Detection",
-        "summary": "Locate visible gauze in a surgical video stream and present frame-level detections for staff to review during counts.",
-        "problem": "Hands, instruments and drapes can obscure gauze in surgical video. A frame-level detection marker gives staff a point to revisit during review.",
-        "challenge": "Folding and occlusion change the visible shape and area of gauze. Similar material, reflections and motion blur can affect recognition.",
+        "title": "Real-Time Detection of Gauze Inside the Patient During Surgery",
+        "summary": "Locate gauze visible inside the patient during surgery and provide frame-level markers for clinical review.",
+        "problem": "The view of gauze placed inside the patient can change with camera angle and occlusion. Position markers and timestamps help staff revisit a particular frame.",
+        "challenge": "Folding, deformation and partial occlusion by tissue or instruments can change how gauze appears. Glare and blur in the operative field also need separate testing.",
         "approach": [
-          "Annotate visible gauze as a single object class and separate training, validation and test images.",
+          "Annotate gauze visible inside the patient as a single object class and separate training, validation and test clips.",
           "Prepare gauze training configurations for YOLOv6 and YOLOv7 as comparison candidates.",
           "Plan timestamped detection boxes for human review and latency testing."
         ],
-        "implementation": "Single-class gauze configurations and training entry points exist for YOLOv6 and YOLOv7. A streaming evaluation should time capture, inference and the overlay separately.",
+        "implementation": "Single-class gauze configurations and training entry points exist for YOLOv6 and YOLOv7. The planned streaming evaluation of the internal operative field times capture, inference and the overlay separately.",
         "result": "The existing work includes dataset split definitions and entry points for training both detector candidates.",
         "deliverables": [
           "Single-class gauze detection training configuration",
           "Planned video overlay and human review workflow",
           "Test plan for operating conditions and end-to-end latency"
         ],
-        "validation": "Use separate clips to measure misses, false detections and capture-to-overlay latency. Report occlusion, folding, glare and blur separately. Clinical use and performance await validation.",
-        "disclosure": "An anonymized development case covering the documented training setup and planned validation. The illustration is conceptual. Detection boxes support human review.",
-        "mediaAlt": "Concept illustration of an overhead camera detecting gauze on a surgical tray",
+        "validation": "Use authorized, held-out intraoperative clips to measure misses, false detections and capture-to-overlay latency for visible gauze. Document the degree of occlusion. Clinical use and performance await validation.",
+        "disclosure": "This anonymized development case covers gauze visible inside the patient in operative footage. Detection boxes support human review. The image is a conceptual cutaway.",
+        "mediaAlt": "Conceptual cutaway with a detection box around gauze in the operative field inside the patient",
         "service": "Discuss surgical video recognition"
       },
       "visibility": "anonymized"

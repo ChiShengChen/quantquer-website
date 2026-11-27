@@ -721,15 +721,15 @@
       </article>
 
       <article class="case reveal" id="surgical-gauze-detection" data-tags="health" data-tech="vision" data-origin="anonymous-engineering" data-stage="development" data-visibility="anonymized" data-case-kind="case" data-featured="false">
-        <figure class="cfig"><img src="assets/cases/surgical-gauze.webp" srcset="assets/cases/surgical-gauze-768.webp 768w, assets/cases/surgical-gauze.webp 1536w, assets/cases/surgical-gauze-3072.webp 3072w" sizes="(max-width: 400px) calc(100vw - 40px), (max-width: 760px) 90vw, (max-width: 1180px) 45vw, 530px" alt="俯視攝影機辨識器械盤上紗布的概念圖" width="1536" height="1024" loading="lazy"></figure>
+        <figure class="cfig"><img src="assets/cases/surgical-gauze.webp" srcset="assets/cases/surgical-gauze-768.webp 768w, assets/cases/surgical-gauze.webp 1536w, assets/cases/surgical-gauze-3072.webp 3072w" sizes="(max-width: 400px) calc(100vw - 40px), (max-width: 760px) 90vw, (max-width: 1180px) 45vw, 530px" alt="剖面示意圖，辨識框標出患者體內術野中的紗布" width="1536" height="1024" loading="lazy"></figure>
         <div class="cbody">
           <div class="ctag">精選案例 · 醫療與神經科技</div>
-          <h3>手術中紗布即時辨識</h3>
-          <p class="en" lang="en">Real-Time Surgical Gauze Detection</p>
+          <h3>手術中體內紗布即時辨識</h3>
+          <p class="en" lang="en">Real-Time Detection of Gauze Inside the Patient During Surgery</p>
           <p class="entry-meta">匿名工程案例 · 研發經歷</p>
-          <p class="cprob">紗布在手術畫面中可能被手部、器械或布巾遮擋。定位標記能讓醫護人員在覆核時回到特定影格。</p>
+          <p class="cprob">紗布置於患者體內術野時，可見範圍會隨取像角度與遮擋變動。畫面上的位置與時間標記能協助醫護回看特定影格。</p>
           <ul class="chk">
-            <li>依可見紗布標註單一物件類別，區分訓練、驗證與測試影像。</li>
+            <li>在術中影像標註體內術野可見的紗布，區分訓練、驗證與測試片段。</li>
             <li>準備 YOLOv6 與 YOLOv7 的紗布訓練設定，作為比較候選。</li>
             <li>規劃將定位框與影格時間戳一起顯示，供人工覆核及延遲測試。</li>
           </ul>
