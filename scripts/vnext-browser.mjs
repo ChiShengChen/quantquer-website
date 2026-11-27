@@ -140,7 +140,9 @@ try {
       assert.ok(await picture.evaluate(img => img.currentSrc.endsWith('-dark.webp')));
     }
     await page.locator('#themeToggle').click();
-    assert.equal(await page.locator('[data-home-archive][open]').count(), 0);
+    const archive = page.locator('details[data-home-archive]');
+    assert.ok(await archive.count() > 1);
+    assert.equal(await page.locator('details[data-home-archive][open]').count(), await archive.count());
     const finder = page.locator('[data-solution-finder]');
     await finder.locator('summary').press('Enter');
     for (const service of ['edge-ai', 'agent', 'gpu-infrastructure', 'research', 'assessment']) {
@@ -439,6 +441,15 @@ try {
 
   await open('/#research-quantum');
   assert.ok(await page.locator('#research-quantum').isVisible());
+  const directory = page.locator('.home-archive-directory');
+  const cases = directory.locator('.home-archive-item').filter({ has: page.locator('#work') });
+  await cases.locator(':scope > summary').press('Enter');
+  assert.equal(await page.locator('#work').isVisible(), false);
+  await directory.locator(':scope > summary').press('Enter');
+  assert.equal(await directory.locator('.home-directory-expand').isVisible(), true);
+  await page.evaluate(() => { location.hash = 'work'; });
+  await page.locator('#work').waitFor({ state: 'visible' });
+  assert.equal(await directory.locator('.home-directory-collapse').isVisible(), true);
   await open('/#edge-ai-deployment');
   assert.ok(await page.locator('#edge-ai-deployment').isVisible());
   const staticContext = await browser.newContext({ javaScriptEnabled: false });
@@ -447,8 +458,12 @@ try {
     await staticHome.goto(base + '/');
     assert.equal(await staticHome.locator('#featured .home-case:visible').count(), portfolio.featured.length);
     assert.equal(await staticHome.locator('[data-solution-finder]').isVisible(), false);
+    const archiveEntries = staticHome.locator('details[data-home-archive]');
+    assert.equal(await staticHome.locator('details[data-home-archive][open]').count(), await archiveEntries.count());
+    assert.equal(await staticHome.locator('#case-list article:visible').count(), 16);
     await staticHome.locator('.home-archive-directory > summary').click();
-    await staticHome.locator('.home-archive-item').filter({ has: staticHome.locator('#work') }).locator(':scope > summary').click();
+    assert.equal(await staticHome.locator('#work').isVisible(), false);
+    await staticHome.locator('.home-archive-directory > summary').click();
     assert.equal(await staticHome.locator('#case-list article:visible').count(), 16);
     await staticHome.goto(base + '/contact/');
     assert.ok(await staticHome.locator('#contact-direct-email').isVisible());
@@ -462,7 +477,7 @@ try {
   assert.equal(await page.locator('.nf-art').count(), 1);
   assert.deepEqual([...defects], []);
   await writeFile(resolve(out, 'layout.json'), JSON.stringify(snapshots, null, 2));
-  console.log('PASS brand copy, homepage section and case illustrations in both themes, case evidence visuals, navigation, language, AND case filters, Labs filters, 3 new demos, 5 GPU strategies, vision controls, DXF, benchmark and PDF downloads, video controls, form fallback and mocked retry, 10 preserved URLs, custom 404 and browser errors');
+  console.log('PASS brand copy, homepage section and case illustrations in both themes, case evidence visuals, navigation, language, AND case filters, Labs filters, 3 new demos, 5 GPU strategies, vision controls, DXF, benchmark and PDF downloads, video controls, form fallback and mocked retry, 10 preserved URLs, expanded directories, custom 404 and browser errors');
 } finally {
   await browser.close();
 }

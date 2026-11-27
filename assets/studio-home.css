@@ -108,6 +108,8 @@ html[lang="en"] .studio-home .hero-title { max-width: 15ch; }
 .home-directory-head h2 { margin-bottom: 0; }
 .home-directory-head .home-section-art { aspect-ratio: 2.5; border: 1px solid var(--line); }
 .home-archive-directory { border-top: 1px solid var(--line-soft); }
+.home-archive-directory[open] > summary .home-directory-expand,
+.home-archive-directory:not([open]) > summary .home-directory-collapse { display: none; }
 @media (max-width: 680px) {
   .home-proof-grid { grid-template-columns: 1fr; }
   :is(#studio-architecture, #project-contact) > .wrap { grid-template-columns: 1fr; grid-template-rows: auto; row-gap: .65rem; }
