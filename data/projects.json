@@ -1,0 +1,856 @@
+{
+  "featured": [
+    "on-device-generative-vision",
+    "industrial-robotics",
+    "enterprise-knowledge-arbitration",
+    "photonic-computing"
+  ],
+  "projects": [
+    {
+      "slug": "industrial-robotics",
+      "anchor": "industrial-robot-workcell",
+      "domain": [
+        "industrial",
+        "agent"
+      ],
+      "tech": [
+        "agent",
+        "cad",
+        "optimization"
+      ],
+      "origin": "anonymous-engineering",
+      "stage": "delivered",
+      "media": "cases/robot",
+      "inquiry": "robotics",
+      "related": [
+        "floorplan-automation",
+        "enterprise-knowledge-arbitration"
+      ],
+      "zh": {
+        "title": "工業機器人工作站智慧設計平台",
+        "summary": "把作業需求、廠房圖面和機器人限制整理成可審查的 2D／3D 工作站方案。",
+        "problem": "規劃碼垛工作站時，工程師要同時考量廠房尺寸、機器人可達性、節拍與設備成本。",
+        "challenge": "可操作的佈局取決於座標、設備規格和作業限制。設計過程需要保留每個候選方案的假設，才能回頭調整並比較。",
+        "approach": [
+          "從自然語言需求抽取工程規格，並整合廠房 CAD 圖面。",
+          "篩選機器人與設備候選，建立工作站佈局並檢查空間可達性。",
+          "比較候選方案的節拍估算與運動限制，輸出 2D／3D 檢視、CAD 與物料清單。"
+        ],
+        "implementation": "歷史規格記載最佳化後端包含九個連續階段，依序處理佈局搜尋、節拍估算、指標補充、分群排序、運動驗證、候選選擇、相機佈局、安全圍欄與場域物件、最終輸出。節拍是候選設計的估算，用於後續工程審查。",
+        "result": "工作站設計可從需求走到 CAD、物料清單與候選佈局，供工程審查。",
+        "deliverables": [
+          "工作站設計平台",
+          "CAD 和設備物料清單",
+          "供審查的佈局及假設"
+        ],
+        "validation": "公開範圍是軟體設計交付。佈局檢查及節拍估算適用於設定的作業與限制，工廠驗收需依設備和場域另行執行。",
+        "disclosure": "保留匿名工程案例，圖像為設計流程示意。客戶圖面、現場資料與設備驗收結果留在原專案。",
+        "mediaAlt": "碼垛工作站與機器人配置的概念圖",
+        "service": "討論機器人選型與工作站設計"
+      },
+      "en": {
+        "title": "Industrial Robot Workcell Design Platform",
+        "summary": "Turn operating requirements, facility drawings and robot constraints into reviewable 2D and 3D workcell proposals.",
+        "problem": "Palletizing workcells require trade-offs among facility dimensions, robot reachability, cycle time and equipment cost.",
+        "challenge": "A usable layout depends on coordinate systems, equipment specifications and operating constraints. Each candidate must retain its assumptions so engineers can check and compare it.",
+        "approach": [
+          "Extract engineering requirements from natural language and incorporate facility CAD drawings.",
+          "Screen robot and equipment candidates, build workcell layouts and check spatial reachability.",
+          "Compare candidate cycle-time estimates and motion constraints, then export 2D and 3D views, CAD and a bill of materials."
+        ],
+        "implementation": "Historical engineering documentation describes nine sequential backend stages covering layout search, cycle-time estimation, metric enrichment, clustering and ranking, motion verification, candidate selection, camera layout, safety fencing and site objects, and final output. Cycle times are estimates for candidate designs.",
+        "result": "The design workflow produces CAD, a bill of materials and layout candidates for engineering review.",
+        "deliverables": [
+          "Workcell design platform",
+          "CAD and equipment bill of materials",
+          "Layouts and assumptions for engineering review"
+        ],
+        "validation": "The published scope covers a software design delivery. Layout checks and cycle-time estimates apply to the configured task and constraints. Factory acceptance depends on the physical equipment and site.",
+        "disclosure": "The engineering engagement is anonymized. The artwork illustrates the design workflow. Customer drawings, site data and equipment acceptance results remain with the project.",
+        "mediaAlt": "Concept illustration of a robotic palletizing workcell layout",
+        "service": "Discuss robot selection and workcell design"
+      },
+      "visibility": "anonymized"
+    },
+    {
+      "slug": "eeg-treatment-response",
+      "domain": [
+        "health",
+        "science"
+      ],
+      "tech": [
+        "signal",
+        "time-series"
+      ],
+      "origin": "academic",
+      "stage": "clinical-use",
+      "media": "cases/eeg",
+      "inquiry": "domain-rd",
+      "references": [
+        {
+          "href": "https://doi.org/10.1016/j.jad.2023.08.059",
+          "zh": "期刊論文 · 跨資料集比較與驗證",
+          "en": "Journal paper · Cross-dataset comparison and validation"
+        }
+      ],
+      "zh": {
+        "title": "腦波憂鬱症療效預測",
+        "summary": "以治療前的額葉腦波，研究如何估計非侵入性腦刺激的反應。",
+        "problem": "非侵入性腦刺激的治療反應因人而異，臨床團隊希望在治療前取得可供判讀的資訊。",
+        "challenge": "腦波特徵與療效標註會受到資料群體和治療設定影響，模型需要在清楚定義的研究條件下評估。",
+        "approach": [
+          "從治療前額葉腦波擷取線性與非線性特徵。",
+          "比較腦波特徵與分類方法對治療反應預測的影響。",
+          "依論文定義比較不同資料集與門診群體。"
+        ],
+        "implementation": "由創辦人參與的學術研究，模型投入門診研究團隊常規使用。相關研究方法與結果刊於期刊。",
+        "result": "已發表跨資料集比較及驗證，研究模型亦有門診使用經驗。",
+        "deliverables": [
+          "治療反應研究流程",
+          "期刊發表與跨資料集比較"
+        ],
+        "validation": "論文定義的群體、比較條件與結果適用於該研究。門診使用狀態由研究團隊成員公開說明。",
+        "disclosure": "此頁記載學術合作，呈現研究方法及公開來源。圖像為概念圖，本頁不提供病患資料。",
+        "mediaAlt": "額葉腦波特徵用於療效研究的概念圖",
+        "service": "討論訊號與臨床 AI 研究"
+      },
+      "en": {
+        "title": "EEG Research on Depression Treatment Response",
+        "summary": "Use pretreatment frontal EEG to study response to non-invasive brain stimulation.",
+        "problem": "Response to non-invasive brain stimulation varies across patients. Clinical researchers wanted information they could review before treatment.",
+        "challenge": "EEG features and outcome definitions vary with the cohort and treatment setting. The model needs evaluation under clearly specified study conditions.",
+        "approach": [
+          "Extract linear and nonlinear features from pretreatment frontal EEG.",
+          "Compare feature sets and classifiers for treatment-response prediction.",
+          "Compare datasets and outpatient cohorts under the protocol documented in the paper."
+        ],
+        "implementation": "The founder contributed to the academic study, whose model entered routine use by the outpatient research team. The methods and results were published in a journal.",
+        "result": "The study published cross-dataset comparison and validation and has experience with outpatient use.",
+        "deliverables": [
+          "Treatment-response research workflow",
+          "Peer-reviewed results and cross-dataset comparison"
+        ],
+        "validation": "The population, comparisons and results reported in the paper apply to that study. A member of the research team publicly documented outpatient use.",
+        "disclosure": "This page describes an academic collaboration and cites its public research. The artwork is conceptual. Patient data is excluded.",
+        "mediaAlt": "Concept illustration of frontal EEG features for treatment-response research",
+        "service": "Discuss signal processing and clinical AI research"
+      },
+      "visibility": "public"
+    },
+    {
+      "slug": "ngs-denoising",
+      "domain": [
+        "health",
+        "science"
+      ],
+      "tech": [
+        "signal",
+        "vision"
+      ],
+      "origin": "anonymous-engineering",
+      "stage": "evaluation",
+      "media": "cases/ngs",
+      "inquiry": "domain-rd",
+      "zh": {
+        "title": "次世代定序影像降噪",
+        "summary": "針對微弱的影像目標訊號設計降噪流程，並以影像品質指標評估。",
+        "problem": "次世代定序影像可能有較強的背景雜訊，影響目標訊號的辨識。",
+        "challenge": "降噪需要同時檢查弱訊號保留與背景抑制，避免只因影像變得平滑就判定成效。",
+        "approach": [
+          "分析原始影像中的目標訊號與背景特徵。",
+          "結合影像處理與針對訊號特性調整的模型。",
+          "依同一影像品質指標與基準方法比較。"
+        ],
+        "implementation": "把針對影像特性的演算法整理成可比較不同設定的降噪流程。",
+        "result": "建立影像降噪流程並依訊號品質評估。",
+        "deliverables": [
+          "影像降噪流程",
+          "訊號品質比較方法"
+        ],
+        "validation": "評估範圍包含影像訊號品質和弱訊號保留。公開資料足以說明方法方向，定量比較需要補齊測試條件。",
+        "disclosure": "匿名工程案例。圖像為概念圖，專案原始影像及資料另行管理。",
+        "mediaAlt": "生醫影像訊號與背景雜訊的概念圖",
+        "service": "討論影像與訊號研發"
+      },
+      "en": {
+        "title": "Sequencing Image Denoising",
+        "summary": "Design an image-denoising workflow for weak target signals and assess it using image-quality measures.",
+        "problem": "Strong background noise can make weak target signals difficult to distinguish in sequencing images.",
+        "challenge": "An assessment needs to consider both preservation of weak signals and reduction of background noise. Smoother images alone do not establish better signal quality.",
+        "approach": [
+          "Characterize target signals and background in the source images.",
+          "Combine image processing with a model adapted to the signal characteristics.",
+          "Compare settings against a reference method using a consistent image-quality measure."
+        ],
+        "implementation": "Image-specific algorithms form a denoising workflow for comparing configurations.",
+        "result": "An image-denoising workflow was developed and assessed for signal quality.",
+        "deliverables": [
+          "Image-denoising workflow",
+          "Signal-quality comparison method"
+        ],
+        "validation": "The assessment concerns image-signal quality and weak-signal retention. The public material describes the approach. Quantitative comparison needs complete test conditions.",
+        "disclosure": "This engineering case is anonymized. The illustration is conceptual. Project images and underlying data are managed separately.",
+        "mediaAlt": "Concept illustration of biomedical image signal and background noise",
+        "service": "Discuss image and signal processing"
+      },
+      "visibility": "anonymized"
+    },
+    {
+      "slug": "financial-intelligence",
+      "anchor": "investment-research",
+      "domain": [
+        "finance",
+        "agent",
+        "infrastructure"
+      ],
+      "tech": [
+        "agent",
+        "knowledge",
+        "time-series"
+      ],
+      "origin": "founder-experience",
+      "stage": "development",
+      "media": "cases/finance",
+      "inquiry": "domain-rd",
+      "references": [
+        {
+          "href": "/financial-intelligence/",
+          "zh": "金融智慧服務與研究範圍",
+          "en": "Financial intelligence services and research scope"
+        },
+        {
+          "href": "https://doi.org/10.1109/ICASSP55912.2026.11460972",
+          "zh": "公開研究 · 自動做市資金再平衡的實證研究",
+          "en": "Public research · An empirical study of automated market-maker rebalancing"
+        }
+      ],
+      "zh": {
+        "title": "AI 投資研究平台",
+        "summary": "以對話工作區整理投資研究，讓公司關係與結論可追溯至原始來源。",
+        "problem": "投資研究需要跨文件整理事實、公司關係與時間先後。摘要若和來源脫節，後續很難查證。",
+        "challenge": "研究內容會隨新資料變動，資料層需保留文件上下文、版本及關係的來源，才能區分觀察、推論與歷史資料。",
+        "approach": [
+          "匯整來源資料並建立可回看的研究筆記。",
+          "從公開文件整理公司與供應鏈關係，維護原始引用。",
+          "在對話工作區組合查詢與筆記，支援多語版本。"
+        ],
+        "implementation": "創辦人參與研發工作。公開案例限於可追溯的資料工程及研究工作區。相關公開論文另載其研究方法。",
+        "result": "研究工作區支援回看版本與引用，並連結至公司關係的原始文本。",
+        "deliverables": [
+          "投資研究工作區",
+          "多語 research notes",
+          "附來源內文的公司與供應鏈關係資料"
+        ],
+        "validation": "以抽查引用、關係來源和版本順序作為可重現的審查方式。公開範圍為研究工作流。",
+        "disclosure": "創辦人研發經歷。頁面討論資料與研究系統，個別策略、績效和交易紀錄不在公開範圍。",
+        "mediaAlt": "投資研究工作區與證據連結的概念圖",
+        "service": "討論金融資料與 AI 研發"
+      },
+      "en": {
+        "title": "AI Investment Research Platform",
+        "summary": "Organize investment research in a conversational workspace with traceable company relationships and source-linked findings.",
+        "problem": "Investment research requires piecing together facts, company relationships and event order across documents. Summaries become difficult to check when separated from their sources.",
+        "challenge": "As new information changes the research, the data layer must preserve document context, versions and provenance so users can distinguish observations, interpretations and historical material.",
+        "approach": [
+          "Collect source material and create versioned research notes.",
+          "Extract company and supply-chain relationships from public documents and retain citations.",
+          "Combine queries and notes in a conversational workspace with multilingual output."
+        ],
+        "implementation": "The founder contributed to development. The public case covers traceable data engineering and the research workspace. A separate publication documents the associated research method.",
+        "result": "The research workspace supports version and citation review, including links to the original text for company relationships.",
+        "deliverables": [
+          "Investment research workspace",
+          "Multilingual research notes",
+          "Source-backed company and supply-chain relationships"
+        ],
+        "validation": "Audit citation accuracy, the source text for relationships and version order as reviewable checks. Public disclosure is limited to the research workflow.",
+        "disclosure": "This is founder development experience. The page describes research and data systems. Individual strategies, performance and transaction records remain confidential.",
+        "mediaAlt": "Concept illustration of an investment research workspace with source links",
+        "service": "Discuss financial data and AI engineering"
+      },
+      "visibility": "public"
+    },
+    {
+      "slug": "enterprise-knowledge-arbitration",
+      "domain": [
+        "agent",
+        "infrastructure"
+      ],
+      "tech": [
+        "agent",
+        "knowledge"
+      ],
+      "origin": "anonymous-engineering",
+      "stage": "evaluation",
+      "media": "cases/kb",
+      "inquiry": "knowledge-base",
+      "related": [
+        "research-automation"
+      ],
+      "zh": {
+        "title": "設備廠商技術知識庫問答系統",
+        "summary": "先處理不同文件間的矛盾，再回答技術問題並保留引用與版本依據。",
+        "problem": "設備文件與專家意見可能在同一問題上給出不同答案，查到相關段落仍需要判斷適用版本。",
+        "challenge": "系統須保存每項主張的出處、文件版本和權威規則，並讓專家追查判斷。",
+        "approach": [
+          "從文件萃取結構化主張，保存來源和版本。",
+          "依權威與版本規則處理衝突，輸出答案、引用及理由。",
+          "提供專家審查並將裁決回寫，以測試題檢查版本選擇和引用。"
+        ],
+        "implementation": "把來源專屬的知識卡、權威裁決及人工審查接入問答流程。",
+        "result": "回答附有可回查的引用與版本選用理由，並支援專家覆核。",
+        "deliverables": [
+          "可追溯知識卡及技術問答流程",
+          "衝突判斷依據與專家審查介面",
+          "版本與引用評測方法"
+        ],
+        "validation": "歷史評測分別檢查版本選擇與引用。拒答也可能拿到高版本分數，因此只呈現有明確題集條件的引用結果。",
+        "disclosure": "匿名工程案例。圖像為知識流程概念圖，技術手冊與題集另行管理。",
+        "mediaAlt": "企業文件、知識卡與引用查核流程的概念圖",
+        "service": "討論企業技術知識庫"
+      },
+      "en": {
+        "title": "Technical Knowledge Base for Equipment Support",
+        "summary": "Resolve conflicts between source documents before answering, and retain citations and version choices.",
+        "problem": "Equipment manuals and expert notes may disagree. Finding a relevant passage still leaves the question of which version applies.",
+        "challenge": "The system must retain claim provenance, document version and authority rules so that experts can audit a decision.",
+        "approach": [
+          "Extract structured claims from source documents while retaining their source and version.",
+          "Apply authority and version rules to resolve conflicts and show the answer, citations and rationale.",
+          "Support expert review and update decisions, using an evaluation set to check version selection and citations."
+        ],
+        "implementation": "The question-answering workflow connects source-specific knowledge cards, conflict decisions and human review.",
+        "result": "Answers include traceable citations and a version-selection rationale. Experts can review the decisions.",
+        "deliverables": [
+          "Traceable knowledge cards and question-answering workflow",
+          "Conflict rationale and expert review interface",
+          "Version and citation evaluation method"
+        ],
+        "validation": "The historical evaluation checks version selection and citations separately. An abstention can score well on version selection, so this page reports citation results with their test-set context.",
+        "disclosure": "This engineering case is anonymized. The artwork illustrates the knowledge workflow. Technical manuals and evaluation questions are managed separately.",
+        "mediaAlt": "Concept illustration of enterprise documents, knowledge cards and citation checking",
+        "service": "Discuss an enterprise technical knowledge base"
+      },
+      "metrics": [
+        {
+          "evidenceId": "knowledge-citation-historical",
+          "type": "measured",
+          "value": "85",
+          "unit": "%",
+          "zh": {
+            "name": "歷史評測的引用正確率",
+            "method": "依既有案例的 28 題參考問答集，檢查所引來源是否正確。",
+            "scope": "僅限當時題集、資料及系統版本。公開範圍未包含題集原文。"
+          },
+          "en": {
+            "name": "Citation accuracy in a historical evaluation",
+            "method": "The original project evaluated the cited sources against a reference set of 28 questions.",
+            "scope": "This applies to that question set, corpus and system version. The questions themselves are unavailable for public review."
+          }
+        }
+      ],
+      "visibility": "anonymized"
+    },
+    {
+      "slug": "floorplan-automation",
+      "domain": [
+        "industrial",
+        "infrastructure"
+      ],
+      "tech": [
+        "vision",
+        "cad"
+      ],
+      "origin": "anonymous-engineering",
+      "stage": "deployment",
+      "media": "cases/floorplan",
+      "inquiry": "domain-rd",
+      "related": [
+        "industrial-robotics"
+      ],
+      "zh": {
+        "title": "建築平面圖自動上色系統",
+        "summary": "在使用者設備上辨識房間、套用材質和標註，批次產出樓層圖。",
+        "problem": "平面圖分區上色、材質配置和面積標註需要大量重複的繪圖工作。",
+        "challenge": "原始圖面的格式、封閉邊界和家具符號可能各不相同。設計需要讓繪圖人員檢查辨識結果及修正。",
+        "approach": [
+          "以幾何演算法處理標準圖面，依圖面特徵選擇辨識方法。",
+          "定位房間與家具，套用材質、陰影及面積標註。",
+          "保留繪圖人員的修正及多樓層批次輸出流程。"
+        ],
+        "implementation": "先辨識房間幾何和圖面元素，再在本機套用各樓層的視覺規則。",
+        "result": "圖面在本機處理，支援互動換色及多樓層批次輸出。",
+        "deliverables": [
+          "地端圖面處理流程",
+          "材質與標註規則",
+          "批次輸出圖檔"
+        ],
+        "validation": "驗收可依公開素材測試圖面相容性與輸出正確性，再針對實際裝置紀錄時間。歷史紀錄只量測已有快取的重新合成。",
+        "disclosure": "匿名工程案例。圖像為平面圖流程示意，客戶圖面不在公開範圍。",
+        "mediaAlt": "自動分區上色與標註平面圖的概念圖",
+        "service": "討論圖面自動化"
+      },
+      "en": {
+        "title": "Automated Floor Plan Coloring",
+        "summary": "Recognize rooms, apply materials and add labels on the user's machine, then export floor plans in batches.",
+        "problem": "Coloring areas, applying materials and annotating floor areas involve repetitive drafting work.",
+        "challenge": "Source drawings vary by format, boundary quality and furniture symbols. Drafters need a way to inspect recognition and correct errors.",
+        "approach": [
+          "Process standardized drawings geometrically and select recognition methods according to drawing features.",
+          "Locate rooms and furniture, then apply materials, shadows and area labels.",
+          "Retain manual correction and multi-floor batch export workflows."
+        ],
+        "implementation": "Room geometry and drawing elements are recognized before local visual rules are applied floor by floor.",
+        "result": "Floor plans are processed locally with interactive color changes and multi-floor batch output.",
+        "deliverables": [
+          "Local drawing pipeline",
+          "Materials and annotation rules",
+          "Batch-output plans"
+        ],
+        "validation": "Acceptance can start with compatibility and output checks on public samples, then measure latency on the actual device. The historical timing covers cached recomposition only.",
+        "disclosure": "The engineering case is anonymized. The artwork illustrates the workflow. Customer plans remain confidential.",
+        "mediaAlt": "Concept illustration of floor plan coloring and annotation",
+        "service": "Discuss drawing automation"
+      },
+      "metrics": [
+        {
+          "evidenceId": "floorplan-cache-recompose-historical",
+          "type": "measured",
+          "value": "≈0.4",
+          "unit": "s",
+          "zh": {
+            "name": "歷史快取命中後的換色重新合成",
+            "method": "沿用已完成的平面圖分析，再套用配色。",
+            "scope": "不含原始圖面分析、檔案輸入輸出或整段操作。當時的硬體與重複次數未公開。"
+          },
+          "en": {
+            "name": "Historical recoloring recomposition on a cache hit",
+            "method": "Apply the colors using the existing cached floor-plan analysis.",
+            "scope": "The timing excludes source analysis, file I/O and the complete interaction. Hardware and repetition count were not published."
+          }
+        }
+      ],
+      "visibility": "anonymized"
+    },
+    {
+      "slug": "fall-detection",
+      "domain": [
+        "health",
+        "semiconductor"
+      ],
+      "tech": [
+        "signal",
+        "vision"
+      ],
+      "origin": "anonymous-engineering",
+      "stage": "deployment",
+      "media": "cases/fall",
+      "inquiry": "edge-ai",
+      "related": [
+        "on-device-generative-vision"
+      ],
+      "zh": {
+        "title": "養老院即時跌倒監測",
+        "summary": "整合邊緣感測、跌倒事件辨識及告警流程。",
+        "problem": "長照場域需要及時辨識可能的跌倒，並讓照護人員能夠確認事件。",
+        "challenge": "告警取決於感測位置、場地遮蔽與活動條件。不同場域應分開驗證。",
+        "approach": [
+          "建立感測資料到事件辨識的處理流程。",
+          "依邊緣裝置的運算資源調整執行方式。",
+          "把辨識結果交給告警流程並保留事件供查核。"
+        ],
+        "implementation": "由邊緣裝置執行感測資料處理與辨識，再將事件交給照護作業流程。",
+        "result": "完成邊緣裝置上的感測、辨識與告警整合。",
+        "deliverables": [
+          "邊緣事件辨識流程",
+          "告警整合"
+        ],
+        "validation": "驗證需依場域記錄事件定義、觀察期間、感測配置及誤報。這些條件會影響結果的適用範圍。",
+        "disclosure": "匿名工程案例。圖像為概念圖，照護場域的原始資料另行管理。",
+        "mediaAlt": "長照環境跌倒辨識和告警的概念圖",
+        "service": "討論邊緣 AI 部署"
+      },
+      "en": {
+        "title": "Edge Fall Monitoring for Long-Term Care",
+        "summary": "Combine edge sensing, fall-event recognition and alerts in one workflow.",
+        "problem": "Care facilities need timely identification of possible falls so caregivers can review the events.",
+        "challenge": "Alerts depend on sensor placement, occlusion and environmental activity. Different settings require separate validation.",
+        "approach": [
+          "Connect sensor data to event recognition.",
+          "Adapt execution to the resources of the target edge device.",
+          "Send detected events to the alert workflow and retain the event for review."
+        ],
+        "implementation": "The edge device processes sensor data and identifies an event, then passes that event to the care workflow.",
+        "result": "Edge sensing, recognition and alerts were integrated.",
+        "deliverables": [
+          "Edge event-recognition workflow",
+          "Alert integration"
+        ],
+        "validation": "A validation report should describe the event definition, observation period, sensor configuration and false alarms for the evaluated site.",
+        "disclosure": "This engineering case is anonymized. The illustration is conceptual. Raw data from care facilities is managed separately.",
+        "mediaAlt": "Concept illustration of fall-event detection and alerts in long-term care",
+        "service": "Discuss edge AI deployment"
+      },
+      "visibility": "anonymized"
+    },
+    {
+      "slug": "adaptive-physics-tutor",
+      "domain": [
+        "agent"
+      ],
+      "tech": [
+        "agent",
+        "knowledge"
+      ],
+      "origin": "education",
+      "stage": "application",
+      "media": "cases/tutor",
+      "inquiry": "agent",
+      "related": [
+        "enterprise-knowledge-arbitration"
+      ],
+      "zh": {
+        "title": "大學普物個人化 AI 家教",
+        "summary": "讓學生依課程內容和理解程度選擇解說、練習與複習。",
+        "problem": "大班普通物理課程中，學生的進度與卡關原因各不相同。",
+        "challenge": "解說必須使用課程相關資料，提示也需配合學生的當下進度與使用情境。",
+        "approach": [
+          "整理課程教材與檢索索引。",
+          "結合教材檢索與對話介面，產生貼近課程的解說和練習。",
+          "依學生狀態調整練習或複習建議。"
+        ],
+        "implementation": "獨立教學應用把課程檢索和解題練習整合到同一個學習介面。",
+        "result": "完成普通物理家教應用，提供學生使用。",
+        "deliverables": [
+          "課程內容檢索",
+          "對話解說與個人化練習流程"
+        ],
+        "validation": "公開內容展示教學功能和使用情境。判讀學習成效須有獨立的評估設計及資料。",
+        "disclosure": "獨立教育應用。圖像為概念圖，學生個資及使用紀錄不在公開範圍。",
+        "mediaAlt": "個人化物理家教與教學路徑的概念圖",
+        "service": "討論客製化 AI Agent"
+      },
+      "en": {
+        "title": "Adaptive Introductory Physics Tutor",
+        "summary": "Help students select explanations, exercises and review material based on course content and their progress.",
+        "problem": "Students in a large introductory physics class differ in progress and in the topics where they need help.",
+        "challenge": "Explanations should use course-relevant sources, and prompts should suit the learner's progress and context.",
+        "approach": [
+          "Organize course material and build a retrieval index.",
+          "Connect course retrieval and dialogue to support explanations and exercises.",
+          "Adapt practice or review recommendations to the learner's state."
+        ],
+        "implementation": "The independent educational application combines course retrieval and problem-solving practice in one learning interface.",
+        "result": "An introductory physics tutoring application was implemented and made available to students.",
+        "deliverables": [
+          "Course content retrieval",
+          "Dialogue explanations and adaptive practice"
+        ],
+        "validation": "The public description covers teaching features and usage. Claims about learning outcomes require a separate evaluation design and data.",
+        "disclosure": "This is an independent educational application. The artwork is conceptual. Student identities and usage records are excluded.",
+        "mediaAlt": "Concept illustration of an adaptive physics tutor and learning path",
+        "service": "Discuss a custom AI Agent"
+      },
+      "visibility": "public"
+    },
+    {
+      "slug": "on-device-generative-vision",
+      "kind": "technical-note",
+      "domain": [
+        "semiconductor",
+        "industrial"
+      ],
+      "tech": [
+        "gen-ai",
+        "vision",
+        "optimization"
+      ],
+      "origin": "internal-rnd",
+      "stage": "demonstration",
+      "media": "cases/edge",
+      "inquiry": "generative-vision",
+      "related": [
+        "gpu-orchestration"
+      ],
+      "references": [
+        {
+          "href": "/labs/interactive/#generative-vision",
+          "zh": "操作合成影像重建展示",
+          "en": "Run the synthetic reconstruction demo"
+        },
+        {
+          "href": "/semiconductor-ai/#on-device",
+          "zh": "晶片端服務與驗收規格",
+          "en": "Edge AI services and validation criteria"
+        }
+      ],
+      "zh": {
+        "title": "晶片端生成式 AI｜人物消除與場景生成",
+        "summary": "拆解人物遮罩、GAN／Diffusion 修補與晶片端驗證。互動展示提供可重現的合成影像對照。",
+        "problem": "人物消除需要補回被遮住的背景。部署到裝置時，輸出品質、模型所需記憶體和運算成本都要評估。",
+        "challenge": "遮罩誤差、微小遮蔽物與跨幀一致性會改變重建品質。NPU Runtime 支援的算子、動態尺寸、精度與記憶體上限會改變部署選擇。",
+        "approach": [
+          "取得人物遮罩，檢查邊界誤差並定義補畫範圍。",
+          "建立可比較的 GAN 修補或 Diffusion 場景重建候選，檢查輸出品質。",
+          "轉換模型、核對 Runtime 相容性，依目標裝置與工作負載執行完整流程驗證。"
+        ],
+        "implementation": "示範使用已知乾淨背景、合成人物及可調遮罩。在瀏覽器中以每一列左右可見像素做線性混合，重建遮罩內的區域。此基準法方便觀察遮罩和背景紋理如何影響誤差。",
+        "result": "展示可調整遮罩、比較遮擋輸入與還原結果，並計算遮罩內像素誤差。",
+        "deliverables": [
+          "瀏覽器合成影像重建展示",
+          "模型轉換與裝置驗證方法",
+          "可供討論的品質及效能驗收規格"
+        ],
+        "validation": "展示計算遮罩內的平均絕對 RGB 誤差，真值來自同一合成場景。裝置研究需另行記錄目標硬體、Runtime、解析度、精度、暖機、端到端 p50／p95 延遲、持續 FPS 與峰值記憶體。",
+        "disclosure": "自主研發技術專題。展示使用合成場景與瀏覽器基準演算法。GAN、Diffusion 與 NPU 部署屬技術流程及驗收規劃，未加入客戶素材、模型權重或硬體實測結果。",
+        "mediaAlt": "人物遮罩與晶片推論流程的概念圖",
+        "service": "討論晶片端生成式影像"
+      },
+      "en": {
+        "title": "On-device Generative Vision: Person Removal and Scene Synthesis",
+        "summary": "Examine masks, GAN and diffusion restoration, and chip-level validation. A reproducible synthetic demo lets visitors compare images.",
+        "problem": "Removing a person requires reconstructing the background they covered. Device deployment adds constraints on output quality, memory and compute.",
+        "challenge": "Mask error, fine occlusions and frame-to-frame consistency affect reconstruction. Operator compatibility, dynamic dimensions, precision and memory limits also affect NPU deployment.",
+        "approach": [
+          "Obtain a person mask, inspect errors at its edges and define the reconstruction region.",
+          "Compare GAN-based restoration or diffusion-based reconstruction candidates under consistent quality criteria.",
+          "Convert the model, verify runtime compatibility, and validate the complete pipeline on the target workload and device."
+        ],
+        "implementation": "The demo creates a synthetic person over a known clean background and lets visitors adjust the mask. A browser baseline reconstructs masked pixels by linearly blending visible RGB samples on each scanline.",
+        "result": "Visitors can adjust the mask, compare the occluded input and reconstructed output, and inspect the error inside the mask.",
+        "deliverables": [
+          "Browser-based synthetic reconstruction demo",
+          "Model conversion and device validation methods",
+          "Quality and performance acceptance criteria"
+        ],
+        "validation": "The demo calculates mean absolute RGB error inside the mask, using the original synthetic scene as ground truth. Device studies should record the hardware, runtime, resolution, precision, warmup, end-to-end p50 and p95 latency, sustained FPS and peak memory.",
+        "disclosure": "An independent technical note with a synthetic browser baseline. GAN, diffusion and NPU deployment appear in the engineering and validation plan. Customer assets, model weights and hardware measurements are excluded.",
+        "mediaAlt": "Concept illustration of a person-mask pipeline and on-device inference",
+        "service": "Discuss on-device generative vision"
+      },
+      "visibility": "public"
+    },
+    {
+      "slug": "photonic-computing",
+      "kind": "technical-note",
+      "domain": [
+        "semiconductor",
+        "science"
+      ],
+      "tech": [
+        "simulation",
+        "optimization"
+      ],
+      "origin": "internal-rnd",
+      "stage": "demonstration",
+      "media": "caps/science",
+      "inquiry": "photonic-simulation",
+      "related": [
+        "gpu-orchestration"
+      ],
+      "references": [
+        {
+          "href": "/labs/interactive/#photonic-fault",
+          "zh": "操作光子故障模擬",
+          "en": "Run the photonic fault simulation"
+        },
+        {
+          "href": "/semiconductor-ai/#photonics",
+          "zh": "光子與科學運算服務",
+          "en": "Photonic and scientific computing services"
+        }
+      ],
+      "zh": {
+        "title": "光子運算與故障模擬",
+        "summary": "透過雙模干涉單元，觀察相位偏移與振幅衰減如何改變兩個輸出埠。",
+        "problem": "光子運算架構對相位誤差與插入損耗敏感，設計初期需要釐清元件變動對輸出的影響。",
+        "challenge": "軟體模型需要明示損耗、幅度與功率的定義，才有辦法與未來元件量測對照。",
+        "approach": [
+          "以兩個理想耦合器和兩條光路建立干涉單元。",
+          "調整其中一條光路的相位或振幅，計算兩個輸出埠的正規化光功率。",
+          "將總輸出和理想基準比較，觀察輸出重新分布及模型內的損耗。"
+        ],
+        "implementation": "瀏覽器用解析式計算理想化的 Mach–Zehnder 干涉單元。互動參數代表單一路徑的偏差，輸出可立即重現。",
+        "result": "相位與衰減控制會更新兩個輸出埠功率及合計，供檢查模型行為。",
+        "deliverables": [
+          "單一干涉單元的互動式模擬",
+          "元件假設與驗證方式"
+        ],
+        "validation": "理想、無損單元的兩埠功率和等於輸入功率。相位改變輸出分配，引入衰減會改變總輸出。結果適用於標示的理想化模型。",
+        "disclosure": "自主研發的軟體模擬。此展示是單一理想干涉單元，不含晶片製造、實體元件量測或客戶架構。",
+        "mediaAlt": "科學運算與模擬工作流程的概念圖",
+        "service": "討論光子模擬與科學運算"
+      },
+      "en": {
+        "title": "Photonic Computing and Fault Simulation",
+        "summary": "Use a two-mode interferometer to inspect how phase error and amplitude loss change its two output ports.",
+        "problem": "Photonic systems are sensitive to phase errors and insertion loss. Early design work needs a way to examine how changes in components affect the output.",
+        "challenge": "A software model should specify how it defines loss, amplitude and power so that future device measurements can be compared with its predictions.",
+        "approach": [
+          "Model an interferometer with two ideal couplers and two optical paths.",
+          "Adjust phase or amplitude in one path and evaluate the normalized power at the two ports.",
+          "Compare total power with an ideal reference to distinguish redistribution from modeled loss."
+        ],
+        "implementation": "The browser evaluates an analytical Mach–Zehnder model. The controls represent a deviation on one path, so the output can be reproduced immediately.",
+        "result": "Phase and attenuation controls update the power at both ports and the total, allowing direct inspection of the model.",
+        "deliverables": [
+          "Interactive simulation of one interferometer",
+          "Component assumptions and validation checks"
+        ],
+        "validation": "The two port powers in the ideal lossless model sum to the input power. Phase redistributes energy. Attenuation changes the total output. Results apply to the stated idealized model.",
+        "disclosure": "This independent software simulation represents one ideal interferometer. It contains no fabrication, physical measurement or customer architecture.",
+        "mediaAlt": "Concept illustration of scientific computing and simulation workflows",
+        "service": "Discuss photonic simulation and scientific computing"
+      },
+      "visibility": "public"
+    },
+    {
+      "slug": "gpu-orchestration",
+      "kind": "technical-note",
+      "domain": [
+        "infrastructure",
+        "science"
+      ],
+      "tech": [
+        "gpu",
+        "optimization",
+        "simulation"
+      ],
+      "origin": "internal-rnd",
+      "stage": "demonstration",
+      "media": "caps/product",
+      "inquiry": "gpu-infrastructure",
+      "related": [
+        "on-device-generative-vision",
+        "research-automation"
+      ],
+      "references": [
+        {
+          "href": "/labs/interactive/#gpu-orchestration",
+          "zh": "操作 GPU 排程展示",
+          "en": "Run the GPU scheduling demo"
+        },
+        {
+          "href": "/semiconductor-ai/#gpu-infrastructure",
+          "zh": "GPU 運算基礎設施服務",
+          "en": "GPU compute infrastructure services"
+        }
+      ],
+      "zh": {
+        "title": "GPU 運算資源排程",
+        "summary": "以合成工作比較 FIFO 與回填策略，觀察 CPU、VRAM 限制如何改變佇列。",
+        "problem": "共享運算環境若同時有多個工作，必須兼顧資源需求、等待順序與資源利用。",
+        "challenge": "一個排在前方的大工作可能阻擋後方能先執行的小工作。提高利用率的同時，還要理解不同工作的等待代價。",
+        "approach": [
+          "為各合成工作定義所需 CPU、VRAM 和執行步數。",
+          "依單機資源上限與選擇的 FIFO 或回填策略判斷是否可開始工作。",
+          "沿離散時間步釋放資源，更新工作狀態、時間軸和資源尖峰。"
+        ],
+        "implementation": "以同一批合成工作、各工時和可用資源執行確定性模擬。FIFO 尊重佇列次序，回填允許符合當下容量的後續工作先開始。",
+        "result": "展示可比較等待中的工作、已模擬排入的時段、無法排入的工作及模擬資源使用。",
+        "deliverables": [
+          "可重現的單機排程試驗",
+          "工作佇列、狀態與排程時間軸",
+          "供選型討論的資源配置方式"
+        ],
+        "validation": "以工作開始、完成、排入與未排入狀態驗證模擬，並檢查同時執行的工作是否超過設定的 CPU 與 VRAM 上限。時間採模擬步數。",
+        "disclosure": "自主研發技術展示使用合成工作與單機模型。資源使用、等待及時間軸為模擬結果，未讀取實際 GPU 或企業工作資料。",
+        "mediaAlt": "AI 系統與效能評估流程的概念圖",
+        "service": "討論 GPU 資源管理及效能工程"
+      },
+      "en": {
+        "title": "GPU Compute Orchestration",
+        "summary": "Compare FIFO and backfill with synthetic jobs and inspect how CPU and VRAM limits affect the queue.",
+        "problem": "A shared compute environment must balance resource demands, queue order and resource usage when several jobs arrive together.",
+        "challenge": "A large job at the head of the queue can block smaller jobs that fit the currently available resources. A policy should make the waiting trade-offs visible.",
+        "approach": [
+          "Set CPU, VRAM and run length for each synthetic job.",
+          "Admit jobs under a single-machine resource limit using the selected FIFO or backfill policy.",
+          "Release resources in discrete steps and update job status, the timeline and peak consumption."
+        ],
+        "implementation": "The same synthetic workload runs deterministically under the configured limits. FIFO respects job order. Backfill lets a later job start when it fits current capacity.",
+        "result": "Compare pending jobs, simulated time slots, jobs that cannot fit, and simulated resource use.",
+        "deliverables": [
+          "Reproducible single-machine scheduling experiment",
+          "Queue, job status and timeline",
+          "Resource configuration for engineering discussion"
+        ],
+        "validation": "Check whether jobs start, finish or cannot be admitted, and verify that concurrent jobs respect the configured CPU and VRAM limits. Time is expressed as simulation steps.",
+        "disclosure": "This independent demo uses synthetic jobs and a single-machine model. Resource use, waiting and the timeline are simulated. No physical GPU or enterprise workload is queried.",
+        "mediaAlt": "Concept illustration of AI systems and performance evaluation",
+        "service": "Discuss GPU resource management and performance engineering"
+      },
+      "visibility": "public"
+    },
+    {
+      "slug": "research-automation",
+      "kind": "technical-note",
+      "domain": [
+        "science",
+        "agent"
+      ],
+      "tech": [
+        "agent",
+        "knowledge"
+      ],
+      "origin": "open-source",
+      "stage": "published",
+      "media": "labs/evidence",
+      "inquiry": "research",
+      "related": [
+        "enterprise-knowledge-arbitration"
+      ],
+      "references": [
+        {
+          "href": "https://github.com/ChiShengChen/paper-evidence",
+          "zh": "公開原始碼與免金鑰引文查核範例",
+          "en": "Public source and no-key quote verification example"
+        }
+      ],
+      "zh": {
+        "title": "可追溯的科研證據驗證",
+        "summary": "以公開的 paper-evidence 驗證核心，檢查研究草稿的引文和數字是否可回溯。",
+        "problem": "長文獻或多來源摘要可能混淆引用內容與作者的推論，尤其是數字、對象和表述範圍。",
+        "challenge": "查到一段相關文字不表示它支持主張。需要把主張依據、原文與適用條件留在同一條稽核鏈上。",
+        "approach": [
+          "將文獻原文、來源位置與擷取引文保存在證據卡。",
+          "驗證引文出現在原文中，並核對數字能否從引文上下文找到。",
+          "需要時依公開工具設定語意支持度檢查，保留未支持或相互矛盾的主張。"
+        ],
+        "implementation": "公開工具的標準函式庫核心可獨立檢查文字和數字。語意判斷的設定及額外的文獻搜尋工具另有先決條件。",
+        "result": "開放原始碼與基本查核範例，可檢查一段引文及其數字上下文。",
+        "deliverables": [
+          "可查閱的驗證核心",
+          "基本查核範例與公開使用說明"
+        ],
+        "validation": "依 README 的免金鑰範例可比較正確引文與篡改字串。功能範圍為文本證據驗證。",
+        "disclosure": "已公開的獨立開源工具。這裡只描述可查證的證據驗證功能，科研推論及研究發現由研究者另行評估。",
+        "mediaAlt": "文獻證據抽取及引文驗證的概念圖",
+        "service": "討論科研工作流程"
+      },
+      "en": {
+        "title": "Traceable Research Evidence Verification",
+        "summary": "Use the public paper-evidence verification core to check whether quotations and numbers in a research draft trace back to the literature.",
+        "problem": "Summaries of long papers and multiple sources can confuse what the text says with an interpretation, especially for numeric claims and their subjects.",
+        "challenge": "A relevant quote may not support a claim. Claims, source text and applicable context should remain together in an audit trail.",
+        "approach": [
+          "Keep source text, location and extracted quotations on evidence cards.",
+          "Verify that the quote appears in the source and that numbers appear in its context.",
+          "When configured, check semantic support and preserve incompatible or unsupported claims for review."
+        ],
+        "implementation": "The published standard-library core checks text and numeric context separately. Semantic judgment and additional literature search have separate configuration requirements.",
+        "result": "Public source and examples let readers inspect the citation and numeric-context checks.",
+        "deliverables": [
+          "Inspectable verification core",
+          "Basic checks and public documentation"
+        ],
+        "validation": "The no-key example in the README lets readers compare a correct quotation with a modified one. This check concerns textual evidence.",
+        "disclosure": "This independent tool is open source. The page describes public evidence verification. Researchers separately evaluate scientific inference and the research findings.",
+        "mediaAlt": "Concept illustration of evidence extraction and citation verification",
+        "service": "Discuss research workflows"
+      },
+      "visibility": "public",
+      "anchor": "research-workflow-evidence"
+    }
+  ]
+}

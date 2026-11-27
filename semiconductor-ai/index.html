@@ -54,6 +54,7 @@
       </a>
       <nav class="navlinks" aria-label="網站導覽">
         <a href="../" class="topic-home">首頁</a>
+        <a href="#english" lang="en">English</a>
         <button id="themeToggle" class="theme-toggle" type="button" aria-label="切換深色模式">☾︎</button>
         <a href="../?inquiry=edge-ai#contact" class="nav-cta">討論需求</a>
       </nav>
@@ -79,11 +80,32 @@
           </figure>
         </div>
         <nav class="topic-jump" aria-label="專題內容">
+          <a href="#model-optimization">硬體感知模型最佳化</a>
           <a href="#on-device">晶片端生成式 AI</a>
           <a href="#photonics">光子與科學運算</a>
           <a href="#compute">GPU 運算基礎設施</a>
+          <a href="#deployment-validation">部署與驗收</a>
           <a href="#related">相關案例與研究</a>
         </nav>
+      </div>
+    </section>
+
+    <section class="topic-section axis-divider" id="model-optimization" aria-labelledby="model-title">
+      <div class="wrap topic-row">
+        <div>
+          <p class="eyebrow">Hardware-aware Model Optimization</p>
+          <h2 id="model-title">硬體感知模型最佳化</h2>
+          <p class="topic-lead">適合持有模型權重與目標裝置的 IC 設計、嵌入式及消費電子團隊。先定位算子、資料搬移和記憶體瓶頸，再決定採用量化、剪枝或蒸餾。</p>
+          <a class="text-link" href="../work/on-device-generative-vision/">看模型轉換與影像驗證專題</a>
+        </div>
+        <div class="topic-panel">
+          <h3>開始條件與交付物</h3>
+          <p class="topic-lead">提供可使用的模型、目標 Runtime、代表性輸入及品質門檻。</p>
+          <ul class="chk">
+            <li>算子支援、CPU fallback 與記憶體佔用清單。</li>
+            <li>以相同測試資料比較基線與最佳化版本，附重現設定與精度差異。</li>
+          </ul>
+        </div>
       </div>
     </section>
 
@@ -122,6 +144,8 @@
           </div>
         </div>
         <div class="entry-links">
+          <a class="text-link" href="../work/on-device-generative-vision/">生成式影像技術詳解</a>
+          <a class="text-link" href="../labs/interactive/#generative-vision">操作合成影像修補展示</a>
           <a class="text-link" href="../?inquiry=generative-vision#contact">討論人物消除與場景生成</a>
           <a class="text-link" href="../#edge-ai-deployment">晶片端模型最佳化服務</a>
         </div>
@@ -135,6 +159,10 @@
           <h2 id="photonics-title">光子與科學運算</h2>
           <p class="topic-lead">用軟體模擬比較光子網路架構與參數，分析元件誤差、漂移與故障情境，再定義實體元件的量測需求。</p>
           <a class="text-link" href="../?inquiry=photonic-simulation#contact">討論光子模擬</a>
+          <div class="entry-links">
+            <a class="text-link" href="../work/photonic-computing/">光子架構與模型假設</a>
+            <a class="text-link" href="../labs/interactive/#photonic-fault">操作光路故障模擬</a>
+          </div>
         </div>
         <div class="topic-panel">
           <h3>可約定交付物</h3>
@@ -142,18 +170,22 @@
             <li>模擬模型、參數假設及可重現的執行設定。</li>
             <li>參數掃描、故障注入及敏感度分析。</li>
             <li>視覺化報告，列明模擬假設、適用範圍與待量測項目。</li>
+            <li>FPGA 可行性討論分別列出軟體模型、HDL／綜合需求與上板驗證條件。</li>
           </ul>
         </div>
       </div>
     </section>
 
     <section class="topic-section axis-divider" id="compute" aria-labelledby="compute-title">
+      <span class="anchor-target" id="gpu-infrastructure"></span>
       <div class="wrap topic-row">
         <div>
           <p class="eyebrow">Compute Infrastructure</p>
           <h2 id="compute-title">GPU 運算基礎設施</h2>
           <p class="topic-lead">為共享 GPU 的研發環境規劃工作佇列、排程、資源配額與監控，在代表性工作負載下評估單機驗證及後續擴展的需求。</p>
           <div class="entry-links">
+            <a class="text-link" href="../work/gpu-orchestration/">GPU 排程技術詳解</a>
+            <a class="text-link" href="../labs/interactive/#gpu-orchestration">比較合成工作佇列</a>
             <a class="text-link" href="../?inquiry=gpu-infrastructure#contact">討論 GPU 資源管理</a>
             <a class="text-link" href="../#gpu-infrastructure">基礎設施與效能工程服務</a>
           </div>
@@ -169,6 +201,23 @@
       </div>
     </section>
 
+    <section class="topic-section axis-divider" id="deployment-validation" aria-labelledby="validation-title">
+      <div class="wrap">
+        <p class="eyebrow">Deployment &amp; Validation</p>
+        <h2 id="validation-title">部署與驗收</h2>
+        <p class="topic-lead">合作開始前共同確認裝置、模型版本、資料授權及品質門檻。測試在約定硬體與 Runtime 執行，隨報告交付測試條件與重現步驟。</p>
+        <dl class="topic-benchmark">
+          <div><dt>相容性</dt><dd>確認目標裝置與算子實際執行位置，分開記錄硬體後端與 CPU fallback。</dd></div>
+          <div><dt>效能</dt><dd>固定輸入、精度與暖機條件，分開記錄單次延遲、持續吞吐量與記憶體峰值。</dd></div>
+          <div><dt>品質</dt><dd>在同一測試集比對輸出品質、失敗案例及約定的誤差界限。</dd></div>
+        </dl>
+        <div class="entry-links">
+          <a class="text-link" href="../work/on-device-generative-vision/">看測試設計與適用範圍</a>
+          <a class="text-link" href="../?inquiry=edge-ai#contact">洽談部署驗收</a>
+        </div>
+      </div>
+    </section>
+
     <section class="topic-section axis-divider" id="related" aria-labelledby="related-title">
       <div class="wrap">
         <p class="eyebrow">Selected Work &amp; Research</p>
@@ -178,7 +227,7 @@
             <h3>工程案例</h3>
             <ul class="topic-links">
               <li><a class="text-link" href="../#fall-detection">養老院即時跌倒監測</a><span>邊緣裝置上的感測、辨識與告警。</span></li>
-              <li><a class="text-link" href="../#industrial-robot-workcell">工業機器人工作站智慧設計平台</a><span>機器人選型、CAD 佈局與可行性驗證。</span></li>
+              <li><a class="text-link" href="../work/industrial-robotics/">工業機器人工作站智慧設計平台</a><span>機器人選型、CAD 佈局與可行性驗證。</span></li>
             </ul>
           </div>
           <div class="topic-panel">
@@ -195,6 +244,24 @@
             <p>可先提供目標平台、資料型態和延遲或品質要求，讓我們一起定義驗證範圍。</p>
           </div>
           <a href="../?inquiry=edge-ai#contact" class="btn btn-primary">談談你的問題</a>
+        </div>
+      </div>
+    </section>
+    <section class="topic-section axis-divider" id="english" lang="en" aria-labelledby="english-title">
+      <div class="wrap">
+        <p class="eyebrow">Services in English</p>
+        <h2 id="english-title">Semiconductor &amp; Edge AI</h2>
+        <p class="topic-lead">For IC design, consumer electronics, embedded, imaging, optics and research teams. Start with a target device, model or workload, permitted representative data, and an acceptance threshold.</p>
+        <dl class="topic-benchmark">
+          <div><dt>Hardware-aware optimization</dt><dd>Profile operators, transfers and peak memory. Compare quantization, pruning or distillation against the same baseline and quality threshold.</dd></div>
+          <div><dt>On-device generative vision</dt><dd>Scope masks, GAN inpainting or diffusion synthesis, then assess model conversion, quality and timing on the agreed runtime. <a class="text-link" href="../work/on-device-generative-vision/#english">Technical note</a></dd></div>
+          <div><dt>Scientific hardware simulation</dt><dd>Document parameters, sensitivities and faults. Treat software models, FPGA synthesis and on-board validation as distinct activities. <a class="text-link" href="../work/photonic-computing/#english">Photonic simulation</a></dd></div>
+          <div><dt>AI compute infrastructure</dt><dd>Scope queuing, resource limits, and failure visibility for a representative workload. Deliver a reproducible evaluation and handover. <a class="text-link" href="../work/gpu-orchestration/#english">Scheduling technical note</a></dd></div>
+          <div><dt>Deployment validation</dt><dd>Record actual compute backends, model version, input, precision and warm-up. Compare quality, end-to-end latency, sustained throughput and peak memory against agreed limits.</dd></div>
+        </dl>
+        <div class="entry-links">
+          <a class="text-link" href="../labs/interactive/?lang=en">Try the demos</a>
+          <a class="text-link" href="../en/#contact">Discuss a deployment</a>
         </div>
       </div>
     </section>

@@ -1,6 +1,6 @@
 # 量維資科 Quantquer Inc. — 官方網站
 
-研究驅動的 AI 與深科技工程公司官網。以靜態首頁和半導體專題呈現晶片端 AI、GPU 運算基礎設施、客製化 AI Agent、研究即服務，以及醫療、訊號、金融與工業 AI。
+研究驅動的 AI 與深科技工程公司官網。以專題、可分享的案例詳頁與瀏覽器互動展示呈現從硬體、演算法到系統與應用的工程能力。
 
 🌐 **線上網址**：<https://quantquer.com>
 
@@ -8,7 +8,7 @@
 
 ## 技術概覽
 
-- **純靜態**。首頁和 `/semiconductor-ai/` 共用 CSS 與原生 JavaScript，無建置流程或套件安裝。
+- **純靜態**。頁面共用 CSS 與原生 JavaScript。Node 只用於生成或檢查案例頁、首頁卡片與 sitemap，部署不需安裝套件。
 - **字型**：Google Fonts（Noto Serif TC / Noto Sans TC / IBM Plex Mono）。
 - **Hero 動畫**：`<canvas>` 即時繪製訊號頻譜（PSD 包絡 + live signal trace），支援 `prefers-reduced-motion`。
 - **雙主題**：亮色（預設，品牌藍 `#004EA1`）／深色（teal `#2DD4BF`），右上角切換，偏好存於 `localStorage`，於繪製前套用以避免閃爍。
@@ -19,7 +19,13 @@
 ```
 .
 ├── index.html                  # 官網首頁與公開案例資料
+├── en/index.html               # 英文首頁
 ├── semiconductor-ai/index.html # 半導體與邊緣 AI 專題
+├── financial-intelligence/     # 金融資料與研究工程專題
+├── labs/interactive/           # 三個瀏覽器端互動展示
+├── work/                       # 已生成的案例及技術專題詳頁
+├── data/projects.json          # 可公開案例資料
+├── scripts/build-portfolio.mjs # 生成首頁卡片、案例頁及 sitemap
 ├── sitemap.xml / robots.txt    # 搜尋引擎索引
 ├── assets/
 │   ├── site.css                # 共用排版、主題及響應式樣式
@@ -53,16 +59,18 @@ python3 -m http.server 8000 --bind 127.0.0.1
 
 - 首頁 <http://127.0.0.1:8000/>
 - 半導體專題 <http://127.0.0.1:8000/semiconductor-ai/>
+- 英文首頁 <http://127.0.0.1:8000/en/>
+- 互動展示 <http://127.0.0.1:8000/labs/interactive/>
 
 ## 首頁區塊
 
 | 區段 | id | 說明 |
 |------|------|------|
 | Hero | `#top` | 主標、一句服務描述、兩個入口按鈕與 canvas 動畫 |
-| 代表案例 | `#featured` | 晶片端生成式 AI 技術專題與三個代表案例 |
+| 代表案例 | `#featured` | 晶片端生成式影像、機器人工作站、知識庫與光子模擬 |
 | §01 能力 | `#capabilities` | 十項技術能力與專題入口 |
 | §02 服務與合作模式 | `#services` | 八個服務方案與五種合作方式 |
-| §03 精選案例 | `#work` | 八個案例，七個技術分類，可複選 |
+| §03 精選案例 | `#work` | 案例與技術專題詳頁。產業、技術、狀態、類型、代表項目及搜尋可組合 |
 | §04 工作方式 | `#method` | Define → Design → Validate → Deliver |
 | §05 研究成果 | `#research` | 代表論文（venue · 論文 · 程式碼連結） |
 | §06 Quantquer Labs | `#labs` | 自主研發工具，可依主題及開源／內部使用／開發中篩選 |
@@ -72,7 +80,8 @@ python3 -m http.server 8000 --bind 127.0.0.1
 
 ## 編輯指南
 
-- 只把可公開的卡片寫入 HTML。案例與 Labs 各卡的 `id` 是穩定錨點，`data-tags` 對應篩選按鈕值，`data-origin` 和 `data-stage` 記錄卡片上對應的歸屬及階段。篩選與計數直接讀取靜態卡片。
+- 案例的雙語內容、歸屬、階段、來源和服務連結由 `data/projects.json` 維護，只收錄公開資料。變更後執行 `node scripts/build-portfolio.mjs`，最後用 `node scripts/build-portfolio.mjs --check` 檢查首頁區塊、案例詳頁和 sitemap 同步。
+- 案例與 Labs 卡片的 `id` 作為穩定錨點。首頁從生成後的卡片讀取篩選條件，案例篩選狀態保存在可分享的網址中。
 - 主題與共用樣式集中在 `assets/site.css`。主題變數位於 `:root`（深色）與 `html[data-theme="light"]`（亮色）。
 - 首頁表單依既有選項 ID 預填需求類型。同頁入口使用 `data-inquiry`，跨頁入口使用 `?inquiry=<選項 ID>#contact`。
 - 換 logo 時注意三個版本的用途（深底用淺色字版、淺底用深色字版）。

@@ -22,8 +22,11 @@
 
     function updateTheme() {
       const dark = mode === 'dark';
+      const english = root.lang === 'en';
       button.textContent = dark ? '☀︎' : '☾︎';
-      button.setAttribute('aria-label', dark ? '切換亮色模式' : '切換深色模式');
+      button.setAttribute('aria-label', english
+        ? (dark ? 'Switch to light mode' : 'Switch to dark mode')
+        : (dark ? '切換亮色模式' : '切換深色模式'));
       themeColor?.setAttribute('content', getComputedStyle(root).getPropertyValue('--bg').trim());
       for (const {img, src, srcset} of images) {
         if (srcset) img.setAttribute('srcset', dark ? darkVariant(srcset) : srcset);
