@@ -98,6 +98,21 @@ for (const project of portfolio.projects) {
   const classification = caseEvidence[project.slug];
   assert(classification?.types.every(type => Object.hasOwn(evidenceTypes, type)) && classification.types.length && /^[a-z-]+$/.test(classification.solution), `Missing evidence classification or solution: ${project.slug}`);
   const anchor = project.anchor ?? project.slug;
+  const visual = featuredEvidence[project.slug]?.visual;
+  if (visual) {
+    assert([1, 2].includes(visual.files.length), `Expected one shared or two localized featured images: ${project.slug}`);
+    for (const { path, width, height } of visual.files) {
+      assert(/^\/assets\/evidence\/featured\/[a-z0-9-]+\.webp$/.test(path)
+        && [width, height].every(value => Number.isInteger(value) && value > 0), `Invalid featured image: ${project.slug}`);
+      await access(resolve(root, path.slice(1)));
+    }
+    assert([visual.alt, visual.caption].every(pair => Array.isArray(pair) && pair.length === languages.length), `Missing featured image translations: ${project.slug}`);
+    for (const language of languages) {
+      requireText(label(visual, 'alt', language), `${project.slug} featured image alt`);
+      requireText(label(visual, 'caption', language), `${project.slug} featured image caption`);
+      if (visual.source) validateLink(label(visual, 'source', language), project);
+    }
+  }
   for (const id of [anchor, project.slug]) {
     assert(/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(id), `Invalid project id: ${id}`);
   }
@@ -221,12 +236,21 @@ function featuredCard(project, language = 'zh') {
   assert(proof, `Missing featured evidence for ${project.slug}`);
   const t = key => escapeHtml(label(proof, key, language));
   const example = project.evidence?.find(item => item.type === 'model-output' && item.image);
+  const visual = proof.visual;
+  const file = visual ? (visual.files[Number(en)] ?? visual.files[0]) : example?.image;
+  assert(file, `Missing public image for featured case ${project.slug}`);
+  const alt = escapeHtml(visual ? label(visual, 'alt', language) : example[language].alt);
+  const caption = escapeHtml(visual ? label(visual, 'caption', language) : en ? 'Recorded MI-GAN CPU output.' : 'MI-GAN CPU 修補實際輸出。');
+  const imageSource = visual?.source ? ` <a href="${escapeHtml(label(visual, 'source', language))}">${en ? 'Image source' : '圖片來源'}</a>` : '';
   return `      <article class="home-case topic-panel">
         <p class="eyebrow">${escapeHtml(label(domains, project.domain[0], language))}</p>
         <h3><a href="${detailPath(project, language)}">${t('title')}</a></h3>
         <p>${t('problem')}</p>
         <p class="home-case-output">${t('output')}</p>
-        ${example ? `<figure class="home-case-image"><img src="${escapeHtml(example.image.path)}" width="${example.image.width}" height="${example.image.height}" alt="${escapeHtml(example[language].alt)}" loading="lazy" decoding="async"><figcaption>${en ? 'Recorded MI-GAN CPU output' : 'MI-GAN CPU 修補實際輸出'}</figcaption></figure>` : ''}
+        <figure class="home-case-image">
+          <a class="home-case-zoom" href="${escapeHtml(file.path)}" aria-label="${en ? 'Open full-size image' : '開啟完整圖片'} · ${t('title')}"><img src="${escapeHtml(file.path)}" width="${file.width}" height="${file.height}" alt="${alt}" loading="lazy" decoding="async"></a>
+          <figcaption>${caption}${imageSource}</figcaption>
+        </figure>
         <p class="home-case-proof">${t('evidence')}</p>
         <a class="text-link" href="${t('source')}">${t('sourceLabel')}</a>
       </article>`.replace(/[ \t]+$/gm, '');

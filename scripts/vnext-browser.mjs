@@ -99,6 +99,16 @@ try {
     assert.ok(await brand.evaluate(section => section.offsetTop >= document.querySelector('#top').offsetHeight));
     assert.equal(await page.locator('#core-solutions li a').count(), 4);
     assert.equal(await page.locator('#featured .home-case').count(), 6);
+    const caseImages = page.locator('#featured .home-case-image img');
+    assert.equal(await caseImages.count(), 6);
+    for (const picture of await caseImages.all()) {
+      await picture.scrollIntoViewIfNeeded();
+      await picture.evaluate(img => img.decode());
+      assert.ok(await picture.evaluate(img => img.alt.trim() && img.naturalWidth === Number(img.getAttribute('width')) && img.naturalHeight === Number(img.getAttribute('height'))));
+      assert.equal(await picture.locator('..').getAttribute('href'), await picture.getAttribute('src'));
+    }
+    assert.equal(await page.locator('#featured figcaption a[href="https://chishengchen.github.io/projects.html"]').count(), 1);
+    assert.equal(await page.locator('#featured figcaption a[href="https://chishengchen.github.io/teaser_jad.png"]').count(), 1);
     assert.equal(await page.locator('[data-home-archive][open]').count(), 0);
     const finder = page.locator('[data-solution-finder]');
     for (const service of ['edge-ai', 'agent', 'gpu-infrastructure', 'research', 'assessment']) {

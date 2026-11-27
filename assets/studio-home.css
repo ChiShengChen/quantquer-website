@@ -34,7 +34,11 @@
 .home-case-output { margin: .35rem 0; }
 .home-case-proof { font-family: var(--mono); padding: .5rem 0 .1rem; margin-top: .5rem; border-top: 1px solid var(--line); }
 .home-case-image { margin: .5rem 0; }
-.home-case-image img { width: 100%; max-height: 140px; object-fit: cover; object-position: center; display: block; border: 1px solid var(--line); }
+.home-case-zoom { display: block; border: 1px solid var(--line); background: var(--bg-2); cursor: zoom-in; }
+.home-case-zoom:hover { border-color: var(--accent-dim); }
+.home-case-image img { width: 100%; height: clamp(116px, 14vw, 176px); object-fit: contain; display: block; }
+.home-case-image figcaption { margin-top: .28rem; }
+.home-case-image figcaption a { color: var(--accent); text-decoration: underline; text-underline-offset: .15em; }
 .home-case-image figcaption, .home-duration { color: var(--fg-dim); font: 500 .75rem var(--mono); }
 .home-engagement-grid { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: clamp(14px, 3vw, 32px); align-items: start; }
 .home-rows li { padding: .55rem 0; border-bottom: 1px solid var(--line); }

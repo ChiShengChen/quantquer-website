@@ -1,3 +1,7 @@
+const featuredImage = (file, width, height) => ({
+  path: `/assets/evidence/featured/${file}.webp`, width, height,
+});
+
 export const featuredEvidence = {
   'industrial-robotics': {
     title: ['工業機器人工作站設計', 'Industrial robot workcell design'],
@@ -6,6 +10,12 @@ export const featuredEvidence = {
     evidence: ['已交付設計軟體。節拍為設計估算。', 'Design software was delivered. Cycle times are planning estimates.'],
     source: ['/work/industrial-robotics/#case-evidence', '/en/work/industrial-robotics/#case-evidence-en'],
     sourceLabel: ['查看交付與驗收範圍', 'Review the delivery and acceptance scope'],
+    visual: {
+      files: [featuredImage('robotics', 760, 437)],
+      alt: ['工作站配置工具顯示 3D 佈局、輸入規格與配置評分', 'The workcell optimizer shows a 3D layout, input specifications and scoring'],
+      caption: ['創辦人的獨立公開 Demo，採用示例配置。', 'Founder’s independent public demo with an example layout.'],
+      source: ['https://chishengchen.github.io/projects.html', 'https://chishengchen.github.io/projects.html'],
+    },
   },
   'on-device-generative-vision': {
     title: ['生成式影像修補與晶片端部署', 'Generative image restoration and edge deployment'],
@@ -22,6 +32,12 @@ export const featuredEvidence = {
     evidence: ['歷史引用正確率 85%，限當時 28 題評測。', '85% historical citation accuracy on the original 28-question evaluation.'],
     source: ['/work/enterprise-knowledge-arbitration/#case-evidence', '/en/work/enterprise-knowledge-arbitration/#case-evidence-en'],
     sourceLabel: ['查看評測條件', 'Review the evaluation scope'],
+    visual: {
+      files: [featuredImage('knowledge-zh', 1052, 232), featuredImage('knowledge-en', 1052, 232)],
+      alt: ['同一組合成設備文件下，關鍵詞檢索與文件仲裁選出不同版本的壓力上限', 'Keyword retrieval and document arbitration select pressure limits from different versions of the same synthetic equipment documents'],
+      caption: ['合成文件示範，畫面比較版本選擇與引用。', 'Synthetic-document demo comparing version selection and citations.'],
+      source: ['/labs/demos/knowledge-arbitration/', '/en/labs/demos/knowledge-arbitration/'],
+    },
   },
   'gpu-orchestration': {
     title: ['GPU 運算資源排程', 'GPU workload orchestration'],
@@ -30,6 +46,11 @@ export const featuredEvidence = {
     evidence: ['單工作站受控實跑，包含兩項 CUDA 與一項 CPU 任務。', 'Controlled single-workstation run with two CUDA jobs and one CPU job.'],
     source: ['/labs/evidence/gpu/', '/labs/evidence/gpu/?lang=en'],
     sourceLabel: ['查看實跑紀錄', 'Inspect the recorded run'],
+    visual: {
+      files: [featuredImage('gpu-zh', 994, 194), featuredImage('gpu-en', 994, 194)],
+      alt: ['單工作站受控實跑的程序 VRAM 取樣與保留量時間軸', 'Timeline of sampled process VRAM and reservations from the controlled single-workstation run'],
+      caption: ['單工作站受控實跑的 VRAM 回放。', 'VRAM replay of the controlled single-workstation run.'],
+    },
   },
   'eeg-treatment-response': {
     title: ['臨床 EEG 治療反應研究', 'Clinical EEG treatment-response research'],
@@ -38,6 +59,12 @@ export const featuredEvidence = {
     evidence: ['公開期刊論文，歸屬學術研究合作。', 'Peer-reviewed publication from an academic collaboration.'],
     source: ['https://doi.org/10.1016/j.jad.2023.08.059', 'https://doi.org/10.1016/j.jad.2023.08.059'],
     sourceLabel: ['查看期刊論文', 'Read the publication'],
+    visual: {
+      files: [featuredImage('eeg-research', 520, 313)],
+      alt: ['額葉 EEG 研究的六步流程，包含訊號前處理、特徵擷取、模型訓練與跨資料集驗證', 'Six-step frontal EEG research workflow covering signal preprocessing, feature extraction, model training and cross-dataset validation'],
+      caption: ['作者個人網站所刊載的 EEG 研究流程圖。', 'EEG research workflow published on the author’s site.'],
+      source: ['https://chishengchen.github.io/teaser_jad.png', 'https://chishengchen.github.io/teaser_jad.png'],
+    },
   },
   'photonic-computing': {
     title: ['光子網格與故障模擬', 'Photonic mesh fault simulation'],
@@ -46,5 +73,10 @@ export const featuredEvidence = {
     evidence: ['四通道、四階段理想 MZI 的數值模擬。', 'Numerical simulation of a four-channel, four-stage ideal MZI mesh.'],
     source: ['/labs/evidence/photonics/', '/labs/evidence/photonics/?lang=en'],
     sourceLabel: ['操作光子模擬', 'Run the photonic simulation'],
+    visual: {
+      files: [featuredImage('photonics-zh', 986, 289), featuredImage('photonics-en', 986, 289)],
+      alt: ['四通道光子網格中的干涉單元、故障位置與模擬輸出光功率', 'Four-channel photonic mesh showing interferometer cells, the selected fault and simulated output power'],
+      caption: ['光子網格故障模擬畫面。', 'Photonic mesh fault simulator output.'],
+    },
   },
 };
