@@ -58,7 +58,7 @@
     --panel:#0C121C;
     --fg:#EAEEF2;
     --fg-dim:#9AA6B4;
-    --fg-faint:#5A6675;
+    --fg-faint:#7A8796;
     --accent:#2DD4BF;
     --accent-dim:rgba(45,212,191,.55);
     --line:rgba(255,255,255,.08);
@@ -80,7 +80,7 @@
     --panel:#FFFFFF;
     --fg:#101A24;
     --fg-dim:#4B5765;
-    --fg-faint:#8593A2;
+    --fg-faint:#5F6B79;
     --accent:#004EA1;
     --accent-dim:rgba(0,78,161,.5);
     --line:rgba(16,26,36,.12);
@@ -208,7 +208,7 @@
   .hero-eyebrow .tick{width:34px;height:1px;background:var(--accent-dim);}
   h1.hero-title{
     font-family:var(--serif);font-weight:600;
-    font-size:clamp(2.5rem,6.4vw,5.1rem);
+    font-size:clamp(2.1rem,6.4vw,5.1rem);
     line-height:1.16;letter-spacing:.01em;
     max-width:16ch;
     text-wrap:balance;
@@ -226,7 +226,8 @@
     font-family:var(--mono);font-size:.72rem;letter-spacing:.04em;color:var(--fg-dim);
     border:1px solid var(--line);padding:.34rem .66rem;border-radius:2px;
   }
-  .cta-row{display:flex;flex-wrap:wrap;gap:1rem;margin-top:2.6rem;}
+  .cta-row{display:flex;flex-wrap:wrap;gap:1rem;margin-top:2.4rem;}
+  .cap-domains{margin:calc(-1 * clamp(1.2rem,3vw,2.2rem)) 0 clamp(1.8rem,3.5vw,2.6rem);}
   .btn{
     font-family:var(--mono);font-size:.84rem;letter-spacing:.03em;
     display:inline-flex;align-items:center;gap:.6rem;
@@ -261,6 +262,22 @@
   .sec-head .en{margin-left:.2rem;}
   .sec-lead{max-width:54ch;color:var(--fg-dim);font-size:1.05rem;margin-top:-1.8rem;margin-bottom:3.4rem;}
 
+  /* ---------- featured work (right after the hero) ---------- */
+  .featured{padding:clamp(48px,7vh,88px) 0 clamp(56px,8vh,96px);position:relative;}
+  .feat-head{display:flex;justify-content:space-between;align-items:baseline;gap:.6rem 1rem;flex-wrap:wrap;margin-bottom:1.4rem;}
+  .feat-head h2.eyebrow{font-size:.78rem;}
+  .feat-all{font-family:var(--mono);font-size:.8rem;color:var(--accent);letter-spacing:.02em;}
+  .feat-all:hover{text-decoration:underline;}
+  .feats{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+  .feat{background:var(--bg);display:flex;flex-direction:column;transition:background .35s;}
+  .feat:hover{background:var(--bg-2);}
+  .feat:hover .cfig img{transform:scale(1.025);}
+  .feat .fbd{padding:clamp(1.5rem,2.6vw,2.1rem);display:flex;flex-direction:column;flex:1;}
+  .feat .ctag{font-family:var(--mono);font-size:.72rem;color:var(--accent);letter-spacing:.1em;}
+  .feat h3{font-family:var(--serif);font-weight:500;font-size:1.4rem;line-height:1.3;margin:.6rem 0 .7rem;}
+  .feat .fdeliv{color:var(--fg);font-size:1rem;line-height:1.7;flex:1;}
+  @media(max-width:760px){ .feats{grid-template-columns:1fr;} }
+
   /* ---------- capabilities ---------- */
   .cap-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
   .cap{background:var(--bg);position:relative;transition:background .35s;display:flex;flex-direction:column;}
@@ -286,7 +303,7 @@
   .cfig{position:relative;aspect-ratio:3/2;overflow:hidden;border-bottom:1px solid var(--line);background:#F3F6FA;}
   .cfig img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.2,.7,.2,1);}
   .case:hover .cfig img,.cap:hover .cfig img,.offer:hover .cfig img,.lab:hover .cfig img{transform:scale(1.025);}
-  html:not([data-theme="light"]) .cfig img{filter:brightness(.86) contrast(1.04);}
+  html:not([data-theme="light"]) .cfig{background:#0C121C;}
   .case .cbody{padding:clamp(1.6rem,2.8vw,2.3rem);display:flex;flex-direction:column;flex:1;}
   .case .ctag{font-family:var(--mono);font-size:.72rem;color:var(--accent);letter-spacing:.1em;}
   .case h3{font-family:var(--serif);font-weight:500;font-size:1.4rem;line-height:1.3;margin:.7rem 0 .8rem;}
@@ -342,7 +359,7 @@
   .step p{color:var(--fg-dim);font-size:.92rem;margin-top:.9rem;}
   .method-fig{border-top:1px solid var(--line);background:#F3F6FA;overflow:hidden;}
   .method-fig img{display:block;width:100%;height:auto;}
-  html:not([data-theme="light"]) .method-fig img{filter:brightness(.86) contrast(1.04);}
+  html:not([data-theme="light"]) .method-fig{background:#0C121C;}
   @media(max-width:860px){ .steps{grid-template-columns:repeat(2,1fr);} }
   @media(max-width:480px){ .steps{grid-template-columns:1fr;} }
 
@@ -431,17 +448,31 @@
   .price-note{margin-top:1.4rem;font-family:var(--mono);font-size:.74rem;color:var(--fg-faint);letter-spacing:.02em;}
 
   /* ---------- contact ---------- */
-  .contact-inner{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(2rem,5vw,4rem);align-items:start;}
+  .contact-inner{display:grid;grid-template-columns:1.15fr .85fr;grid-template-areas:"intro card" "form card";column-gap:clamp(2rem,5vw,4rem);align-items:start;}
+  .c-intro{grid-area:intro;}
+  .contact-inner .qform{grid-area:form;}
+  .contact-inner .mailcard{grid-area:card;}
   .qform{margin-top:2.4rem;display:grid;grid-template-columns:1fr 1fr;gap:1.1rem 1.1rem;}
   .qform .full{grid-column:1/-1;}
-  .qform label{display:block;font-family:var(--mono);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-faint);margin-bottom:.45rem;}
+  .qform label{display:block;font-family:var(--sans);font-size:.84rem;font-weight:500;letter-spacing:.02em;color:var(--fg-dim);margin-bottom:.45rem;}
   .qform label .req{color:var(--accent);}
   .qform input,.qform select,.qform textarea{width:100%;font-family:var(--sans);font-size:.95rem;font-weight:400;color:var(--fg);background:var(--bg-2);border:1px solid var(--line);border-radius:2px;padding:.7rem .8rem;transition:border-color .25s;}
   .qform textarea{min-height:140px;resize:vertical;line-height:1.6;}
   .qform input:focus,.qform select:focus,.qform textarea:focus{outline:none;border-color:var(--accent);}
   .qform .factions{display:flex;flex-wrap:wrap;align-items:center;gap:1rem 1.4rem;}
-  .qform .factions .btn{border:none;}
-  .qform .fnote{font-family:var(--mono);font-size:.68rem;color:var(--fg-faint);letter-spacing:.02em;line-height:1.6;}
+  .qform .fnote{font-size:.84rem;color:var(--fg-faint);line-height:1.6;margin-top:-.2rem;}
+  .qform .fnote.ok{color:var(--accent);}
+  .qform textarea.qcopy-out{min-height:180px;font-size:.88rem;}
+  .qmore{border:1px solid var(--line);border-radius:2px;background:var(--bg-2);}
+  .qmore summary{cursor:pointer;list-style:none;padding:.85rem 1rem;font-size:.92rem;color:var(--fg);display:flex;align-items:baseline;flex-wrap:wrap;gap:.3rem .7rem;}
+  .qmore summary::-webkit-details-marker{display:none;}
+  .qmore summary::before{content:"+";font-family:var(--mono);color:var(--accent);width:.9rem;}
+  .qmore[open] summary::before{content:"−";}
+  .qmore summary span{color:var(--fg-faint);font-size:.82rem;}
+  .qmore summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+  .qmore-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem 1.1rem;padding:.3rem 1rem 1.2rem;}
+  .qmore-grid input,.qmore-grid select{background:var(--bg);}
+  @media(max-width:560px){ .qmore-grid{grid-template-columns:1fr;} }
   @media(max-width:560px){ .qform{grid-template-columns:1fr;} }
   .mailcard{position:sticky;top:96px;}
   .contact h2{font-family:var(--serif);font-weight:500;font-size:clamp(1.7rem,3.8vw,2.8rem);line-height:1.25;}
@@ -451,7 +482,7 @@
   .mailcard .ml{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--fg-faint);}
   .mailcard a.email{font-family:var(--mono);font-size:clamp(.95rem,2vw,1.25rem);color:var(--fg);display:block;margin:.7rem 0 1.6rem;letter-spacing:.01em;word-break:break-all;transition:color .25s;}
   .mailcard a.email:hover{color:var(--accent);}
-  @media(max-width:760px){ .contact-inner{grid-template-columns:1fr;align-items:start;} .mailcard{position:static;} }
+  @media(max-width:760px){ .contact-inner{grid-template-columns:1fr;grid-template-areas:"intro" "card" "form";row-gap:2rem;} .mailcard{position:static;} .contact-inner .qform{margin-top:0;} }
 
   /* ---------- footer ---------- */
   footer{border-top:1px solid var(--line);padding:2.8rem 0 2.2rem;}
@@ -533,22 +564,43 @@
     <h1 class="hero-title">把困難的量化問題，<br>做成<span class="hl">可交付的系統</span>。</h1>
     <p class="hero-sub">
       結合前沿 AI 研究、科學計算與軟體工程，為企業打造客製化 AI Agent、智慧決策系統、訊號處理演算法與深科技產品。
-      <span class="en">From scientific discovery to production-ready intelligence.</span>
     </p>
-    <div class="domains">
-      <span>AI Agent</span>
-      <span>AI for Science</span>
-      <span>臨床 AI Clinical</span>
-      <span>訊號與時序 Signal &amp; Time-Series</span>
-      <span>金融與量化 Quant</span>
-      <span>工業 AI Industrial</span>
-    </div>
     <div class="cta-row">
       <a href="#contact" class="btn btn-primary">談談你的問題 <span class="arr">→</span></a>
       <a href="#work" class="btn btn-ghost">看精選案例 <span class="arr">→</span></a>
     </div>
   </div>
   <div class="fig-cap"><span class="dot"></span> fig.01 — power spectral density · live signal trace</div>
+</section>
+
+<!-- ===================== FEATURED WORK ===================== -->
+<section class="featured" id="featured" aria-labelledby="featured-title">
+  <div class="wrap">
+    <div class="feat-head reveal">
+      <h2 class="eyebrow" id="featured-title">代表案例 / Featured Work</h2>
+      <a href="#work" class="feat-all">看全部 8 個案例 →</a>
+    </div>
+    <div class="feats reveal">
+      <a class="feat" href="#work">
+        <div class="cfig"><img src="assets/cases/robot.webp" srcset="assets/cases/robot-768.webp 768w, assets/cases/robot.webp 1536w" sizes="(max-width: 760px) 100vw, 530px" alt="機器人碼垛工作站佈局最佳化示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="fbd">
+          <div class="ctag">工業 AI · AI Agent</div>
+          <h3>工業機器人工作站智慧設計平台</h3>
+          <p class="fdeliv">交付一套設計平台：用對話描述需求，自動產出可建置的 2D／3D 工作站佈局、物料清單與技術設計報告。</p>
+          <div class="cres"><div class="big">9</div><p class="rdesc">階段最佳化，涵蓋可達性搜尋、節拍估算與運動規劃驗證。</p></div>
+        </div>
+      </a>
+      <a class="feat" href="#work">
+        <div class="cfig"><img src="assets/cases/kb.webp" srcset="assets/cases/kb-768.webp 768w, assets/cases/kb.webp 1536w" sizes="(max-width: 760px) 100vw, 530px" alt="企業知識庫衝突仲裁問答系統示意圖" loading="lazy" width="1536" height="1024"></div>
+        <div class="fbd">
+          <div class="ctag">企業 AI · 知識管理</div>
+          <h3>設備廠商技術知識庫問答系統</h3>
+          <p class="fdeliv">交付一套知識庫問答系統：文件說法互相矛盾時先依權威規則仲裁，再附上引用回答。</p>
+          <div class="cres"><div class="big">100<small>%</small></div><p class="rdesc">28 題評測的版本正確率；引用正確率 85%。</p></div>
+        </div>
+      </a>
+    </div>
+  </div>
 </section>
 
 <!-- ===================== CAPABILITIES ===================== -->
@@ -558,6 +610,14 @@
       <span class="idx">§ 01</span>
       <h2>能力</h2>
       <span class="en">/ Capabilities</span>
+    </div>
+    <div class="domains cap-domains reveal">
+      <span>AI Agent</span>
+      <span>AI for Science</span>
+      <span>臨床 AI Clinical</span>
+      <span>訊號與時序 Signal &amp; Time-Series</span>
+      <span>金融與量化 Quant</span>
+      <span>工業 AI Industrial</span>
     </div>
     <div class="cap-grid reveal">
       <div class="cap">
@@ -819,7 +879,7 @@
             <li>回答前先依權威規則仲裁衝突，回答附引用與仲裁軌跡</li>
             <li>專家審查介面，人工裁決回寫知識庫，並以評測集守住品質</li>
           </ul>
-          <div class="cres"><div class="big">628</div><p class="rdesc">張知識卡，由 14 份文件抽出；28 題評測中版本正確 100%、引用正確 85%。</p></div>
+          <div class="cres"><div class="big">100<small>%</small></div><p class="rdesc">28 題評測的版本正確率；引用正確率 85%。知識庫由 14 份文件抽出 628 張知識卡。</p></div>
         </div>
       </article>
 
@@ -1230,59 +1290,10 @@
 <section class="block axis-divider contact" id="contact">
   <div class="wrap">
     <div class="contact-inner reveal">
-      <div>
+      <div class="c-intro">
         <div class="eyebrow" style="margin-bottom:1.4rem;">§ 09 / Contact</div>
         <h2>有一個<span class="hl">別人解不動</span>的問題？<br>來談談。</h2>
         <p class="csub">告訴我們你卡在哪裡。第一次對話，我們會一起把問題定義清楚——這通常是最有價值的一步。</p>
-        <form class="qform" id="qform" novalidate>
-          <div>
-            <label for="qf-name">稱呼 <span class="req">*</span></label>
-            <input id="qf-name" name="name" type="text" autocomplete="name" required>
-          </div>
-          <div>
-            <label for="qf-org">公司／單位</label>
-            <input id="qf-org" name="org" type="text" autocomplete="organization">
-          </div>
-          <div>
-            <label for="qf-type">需求類型</label>
-            <select id="qf-type" name="type">
-              <option>客製化 AI Agent 系統</option>
-              <option>AI 評估與成本最佳化</option>
-              <option>研究即服務</option>
-              <option>企業知識庫與智慧問答</option>
-              <option>領域 AI 演算法研發（醫療／訊號／金融／工業）</option>
-              <option>AI 技術診斷與架構規劃</option>
-              <option>其他</option>
-            </select>
-          </div>
-          <div>
-            <label for="qf-stage">目前階段</label>
-            <select id="qf-stage" name="stage">
-              <option>還在想法階段</option>
-              <option>需要先驗證可行性（PoC）</option>
-              <option>要做出可用的產品（MVP）</option>
-              <option>已有系統，想改善</option>
-              <option>想找長期技術夥伴</option>
-            </select>
-          </div>
-          <div class="full">
-            <label for="qf-time">期望時程</label>
-            <select id="qf-time" name="timeline">
-              <option>尚未確定</option>
-              <option>1 個月內</option>
-              <option>1–3 個月</option>
-              <option>3 個月以上</option>
-            </select>
-          </div>
-          <div class="full">
-            <label for="qf-desc">問題描述 <span class="req">*</span></label>
-            <textarea id="qf-desc" name="desc" required placeholder="你卡在哪裡？目前有哪些資料或系統？希望達成什麼？"></textarea>
-          </div>
-          <div class="full factions">
-            <button type="submit" class="btn btn-primary">產生需求信 <span class="arr">→</span></button>
-            <span class="fnote">會開啟你的郵件軟體並帶入內容，資料不經過任何第三方。</span>
-          </div>
-        </form>
       </div>
       <div class="mailcard">
         <div class="ml">Email</div>
@@ -1292,6 +1303,63 @@
         <a href="https://www.linkedin.com/company/104143648/" target="_blank" rel="noopener" class="btn btn-ghost" style="width:100%;justify-content:center;margin-top:.8rem;">追蹤 LinkedIn <span class="arr">↗</span></a>
         <div class="mono" style="font-size:.7rem;color:var(--fg-faint);letter-spacing:.04em;margin-top:1.1rem;">LINE ID：m50816hc（陳先生）</div>
       </div>
+      <form class="qform" id="qform" novalidate>
+        <div class="full">
+          <label for="qf-name">稱呼 <span class="req">*</span></label>
+          <input id="qf-name" name="name" type="text" autocomplete="name" required>
+        </div>
+        <div class="full">
+          <label for="qf-desc">問題描述 <span class="req">*</span></label>
+          <textarea id="qf-desc" name="desc" required placeholder="你卡在哪裡？目前有哪些資料或系統？希望達成什麼？"></textarea>
+        </div>
+        <details class="qmore full">
+          <summary>補充專案資訊 <span>選填：公司、需求類型、階段、時程</span></summary>
+          <div class="qmore-grid">
+            <div>
+              <label for="qf-org">公司／單位</label>
+              <input id="qf-org" name="org" type="text" autocomplete="organization">
+            </div>
+            <div>
+              <label for="qf-type">需求類型</label>
+              <select id="qf-type" name="type">
+                <option value="">未指定</option>
+                <option>客製化 AI Agent 系統</option>
+                <option>AI 評估與成本最佳化</option>
+                <option>研究即服務</option>
+                <option>企業知識庫與智慧問答</option>
+                <option>領域 AI 演算法研發（醫療／訊號／金融／工業）</option>
+                <option>AI 技術診斷與架構規劃</option>
+                <option>其他</option>
+              </select>
+            </div>
+            <div>
+              <label for="qf-stage">目前階段</label>
+              <select id="qf-stage" name="stage">
+                <option value="">未指定</option>
+                <option>還在想法階段</option>
+                <option>需要先驗證可行性（PoC）</option>
+                <option>要做出可用的產品（MVP）</option>
+                <option>已有系統，想改善</option>
+                <option>想找長期技術夥伴</option>
+              </select>
+            </div>
+            <div>
+              <label for="qf-time">期望時程</label>
+              <select id="qf-time" name="timeline">
+                <option value="">未指定</option>
+                <option>1 個月內</option>
+                <option>1–3 個月</option>
+                <option>3 個月以上</option>
+              </select>
+            </div>
+          </div>
+        </details>
+        <div class="full factions">
+          <button type="submit" class="btn btn-primary">開啟郵件草稿 <span class="arr">→</span></button>
+          <button type="button" class="btn btn-ghost" id="qcopy">複製需求內容</button>
+        </div>
+        <p class="full fnote" id="qstatus" role="status" aria-live="polite">沒有設定郵件 App？按「複製需求內容」，再貼到任何信箱寄到 chisheng.m.chen@gmail.com。內容不經過任何第三方。</p>
+      </form>
     </div>
   </div>
 </section>
@@ -1422,11 +1490,23 @@
   // ---- light / dark theme toggle ----
   const themeToggle = document.getElementById('themeToggle');
   const metaTheme = document.querySelector('meta[name="theme-color"]');
+  // theme-aware illustrations: dark theme swaps every figure to its *-dark.webp twin
+  const themedImgs = [...document.querySelectorAll('.cfig img, .method-fig img')];
+  themedImgs.forEach(img=>{ img.dataset.lsrc = img.getAttribute('src'); img.dataset.lset = img.getAttribute('srcset') || ''; });
+  const toDark = u => u.replace(/\.webp(?=[\s,]|$)/g, '-dark.webp');
+  function setThemedImages(mode){
+    const dark = mode !== 'light';
+    themedImgs.forEach(img=>{
+      if(img.dataset.lset) img.setAttribute('srcset', dark ? toDark(img.dataset.lset) : img.dataset.lset);
+      img.setAttribute('src', dark ? toDark(img.dataset.lsrc) : img.dataset.lsrc);
+    });
+  }
   function applyTheme(mode){
     if(mode==='light') document.documentElement.setAttribute('data-theme','light');
     else document.documentElement.removeAttribute('data-theme');
     themeToggle.textContent = (mode==='light') ? '☾︎' : '☀︎';  // moon / sun, text style
     readColors();                                   // refresh canvas palette
+    setThemedImages(mode);
     if(metaTheme) metaTheme.setAttribute('content', getComputedStyle(document.documentElement).getPropertyValue('--bg').trim());
     if(reduce) draw(0);                             // repaint static frame
   }
@@ -1453,30 +1533,63 @@
   document.addEventListener('click', (e)=>{ if(menuOpen() && !hdr.contains(e.target)) setMenu(false); });
   window.matchMedia('(min-width: 941px)').addEventListener('change', (e)=>{ if(e.matches) setMenu(false); });
 
-  // ---- inquiry form -> prefilled email (no third-party backend) ----
+  // ---- inquiry form -> mail draft or clipboard (no third-party backend) ----
   const qform = document.getElementById('qform');
   if(qform){
+    const MAILTO = 'chisheng.m.chen@gmail.com';
+    const qstatus = document.getElementById('qstatus');
+    const v = k => (qform.elements[k].value || '').trim();
+    const valid = ()=>{
+      for(const el of [qform.elements.name, qform.elements.desc]){
+        if(!el.value.trim()){ el.focus(); el.reportValidity && el.reportValidity(); return false; }
+      }
+      return true;
+    };
+    const compose = ()=>{
+      const subject = `[Quantquer] ${v('type') || '合作洽詢'}｜${v('name')}`;
+      const lines = [`稱呼：${v('name')}`];
+      if(v('org')) lines.push(`公司／單位：${v('org')}`);
+      if(v('type')) lines.push(`需求類型：${v('type')}`);
+      if(v('stage')) lines.push(`目前階段：${v('stage')}`);
+      if(v('timeline')) lines.push(`期望時程：${v('timeline')}`);
+      lines.push('', '問題描述：', v('desc'));
+      return { subject, body: lines.join('\r\n') };
+    };
+    const say = (msg, ok)=>{ qstatus.textContent = msg; qstatus.classList.toggle('ok', !!ok); };
     qform.addEventListener('submit', (e)=>{
       e.preventDefault();
-      const name = qform.elements.name, desc = qform.elements.desc;
-      for(const el of [name, desc]){
-        if(!el.value.trim()){ el.focus(); el.reportValidity && el.reportValidity(); return; }
-      }
-      const v = k => (qform.elements[k].value || '').trim();
-      const subject = `[Quantquer] ${v('type')}｜${v('name')}`;
-      const body = [
-        `稱呼：${v('name')}`,
-        `公司／單位：${v('org') || '—'}`,
-        `需求類型：${v('type')}`,
-        `目前階段：${v('stage')}`,
-        `期望時程：${v('timeline')}`,
-        '',
-        '問題描述：',
-        v('desc')
-      ].join('\r\n');
-      window.location.href = 'mailto:chisheng.m.chen@gmail.com'
+      if(!valid()) return;
+      const { subject, body } = compose();
+      window.location.href = 'mailto:' + MAILTO
         + '?subject=' + encodeURIComponent(subject)
         + '&body=' + encodeURIComponent(body);
+      say('已嘗試開啟郵件 App。沒有跳出來的話，請改按「複製需求內容」。');
+    });
+    const copyText = async (text)=>{
+      try{ await navigator.clipboard.writeText(text); return true; }
+      catch(e){
+        const ta = document.createElement('textarea');
+        ta.value = text; ta.setAttribute('readonly',''); ta.style.position='fixed'; ta.style.opacity='0';
+        document.body.appendChild(ta); ta.select();
+        let ok = false; try{ ok = document.execCommand('copy'); }catch(_){}
+        ta.remove(); return ok;
+      }
+    };
+    document.getElementById('qcopy').addEventListener('click', async ()=>{
+      if(!valid()) return;
+      const { subject, body } = compose();
+      const text = `收件人：${MAILTO}\r\n主旨：${subject}\r\n\r\n${body}`;
+      let out = document.getElementById('qcopy-out');
+      if(await copyText(text)){ if(out) out.remove(); say(`已複製。貼到任何信箱，寄到 ${MAILTO} 即可。`, true); return; }
+      // clipboard blocked: show the text pre-selected so it can be copied by hand
+      if(!out){
+        out = document.createElement('textarea');
+        out.id = 'qcopy-out'; out.className = 'full qcopy-out'; out.readOnly = true;
+        out.setAttribute('aria-label','需求內容');
+        qstatus.after(out);
+      }
+      out.value = text; out.focus(); out.select();
+      say(`瀏覽器不允許自動複製，內容已在下方選取，請按 Ctrl+C（手機長按）複製後寄到 ${MAILTO}。`);
     });
   }
 </script>

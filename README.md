@@ -31,6 +31,7 @@
 │   ├── method-flow.webp        # §04 工作方式流程圖（1536×512）
 │   └── cases/*.webp            # §03 案例配圖
 │                               #   插圖皆為 AI 生成：<name>.webp 1536×1024 + <name>-768.webp，以 srcset 供瀏覽器挑選
+│                               #   深色主題版：<name>-dark.webp、<name>-768-dark.webp，切換主題時由 JS 換圖
 ├── CNAME                       # 自訂網域：quantquer.com
 ├── .nojekyll                   # 關閉 GitHub Pages 的 Jekyll 處理
 └── .gitignore
@@ -49,8 +50,9 @@ python3 -m http.server 8000
 
 | 區段 | id | 說明 |
 |------|------|------|
-| Hero | `#top` | 主標與 canvas 動畫 |
-| §01 能力 | `#capabilities` | 八大技術領域，每項附一行佐證 |
+| Hero | `#top` | 主標、一句服務描述、兩個入口按鈕與 canvas 動畫 |
+| 代表案例 | `#featured` | 首屏後的兩個代表案例（工作站設計平台、設備知識庫） |
+| §01 能力 | `#capabilities` | 領域標籤＋八大技術領域，每項附一行佐證 |
 | §02 服務與合作模式 | `#services` | 依需求的六個方案（附交付物，不公開價格）＋五種合作方式 |
 | §03 精選案例 | `#work` | 八個案例卡（客戶資訊已匿名化，配示意圖） |
 | §04 工作方式 | `#method` | Define → Design → Validate → Deliver |
@@ -58,7 +60,7 @@ python3 -m http.server 8000
 | §06 Quantquer Labs | `#labs` | 自主研發工具，標明開源／內部使用／開發中 |
 | §07 關於 | `#about` | 創辦人與資歷 |
 | §08 夥伴服務 | `#partners` | 協作夥伴 |
-| §09 聯絡 | `#contact` | 需求表單（產生 mailto，不經第三方）· Email · LINE · LinkedIn |
+| §09 聯絡 | `#contact` | Email · LINE · LinkedIn，以及需求表單（開啟郵件草稿或複製需求內容，不經第三方） |
 
 ## 編輯指南
 
