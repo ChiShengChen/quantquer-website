@@ -10,6 +10,11 @@ const content = {
     primary: '討論你的專案', secondary: '查看工程成果',
     eyebrow: studioBrand.technicalTagline,
     trust: ['已交付工程', '研究發表', '開源工具'],
+    showreel: '工程成果短片',
+    showreelSummary: '39 秒看影像修補、工作站設計、GPU 排程、光子模擬與科研查核。',
+    showreelPlay: '播放',
+    showreelOpen: '開啟影片檔',
+    showreelPDF: '下載公司技術能力簡介（PDF）',
     solutions: '四大工程解決方案',
     evidence: '工程證據',
     methods: '查看量測條件、操作展示或下載可重跑的原始資料。',
@@ -43,6 +48,11 @@ const content = {
     intro: 'We turn complex AI, semiconductor, and scientific computing challenges into measurable, deployable engineering solutions.',
     primary: 'Discuss your project', secondary: 'Explore engineering work',
     trust: ['Engineering delivery', 'Publications', 'Open-source tools'],
+    showreel: 'Engineering showreel',
+    showreelSummary: 'See image restoration, workcell design, GPU scheduling, photonic simulation and research verification in 39 seconds.',
+    showreelPlay: 'Play',
+    showreelOpen: 'Open the video file',
+    showreelPDF: 'Download the capabilities statement (PDF)',
     solutions: 'Four engineering solutions',
     evidence: 'Engineering evidence',
     methods: 'Read the test methods, run a demo or download the data to reproduce a result.',
@@ -183,6 +193,25 @@ function homeBlocks(locale) {
     <nav class="entry-links anchor-target" id="engineering-credentials" aria-label="${en ? 'Engineering credentials' : '工程實績與研究'}">${links([local('/work/industrial-robotics/'), local('/research/'), local('/labs/projects/')], copy.trust)}</nav>
   </div>
 </section>`;
+  const showreel = `<section class="site-showreel axis-divider" id="showreel" aria-labelledby="showreel-title">
+  <div class="wrap topic-row">
+    <div>
+      <h2 id="showreel-title">${copy.showreel}</h2>
+      <p class="topic-lead">${copy.showreelSummary}</p>
+      <div class="entry-links">
+        <a class="text-link" href="/downloads/quantquer-capabilities-${locale}.pdf" download data-analytics="capability_pdf_downloaded">${copy.showreelPDF}</a>
+      </div>
+    </div>
+    <div class="showreel-frame">
+      <button type="button" data-showreel-play aria-label="${copy.showreelPlay} · 0:39 ${copy.showreel}">
+        <img src="/assets/evidence/showreel/poster.webp" width="1280" height="720" loading="lazy" decoding="async" alt="">
+        <span>${copy.showreelPlay} · 0:39</span>
+      </button>
+      <a class="text-link showreel-fallback" href="/assets/evidence/showreel/quantquer-technical-showreel.mp4">${copy.showreelOpen}</a>
+      <noscript><a class="text-link" href="/assets/evidence/showreel/quantquer-technical-showreel.mp4">${copy.showreelOpen}</a></noscript>
+    </div>
+  </div>
+</section>`;
   const solutionCards = pillars.map(pillar => {
     const proof = pillar.evidence.startsWith('/labs/demos/') ? local(pillar.evidence) : pillar.evidence + (en ? '?lang=en' : '');
     return `<li class="topic-panel">
@@ -248,7 +277,7 @@ function homeBlocks(locale) {
   return {
     navigation: waveformNavigation(locale),
     hero: [waveformHero, brand].join('\n'),
-    conversion: [core, evidence, engagements, company, contact].join('\n'),
+    conversion: [showreel, core, evidence, engagements, company, contact].join('\n'),
     directory: `<div class="wrap home-directory-head">
       <h2 id="home-archive-heading">${copy.directory}</h2>
       ${homeIllustration('labs/tokenbench', companionArtSizes)}

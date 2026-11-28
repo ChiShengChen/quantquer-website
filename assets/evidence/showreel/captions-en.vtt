@@ -1,33 +1,29 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:04.000
-Quantquer. Research-driven AI and deep-tech engineering.
+00:00:00.000 --> 00:00:03.000
+Quantquer engineering in practice.
 
-00:00:04.000 --> 00:00:12.000
-Recorded MI-GAN model output with a supplied mask.
-Desktop CPU and controlled still image.
+00:00:03.000 --> 00:00:10.000
+Compare the controlled input with recorded MI-GAN output.
+The model used a supplied person mask and ran on a desktop CPU.
 
-00:00:12.000 --> 00:00:19.000
-Anonymized delivery: workcell layouts, CAD,
-and equipment bill of materials.
+00:00:10.000 --> 00:00:16.000
+Public demo with a sample layout. Review the robot placement
+and 3D workcell in the founder’s independent tool.
 
-00:00:19.000 --> 00:00:22.000
-Four-stage photonic mesh software simulation.
-The first view is the ideal lossless reference.
+00:00:16.000 --> 00:00:24.000
+Recorded single-GPU run. The second CUDA job waits for the GPU.
+The CPU-only job overlaps the first CUDA job.
 
-00:00:22.000 --> 00:00:27.000
-Injecting phase drift and attenuation changes the simulated outputs.
+00:00:24.000 --> 00:00:27.000
+Four-stage photonic mesh software simulation. Ideal reference.
 
 00:00:27.000 --> 00:00:31.000
-Recorded run on one GPU. The CPU-only task
-starts alongside the first CUDA task.
+Injected phase drift and attenuation change simulated outputs.
 
-00:00:31.000 --> 00:00:35.000
-The second CUDA task waits for the GPU slot to become available.
+00:00:31.000 --> 00:00:36.000
+Open-source paper-evidence checks numbers against synthetic text.
+It rejects a number found only in another context.
 
-00:00:35.000 --> 00:00:43.000
-An offline check with paper-evidence accepts the number supported by its quote
-and rejects a number from another context.
-
-00:00:43.000 --> 00:00:52.000
-Discuss your deployment target and acceptance criteria with Quantquer.
+00:00:36.000 --> 00:00:39.000
+Discuss your engineering project at quantquer.com.

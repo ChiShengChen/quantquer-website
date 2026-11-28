@@ -439,15 +439,24 @@ try {
     if (anchor) assert.equal(await page.locator(`[id="${anchor}"]`).count(), 1, path);
     if (path.startsWith('/#')) assert.ok(await page.locator(`#${anchor}`).isVisible(), path);
   }
-  await open('/#showreel');
-  await page.locator('[data-showreel-play]').press('Enter');
-  const movie = page.locator('#showreel video');
-  await movie.waitFor({ state: 'visible' });
-  assert.equal(await movie.locator('track').count(), 2);
-  assert.ok(await movie.evaluate(video => video.controls && video.playsInline));
-  await page.waitForFunction(() => document.querySelector('#showreel video').readyState >= 2);
-  await movie.evaluate(video => video.pause());
-  assert.equal(await movie.evaluate(video => video.paused), true);
+  for (const [route, language] of [['/#showreel', 'zh-Hant'], ['/en/#showreel', 'en']]) {
+    await open(route);
+    const showreel = page.locator('#showreel');
+    assert.ok(await showreel.evaluate(section =>
+      (document.getElementById('featured').compareDocumentPosition(section) & Node.DOCUMENT_POSITION_FOLLOWING) &&
+      (section.compareDocumentPosition(document.getElementById('core-solutions')) & Node.DOCUMENT_POSITION_FOLLOWING)));
+    assert.equal(await showreel.locator('video').count(), 0);
+    await showreel.locator('[data-showreel-play]').press('Enter');
+    const movie = showreel.locator('video');
+    await movie.waitFor({ state: 'visible' });
+    assert.equal(await movie.locator('track').count(), 2);
+    assert.equal(await movie.locator('track[default]').getAttribute('srclang'), language);
+    assert.ok(await movie.evaluate(video => video.controls && video.playsInline));
+    await page.waitForFunction(() => document.querySelector('#showreel video').readyState >= 2);
+    assert.ok(await movie.evaluate(video => Math.abs(video.duration - 39) <= .1));
+    await movie.evaluate(video => video.pause());
+    assert.equal(await movie.evaluate(video => video.paused), true);
+  }
 
   await open('/#research-quantum');
   assert.ok(await page.locator('#research-quantum').isVisible());

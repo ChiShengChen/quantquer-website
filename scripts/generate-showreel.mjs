@@ -36,32 +36,49 @@ function frame(category, title, summary, content) {
 }
 
 function cover(close = false) {
-  return `<main class="cover ${close ? 'close' : ''}">${image('logo-full-light.png', 'Quantquer', 'cover-logo')}
-    <p class="kicker">${close ? 'TECHNICAL CONSULTATION' : 'SELECTED ENGINEERING WORK'}</p>
-    <h1>From Silicon<br>to <span>Intelligence.</span></h1>
-    <p class="summary">${close ? 'Bring your target system, constraints and acceptance criteria.' : 'Research-driven AI and deep-tech engineering'}</p>
-    ${close ? '<p class="address">quantquer.com</p>' : '<div class="cover-rule"></div>'}</main>`;
+  const previews = close ? '' : `<div class="cover-previews">
+    ${image('evidence/vision/hallway-migan.webp', 'MI-GAN inpainting output')}
+    ${image('evidence/featured/robotics.webp', 'Public workcell design demo')}
+  </div>`;
+  return `<main class="cover ${close ? 'close' : ''}">
+    <div>${image('logo-full-light.png', 'Quantquer', 'cover-logo')}
+      <h1>${close ? 'From Silicon<br>to <span>Intelligence.</span>' : 'Engineering<br>in <span>practice.</span>'}</h1>
+      ${close ? '<p class="address">quantquer.com</p>' : '<p class="summary">Model outputs, system demos and recorded runs.</p>'}
+    </div>${previews}
+  </main>`;
 }
 
 function vision() {
-  const views = [
-    ['hallway-input.webp', 'Input with illustrated occluder'],
-    ['hallway-mask.webp', 'Known supplied mask'],
-    ['hallway-migan.webp', 'Actual MI-GAN inpainting output'],
-  ];
   return frame('RECORDED MODEL OUTPUT', 'Generative vision', 'MI-GAN-512 · ONNX Runtime · Desktop CPU',
-    `<div class="vision-grid">${views.map(([path, label]) =>
-      `<figure>${image(`evidence/vision/${path}`, label)}<figcaption>${escape(label)}</figcaption></figure>`).join('')}</div>
-    <p class="source">Controlled still image with an illustrated overlay · Background photo by Daderot (public domain)</p>`);
+    `<div class="vision-grid">
+      <figure>
+        <div class="vision-wipe">
+          ${image('evidence/vision/hallway-input.webp', 'Hallway photo with an illustrated foreground person')}
+          ${image('evidence/vision/hallway-migan.webp', 'Recorded MI-GAN inpainting result', 'vision-after')}
+          <span aria-hidden="true"></span>
+        </div>
+        <figcaption><span>Before · Test input</span><span>After · MI-GAN output</span></figcaption>
+      </figure>
+      <div class="vision-note">
+        ${image('evidence/vision/hallway-mask.webp', 'Mask supplied to the model')}
+        <p>Supplied person mask</p>
+        <p class="source">Controlled still image. Background photo by Daderot (public domain).</p>
+      </div>
+    </div>`);
+}
+
+function updateVision(progress) {
+  const sweep = Math.max(0, Math.min(1, (progress - .1) / .72));
+  const split = 92 - 87 * sweep * sweep * (3 - 2 * sweep);
+  document.querySelector('.vision-wipe').style.setProperty('--split', `${split}%`);
 }
 
 function workcell() {
-  const steps = ['Operating requirements and facility CAD', 'Robot and layout candidates', 'Reachability and cycle-time estimates', 'Reviewable layout, CAD and bill of materials'];
-  return frame('ANONYMIZED ENGINEERING · SOFTWARE DELIVERY', 'Industrial workcell design', 'From operating constraints to designs an engineer can review.',
-    `<div class="workcell-grid"><figure>${image('cases/robot-768.webp', 'Concept illustration of palletizing workcell placement')}
-    <figcaption>Concept illustration from the public case study</figcaption></figure>
-    <ol>${steps.map(step => `<li>${escape(step)}</li>`).join('')}</ol></div>
-    <p class="source">quantquer.com/work/industrial-robotics/</p>`);
+  return frame('FOUNDER’S INDEPENDENT PUBLIC DEMO', 'Industrial workcell design', 'Review a sample layout in the workcell design tool.',
+    `<div class="workcell-grid"><figure>${image('evidence/featured/robotics.webp', 'Actual demo screen with a 3D workcell, input specifications and layout scoring')}
+      <figcaption>Screen from the public demo · Sample configuration</figcaption></figure>
+      <ol><li>Review equipment and facility constraints</li><li>Inspect the 3D layout and placement</li><li>Use the layout and scores for engineering review</li></ol>
+    </div>`);
 }
 
 async function captureMesh(page) {
@@ -137,22 +154,26 @@ function trace() {
   return ['GPU A', 'GPU B', 'CPU C'].map(job);
 }
 
-function gpu(jobs, afterRelease) {
-  const scale = Math.ceil(Math.max(...jobs.map(job => job.times[2])) / 5) * 5;
-  const label = afterRelease ? 'The second CUDA task starts only after the first releases the GPU slot.' : 'The CPU-only task runs alongside the first CUDA task.';
-  const interval = (start, end) => `--start:${100 * start / scale}%;--duration:${100 * (end - start) / scale}%`;
-  const rows = jobs.map((job, index) => {
+function gpu(jobs, duration) {
+  const interval = (start, end) => `--start:${100 * start / duration}%;--duration:${100 * (end - start) / duration}%`;
+  const rows = jobs.map(job => {
     const [submit, start, end] = job.times;
-    const focus = afterRelease ? index === 1 : index !== 1;
-    return `<span class="queue-name">${escape(job.name)}</span><div class="queue-track">
+    return `<span class="queue-name">${escape(job.name)}</span><div class="queue-track"><div class="queue-fill">
       ${start > submit ? `<span class="waiting" style="${interval(submit, start)}" aria-hidden="true"></span>` : ''}
-      <span class="${index === 2 ? 'cpu' : ''} ${focus ? 'focus' : ''}" style="${interval(start, end)}" aria-hidden="true"></span></div>`;
+      <span class="${job.name === 'CPU C' ? 'cpu' : ''}" style="${interval(start, end)}" aria-hidden="true"></span></div></div>`;
   });
   return frame('RECORDED CONTROLLED RUN', 'Shared GPU scheduling', 'One GPU slot · Two CUDA fixtures · One CPU-only fixture',
     `<div class="queue"><span>Job</span><div class="queue-axis">${Array.from({length: 6}, (_, index) =>
-      `<span>${Number((index * scale / 5).toFixed(1))}${index === 5 ? ' s' : ''}</span>`).join('')}</div>
-      ${rows.join('')}</div><p class="queue-callout">${escape(label)}</p>
-    <p class="source">Relative time since first submission · Dashed bars show waiting · Single controlled run</p>`);
+      `<span>${Number((index * duration / 5).toFixed(1))}${index === 5 ? ' s' : ''}</span>`).join('')}</div>
+      ${rows.join('')}</div>
+      <p class="queue-callout"><span>Trace time <b id="trace-time">0.00 s</b></span><span>Dashed bars show waiting · Time compressed for playback</span></p>
+      <p class="source">Actual admission and completion events from one controlled workstation run.</p>`);
+}
+
+function updateTrace(progress, duration) {
+  const playback = Math.min(progress / .9, 1);
+  document.querySelector('.queue').style.setProperty('--progress', `${playback * 100}%`);
+  document.getElementById('trace-time').textContent = `${(playback * duration).toFixed(2)} s`;
 }
 
 function paperEvidence() {
@@ -182,20 +203,27 @@ function ffmpeg(...args) {
   execFileSync('ffmpeg', ['-hide_banner', '-loglevel', 'error', '-y', ...args], { stdio: ['ignore', 'ignore', 'inherit'] });
 }
 
-function encodeStill(image, duration, clip) {
-  ffmpeg('-loop', '1', '-framerate', '24', '-i', image, '-t', String(duration), '-an',
-    '-c:v', 'libx264', '-tune', 'stillimage', '-crf', '20', '-pix_fmt', 'yuv420p', '-threads', '2', clip);
-}
+const videoSettings = ['-an', '-c:v', 'libx264', '-tune', 'stillimage', '-crf', '20', '-pix_fmt', 'yuv420p', '-threads', '2'];
 
 async function renderFrames(scenes, page) {
   const clips = [];
   for (const [index, scene] of scenes.entries()) {
-    const png = join(scratch, `scene-${index}.png`);
     await page.setContent(`<!doctype html><html lang="en"><meta charset="utf-8"><style>${css}</style>${scene.data}</html>`);
     await page.evaluate(() => Promise.all([document.fonts.ready, ...Array.from(document.images, image => image.decode())]));
-    await page.screenshot({ path: png });
     const clip = join(scratch, `scene-${index}.mp4`);
-    encodeStill(png, scene.duration, clip);
+    if (scene.motion) {
+      const fps = 10;
+      const frames = scene.duration * fps;
+      for (let frame = 0; frame < frames; frame++) {
+        await page.evaluate(scene.motion, frame / (frames - 1), scene.traceDuration);
+        await page.screenshot({ path: join(scratch, `frame-${index}-${String(frame).padStart(3, '0')}.png`) });
+      }
+      ffmpeg('-framerate', String(fps), '-i', join(scratch, `frame-${index}-%03d.png`), '-vf', 'fps=24', ...videoSettings, clip);
+    } else {
+      const png = join(scratch, `scene-${index}.png`);
+      await page.screenshot({ path: png });
+      ffmpeg('-loop', '1', '-framerate', '24', '-i', png, '-t', String(scene.duration), ...videoSettings, clip);
+    }
     clips.push(clip);
   }
   return clips;
@@ -216,16 +244,16 @@ try {
   await sourcePage.setViewport({ width: 1440, height: 900, deviceScaleFactor: 2 });
   const mesh = await captureMesh(sourcePage);
   const jobs = trace();
+  const traceDuration = Math.ceil(Math.max(...jobs.map(job => job.times[2])));
   const scenes = [
-    { duration: 4, data: cover(), en: 'Quantquer. Research-driven AI and deep-tech engineering.', zh: '量維資科。研究驅動的 AI 與深科技工程。' },
-    { duration: 8, data: vision(), en: 'Recorded MI-GAN model output with a supplied mask.\nDesktop CPU and controlled still image.', zh: '使用已知遮罩的 MI-GAN 實際推論輸出。\n測試使用桌面 CPU 與受控靜態影像。' },
-    { duration: 7, data: workcell(), en: 'Anonymized delivery: workcell layouts, CAD,\nand equipment bill of materials.', zh: '匿名軟體交付涵蓋機器人工作站佈局、CAD 與設備物料清單。' },
-    { duration: 3, data: optics(mesh[0], false), en: 'Four-stage photonic mesh software simulation.\nThe first view is the ideal lossless reference.', zh: '四級光子網路軟體模擬。\n先觀察理想無耗損基準。' },
-    { duration: 5, data: optics(mesh[1], true), en: 'Injecting phase drift and attenuation changes the simulated outputs.', zh: '注入相位漂移與衰減後，可觀察各通道輸出的變化。' },
-    { duration: 4, data: gpu(jobs, false), en: 'Recorded run on one GPU. The CPU-only task\nstarts alongside the first CUDA task.', zh: '單張 GPU 的實際測試。CPU 任務可與第一項 CUDA 任務並行。' },
-    { duration: 4, data: gpu(jobs, true), en: 'The second CUDA task waits for the GPU slot to become available.', zh: '第二項 CUDA 任務等待 GPU 執行槽釋出。' },
-    { duration: 8, data: paperEvidence(), en: 'An offline check with paper-evidence accepts the number supported by its quote\nand rejects a number from another context.', zh: '使用開源 paper-evidence 離線實跑。\n引文支持的數字通過，來自別段的數字被拒絕。' },
-    { duration: 9, data: cover(true), en: 'Discuss your deployment target and acceptance criteria with Quantquer.', zh: '歡迎與量維資科討論部署目標、技術限制及驗收條件。' },
+    { duration: 3, data: cover(), en: 'Quantquer engineering in practice.', zh: '量維資科工程成果短片。' },
+    { duration: 7, data: vision(), motion: updateVision, en: 'Compare the controlled input with recorded MI-GAN output.\nThe model used a supplied person mask and ran on a desktop CPU.', zh: '比較受控輸入與 MI-GAN 的實際輸出。\n模型使用已知人物遮罩，在桌面 CPU 上執行。' },
+    { duration: 6, data: workcell(), en: 'Public demo with a sample layout. Review the robot placement\nand 3D workcell in the founder’s independent tool.', zh: '畫面是創辦人獨立公開工具的示例配置，\n可在介面中查看機器人擺位和 3D 工作站。' },
+    { duration: 8, data: gpu(jobs, traceDuration), motion: updateTrace, traceDuration, en: 'Recorded single-GPU run. The second CUDA job waits for the GPU.\nThe CPU-only job overlaps the first CUDA job.', zh: '單張 GPU 的實跑回放。第二項 CUDA 任務等待執行槽，\nCPU 任務與第一項 CUDA 任務並行。' },
+    { duration: 3, data: optics(mesh[0], false), en: 'Four-stage photonic mesh software simulation. Ideal reference.', zh: '四級光子網格軟體模擬，先看無故障基準。' },
+    { duration: 4, data: optics(mesh[1], true), en: 'Injected phase drift and attenuation change simulated outputs.', zh: '注入相位漂移與衰減後，模擬輸出隨之改變。' },
+    { duration: 5, data: paperEvidence(), en: 'Open-source paper-evidence checks numbers against synthetic text.\nIt rejects a number found only in another context.', zh: '開源 paper-evidence 用合成文本測試引文查核，\n拒絕只出現在其他上下文的數字。' },
+    { duration: 3, data: cover(true), en: 'Discuss your engineering project at quantquer.com.', zh: '歡迎到 quantquer.com 討論工程需求。' },
   ];
   const outputPage = await browser.newPage();
   await outputPage.setViewport({ width: 1920, height: 1080, deviceScaleFactor: 1 });
@@ -241,14 +269,14 @@ try {
   const shortTimeline = [
     { scene: 0, duration: 2, en: 'Quantquer engineering showcase.', zh: '量維資科工程成果。' },
     { scene: 1, duration: 4, en: 'Recorded MI-GAN output on desktop CPU.', zh: '桌面 CPU 的 MI-GAN 實際輸出。' },
-    { scene: 2, duration: 3, en: 'Industrial workcell design software.', zh: '工業機器人工作站設計軟體。' },
-    { scene: 4, duration: 3, en: 'Photonic mesh fault simulation.', zh: '光子網路故障模擬。' },
-    { scene: 6, duration: 3, en: 'Recorded single-GPU execution.', zh: '單張 GPU 的實際排程回放。' },
-    { scene: 8, duration: 4, en: 'Discuss your project at quantquer.com.', zh: '歡迎至 quantquer.com 討論您的專案。' },
+    { scene: 2, duration: 3, en: 'Public workcell design demo with a sample layout.', zh: '公開工作站設計示範，使用示例配置。' },
+    { scene: 3, duration: 5, en: 'Recorded single-GPU execution.', zh: '單張 GPU 的實際排程回放。' },
+    { scene: 5, duration: 3, en: 'Photonic mesh fault simulation.', zh: '光子網格故障模擬。' },
+    { scene: 7, duration: 3, en: 'Discuss your project at quantquer.com.', zh: '歡迎到 quantquer.com 討論你的專案。' },
   ];
   const shortClips = shortTimeline.map(({ scene, duration }, shortIndex) => {
     const clip = join(scratch, `short-${shortIndex}.mp4`);
-    encodeStill(join(scratch, `scene-${scene}.png`), duration, clip);
+    ffmpeg('-i', clips[scene], '-t', String(duration), ...videoSettings, clip);
     return clip;
   });
   assemble(shortClips, short);
